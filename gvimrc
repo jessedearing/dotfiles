@@ -54,7 +54,7 @@ set guioptions-=T
 " color ir_black
 color tubster
 
-set guifont=Anonymous\ Pro:h16
+set guifont=Anonymous\ Pro:h14
 
 " ConqueTerm wrapper
 function StartTerm()
