@@ -26,7 +26,9 @@ export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X1
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
 export GIT_EDITOR="mvim --nofork "
+export EDITOR="vi"
 export PGDATA=/usr/local/var/postgresql
+alias vi="mvim -v"
 alias vim="mvim"
 alias sgem="sudo gem"
 alias ruby18="rvm use ruby-1.8.7-p174"
@@ -47,3 +49,6 @@ export EC2_HOME="/usr/local/aws/ec2-api-tools-1.4.3.0"
 export JAVA_HOME="/Library/Java/Home"
 
 export NODE_PATH=/usr/local/lib/node
+
+# Use vim bindings in zsh
+bindkey -v
