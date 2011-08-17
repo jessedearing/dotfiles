@@ -11,10 +11,10 @@ def link_file(home_file, file)
   end
 end
 
-task :default => :copy
+task :default => :install
 
-desc 'Copy dotfiles to users home directory'
-task :copy do
+desc 'Symlink dotfiles to users home directory'
+task :install do
   all_files = Dir['*']
   home_dir = ENV['HOME'] || File.expand_path('~')
 
