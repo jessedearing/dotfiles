@@ -12,6 +12,7 @@ end
 require 'rubygems' rescue nil
 require 'wirble'
 require 'awesome_print'
+require 'interactive_editor'
 
 module AwesomePrintMongoid
 
