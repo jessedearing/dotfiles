@@ -16,7 +16,7 @@ export ZSH_THEME="dallas"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby memdisk rails3)
+plugins=(git ruby memdisk rails3 shorten)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -36,12 +36,15 @@ alias web="open -a 'Google Chrome' "
 alias nginx="sudo /usr/local/sbin/nginx"
 function u() {\unicorn -l $(pwd)/tmp/sockets/unicorn.sock}
 function ur() {\unicorn_rails -l $(pwd)/tmp/sockets/unicorn.sock}
+function bur() {bundle exec unicorn_rails -l $(pwd)/tmp/sockets/unicorn.sock}
 function api() {open -a 'Google Chrome' "http://apidock.com/$1/search?query=$2";}
 alias be="bundle exec"
 alias bi="bundle install"
 alias bl="bundle list"
 alias bu="bundle update"
 alias bp="bundle package"
+
+alias mongod="mongod -f /usr/local/Cellar/mongodb/1.8.1-i386/mongod.conf"
 
 export EC2_PRIVATE_KEY="/usr/local/aws/ec2-api-tools-1.4.3.0/pk"
 export EC2_CERT="/usr/local/aws/ec2-api-tools-1.4.3.0/cert"
