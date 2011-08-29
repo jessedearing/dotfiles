@@ -26,7 +26,7 @@ export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X1
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
 export GIT_EDITOR="mvim --nofork "
-export EDITOR="vi"
+export EDITOR="mvim -v"
 export PGDATA=/usr/local/var/postgresql
 alias vi="mvim -v"
 alias vim="mvim"
