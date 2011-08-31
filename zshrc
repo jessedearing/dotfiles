@@ -29,7 +29,6 @@ export GIT_EDITOR="mvim --nofork "
 export EDITOR="mvim -v"
 export PGDATA=/usr/local/var/postgresql
 alias vi="mvim -v"
-alias vim="mvim"
 alias sgem="sudo gem"
 alias ruby18="rvm use ruby-1.8.7-p174"
 alias web="open -a 'Google Chrome' "
