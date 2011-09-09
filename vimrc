@@ -3,8 +3,8 @@ set nocompatible
 set number
 set ruler
 syntax on
-set foldmethod=syntax
-set foldlevelstart=99
+" set foldmethod=syntax
+" set foldlevelstart=99
 
 " Set encoding
 set encoding=utf-8

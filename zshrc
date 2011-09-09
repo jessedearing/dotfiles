@@ -16,7 +16,7 @@ export ZSH_THEME="dallas"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby memdisk rails3 shorten)
+plugins=(git ruby memdisk rails3 shorten bundler)
 
 source $ZSH/oh-my-zsh.sh
 
