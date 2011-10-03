@@ -33,17 +33,28 @@ alias sgem="sudo gem"
 alias ruby18="rvm use ruby-1.8.7-p174"
 alias web="open -a 'Google Chrome' "
 alias nginx="sudo /usr/local/sbin/nginx"
-function u() {\unicorn -l $(pwd)/tmp/sockets/unicorn.sock}
-function ur() {\unicorn_rails -l $(pwd)/tmp/sockets/unicorn.sock}
-function bur() {bundle exec unicorn_rails -l $(pwd)/tmp/sockets/unicorn.sock}
+# \unicorn -l $(pwd)/tmp/sockets/unicorn.sock -c /usr/local/etc/unicorn.rb
+function u() {
+  \unicorn -l 127.0.0.1:3000 -E development -c /usr/local/etc/unicorn.rb
+}
+function bu() {bundle exec unicorn -E development -l 127.0.0.1:3000}
+function ur() {\unicorn_rails -E development -l 127.0.0.1:3000}
+function bur() {bundle exec unicorn_rails -E development -l 127.0.0.1:3000}
 function api() {open -a 'Google Chrome' "http://apidock.com/$1/search?query=$2";}
+function varn() {
+  if [[ $1 = "start" ]]; then
+    sudo varnishd -f /usr/local/etc/varnish/default.vcl -s malloc,1G -a 0.0.0.0:8080
+  else
+    sudo killall varnishd
+  fi
+}
 alias be="bundle exec"
 alias bi="bundle install"
 alias bl="bundle list"
 alias bu="bundle update"
 alias bp="bundle package"
 
-alias mongod="mongod -f /usr/local/Cellar/mongodb/1.8.1-i386/mongod.conf"
+alias mongod="mongod -f /usr/local/Cellar/mongodb/1.8.3-x86_64/mongod.conf"
 
 export EC2_PRIVATE_KEY="/usr/local/aws/ec2-api-tools-1.4.3.0/pk"
 export EC2_CERT="/usr/local/aws/ec2-api-tools-1.4.3.0/cert"
