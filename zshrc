@@ -3,7 +3,7 @@ export ZSH=$HOME/.oh-my-zsh
 
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
-export ZSH_THEME="dallas"
+export ZSH_THEME="smt"
 
 # Set to this to use case-sensitive completion
 # export CASE_SENSITIVE="true"
@@ -33,13 +33,46 @@ alias sgem="sudo gem"
 alias ruby18="rvm use ruby-1.8.7-p174"
 alias web="open -a 'Google Chrome' "
 alias nginx="sudo /usr/local/sbin/nginx"
+alias gl="git log --stat --graph --decorate"
+alias gs="git status"
 # \unicorn -l $(pwd)/tmp/sockets/unicorn.sock -c /usr/local/etc/unicorn.rb
 function u() {
-  \unicorn -l 127.0.0.1:3000 -E development -c /usr/local/etc/unicorn.rb
+  if [[ -z $1 ]]; then
+    UNICORN_PORT=3000;
+  else
+    UNICORN_PORT=$1;
+  fi
+
+  \unicorn -l 127.0.0.1:$UNICORN_PORT -E development -c /usr/local/etc/unicorn.rb;
 }
-function bu() {bundle exec unicorn -E development -l 127.0.0.1:3000}
-function ur() {\unicorn_rails -E development -l 127.0.0.1:3000}
-function bur() {bundle exec unicorn_rails -E development -l 127.0.0.1:3000}
+
+function bbu() {
+  if [[ -z $1 ]]; then
+    UNICORN_PORT=3000;
+  else
+    UNICORN_PORT=$1;
+  fi
+  bundle exec unicorn -E development -c /usr/local/etc/unicorn.rb -l 127.0.0.1:$UNICORN_PORT
+}
+
+function ur() {
+  if [[ -z $1 ]]; then
+    UNICORN_PORT=3000;
+  else
+    UNICORN_PORT=$1;
+  fi
+  \unicorn_rails -E development -l 127.0.0.1:$UNICORN_PORT
+}
+
+function bur() {
+  if [[ -z $1 ]]; then
+    UNICORN_PORT=3000;
+  else
+    UNICORN_PORT=$1;
+  fi
+  bundle exec unicorn_rails -E development -l 127.0.0.1:$UNICORN_PORT
+}
+
 function api() {open -a 'Google Chrome' "http://apidock.com/$1/search?query=$2";}
 function varn() {
   if [[ $1 = "start" ]]; then
