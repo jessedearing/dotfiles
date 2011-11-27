@@ -54,7 +54,7 @@ set guioptions-=T
 " color ir_black
 color soso
 
-set guifont=Anonymous\ Pro:h14
+set guifont=Bitstream\ Vera\ Sans\ Mono:h14
 
 " ConqueTerm wrapper
 function StartTerm()
