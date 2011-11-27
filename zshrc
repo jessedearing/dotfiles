@@ -4,6 +4,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
 export ZSH_THEME="smt"
+export ZSH_CUSTOM="$HOME/.zsh-custom"
 
 # Set to this to use case-sensitive completion
 # export CASE_SENSITIVE="true"
@@ -25,8 +26,10 @@ export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X1
 
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
+[[ ! -x /usr/local/bin/mvim ]] && alias mvim="vim"
+
 export GIT_EDITOR="mvim --nofork "
-export EDITOR="mvim -v"
+export EDITOR="mvim --nofork"
 export PGDATA=/usr/local/var/postgresql
 alias vi="mvim -v"
 alias sgem="sudo gem"
@@ -64,13 +67,13 @@ function ur() {
   \unicorn_rails -E development -l 127.0.0.1:$UNICORN_PORT
 }
 
-function bur() {
+function bbur() {
   if [[ -z $1 ]]; then
     UNICORN_PORT=3000;
   else
     UNICORN_PORT=$1;
   fi
-  bundle exec unicorn_rails -E development -l 127.0.0.1:$UNICORN_PORT
+  bundle exec unicorn_rails -E development -c /usr/local/etc/unicorn.rb -l 127.0.0.1:$UNICORN_PORT
 }
 
 function api() {open -a 'Google Chrome' "http://apidock.com/$1/search?query=$2";}
