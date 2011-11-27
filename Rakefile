@@ -3,8 +3,6 @@ require 'fileutils'
 def link_file(home_file, file)
   if File.exists?(home_file)
     return "file exists"
-  elsif File.directory?(file)
-    return "file is directory"
   else
     FileUtils.ln_s File.expand_path(file), home_file
     return "done"
