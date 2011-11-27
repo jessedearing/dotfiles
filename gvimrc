@@ -52,7 +52,7 @@ set guioptions-=T
 
 " Default gui color scheme
 " color ir_black
-color tubster
+color soso
 
 set guifont=Anonymous\ Pro:h14
 
