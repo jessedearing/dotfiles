@@ -3,7 +3,7 @@ export ZSH=$HOME/.oh-my-zsh
 
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
-export ZSH_THEME="smt"
+export ZSH_THEME=""
 export ZSH_CUSTOM="$HOME/.zsh-custom"
 
 # Set to this to use case-sensitive completion
@@ -17,7 +17,7 @@ export ZSH_CUSTOM="$HOME/.zsh-custom"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby memdisk rails3 shorten bundler)
+plugins=(git ruby memdisk rails3 shorten)
 
 source $ZSH/oh-my-zsh.sh
 
