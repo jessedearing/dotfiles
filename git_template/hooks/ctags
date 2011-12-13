@@ -1,0 +1,3 @@
+#!/bin/sh
+rm -rf .git/tags
+/usr/local/bin/ctags --tag-relative -Rf.git/tags --exclude=.git
