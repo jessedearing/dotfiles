@@ -85,7 +85,7 @@ end
 
 # load hirb
 
-IRB.conf[:AUTO_INDENT] = true
+# IRB.conf[:AUTO_INDENT] = true
 
 if ENV.include?('RAILS_ENV')
   if !Object.const_defined?('RAILS_DEFAULT_LOGGER')
