@@ -17,7 +17,7 @@ export ZSH_CUSTOM="$HOME/.zsh-custom"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby memdisk rails3 shorten)
+plugins=(git github ruby memdisk rails3 shorten vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -100,6 +100,3 @@ export JAVA_HOME="/Library/Java/Home"
 export ARCHFLAGS='-arch x86_64'
 
 export NODE_PATH=/usr/local/lib/node
-
-# Use vim bindings in zsh
-bindkey -v
