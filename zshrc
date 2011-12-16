@@ -97,6 +97,8 @@ export EC2_CERT="/usr/local/aws/ec2-api-tools-1.4.3.0/cert"
 export EC2_HOME="/usr/local/aws/ec2-api-tools-1.4.3.0"
 export JAVA_HOME="/Library/Java/Home"
 
+export ARCHFLAGS='-arch x86_64'
+
 export NODE_PATH=/usr/local/lib/node
 
 # Use vim bindings in zsh

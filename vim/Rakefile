@@ -159,6 +159,7 @@ vim_plugin_task "gist-vim",         "git://github.com/mattn/gist-vim.git"
 vim_plugin_task "taskpaper",        "git://github.com/davidoc/taskpaper.vim.git"
 vim_plugin_task "matchit",          "http://www.vim.org/scripts/download_script.php?src_id=8196"
 vim_plugin_task "tabular",          "https://github.com/godlygeek/tabular.git"
+vim_plugin_task "neocomplcache",    "https://github.com/Shougo/neocomplcache.git"
 
 # vim_plugin_task "hammer",           "git://github.com/robgleeson/hammer.vim.git" do
 #  sh "gem install github-markup redcarpet"
