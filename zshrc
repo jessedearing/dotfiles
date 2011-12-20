@@ -17,7 +17,7 @@ export ZSH_CUSTOM="$HOME/.zsh-custom"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git git-flow brew rvm autojump knife github ruby memdisk rails3 shorten vi-mode)
+plugins=(git brew rvm autojump github memdisk rails3 shorten vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -25,7 +25,6 @@ source $ZSH/oh-my-zsh.sh
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
 
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
-
 [[ ! -x /usr/local/bin/mvim ]] && alias mvim="vim"
 
 export GIT_EDITOR="mvim --nofork "
@@ -84,6 +83,7 @@ function varn() {
     sudo killall varnishd
   fi
 }
+
 alias be="bundle exec"
 alias bi="bundle install"
 alias bl="bundle list"
@@ -100,3 +100,16 @@ export JAVA_HOME="/Library/Java/Home"
 export ARCHFLAGS='-arch x86_64'
 
 export NODE_PATH=/usr/local/lib/node
+
+export GIT_COMMITTER_NAME="Jesse Dearing"
+export GIT_COMMITTER_EMAIL="jesse.dearing@gmail.com"
+
+# Add the following to your ~/.bashrc or ~/.zshrc
+hitch() {
+  command hitch "$@"
+  if [[ -s "$HOME/.hitch_export_authors" ]] ; then source "$HOME/.hitch_export_authors" ; fi
+}
+alias unhitch='hitch -u'
+# Uncomment to persist pair info between terminal instances
+# hitch
+
