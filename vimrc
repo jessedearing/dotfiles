@@ -96,7 +96,8 @@ map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
 " Opens a tab edit command with the path of the currently edited file filled in
 " Normal mode: <Leader>t
-map <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
+" map <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
+map <Leader>t :CtrlP<CR>
 
 " Inserts the path of the currently edited file into a command
 " Command mode: Ctrl+P
@@ -122,7 +123,7 @@ set modelines=10
 
 " Default color scheme
 " color desert
-color soso
+color solarized
 
 " Directories for swp files
 set backupdir=~/.vim/backup
@@ -141,6 +142,7 @@ endif
 
 " neocomplcache
 " A beter autocomplete system!
+imap <expr><TAB> neocomplcache#sources#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : pumvisible() ? "\<C-n>" : "\<TAB>" 
 
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_camel_case_completion = 1
@@ -154,7 +156,7 @@ let g:neocomplcache_max_list = 15
 let g:neocomplcache_auto_completion_start_length = 3
 
 " Map standard Ctrl-N completion to Cmd-Space
-inoremap <Leader><Space> <C-n>
+" inoremap <Leader><Space> <C-n>
 
 " This makes sure we use neocomplcache completefunc instead of 
 " the one in rails.vim, otherwise this plugin will crap out

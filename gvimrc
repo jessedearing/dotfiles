@@ -5,8 +5,10 @@ if has("gui_macvim")
 
   " Command-T for CommandT
   macmenu &File.New\ Tab key=<D-T>
-  map <D-t> :CommandT<CR>
-  imap <D-t> <Esc>:CommandT<CR>
+  " map <D-t> :CommandT<CR>
+  " imap <D-t> <Esc>:CommandT<CR>
+  map <D-t> :CtrlP<CR>
+  imap <D-t> <Esc>:CtrlP<CR>
 
   " Command-Return for fullscreen
   macmenu Window.Toggle\ Full\ Screen\ Mode key=<D-CR>
@@ -52,9 +54,10 @@ set guioptions-=T
 
 " Default gui color scheme
 " color ir_black
-color soso
+color solarized
+set background=dark
 
-set guifont=DejaVu\ Sans\ Mono:h14
+set guifont=DejaVu\ Sans\ Mono:h12
 
 " ConqueTerm wrapper
 function StartTerm()
