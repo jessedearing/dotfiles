@@ -17,7 +17,7 @@ export ZSH_CUSTOM="$HOME/.zsh-custom"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew rvm autojump github memdisk rails3 shorten vi-mode)
+plugins=(git brew rvm autojump github memdisk rails3 shorten vi-mode tmux)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -25,12 +25,11 @@ source $ZSH/oh-my-zsh.sh
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
 
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
-[[ ! -x /usr/local/bin/mvim ]] && alias mvim="vim"
 
-export GIT_EDITOR="mvim --nofork "
-export EDITOR="mvim --nofork"
+export GIT_EDITOR="vim"
+export EDITOR="vim"
 export PGDATA=/usr/local/var/postgresql
-alias vi="mvim -v"
+alias vi="vim"
 alias sgem="sudo gem"
 alias ruby18="rvm use ruby-1.8.7-p174"
 alias web="open -a 'Google Chrome' "
