@@ -17,7 +17,7 @@ export ZSH_CUSTOM="$HOME/.zsh-custom"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew rvm autojump github memdisk rails3 shorten vi-mode tmux)
+plugins=(git brew rvm autojump github memdisk rails3 shorten vi-mode gem)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -37,6 +37,18 @@ alias nginx="sudo /usr/local/sbin/nginx"
 alias gl="git log --stat --graph --decorate"
 alias gs="git status"
 # \unicorn -l $(pwd)/tmp/sockets/unicorn.sock -c /usr/local/etc/unicorn.rb
+function vim() {
+  if [[ $TERM = "screen" ]]; then
+    =vim $*
+  else
+    if [[ -x /usr/local/bin/mvim ]]; then
+      /usr/local/bin/mvim $*
+    else
+      =vim $*
+    fi
+  fi
+}
+
 function u() {
   if [[ -z $1 ]]; then
     UNICORN_PORT=3000;
