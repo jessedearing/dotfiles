@@ -38,14 +38,14 @@ alias gl="git log --stat --graph --decorate"
 alias gs="git status"
 # \unicorn -l $(pwd)/tmp/sockets/unicorn.sock -c /usr/local/etc/unicorn.rb
 function vim() {
-  if [[ $TERM = "screen" ]]; then
-    =vim $*
-  else
-    if [[ -x /usr/local/bin/mvim ]]; then
-      /usr/local/bin/mvim $*
+  if [[ -x /usr/local/bin/mvim ]]; then
+    if [[ $TERM = "screen" ]]; then
+      /usr/local/bin/mvim -v $*
     else
-      =vim $*
+      /usr/local/bin/mvim $*
     fi
+  else
+    =vim $*
   fi
 }
 
