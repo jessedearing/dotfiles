@@ -49,13 +49,13 @@ if has("gui_macvim")
   imap <D-9> <Esc>9gt
 endif
 
+set list listchars=tab:\ \ ,trail:·
+
 " Start without the toolbar
 set guioptions-=T
 
 " Default gui color scheme
-" color ir_black
-color solarized
-set background=dark
+color soso
 
 set guifont=DejaVu\ Sans\ Mono:h12
 
@@ -67,7 +67,7 @@ endfunction
 
 " Project Tree
 autocmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
-autocmd FocusGained * call s:UpdateNERDTree()
+" autocmd FocusGained * call s:UpdateNERDTree()
 autocmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 
 " Close all open buffers on entering a window if the only
