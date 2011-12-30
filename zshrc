@@ -26,8 +26,6 @@ export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X1
 
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
-export GIT_EDITOR="vim"
-export EDITOR="vim"
 export PGDATA=/usr/local/var/postgresql
 alias vi="vim"
 alias sgem="sudo gem"
@@ -36,17 +34,22 @@ alias web="open -a 'Google Chrome' "
 alias nginx="sudo /usr/local/sbin/nginx"
 alias gl="git log --stat --graph --decorate"
 alias gs="git status"
-# \unicorn -l $(pwd)/tmp/sockets/unicorn.sock -c /usr/local/etc/unicorn.rb
-function vim() {
-  if [[ -x /usr/local/bin/mvim ]]; then
-    if [[ $TERM = "screen" ]]; then
-      /usr/local/bin/mvim -v $*
-    else
-      /usr/local/bin/mvim $*
-    fi
+
+# To MacVim or Vim?
+if [[ -x /usr/local/bin/mvim ]]; then
+  if [[ $TERM = "screen" ]]; then
+    VIM="/usr/local/bin/mvim -v"
   else
-    =vim $*
+    VIM="/usr/local/bin/mvim"
   fi
+else
+  VIM="vim"
+fi
+export GIT_EDITOR="$VIM -f"
+export EDITOR=$VIM
+
+function vim() {
+  $VIM $*
 }
 
 function u() {

@@ -55,7 +55,7 @@ set list listchars=tab:\ \ ,trail:·
 set guioptions-=T
 
 " Default gui color scheme
-color soso
+color tubster
 
 set guifont=DejaVu\ Sans\ Mono:h12
 
