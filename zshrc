@@ -17,7 +17,7 @@ export ZSH_CUSTOM="$HOME/.zsh-custom"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew rvm autojump github memdisk rails3 shorten vi-mode gem)
+plugins=(git brew rvm github memdisk rails3 shorten vi-mode gem)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -117,6 +117,8 @@ export NODE_PATH=/usr/local/lib/node
 
 export GIT_COMMITTER_NAME="Jesse Dearing"
 export GIT_COMMITTER_EMAIL="jesse.dearing@gmail.com"
+
+export KEYTIMEOUT=20
 
 # Add the following to your ~/.bashrc or ~/.zshrc
 hitch() {
