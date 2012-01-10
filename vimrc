@@ -5,6 +5,7 @@ set ruler
 syntax on
 " set foldmethod=syntax
 " set foldlevelstart=99
+set shell=/bin/sh
 
 " Set encoding
 set encoding=utf-8
