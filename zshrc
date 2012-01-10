@@ -24,8 +24,6 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
 
-[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
-
 export PGDATA=/usr/local/var/postgresql
 alias vi="vim"
 alias sgem="sudo gem"
@@ -118,7 +116,7 @@ export NODE_PATH=/usr/local/lib/node
 export GIT_COMMITTER_NAME="Jesse Dearing"
 export GIT_COMMITTER_EMAIL="jesse.dearing@gmail.com"
 
-export KEYTIMEOUT=20
+export KEYTIMEOUT=5
 
 # Add the following to your ~/.bashrc or ~/.zshrc
 hitch() {
