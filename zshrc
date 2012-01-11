@@ -10,7 +10,7 @@ export ZSH_CUSTOM="$HOME/.zsh-custom"
 # export CASE_SENSITIVE="true"
 
 # Comment this out to disable weekly auto-update checks
-# export DISABLE_AUTO_UPDATE="true"
+export DISABLE_AUTO_UPDATE="true"
 
 # Uncomment following line if you want to disable colors in ls
 # export DISABLE_LS_COLORS="true"
@@ -38,18 +38,19 @@ alias gs="git status"
 # To MacVim or Vim?
 if [[ -x /usr/local/bin/mvim ]]; then
   if [[ $TERM = "screen" ]]; then
-    VIM="/usr/local/bin/mvim -v"
+    VIM='/usr/local/bin/mvim'
+    VIMFLAGS='-v'
   else
-    VIM="/usr/local/bin/mvim"
+    VIM='/usr/local/bin/mvim'
   fi
 else
   VIM="vim"
 fi
-export GIT_EDITOR="$VIM -f"
-export EDITOR=$VIM
+export GIT_EDITOR=$VIM" "$VIMFLAGS" -f"
+export EDITOR=$VIM" "$VIMFLAGS" -f"
 
 function vim() {
-  $VIM $*
+  $VIM $VIMFLAGS $*
 }
 
 function u() {
@@ -118,7 +119,7 @@ export NODE_PATH=/usr/local/lib/node
 export GIT_COMMITTER_NAME="Jesse Dearing"
 export GIT_COMMITTER_EMAIL="jesse.dearing@gmail.com"
 
-export KEYTIMEOUT=20
+export KEYTIMEOUT=5
 
 # Add the following to your ~/.bashrc or ~/.zshrc
 hitch() {
