@@ -11,7 +11,7 @@ end
 
 require 'rubygems' rescue nil
 require 'wirble'
-require 'awesome_print'
+require 'awesome_print' rescue nil
 require 'interactive_editor'
 
 module AwesomePrintMongoid
@@ -62,7 +62,7 @@ module AwesomePrintMongoid
   end
 end
 
-AwesomePrint.send(:include, AwesomePrintMongoid)
+# AwesomePrint.send(:include, AwesomePrintMongoid)
 
 
 # load wirble
