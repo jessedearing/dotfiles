@@ -5,7 +5,6 @@ set ruler
 syntax on
 " set foldmethod=syntax
 " set foldlevelstart=99
-set shell=/bin/sh
 
 " Set encoding
 set encoding=utf-8
@@ -142,5 +141,3 @@ let macvim_hig_shift_movement = 1
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
-
-set clipboard=unnamed
