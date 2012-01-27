@@ -17,7 +17,7 @@ export DISABLE_AUTO_UPDATE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew rvm github memdisk rails3 shorten vi-mode gem)
+plugins=(git rvm vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -50,7 +50,7 @@ export GIT_EDITOR=$VIM" "$VIMFLAGS" -f"
 export EDITOR=$VIM" "$VIMFLAGS" -f"
 
 function vim() {
-  $VIM $VIMFLAGS $*
+  =$VIM $VIMFLAGS $*
 }
 
 function u() {
