@@ -113,7 +113,7 @@ nmap <C-Down> ]e
 vmap <C-Up> [egv
 vmap <C-Down> ]egv
 
-map <Leader><Esc> :let @/ = ""<CR>
+nmap <Leader><Esc> :nohlsearch<CR>
 
 " Enable syntastic syntax checking
 let g:syntastic_enable_signs=1
@@ -136,6 +136,8 @@ let g:JSLintHighlightErrorLine = 0
 
 " MacVIM shift+arrow-keys behavior (required in .vimrc)
 let macvim_hig_shift_movement = 1
+
+set clipboard=unnamed
 
 " Include user's local vim config
 if filereadable(expand("~/.vimrc.local"))
