@@ -8,6 +8,7 @@
 
 MODE_INDICATOR="%{$fg_bold[red]%}❮%{$reset_color%}%{$fg[red]%}❮❮%{$reset_color%}"
 local return_status="%(?..%{$fg[red]%}%? ↩%{$reset_color%})"
+local smiley="%(?,%{$fg[green]%}:%)%{$reset_color%},%{$fg[red]%}:(%{$reset_color%})"
 
 ZSH_THEME_GIT_PROMPT_PREFIX="|"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
@@ -86,6 +87,6 @@ function git_time_since_commit() {
 
 PROMPT='
 %{$fg[blue]%}%m%{$reset_color%} 福 %{$fg[cyan]%}%~ %{$reset_color%}$(git_prompt_short_sha)$(git_prompt_info)
-%{$fg[red]%}%!%{$reset_color%} $(prompt_char) : '
+${smiley} $(prompt_char) : '
 
 RPROMPT='$(vi_mode_prompt_info)${return_status}$(git_time_since_commit)$(git_prompt_status)%{$reset_color%}'
