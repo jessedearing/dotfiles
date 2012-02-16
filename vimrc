@@ -34,6 +34,7 @@ set wildignore+=*.o,*.obj,.git,*.rbc
 
 " Status bar
 set laststatus=2
+set statusline=[%n]\ %<%f\ %([%1*%M%*%R%Y]%)\ \ \ [%{Tlist_Get_Tagname_By_Line()}]\ %=%-19(\LINE\ [%l/%L]\ COL\ [%02c%03V]%)\ %P
 
 " Without setting this, ZoomWin restores windows in a way that causes
 " equalalways behavior to be triggered the next time CommandT is used.
@@ -51,7 +52,17 @@ let g:CommandTMaxHeight=20
 map <Leader><Leader> :ZoomWin<CR>
 
 " CTags
-map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
+map <Leader>rt :!/usr/local/bin/ctags --tag-relative -f.git/tags --extra=+f --exclude=.git --exclude=doc --exclude=coverage -R<CR><CR>
+map <Leader>gt :!.git/hooks/ctags<CR><CR>
+let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
+" let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
+let Tlist_WinWidth = 50
+map <Leader>tlt :TlistToggle<cr>
+map <Leader>tll :TlistSessionLoad 
+map <Leader>tls :TlistSessionSave 
+map <Leader>tla :TlistAddFilesRecursive 
+map <Leader>tlg :TlistSessionLoad .git/taglist<CR>
+" map <Leader>tb :TagbarToggle<CR>
 
 " Remember last location in file
 if has("autocmd")
@@ -137,7 +148,9 @@ let g:JSLintHighlightErrorLine = 0
 " MacVIM shift+arrow-keys behavior (required in .vimrc)
 let macvim_hig_shift_movement = 1
 
-set clipboard=unnamed
+set clipboard="
+
+au BufRead,BufNewFile *.jbuilder setf ruby
 
 " Include user's local vim config
 if filereadable(expand("~/.vimrc.local"))

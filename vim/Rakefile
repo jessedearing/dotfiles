@@ -160,6 +160,7 @@ vim_plugin_task "taskpaper",        "git://github.com/davidoc/taskpaper.vim.git"
 vim_plugin_task "matchit",          "http://www.vim.org/scripts/download_script.php?src_id=8196"
 vim_plugin_task "tabular",          "https://github.com/godlygeek/tabular.git"
 vim_plugin_task "sessionman",       "git://github.com/vim-scripts/sessionman.vim.git"
+# vim_plugin_task "tagbar",           "https://github.com/majutsushi/tagbar.git"
 # vim_plugin_task "neocomplcache",    "https://github.com/Shougo/neocomplcache.git"
 
 # vim_plugin_task "hammer",           "git://github.com/robgleeson/hammer.vim.git" do
