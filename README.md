@@ -9,7 +9,10 @@ The .tmux.conf file was copied from [pengwynn](https://github.com/pengwynn/dotfi
 The prefix key is Ctrl-a instead of Ctrl-b.
 
 ###(G)Vimrc
-I use the [Janus](https://github.com/carlhuda/janus) package for Vim so my rc is tailored to work with it.
+I use the an early variation of the vimrc and gvimrc from
+[Janus](https://github.com/carlhuda/janus). I do not actually use
+Janus, rather I use [Pathogen](https://github.com/tpope/vim-pathogen) to
+maintain my git plugins. All the plugins are set up as git submodules
 
 ###Irbrc
 This file requires that `wirble` and `awesome_print` gems are installed.
