@@ -32,13 +32,17 @@ alias sgem="sudo gem"
 alias ruby18="rvm use ruby-1.8.7-p174"
 alias web="open -a 'Google Chrome' "
 alias nginx="sudo /usr/local/sbin/nginx"
-alias g='nocorrect git'
+if [[ -x /usr/local/bin/hub ]]; then
+  alias g='nocorrect hub'
+else
+  alias g='nocorrect git'
+fi
 alias gl="git log --stat --graph --decorate"
 alias gs="git status"
 
 # To MacVim or Vim?
 if [[ -x /usr/local/bin/mvim ]]; then
-  if [[ $TERM = "screen" ]]; then
+  if [[ $TERM = "screen" || $TERM = "screen-256color" ]]; then
     VIM='/usr/local/bin/mvim'
     VIMFLAGS='-v'
   else
@@ -131,3 +135,5 @@ alias unhitch='hitch -u'
 # Uncomment to persist pair info between terminal instances
 # hitch
 
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
