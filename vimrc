@@ -1,5 +1,7 @@
 set nocompatible
 
+call pathogen#infect()
+
 set number
 set ruler
 syntax on
@@ -148,11 +150,7 @@ let g:JSLintHighlightErrorLine = 0
 " MacVIM shift+arrow-keys behavior (required in .vimrc)
 let macvim_hig_shift_movement = 1
 
-set clipboard="
+" set clipboard="
+set clipboard=unnamed
 
 au BufRead,BufNewFile *.jbuilder setf ruby
-
-" Include user's local vim config
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
-endif
