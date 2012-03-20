@@ -9,6 +9,13 @@ if defined?(::Bundler)
   end
 end
 
+if defined?(::Bundler)
+  [:wirble, :awesome_print].each do |gem|
+    path = Dir.glob("/usr/local/lib/ruby/gems/1.9.1/gems/*").grep(Regexp.new(gem.to_s)).first
+    $LOAD_PATH << "#{path}/lib" if path && !path.empty?
+  end
+end
+
 require 'rubygems' rescue nil
 require 'wirble'
 require 'awesome_print' rescue nil
