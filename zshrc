@@ -32,11 +32,7 @@ alias sgem="sudo gem"
 alias ruby18="rvm use ruby-1.8.7-p174"
 alias web="open -a 'Google Chrome' "
 alias nginx="sudo /usr/local/sbin/nginx"
-if [[ -x /usr/local/bin/hub ]]; then
-  alias g='nocorrect hub'
-else
-  alias g='nocorrect git'
-fi
+alias g='nocorrect git'
 alias gl="git log --stat --graph --decorate"
 alias gs="git status"
 
