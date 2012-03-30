@@ -51,7 +51,7 @@ export GIT_EDITOR=$VIM" "$VIMFLAGS" -f"
 export EDITOR=$VIM" "$VIMFLAGS" -f"
 
 function vim() {
-  =$VIM $VIMFLAGS $*
+  (unset GEM_HOME GEM_PATH; =$VIM $VIMFLAGS $*)
 }
 
 function u() {
