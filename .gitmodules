@@ -106,3 +106,6 @@
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
+[submodule "vim/bundle/webapi.vim"]
+	path = vim/bundle/webapi.vim
+	url = https://github.com/mattn/webapi-vim.git
