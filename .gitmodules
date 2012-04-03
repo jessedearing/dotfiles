@@ -109,3 +109,6 @@
 [submodule "vim/bundle/webapi.vim"]
 	path = vim/bundle/webapi.vim
 	url = https://github.com/mattn/webapi-vim.git
+[submodule "vim/bundle/smartinput.vim"]
+	path = vim/bundle/smartinput.vim
+	url = git://github.com/kana/vim-smartinput.git
