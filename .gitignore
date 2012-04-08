@@ -1,11 +1,7 @@
 vim/after
-vim/autoload
 vim/backup
-vim/colors
 vim/compiler
 vim/doc
-vim/ftdetect
-vim/ftplugin
 vim/indent
 vim/nerdtree_plugin
 vim/plugin
