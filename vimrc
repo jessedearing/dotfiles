@@ -106,8 +106,6 @@ filetype plugin indent on
 " Normal mode: <Leader>e
 map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
-map <Leader>t :CtrlP<CR>
-
 " Inserts the path of the currently edited file into a command
 " Command mode: Ctrl+P
 cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
@@ -149,5 +147,10 @@ set clipboard=unnamed
 
 " Gist
 let g:gist_private = 1
+
+" Grep
+let Grep_Find_Use_Xargs = 0
+let Grep_Default_Options = '-i'
+nnoremap <silent> <F3> :Grep<CR>
 
 au BufRead,BufNewFile *.jbuilder setf ruby
