@@ -118,3 +118,6 @@
 [submodule "vim/bundle/hammer.vim"]
 	path = vim/bundle/hammer.vim
 	url = https://github.com/vim-scripts/hammer.vim.git
+[submodule "vim/bundle/grep.vim"]
+	path = vim/bundle/grep.vim
+	url = https://github.com/vim-scripts/grep.vim.git
