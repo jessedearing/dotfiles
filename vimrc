@@ -7,6 +7,8 @@ set ruler
 syntax on
 " set foldmethod=syntax
 " set foldlevelstart=99
+set visualbell t_vb=
+
 
 " Set encoding
 set encoding=utf-8
