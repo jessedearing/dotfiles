@@ -115,9 +115,9 @@
 [submodule "vim/bundle/hammer.vim"]
 	path = vim/bundle/hammer.vim
 	url = https://github.com/vim-scripts/hammer.vim.git
-[submodule "vim/bundle/grep.vim"]
-	path = vim/bundle/grep.vim
-	url = https://github.com/vim-scripts/grep.vim.git
 [submodule "vim/bundle/zencoding.vim"]
 	path = vim/bundle/zencoding.vim
 	url = https://github.com/mattn/zencoding-vim
+[submodule "vim/bundle/ack.vim"]
+	path = vim/bundle/ack.vim
+	url = git://github.com/mileszs/ack.vim.git
