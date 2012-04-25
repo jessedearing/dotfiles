@@ -105,6 +105,7 @@ alias bi="bundle install"
 alias bl="bundle list"
 alias bu="bundle update"
 alias bp="bundle package"
+alias lol="rvm 1.8.7 exec lolspeak"
 
 alias mongod="mongod -f /usr/local/Cellar/mongodb/1.8.3-x86_64/mongod.conf"
 
