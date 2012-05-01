@@ -53,7 +53,8 @@ map <Leader>n :NERDTreeToggle<CR>
 map <Leader><Leader> :ZoomWin<CR>
 
 " CTags
-map <Leader>rt :!/usr/local/bin/ctags --tag-relative -f.git/tags --extra=+f --exclude=.git --exclude=doc --exclude=coverage -R<CR><CR>
+set tags=tags;/
+map <Leader>rt :!/usr/local/bin/ctags --tag-relative -ftags --extra=+f --exclude=.git --exclude=doc --exclude=coverage -R<CR><CR>
 map <Leader>gt :!.git/hooks/ctags<CR><CR>
 let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
 " let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
