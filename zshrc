@@ -34,10 +34,20 @@ alias web="open -a 'Google Chrome' "
 alias nginx="sudo /usr/local/sbin/nginx"
 alias g='nocorrect git'
 alias gl="git log --stat --graph --decorate"
-alias gs="git status"
+alias gs="git status -sb"
+alias ghost="sudo rvm 1.9.3 do ghost"
+alias knife="rvm 1.9.3 do knife"
+alias be="bundle exec"
+alias bi="bundle install"
+alias bl="bundle list"
+alias bu="bundle update"
+alias bp="bundle package"
+alias lol="rvm 1.8.7 do lolspeak"
+alias mongod="mongod -f /usr/local/Cellar/mongodb/1.8.3-x86_64/mongod.conf"
+alias cheat="rvm 1.9.3 do cheat"
 
-export GIT_EDITOR=$VIM" "$VIMFLAGS" -f"
-export EDITOR=$VIM" "$VIMFLAGS" -f"
+export GIT_EDITOR="vim"
+export EDITOR="vim"
 
 function vim() {
   (unset GEM_HOME GEM_PATH; =vim $VIMFLAGS $*)
@@ -89,14 +99,19 @@ function varn() {
   fi
 }
 
-alias be="bundle exec"
-alias bi="bundle install"
-alias bl="bundle list"
-alias bu="bundle update"
-alias bp="bundle package"
-alias lol="rvm 1.8.7 exec lolspeak"
+function quote() {
+  echo "“$*”" | pbcopy
+}
 
-alias mongod="mongod -f /usr/local/Cellar/mongodb/1.8.3-x86_64/mongod.conf"
+function last_migration() {
+  local rails_dir=$PWD
+  while [ $rails_dir != "/" ]; do
+    [ -f "$rails_dir/config/boot.rb" ] && break
+    rails_dir="$(dirname $rails_dir)"
+  done
+  [ $rails_dir = "/" ] && echo "Rails project not found" && return
+  vim $rails_dir/db/migrate/${$(ls -1t $rails_dir/db/migrate)[1]}
+}
 
 export EC2_PRIVATE_KEY="/usr/local/aws/ec2-api-tools-1.4.3.0/pk"
 export EC2_CERT="/usr/local/aws/ec2-api-tools-1.4.3.0/cert"
