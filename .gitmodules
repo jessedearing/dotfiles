@@ -124,3 +124,6 @@
 [submodule "vim/bundle/powerline.vim"]
 	path = vim/bundle/powerline.vim
 	url = https://github.com/Lokaltog/vim-powerline.git
+[submodule "vim/bundle/netrw.vim"]
+	path = vim/bundle/netrw.vim
+	url = https://github.com/vim-scripts/netrw.vim.git
