@@ -1,5 +1,6 @@
 
 if has("gui_macvim")
+  set shell=/bin/zsh\ -li
   " Fullscreen takes up entire screen
   set fuoptions=maxhorz,maxvert
 
@@ -52,7 +53,8 @@ set transparency=10
 " Default gui color scheme
 color tubster
 
-set guifont=DejaVu\ Sans\ Mono:h12
+" set guifont=DejaVu\ Sans\ Mono:h12
+set guifont=Anonymous\ Pro\ for\ Powerline:h14
 
 set clipboard=unnamed
 

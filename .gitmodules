@@ -121,3 +121,6 @@
 [submodule "vim/bundle/ack.vim"]
 	path = vim/bundle/ack.vim
 	url = git://github.com/mileszs/ack.vim.git
+[submodule "vim/bundle/powerline.vim"]
+	path = vim/bundle/powerline.vim
+	url = https://github.com/Lokaltog/vim-powerline.git

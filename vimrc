@@ -133,7 +133,7 @@ set modelines=10
 
 " Default color scheme
 " color desert
-color twilight
+" color twilight
 
 " Directories for swp files
 set backupdir=~/.vim/backup
@@ -157,3 +157,13 @@ let Grep_Default_Options = '-i'
 nnoremap <silent> <F3> :Grep<CR>
 
 au BufRead,BufNewFile *.jbuilder setf ruby
+au BufRead,BufNewFile *.thor setf ruby
+
+let g:Powerline_symbols = 'fancy'
+
+let g:ctrlp_extensions = ['tag', 'line']
+let g:ctrlp_open_multiple_files = 'h'
+
+set ttyfast
+set mouse=a
+set ttymouse=xterm2

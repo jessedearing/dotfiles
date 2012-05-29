@@ -17,7 +17,7 @@ export DISABLE_AUTO_UPDATE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git rvm brew cloudapp vi-mode)
+plugins=(git rvm brew cloudapp vi-mode tmux)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -36,22 +36,11 @@ alias g='nocorrect git'
 alias gl="git log --stat --graph --decorate"
 alias gs="git status"
 
-# To MacVim or Vim?
-if [[ -x /usr/local/bin/mvim ]]; then
-  if [[ $TERM = "screen" || $TERM = "screen-256color" ]]; then
-    VIM='/usr/local/bin/mvim'
-    VIMFLAGS='-v'
-  else
-    VIM='/usr/local/bin/mvim'
-  fi
-else
-  VIM="vim"
-fi
 export GIT_EDITOR=$VIM" "$VIMFLAGS" -f"
 export EDITOR=$VIM" "$VIMFLAGS" -f"
 
 function vim() {
-  (unset GEM_HOME GEM_PATH; =$VIM $VIMFLAGS $*)
+  (unset GEM_HOME GEM_PATH; =vim $VIMFLAGS $*)
 }
 
 function u() {

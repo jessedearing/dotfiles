@@ -1,4 +1,4 @@
-[[ $TERM == "screen" ]] && return
+[[ $TERM == "screen-256color" ]] && return
 [[ $- != *i* ]] && return
 tmux_sock=0
 while [[ -a "/tmp/tmux.$tmux_sock" ]] do
