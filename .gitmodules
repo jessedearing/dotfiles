@@ -127,3 +127,6 @@
 [submodule "vim/bundle/netrw.vim"]
 	path = vim/bundle/netrw.vim
 	url = https://github.com/vim-scripts/netrw.vim.git
+[submodule "vim/bundle/vimux.vim"]
+	path = vim/bundle/vimux.vim
+	url = https://github.com/benmills/vimux.git
