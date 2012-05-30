@@ -167,3 +167,6 @@ let g:ctrlp_open_multiple_files = 'h'
 set ttyfast
 set mouse=a
 set ttymouse=xterm2
+
+set spell
+set spelllang=en_us
