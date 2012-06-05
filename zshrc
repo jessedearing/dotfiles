@@ -17,7 +17,7 @@ export DISABLE_AUTO_UPDATE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git rvm brew cloudapp vi-mode tmux)
+plugins=(git brew cloudapp vi-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -46,11 +46,23 @@ alias lol="rvm 1.8.7 do lolspeak"
 alias mongod="mongod -f /usr/local/Cellar/mongodb/1.8.3-x86_64/mongod.conf"
 alias cheat="rvm 1.9.3 do cheat"
 
-export GIT_EDITOR="vim"
-export EDITOR="vim"
+# To MacVim or Vim?
+if [[ -x /usr/local/bin/mvim ]]; then
+  if [[ $TERM = "screen" || $TERM = "screen-256color" ]]; then
+    VIM='/usr/local/bin/mvim'
+    VIMFLAGS='-v'
+  else
+    VIM='/usr/local/bin/mvim'
+  fi
+else
+  VIM="vim"
+fi
+
+export EDITOR="$VIM $VIMFLAGS -f"
+export GIT_EDITOR=$EDITOR
 
 function vim() {
-  (unset GEM_HOME GEM_PATH; =vim $VIMFLAGS $*)
+  (unset GEM_HOME GEM_PATH; =$VIM $VIMFLAGS $*)
 }
 
 function u() {
@@ -135,6 +147,5 @@ hitch() {
 alias unhitch='hitch -u'
 # Uncomment to persist pair info between terminal instances
 # hitch
-
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
