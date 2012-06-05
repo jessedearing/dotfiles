@@ -18,6 +18,9 @@ export DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git brew cloudapp vi-mode)
+fpath=($HOME/.zsh-completions ${fpath})
+autoload -U compinit
+compinit
 
 source $ZSH/oh-my-zsh.sh
 
