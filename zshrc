@@ -18,16 +18,13 @@ export DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git brew cloudapp vi-mode)
-fpath=($HOME/.zsh-completions ${fpath})
-autoload -U compinit
-compinit
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export PATH=$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
 
-[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
+[[ -s $HOME/.rvm/scripts/rvm && $USER != 'root' ]] && source $HOME/.rvm/scripts/rvm
 
 export PGDATA=/usr/local/var/postgresql
 alias vi="vim"

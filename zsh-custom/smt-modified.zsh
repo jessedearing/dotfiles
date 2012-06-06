@@ -10,7 +10,7 @@ MODE_INDICATOR="%{$fg_bold[red]%}❮%{$reset_color%}%{$fg[red]%}❮❮%{$reset_c
 local return_status="%(?..%{$fg[red]%}%? ↩%{$reset_color%})"
 function root_eyebrows() {
   local eyebrows
-  if [[ $(whoami) == 'root' ]]; then
+  if [[ $USER == 'root' ]]; then
     if [[ $? == 0 ]]; then
       eyebrows="%{$fg[green]%}"
     else
