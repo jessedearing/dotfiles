@@ -8,6 +8,18 @@
 
 MODE_INDICATOR="%{$fg_bold[red]%}❮%{$reset_color%}%{$fg[red]%}❮❮%{$reset_color%}"
 local return_status="%(?..%{$fg[red]%}%? ↩%{$reset_color%})"
+function root_eyebrows() {
+  local eyebrows
+  if [[ $(whoami) == 'root' ]]; then
+    if [[ $? == 0 ]]; then
+      eyebrows="%{$fg[green]%}"
+    else
+      eyebrows="%{$fg[red]%}"
+    fi
+    eyebrows="$eyebrows>"
+  fi
+  echo $eyebrows
+}
 local smiley="%(?,%{$fg[green]%}:%)%{$reset_color%},%{$fg[red]%}:(%{$reset_color%})"
 
 ZSH_THEME_GIT_PROMPT_PREFIX="|"
@@ -87,6 +99,6 @@ function git_time_since_commit() {
 
 PROMPT='
 %{$fg[blue]%}%m%{$reset_color%} %{$fg[yellow]%}$(rvm-prompt)%{$reset_color%} 福 %{$fg[cyan]%}%~ %{$reset_color%}$(git_prompt_short_sha)$(git_prompt_info)
-${smiley} $(prompt_char) : '
+$(root_eyebrows)${smiley} $(prompt_char) : '
 
 RPROMPT='$(vi_mode_prompt_info)${return_status}$(git_time_since_commit)$(git_prompt_status)%{$reset_color%}'
