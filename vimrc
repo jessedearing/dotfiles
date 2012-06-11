@@ -52,19 +52,6 @@ map <Leader>n :NERDTreeToggle<CR>
 " ZoomWin configuration
 map <Leader><Leader> :ZoomWin<CR>
 
-" CTags
-set tags=tags;/
-map <Leader>rt :!/usr/local/bin/ctags --tag-relative -ftags --extra=+f --exclude=.git --exclude=doc --exclude=coverage -R<CR><CR>
-map <Leader>gt :!.git/hooks/ctags<CR><CR>
-let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
-" let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
-let Tlist_WinWidth = 50
-map <Leader>tlt :TlistToggle<cr>
-map <Leader>tll :TlistSessionLoad 
-map <Leader>tls :TlistSessionSave 
-map <Leader>tla :TlistAddFilesRecursive 
-map <Leader>tlg :TlistSessionLoad .git/taglist<CR>
-" map <Leader>tb :TagbarToggle<CR>
 
 " Remember last location in file
 if has("autocmd")
@@ -109,10 +96,6 @@ filetype plugin indent on
 " Normal mode: <Leader>e
 map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
-" Inserts the path of the currently edited file into a command
-" Command mode: Ctrl+P
-cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
-
 " Unimpaired configuration
 " Bubble single lines
 nmap <Leader><Up> [e
@@ -123,9 +106,6 @@ vmap <Leader><Down> ]egv
 
 nmap <Leader><Esc> :nohlsearch<CR>
 
-" Enable syntastic syntax checking
-let g:syntastic_enable_signs=1
-let g:syntastic_quiet_warnings=1
 
 " Use modeline overrides
 set modeline
@@ -150,10 +130,20 @@ let macvim_hig_shift_movement = 1
 " set clipboard="
 set clipboard=unnamed
 
-" Gist
-let g:gist_private = 1
+"   Syntastic
+" ====================================================================
+" Enable syntastic syntax checking
+let g:syntastic_enable_signs=1
+let g:syntastic_quiet_warnings=1
 
-" Grep
+"   Gist
+" ====================================================================
+let g:gist_private = 1
+let g:gist_clip_command = 'pbcopy'
+" let g:gist_open_browser_after_post = 1
+
+"   Grep
+" ====================================================================
 let Grep_Find_Use_Xargs = 0
 let Grep_Default_Options = '-i'
 nnoremap <silent> <F3> :Grep<CR>
@@ -164,23 +154,23 @@ au BufRead,BufNewFile *.{md,mkd,txt} set spell
 au BufRead,BufNewFile COMMIT_EDITMSG set spell
 au BufRead,BufNewFile *.rb set keywordprg=rvm\ default-with-rvmrc\ do\ ri
 
+"   Powerline
+" ====================================================================
+" Settings
 let g:Powerline_symbols = 'fancy'
 
-let g:ctrlp_extensions = ['tag', 'line']
-let g:ctrlp_open_multiple_files = 'h'
-
-" set ttyfast
-" set mouse=a
-" set ttymouse=xterm2
-
+"   Spell
+" ====================================================================
 set spelllang=en_us
-
 map <Leader>ds :set nospell<CR>
 
-" highlight ExtraWhitespace ctermbg=red guibg=red
-" match ExtraWhitespace /\s\+$/
-
-" CtrlP Keybindings
+"   CtrlP
+" ====================================================================
+" Settings
+let g:ctrlp_extensions = ['tag', 'line']
+let g:ctrlp_open_multiple_files = 'h'
+" Keybindings
+map <Leader>ff :CtrlP<CR>
 map <Leader>fv :CtrlP app/views<CR>
 map <Leader>fm :CtrlP app/models<CR>
 map <Leader>fs :CtrlP spec/<CR>
@@ -189,7 +179,9 @@ map <Leader>fc :CtrlP app/controllers<CR>
 map <Leader>fo :CtrlP app/concerns<CR>
 map <Leader>fa :CtrlP app/assets<CR>
 
-" RSpec Keybindings
+"   RSpec
+" ====================================================================
+" Keybindings
 " Shamelessly ripped off from @garybernhardt's dotfiles
 "     (https://github.com/garybernhardt/dotfiles/blob/025099b412d6bf9a5a52f50e3cf9b968d9e06866/.vimrc#L294-350)
 map <leader>t :call RunTestFile()<cr>
@@ -198,6 +190,7 @@ map <leader>a :call RunTests('')<cr>
 map <leader>c :w\|:!script/features<cr>
 map <leader>w :w\|:!script/features --profile wip<cr>
 
+" Functions
 function! RunTestFile(...)
     if a:0
         let command_suffix = a:1
@@ -243,3 +236,18 @@ function! RunTests(filename)
     "     exec ":!rspec --color " . a:filename
     " end
 endfunction
+
+"   CTags
+" ====================================================================
+set tags=tags;/
+map <Leader>rt :!/usr/local/bin/ctags --tag-relative -ftags --extra=+q --extra=+f --exclude=.git --exclude=doc --exclude=coverage -R<CR><CR>
+map <Leader>gt :!.git/hooks/ctags<CR><CR>
+let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
+" let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
+let Tlist_WinWidth = 50
+map <Leader>tlt :TlistToggle<cr>
+map <Leader>tll :TlistSessionLoad 
+map <Leader>tls :TlistSessionSave 
+map <Leader>tla :TlistAddFilesRecursive 
+map <Leader>tlg :TlistSessionLoad .git/taglist<CR>
+" map <Leader>tb :TagbarToggle<CR>
