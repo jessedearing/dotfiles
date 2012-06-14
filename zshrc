@@ -17,7 +17,7 @@ export DISABLE_AUTO_UPDATE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew cloudapp vi-mode)
+plugins=(git brew cloudapp vi-mode fasd)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -45,6 +45,7 @@ alias bp="bundle package"
 alias lol="rvm 1.8.7 do lolspeak"
 alias mongod="mongod -f /usr/local/Cellar/mongodb/1.8.3-x86_64/mongod.conf"
 alias cheat="rvm 1.9.3 do cheat"
+alias v="f -e $VIM"
 
 # To MacVim or Vim?
 if [[ -x /usr/local/bin/mvim ]]; then
