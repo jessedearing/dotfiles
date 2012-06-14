@@ -130,3 +130,6 @@
 [submodule "vim/bundle/vimux.vim"]
 	path = vim/bundle/vimux.vim
 	url = https://github.com/benmills/vimux.git
+[submodule "vim/bundle/go.vim"]
+	path = vim/bundle/go.vim
+	url = https://github.com/uggedal/go-vim.git
