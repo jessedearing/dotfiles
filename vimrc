@@ -47,7 +47,7 @@ set noequalalways
 
 " NERDTree configuration
 let NERDTreeIgnore=['\.rbc$', '\~$']
-map <Leader>n :NERDTreeToggle<CR>
+map <Leader>nn :NERDTreeToggle<CR>
 
 " ZoomWin configuration
 map <Leader><Leader> :ZoomWin<CR>
@@ -251,3 +251,12 @@ map <Leader>tls :TlistSessionSave
 map <Leader>tla :TlistAddFilesRecursive 
 map <Leader>tlg :TlistSessionLoad .git/taglist<CR>
 " map <Leader>tb :TagbarToggle<CR>
+
+"   VimOrganizer
+" ====================================================================
+au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
+au BufEnter *.org            call org#SetOrgFileType()
+
+"   NarrowRegion
+" ====================================================================
+map <Leader>nr :NarrowRegion<CR>
