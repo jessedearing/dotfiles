@@ -1,5 +1,7 @@
 require 'fileutils'
 
+DOTFILE_BLACKLIST = ['Readme.md', 'global_gems.sh']
+
 def link_file(home_file, file)
   if File.exists?(home_file)
     return "file exists"
@@ -19,6 +21,7 @@ task :install do
   all_files.delete(File.basename(__FILE__))
 
   all_files.each do |file|
+    next if DOTFILE_BLACKLIST.map(&:downcase).include? file.downcase
     home_file = File.join(home_dir, ".#{file}")
     puts "Linking #{file} to #{home_file}"
     puts link_file(home_file, file)
