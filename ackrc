@@ -3,6 +3,7 @@
 --type-add=html=.html,.haml,.htm,.erb
 --type-add=coffeescript=.coffee
 --type-add=cucumber=.feature
+--type-add=handlebars=.hbs
 
 --ignore-dir=coverage
 --ignore-dir=doc
