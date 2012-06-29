@@ -1,8 +1,5 @@
 set antialias
 
-" Autosave when window loses focus
-au FocusLost * :w
-
 if has("gui_macvim")
   set shell=/bin/zsh
   " Fullscreen takes up entire screen
