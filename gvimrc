@@ -1,3 +1,8 @@
+set antialias
+set cursorline
+
+" Autosave when window loses focus
+au FocusLost * :w
 
 if has("gui_macvim")
   set shell=/bin/zsh
