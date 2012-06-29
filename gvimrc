@@ -1,5 +1,4 @@
 set antialias
-set cursorline
 
 " Autosave when window loses focus
 au FocusLost * :w

@@ -4,6 +4,8 @@ call pathogen#infect()
 
 set number
 set ruler
+set cursorline
+set showcmd
 syntax on
 " set foldmethod=syntax
 " set foldlevelstart=99
@@ -260,3 +262,7 @@ au BufEnter *.org            call org#SetOrgFileType()
 "   NarrowRegion
 " ====================================================================
 map <Leader>nr :NarrowRegion<CR>
+
+"   Numbers
+" ====================================================================
+nmap <F3> :NumbersToggle<CR>
