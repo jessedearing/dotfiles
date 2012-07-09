@@ -136,9 +136,6 @@
 [submodule "vim/bundle/narrow_region"]
 	path = vim/bundle/narrow_region
 	url = https://github.com/vim-scripts/narrow_region.git
-[submodule "vim/bundle/numbers.vim"]
-	path = vim/bundle/numbers.vim
-	url = https://github.com/myusuf3/numbers.vim.git
 [submodule "vim/bundle/vim-bundler"]
 	path = vim/bundle/vim-bundler
 	url = https://github.com/tpope/vim-bundler.git

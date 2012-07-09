@@ -2,7 +2,8 @@ set nocompatible
 
 call pathogen#infect()
 
-set number
+" Shows relative numbers on the side
+set relativenumber
 set ruler
 set cursorline
 set showcmd
