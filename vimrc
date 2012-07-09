@@ -19,6 +19,16 @@ set visualbell t_vb=
 " that are too long
 set colorcolumn=85
 
+" Undofile directory settings
+if exists("+undofile")
+  " This, like swap and backups, uses .vim-undo first, then ~/.vim/undo
+  " :help undo-persistence
+  " This is only present in 7.3+
+  if isdirectory($HOME . '/.vim/undo') == 0
+    :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
+  endif
+  set undodir=~/.vim/undo//
+endif
 
 " Set encoding
 set encoding=utf-8
