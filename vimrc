@@ -14,7 +14,7 @@ syntax on
 set visualbell t_vb=
 " Puts a line on column 85 of the screen. This is a good indicator for methods
 " that are too long
-set colorcolumn=85
+set colorcolumn=90
 
 " Undofile directory settings
 if exists("+undofile")
@@ -81,7 +81,7 @@ endif
 function s:setupWrapping()
   set wrap
   set wm=2
-  set textwidth=72
+  set textwidth=90
 endfunction
 
 function s:setupMarkup()
