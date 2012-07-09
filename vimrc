@@ -4,13 +4,20 @@ call pathogen#infect()
 
 " Shows relative numbers on the side
 set relativenumber
+" Creates an undo file so undo history is saved and can be executed
+" after the file is reopened
+set undofile
 set ruler
+" Highlights current line
 set cursorline
 set showcmd
 syntax on
 " set foldmethod=syntax
 " set foldlevelstart=99
 set visualbell t_vb=
+" Puts a line on column 85 of the screen. This is a good indicator for methods
+" that are too long
+set colorcolumn=85
 
 
 " Set encoding
