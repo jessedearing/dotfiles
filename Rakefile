@@ -32,8 +32,6 @@ task :install do
     my_gems = File.read(Dir.pwd << "/global_gems")
     File.open("#{home_dir}/.rvm/gemsets/global.gems", "w") do |f|
       f.write(my_gems)
-      f.write("\n")
-      f.write(rvm_gems)
     end
   else
     warn "RVM not installed or cannot find global.gems file in #{home_dir}/.rvm/gemsets/global.gems"
