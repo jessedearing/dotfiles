@@ -4,9 +4,6 @@ call pathogen#infect()
 
 " Shows relative numbers on the side
 set relativenumber
-" Creates an undo file so undo history is saved and can be executed
-" after the file is reopened
-set undofile
 set ruler
 " Highlights current line
 set cursorline
@@ -21,7 +18,9 @@ set colorcolumn=85
 
 " Undofile directory settings
 if exists("+undofile")
-  " This, like swap and backups, uses .vim-undo first, then ~/.vim/undo
+  " Creates an undo file so undo history is saved and can be executed
+  " after the file is reopened
+  set undofile
   " :help undo-persistence
   " This is only present in 7.3+
   if isdirectory($HOME . '/.vim/undo') == 0
