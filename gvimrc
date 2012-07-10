@@ -46,8 +46,10 @@ endif
 
 set list listchars=tab:\ \ ,trail:·
 
-" Start without the toolbar
+" Start without the toolbar or scrollbars
 set guioptions-=T
+set guioptions-=r
+set guioptions-=L
 
 set transparency=10
 
