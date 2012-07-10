@@ -97,8 +97,15 @@ function git_time_since_commit() {
     fi
 }
 
+function rvm_status_line() {
+  local rvm_status
+  if rvm_status=$(rvm-prompt); then
+    echo $rvm_status
+  fi
+}
+
 PROMPT='
-%{$fg[blue]%}%m%{$reset_color%} %{$fg[yellow]%}$(rvm-prompt)%{$reset_color%} 福 %{$fg[cyan]%}%~ %{$reset_color%}$(git_prompt_short_sha)$(git_prompt_info)
+%{$fg[blue]%}%m%{$reset_color%} %{$fg[yellow]%}$(rvm_status_line)%{$reset_color%} 福 %{$fg[cyan]%}%~ %{$reset_color%}$(git_prompt_short_sha)$(git_prompt_info)
 $(root_eyebrows)${smiley} $(prompt_char) : '
 
 RPROMPT='$(vi_mode_prompt_info)${return_status}$(git_time_since_commit)$(git_prompt_status)%{$reset_color%}'
