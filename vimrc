@@ -2,6 +2,7 @@ set nocompatible
 
 call pathogen#infect()
 
+set hidden
 " Shows relative numbers on the side
 set relativenumber
 set ruler
@@ -28,6 +29,9 @@ if exists("+undofile")
   endif
   set undodir=~/.vim/undo//
 endif
+
+nnoremap ' `
+nnoremap ` '
 
 " Set encoding
 set encoding=utf-8
