@@ -99,8 +99,8 @@ function git_time_since_commit() {
 
 function rvm_status_line() {
   local rvm_status
-  if rvm_status=$(rvm-prompt); then
-    echo $rvm_status
+  if rvm_status=$(which rvm-prompt); then
+    $rvm_status
   fi
 }
 
