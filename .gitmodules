@@ -142,3 +142,6 @@
 [submodule "vim/bundle/scratch.vim"]
 	path = vim/bundle/scratch.vim
 	url = git://github.com/vim-scripts/scratch.vim.git
+[submodule "vim/bundle/vim-css-color"]
+	path = vim/bundle/vim-css-color
+	url = git://github.com/ap/vim-css-color.git
