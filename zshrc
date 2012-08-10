@@ -47,6 +47,7 @@ alias lol="rvm 1.8.7 do lolspeak"
 alias mongod="mongod -f /usr/local/Cellar/mongodb/1.8.3-x86_64/mongod.conf"
 alias cheat="rvm 1.9.3 do cheat"
 alias v="f -e $VIM"
+alias less="less -R"
 
 # To MacVim or Vim?
 if [[ -x /usr/local/bin/mvim ]]; then
