@@ -54,7 +54,7 @@ set guioptions-=L
 set transparency=10
 
 " set guifont=DejaVu\ Sans\ Mono:h12
-set guifont=Anonymous\ Pro\ for\ Powerline:h15
+set guifont=Anonymous\ Pro:h15
 
 colorscheme tubster
 

@@ -4,7 +4,8 @@ call pathogen#infect()
 
 set hidden
 " Shows relative numbers on the side
-set relativenumber
+" set relativenumber
+set number
 set ruler
 " Highlights current line
 set cursorline
@@ -73,7 +74,7 @@ let NERDTreeIgnore=['\.rbc$', '\~$']
 map <Leader>nn :NERDTreeToggle<CR>
 
 " ZoomWin configuration
-map <Leader><Leader> :ZoomWin<CR>
+" map <Leader><Leader> :ZoomWin<CR>
 
 
 " Remember last location in file
