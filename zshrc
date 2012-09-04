@@ -48,6 +48,7 @@ alias mongod="mongod -f /usr/local/Cellar/mongodb/1.8.3-x86_64/mongod.conf"
 alias cheat="rvm 1.9.3 do cheat"
 alias less="less -R"
 alias v=vagrant
+alias knife="nocorrect knife"
 
 # To MacVim or Vim?
 if [[ -x /usr/local/bin/mvim ]]; then
