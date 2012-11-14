@@ -294,3 +294,7 @@ let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 let g:syntastic_quiet_warnings=0
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+
+" Gundo
+" ====================================================================
+map <Leader>gd :GundoToggle<CR>
