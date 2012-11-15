@@ -43,6 +43,8 @@ rbenv() {
 }
 
 export PGDATA=/usr/local/var/postgresql
+alias lpup="librarian-puppet"
+alias puppet="nocorrect puppet"
 alias vi="vim"
 alias sgem="sudo gem"
 alias ruby18="rvm use ruby-1.8.7-p174"
