@@ -14,9 +14,9 @@ syntax on
 " set foldmethod=syntax
 " set foldlevelstart=99
 set visualbell t_vb=
-" Puts a line on column 85 of the screen. This is a good indicator for methods
+" Puts a line on column 80 of the screen. This is a good indicator for methods
 " that are too long
-set colorcolumn=90
+set colorcolumn=80
 
 " Undofile directory settings
 if exists("+undofile")
@@ -86,7 +86,7 @@ endif
 function s:setupWrapping()
   set wrap
   set wm=2
-  set textwidth=90
+  set textwidth=80
 endfunction
 
 function s:setupMarkup()
@@ -153,6 +153,10 @@ let macvim_hig_shift_movement = 1
 
 " set clipboard="
 set clipboard=unnamed
+
+" GNUpg
+" ====================================================================
+map <Leader>cd :%!gpg -d --batch -<CR>
 
 "   Syntastic
 " ====================================================================
