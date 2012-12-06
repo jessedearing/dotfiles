@@ -4,6 +4,7 @@
 --type-add=coffeescript=.coffee
 --type-add=cucumber=.feature
 --type-add=handlebars=.hbs
+--type-add=puppet=.pp
 
 --ignore-dir=coverage
 --ignore-dir=doc
