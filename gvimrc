@@ -56,7 +56,7 @@ set transparency=10
 " set guifont=DejaVu\ Sans\ Mono:h12
 set guifont=Anonymous\ Pro:h14
 
-colorscheme tubster
+" colorscheme tubster
 
 set clipboard=unnamed
 
