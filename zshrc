@@ -24,8 +24,6 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 export PATH=/usr/local/heroku/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
 
-[[ -s $HOME/.rvm/scripts/rvm && $USER != 'root' ]] && source $HOME/.rvm/scripts/rvm
-
 source "/Users/jdearing/.rbenv/libexec/../completions/rbenv.zsh"
 rbenv rehash 2>/dev/null
 rbenv() {
@@ -68,24 +66,8 @@ alias less="less -R"
 alias v=vagrant
 alias knife="nocorrect knife"
 
-# To MacVim or Vim?
-if [[ -x /usr/local/bin/mvim ]]; then
-  if [[ $TERM = "screen" || $TERM = "screen-256color" ]]; then
-    VIM='/usr/local/bin/mvim'
-    VIMFLAGS='-v'
-  else
-    VIM='/usr/local/bin/mvim'
-  fi
-else
-  VIM="vim"
-fi
-
-export EDITOR="$VIM $VIMFLAGS -f"
+export EDITOR="vim -f"
 export GIT_EDITOR=$EDITOR
-
-function vim() {
-  (unset GEM_HOME GEM_PATH; =$VIM $VIMFLAGS $*)
-}
 
 function u() {
   if [[ -z $1 ]]; then
@@ -169,3 +151,10 @@ hitch() {
 alias unhitch='hitch -u'
 # Uncomment to persist pair info between terminal instances
 # hitch
+
+function disconnectwifi() {
+  sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -z
+}
+
+PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
+[ -z "$TMUX" ] && tmux && exit
