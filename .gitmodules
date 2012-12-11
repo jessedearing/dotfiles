@@ -151,3 +151,6 @@
 [submodule "vim/bundle/vim-ruby-refactoring"]
 	path = vim/bundle/vim-ruby-refactoring
 	url = git://github.com/ecomba/vim-ruby-refactoring.git
+[submodule "vim/bundle/csapprox"]
+	path = vim/bundle/csapprox
+	url = git://github.com/vim-scripts/CSApprox.git
