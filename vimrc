@@ -136,10 +136,10 @@ set modeline
 set modelines=10
 
 " Default color scheme
-set t_Co=256
 " color desert
 " color twilight
-color lucius
+" color lucius
+color wombat
 
 " Directories for swp files
 set backupdir=~/.vim/backup
@@ -186,6 +186,7 @@ au BufRead,BufNewFile *.rb set keywordprg=rvm\ default-with-rvmrc\ do\ ri
 " ====================================================================
 " Settings
 let g:Powerline_symbols = 'fancy'
+set fillchars+=stl:\ ,stlnc:\ 
 
 "   Spell
 " ====================================================================
