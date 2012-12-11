@@ -1,7 +1,7 @@
 require 'fileutils'
 
 DOTFILE_BLACKLIST = ['Readme.md', 'global_gems', 'chef_cookbooks',
-  'global.gems', 'powerline-fonts']
+  'global.gems', 'powerline-fonts', 'misc_scripts']
 
 def link_file(home_file, file)
   if File.exists?(home_file)
