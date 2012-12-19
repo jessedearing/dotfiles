@@ -102,5 +102,9 @@ function disconnectwifi() {
   sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -z
 }
 
+function historygrep() {
+  history | grep $1
+}
+
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 [ -z "$TMUX" ] && tmux && exit
