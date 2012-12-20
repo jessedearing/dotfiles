@@ -41,6 +41,7 @@ rbenv() {
 }
 
 export PGDATA=/usr/local/var/postgresql
+alias vim="mvim -v"
 alias lpup="librarian-puppet"
 alias puppet="nocorrect puppet"
 alias vi="vim"
