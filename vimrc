@@ -303,3 +303,7 @@ let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 " Gundo
 " ====================================================================
 map <Leader>gd :GundoToggle<CR>
+
+" Vimwiki
+" ====================================================================
+let g:vimwiki_folding=1
