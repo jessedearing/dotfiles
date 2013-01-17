@@ -45,6 +45,8 @@ set softtabstop=2
 set autoindent
 set expandtab
 " set list listchars=tab:\ \ ,trail:·
+" Disables autoindent for current file (helpful for XML and HTML)
+nnoremap <F8> :setl noai nocin nosi inde=<CR>
 
 " Searching
 set hlsearch
