@@ -41,7 +41,9 @@ rbenv() {
 }
 
 export PGDATA=/usr/local/var/postgresql
-alias vim="mvim -v"
+if (which mvim); then
+  alias vim="mvim -v"
+fi
 alias lpup="librarian-puppet"
 alias puppet="nocorrect puppet"
 alias vi="vim"
@@ -108,4 +110,4 @@ function historygrep() {
 }
 
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
-[ -z "$TMUX" ] && tmux && exit
+[ -z "$TMUX" ] && (which tmux) && tmux && exit
