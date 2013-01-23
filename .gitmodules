@@ -154,3 +154,6 @@
 [submodule "vim/bundle/vimwiki"]
 	path = vim/bundle/vimwiki
 	url = https://github.com/vim-scripts/vimwiki
+[submodule "vim/bundle/auto-pairs"]
+	path = vim/bundle/auto-pairs
+	url = git://github.com/vim-scripts/Auto-Pairs.git
