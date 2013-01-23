@@ -110,4 +110,4 @@ function historygrep() {
 }
 
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
-[ -z "$TMUX" ] && (which tmux 2>&1 > /dev/null) && tmux && exit
+[ -z "$TMUX" ] && [ -z "$SUDO_USER" ] && (which tmux 2>&1 > /dev/null) && tmux && exit
