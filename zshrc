@@ -24,22 +24,26 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 export PATH=/usr/local/heroku/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
 
-source "$HOME/.rbenv/libexec/../completions/rbenv.zsh"
+if [ -f $HOME/.rbenv/libexec/../completions/rbenv.zsh ]; then
+  source "$HOME/.rbenv/libexec/../completions/rbenv.zsh"
+fi
 
-rbenv rehash 2>/dev/null
-rbenv() {
-  local command="$1"
-  if [ "$#" -gt 0 ]; then
-    shift
-  fi
+if ( which rbenv 2>&1 > /dev/null ); then
+  rbenv rehash 2>/dev/null
+  rbenv() {
+    local command="$1"
+    if [ "$#" -gt 0 ]; then
+      shift
+    fi
 
-  case "$command" in
-  shell)
-    eval `rbenv "sh-$command" "$@"`;;
-  *)
-    command rbenv "$command" "$@";;
-  esac
-}
+    case "$command" in
+    shell)
+      eval `rbenv "sh-$command" "$@"`;;
+    *)
+      command rbenv "$command" "$@";;
+    esac
+  }
+fi
 
 export PGDATA=/usr/local/var/postgresql
 if (which mvim 2>&1 > /dev/null); then
