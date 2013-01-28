@@ -24,7 +24,8 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 export PATH=/usr/local/heroku/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
 
-source "/Users/jdearing/.rbenv/libexec/../completions/rbenv.zsh"
+source "$HOME/.rbenv/libexec/../completions/rbenv.zsh"
+
 rbenv rehash 2>/dev/null
 rbenv() {
   local command="$1"
