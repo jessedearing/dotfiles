@@ -22,7 +22,7 @@ plugins=(git brew cloudapp vi-mode webdev)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/local/heroku/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
+export PATH=/usr/local/heroku/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/local/share/python:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
 
 if [ -f $HOME/.rbenv/libexec/../completions/rbenv.zsh ]; then
   source "$HOME/.rbenv/libexec/../completions/rbenv.zsh"
@@ -115,4 +115,12 @@ function historygrep() {
 }
 
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
-[ -z "$TMUX" ] && [ -z "$SUDO_USER" ] && (which tmux 2>&1 > /dev/null) && tmux && exit
+if [ -z "$TMUX" ] && ( tmux ls 2>&1 ); then
+  tmux attach -t 0
+else
+  [ -z "$TMUX" ] && [ -z "$SUDO_USER" ] && (which tmux 2>&1 > /dev/null) && tmux && exit
+fi
+
+if [[ $(uname -s) == "Darwin" ]]; then
+  export RVC_READLINE="/usr/local/Cellar/readline/6.2.4/lib/libreadline.6.dylib"
+fi
