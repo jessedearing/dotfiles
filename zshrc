@@ -116,7 +116,7 @@ function historygrep() {
 
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 if [ -z "$TMUX" ] && ( tmux ls 2>&1 ); then
-  tmux attach -t 0
+  tmux attach -t 0 && exit
 else
   [ -z "$TMUX" ] && [ -z "$SUDO_USER" ] && (which tmux 2>&1 > /dev/null) && tmux && exit
 fi
