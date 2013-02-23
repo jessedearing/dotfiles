@@ -116,11 +116,21 @@ function historygrep() {
   history | grep $1
 }
 
+function ssh() {
+  if [[ "${TERM}" = screen* ]]; then
+    env TERM=screen ssh "$@"
+  else
+    ssh "$@"
+  fi
+}
+
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
-if [ -z "$TMUX" ] && ( tmux ls 2>&1 ); then
-  tmux new-session -t 0 && exit
-else
-  [ -z "$TMUX" ] && [ -z "$SUDO_USER" ] && [ -z "$SSH_CONNECTION" ]&& (which tmux 2>&1 > /dev/null) && tmux && exit
+if (which tmux 2>&1 > /dev/null); then
+  if [ -z "$TMUX" ] && ( tmux ls 2>&1 ); then
+    tmux new-session -t 0 && exit
+  else
+    [ -z "$TMUX" ] && [ -z "$SUDO_USER" ] && [ -z "$SSH_CONNECTION" ] && tmux && exit
+  fi
 fi
 
 if [[ $(uname -s) == "Darwin" ]]; then
