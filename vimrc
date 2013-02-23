@@ -260,7 +260,5 @@ let g:vimwiki_folding=1
 
 " AutoPairs
 " ====================================================================
-let g:AutoPairsShortcutToggle = '<C-l>'
-let g:AutoPairsShortcutFastWrap = '<C-;>'
 let g:AutoPairsShortcutJump = '<C-\>'
 
