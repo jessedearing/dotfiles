@@ -118,7 +118,7 @@ PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -
 if [ -z "$TMUX" ] && ( tmux ls 2>&1 ); then
   tmux new-session -t 0 && exit
 else
-  [ -z "$TMUX" ] && [ -z "$SUDO_USER" ] [ -z "$SSH_CONNECTION" ]&& (which tmux 2>&1 > /dev/null) && tmux && exit
+  [ -z "$TMUX" ] && [ -z "$SUDO_USER" ] && [ -z "$SSH_CONNECTION" ]&& (which tmux 2>&1 > /dev/null) && tmux && exit
 fi
 
 if [[ $(uname -s) == "Darwin" ]]; then
