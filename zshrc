@@ -83,10 +83,10 @@ function quote() {
   echo "“$*”" | pbcopy
 }
 
-export EC2_PRIVATE_KEY="/usr/local/aws/ec2-api-tools-1.4.3.0/pk"
-export EC2_CERT="/usr/local/aws/ec2-api-tools-1.4.3.0/cert"
-export EC2_HOME="/usr/local/aws/ec2-api-tools-1.4.3.0"
-export JAVA_HOME="/Library/Java/Home"
+export JAVA_HOME="$(/usr/libexec/java_home)"
+export EC2_PRIVATE_KEY="$(/bin/ls "$HOME"/.ec2/pk-*.pem | /usr/bin/head -1)"
+export EC2_CERT="$(/bin/ls "$HOME"/.ec2/cert-*.pem | /usr/bin/head -1)"
+export EC2_AMITOOL_HOME="/usr/local/Library/LinkedKegs/ec2-ami-tools/jars"
 
 export ARCHFLAGS='-arch x86_64'
 
@@ -116,9 +116,9 @@ function historygrep() {
 
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 if [ -z "$TMUX" ] && ( tmux ls 2>&1 ); then
-  tmux attach -t 0 && exit
+  tmux new-session -t 0 && exit
 else
-  [ -z "$TMUX" ] && [ -z "$SUDO_USER" ] && (which tmux 2>&1 > /dev/null) && tmux && exit
+  [ -z "$TMUX" ] && [ -z "$SUDO_USER" ] [ -z "$SSH_CONNECTION" ]&& (which tmux 2>&1 > /dev/null) && tmux && exit
 fi
 
 if [[ $(uname -s) == "Darwin" ]]; then
