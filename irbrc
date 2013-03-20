@@ -1,76 +1,22 @@
 if defined?(::Bundler)
-  global_gemset = ENV['GEM_PATH'].split(':').grep(/ruby.*@global/).first
-  if global_gemset
-    all_global_gem_paths = Dir.glob("#{global_gemset}/gems/*")
-    all_global_gem_paths.each do |p|
-      gem_path = "#{p}/lib"
-      $LOAD_PATH << gem_path
-    end
-  end
-end
-
-if defined?(::Bundler)
+  global_path = File.expand_path('../../lib/ruby/gems/1.9.1/gems', `rbenv which ruby`.chomp)
   [:wirble, :awesome_print].each do |gem|
-    path = Dir.glob("/usr/local/lib/ruby/gems/1.9.1/gems/*").grep(Regexp.new(gem.to_s)).first
-    $LOAD_PATH << "#{path}/lib" if path && !path.empty?
+    path = Dir.glob("#{global_path}/*").grep(Regexp.new(gem.to_s)).first
+    if path && !path.empty?
+      $LOAD_PATH << "#{path}/lib"
+    elsif ENV['GEM_HOME']
+      # fall back to gem home
+      home = Dir.glob("#{ENV['GEM_HOME']}/*").grep(Regexp.new(gem.to_s)).first
+      if home
+        $LOAD_PATH << "#{home}/lib"
+      end
+    end
   end
 end
 
 require 'rubygems' rescue nil
-require 'wirble'
+require 'wirble' rescue nil
 require 'awesome_print' rescue nil
-require 'interactive_editor'
-
-module AwesomePrintMongoid
-
-  def self.included(base)
-    base.send :alias_method, :printable_without_mongoid, :printable
-    base.send :alias_method, :printable, :printable_with_mongoid
-  end
-
-  # Add Mongoid class names to the dispatcher pipeline.
-  #------------------------------------------------------------------------------
-  def printable_with_mongoid(object)
-    printable = printable_without_mongoid(object)
-    return printable if !defined?(Mongoid::Document)
-
-    if printable == :self
-      if object.is_a?(Mongoid::Document)
-        printable = :mongoid_instance
-      end
-    elsif printable == :class && object.ancestors.include?(Mongoid::Document)
-      printable = :mongoid_class
-    end
-    printable
-  end
-
-  # Format Mongoid instance object.
-  #------------------------------------------------------------------------------
-  def awesome_mongoid_instance(object)
-    return object.inspect if !defined?(ActiveSupport::OrderedHash)
-
-    data = object.fields.keys.sort_by{|k| k}.inject(ActiveSupport::OrderedHash.new) do |hash, name|
-      hash[name] = object[name]
-      hash
-    end
-    "#{object} " + awesome_hash(data)
-  end
-
-  # Format Mongoid class object.
-  #------------------------------------------------------------------------------
-  def awesome_mongoid_class(object)
-    return object.inspect if !defined?(ActiveSupport::OrderedHash)
-
-    data = object.fields.sort_by{|k| k}.inject(ActiveSupport::OrderedHash.new) do |hash, c|
-      hash[c.first] = (c.last.type || "undefined").to_s.underscore.intern
-      hash
-    end
-    "class #{object} < #{object.superclass} " << awesome_hash(data)
-  end
-end
-
-# AwesomePrint.send(:include, AwesomePrintMongoid)
-
 
 # load wirble
 Wirble.init
