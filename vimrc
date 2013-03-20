@@ -262,3 +262,8 @@ let g:vimwiki_folding=1
 " ====================================================================
 let g:AutoPairsShortcutJump = '<C-\>'
 
+" Vimux
+" ====================================================================
+map <Leader>vit :VimuxPromptCommand<CR>
+map <Leader>vii :VimuxInspectRunner<CR>
+map <Leader>vil :VimuxRunLastCommand<CR>
