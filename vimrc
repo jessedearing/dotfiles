@@ -60,7 +60,7 @@ let g:mapleader = ","
 
 " Tab completion
 set wildmode=list:longest,list:full
-set wildignore+=*/.bundle/*,*.o,*.obj,.git,*.rbc
+set wildignore+=*/.vagrant/*,*/.bundle/*,*.o,*.obj,.git,*.rbc
 
 " Status bar
 set laststatus=2
