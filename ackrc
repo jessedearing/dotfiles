@@ -12,6 +12,7 @@
 --ignore-dir=.git
 --ignore-dir=vendor
 --ignore-dir=db/sphinx
+--ignore-dir=.bundle
 
 --color
 --follow
