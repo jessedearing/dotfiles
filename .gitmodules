@@ -163,3 +163,6 @@
 [submodule "vim/bundle/vim-slim"]
 	path = vim/bundle/vim-slim
 	url = git://github.com/slim-template/vim-slim.git
+[submodule "vim/bundle/runtest"]
+	path = vim/bundle/runtest
+	url = git://github.com/bronson/vim-runtest.git
