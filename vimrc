@@ -141,7 +141,8 @@ set modelines=10
 " color desert
 " color twilight
 " color lucius
-color wombat
+" color wombat
+color tubster
 
 " Directories for swp files
 set backupdir=~/.vim/backup
@@ -155,6 +156,9 @@ let macvim_hig_shift_movement = 1
 
 " set clipboard="
 set clipboard=unnamed
+
+" Testing 
+map <Leader>r :!~/.rbenv/shims/bundle exec rake<CR>
 
 " GNUpg
 " ====================================================================
@@ -267,3 +271,7 @@ let g:AutoPairsShortcutJump = '<C-\>'
 map <Leader>vit :VimuxPromptCommand<CR>
 map <Leader>vii :VimuxInspectRunner<CR>
 map <Leader>vil :VimuxRunLastCommand<CR>
+
+" Testing
+" ====================================================================
+nmap t :TestUnit<CR>
