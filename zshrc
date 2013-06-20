@@ -3,7 +3,7 @@ export ZSH=$HOME/.oh-my-zsh
 
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
-export ZSH_THEME=""
+export ZSH_THEME="agnoster"
 export ZSH_CUSTOM="$HOME/.zsh-custom"
 
 # Set to this to use case-sensitive completion
@@ -132,3 +132,11 @@ fi
 if [[ $(uname -s) == "Darwin" ]]; then
   export RVC_READLINE="/usr/local/Cellar/readline/6.2.4/lib/libreadline.6.dylib"
 fi
+
+function printcolors() {
+  for i in {0..255} ; do
+    printf "\x1b[38;5;${i}mcolour${i}\n"
+  done
+}
+
+#export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
