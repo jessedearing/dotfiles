@@ -117,7 +117,7 @@
 	url = git://github.com/mileszs/ack.vim.git
 [submodule "vim/bundle/powerline.vim"]
 	path = vim/bundle/powerline.vim
-	url = https://github.com/Lokaltog/vim-powerline.git
+	url = https://github.com/Lokaltog/powerline.git
 [submodule "vim/bundle/netrw.vim"]
 	path = vim/bundle/netrw.vim
 	url = https://github.com/vim-scripts/netrw.vim.git
