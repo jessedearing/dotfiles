@@ -121,14 +121,16 @@ function ssh() {
   fi
 }
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
-if (which tmux 2>&1 > /dev/null); then
-  if [ -z "$TMUX" ] && ( tmux ls 2>&1 ); then
-    tmux new-session -t 0 && exit
-  else
-    [ -z "$TMUX" ] && [ -z "$SUDO_USER" ] && [ -z "$SSH_CONNECTION" ] && tmux && exit
-  fi
-fi
 
+function load_tmux() {
+  if (which tmux 2>&1 > /dev/null); then
+    if [ -z "$TMUX" ] && ( tmux ls 2>&1 ); then
+      tmux new-session -t 0 && exit
+    else
+      [ -z "$TMUX" ] && [ -z "$SUDO_USER" ] && [ -z "$SSH_CONNECTION" ] && tmux && exit
+    fi
+  fi
+}
 if [[ $(uname -s) == "Darwin" ]]; then
   export RVC_READLINE="/usr/local/Cellar/readline/6.2.4/lib/libreadline.6.dylib"
 fi
@@ -140,3 +142,4 @@ function printcolors() {
 }
 
 #export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
+#load_tmux
