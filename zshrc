@@ -47,6 +47,9 @@ if ( which rbenv 2>&1 > /dev/null ); then
 fi
 
 export PGDATA=/usr/local/var/postgresql
+if (which mvim 2>&1 > /dev/null); then
+  alias vim="mvim -v"
+fi
 alias lpup="librarian-puppet"
 alias puppet="nocorrect puppet"
 alias vi="vim"
@@ -67,11 +70,12 @@ alias bu="bundle update"
 alias bp="bundle package"
 alias lol="rvm 1.8.7 do lolspeak"
 alias mongod="mongod -f /usr/local/Cellar/mongodb/1.8.3-x86_64/mongod.conf"
+alias cheat="rvm 1.9.3 do cheat"
 alias less="less -R"
 alias v=vagrant
 alias knife="nocorrect knife"
 
-export EDITOR="vim"
+export EDITOR="vim -f"
 export GIT_EDITOR=$EDITOR
 
 function api() {open -a 'Google Chrome' "http://apidock.com/$1/search?query=$2";}
@@ -120,6 +124,7 @@ function ssh() {
     ssh "$@"
   fi
 }
+
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 
 function load_tmux() {
