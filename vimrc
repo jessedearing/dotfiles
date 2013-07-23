@@ -271,3 +271,8 @@ let g:AutoPairsShortcutJump = '<C-\>'
 map <Leader>vit :VimuxPromptCommand<CR>
 map <Leader>vii :VimuxInspectRunner<CR>
 map <Leader>vil :VimuxRunLastCommand<CR>
+
+
+map <Leader>< :bn<CR>
+map <Leader>< :bp<CR>
+
