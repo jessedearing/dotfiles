@@ -60,6 +60,8 @@ set guifont=Source\ Code\ Pro:h14
 
 set clipboard=unnamed
 
+let $PATH = $HOME . '/.rbenv/shims:' . $PATH
+
 " Include user's local vim config
 if filereadable(expand("~/.gvimrc.local"))
   source ~/.gvimrc.local
