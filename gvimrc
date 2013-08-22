@@ -42,6 +42,8 @@ if has("gui_macvim")
   imap <D-8> <Esc>8gt
   map  <D-9> 9gt
   imap <D-9> <Esc>9gt
+
+  highlight ColorColumn guibg=#550000
 endif
 
 set list listchars=tab:\ \ ,trail:·
