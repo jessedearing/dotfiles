@@ -48,7 +48,7 @@ fi
 
 export PGDATA=/usr/local/var/postgresql
 if (which mvim 2>&1 > /dev/null); then
-  alias vim="mvim -v"
+  alias vim="mvim"
 fi
 alias lpup="librarian-puppet"
 alias puppet="nocorrect puppet"
@@ -75,7 +75,7 @@ alias less="less -R"
 alias v=vagrant
 alias knife="nocorrect knife"
 
-export EDITOR="vim -f"
+export EDITOR="mvim -f"
 export GIT_EDITOR=$EDITOR
 
 function api() {open -a 'Google Chrome' "http://apidock.com/$1/search?query=$2";}
@@ -115,14 +115,6 @@ function disconnectwifi() {
 
 function historygrep() {
   history | grep $1
-}
-
-function ssh() {
-  if [[ "${TERM}" = screen* ]]; then
-    env TERM=screen ssh "$@"
-  else
-    ssh "$@"
-  fi
 }
 
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
