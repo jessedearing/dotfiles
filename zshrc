@@ -74,6 +74,8 @@ alias cheat="rvm 1.9.3 do cheat"
 alias less="less -R"
 alias v=vagrant
 alias knife="nocorrect knife"
+alias ggpnp='git pull --rebase && git push'
+compdef ggpnp=git
 
 export EDITOR="mvim -f"
 export GIT_EDITOR=$EDITOR
