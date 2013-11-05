@@ -114,7 +114,7 @@ function disconnectwifi() {
   sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -z
 }
 
-function historygrep() {
+function hisgrep() {
   history | grep $1
 }
 
