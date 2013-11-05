@@ -76,7 +76,7 @@ alias knife="nocorrect knife"
 alias ggpnp='git stash && git pull --rebase && git push && git stash pop'
 compdef ggpnp=git
 
-export EDITOR="mvim -f"
+export EDITOR="vim"
 export GIT_EDITOR=$EDITOR
 
 function api() {open -a 'Google Chrome' "http://apidock.com/$1/search?query=$2";}
