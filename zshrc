@@ -57,7 +57,6 @@ alias sgem="sudo gem"
 alias ruby18="rvm use ruby-1.8.7-p174"
 alias irb=pry
 alias web="open -a 'Google Chrome' "
-alias nginx="sudo /usr/local/sbin/nginx"
 alias g='nocorrect git'
 alias gco='git checkout'
 alias gl="git log --stat --graph --decorate"
