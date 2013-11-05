@@ -73,7 +73,7 @@ alias mongod="mongod -f /usr/local/Cellar/mongodb/1.8.3-x86_64/mongod.conf"
 alias less="less -R"
 alias v=vagrant
 alias knife="nocorrect knife"
-alias ggpnp='git pull --rebase && git push'
+alias ggpnp='git stash && git pull --rebase && git push && git stash pop'
 compdef ggpnp=git
 
 export EDITOR="mvim -f"
