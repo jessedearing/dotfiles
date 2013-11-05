@@ -48,7 +48,7 @@ fi
 
 export PGDATA=/usr/local/var/postgresql
 if (which mvim 2>&1 > /dev/null); then
-  alias vim="mvim"
+  alias vim="mvim -v"
 fi
 alias lpup="librarian-puppet"
 alias puppet="nocorrect puppet"
