@@ -1,0 +1,31 @@
+[user]
+	name = Jesse Dearing
+  email = jesse.dearing@gmail.com
+[color]
+	ui = true
+[mergetool "opendiff"]
+	cmd = "opendiff   -ancestor  -merge "
+[mergetool "fugitive"]
+  cmd = mvim -f -c "Gdiff" "$MERGED"
+[merge]
+	tool = fugitive
+[core]
+	excludesfile = /Users/jdearing/.gitignore
+[difftool "mvim"]
+  cmd = mvim -d $LOCAL $REMOTE
+[difftool]
+	prompt = false
+[difftool "Kaleidoscope"]
+	cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
+[diff]
+	tool = Kaleidoscope
+[init]
+	templatedir = ~/.git_template
+[credential]
+	helper = osxkeychain
+[push]
+	default = simple
+[help]
+	autocorrect = 1
+[include]
+  path = ~/.gitconfig.local
