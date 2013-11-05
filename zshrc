@@ -139,5 +139,5 @@ function printcolors() {
   done
 }
 
-#export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
+export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 #load_tmux
