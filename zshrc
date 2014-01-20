@@ -22,7 +22,7 @@ plugins=(git brew cloudapp vi-mode webdev)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
+export PATH=/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/Cellar/go/1.2/libexec/bin
 
 if [ -f $HOME/.rbenv/libexec/../completions/rbenv.zsh ]; then
   source "$HOME/.rbenv/libexec/../completions/rbenv.zsh"
@@ -74,6 +74,7 @@ alias less="less -R"
 alias v=vagrant
 alias knife="nocorrect knife"
 alias ggpnp='git stash && git pull --rebase && git push && git stash pop'
+alias yard='nocorrect yard'
 compdef ggpnp=git
 
 export EDITOR="vim"

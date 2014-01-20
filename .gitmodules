@@ -166,3 +166,6 @@
 [submodule "vim/bundle/runtest"]
 	path = vim/bundle/runtest
 	url = git://github.com/bronson/vim-runtest.git
+[submodule "vim/bundle/aldmeris"]
+	path = vim/bundle/aldmeris
+	url = https://github.com/veloce/vim-aldmeris.git

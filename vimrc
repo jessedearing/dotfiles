@@ -4,7 +4,7 @@ call pathogen#infect()
 
 set hidden
 " Shows relative numbers on the side
-" set relativenumber
+set relativenumber
 set number
 set ruler
 " Highlights current line
@@ -142,7 +142,10 @@ set modelines=10
 " color twilight
 " color lucius
 " color wombat
-color tubster
+" color tubster
+let g:aldmeris_transparent = 1
+let g:aldmeris_termcolors = "tango"
+color aldmeris
 
 " Directories for swp files
 set backupdir=~/.vim/backup
