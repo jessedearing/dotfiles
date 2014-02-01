@@ -226,7 +226,7 @@ map <Leader>fa :CtrlP app/assets<CR>
 "   CTags
 " ====================================================================
 set tags=tags;/
-map <Leader>rt :!/usr/local/bin/ctags --tag-relative -ftags --extra=+q --extra=+f --exclude=.git --exclude=doc --exclude=coverage -R<CR><CR>
+map <Leader>rt :!/usr/local/bin/ctags --tag-relative -ftags --extra=+q --extra=+f --exclude=.git --exclude=.bundle --exclude=doc --exclude=coverage -R<CR><CR>
 map <Leader>gt :!.git/hooks/ctags<CR><CR>
 let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
 " let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
