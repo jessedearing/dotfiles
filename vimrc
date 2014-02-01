@@ -279,3 +279,7 @@ map <Leader>vil :VimuxRunLastCommand<CR>
 map <Leader>> :bn<CR>
 map <Leader>< :bp<CR>
 
+" Thrift Syntax
+" ====================================================================
+
+au BufRead,BufNewFile *.thrift set filetype=thrift
