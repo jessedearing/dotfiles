@@ -48,7 +48,7 @@
 	url = git://github.com/tpope/vim-rails.git
 [submodule "vim/bundle/rspec"]
 	path = vim/bundle/rspec
-	url = git@github.com:skwp/vim-rspec.git
+  url = https://github.com/skwp/vim-rspec.git
 [submodule "vim/bundle/zoomwin"]
 	path = vim/bundle/zoomwin
 	url = git://github.com/vim-scripts/ZoomWin.git
@@ -147,7 +147,7 @@
 	url = git://github.com/vim-scripts/CSApprox.git
 [submodule "vim/bundle/vim-powerline"]
 	path = vim/bundle/vim-powerline
-	url = git://github.com/Lokaltog/vim-powerline.git
+	url = https://github.com/Lokaltog/vim-powerline.git
 [submodule "tmux-powerline"]
 	path = tmux-powerline
 	url = git@github.com:jessedearing/tmux-powerline.git
@@ -169,3 +169,6 @@
 [submodule "vim/bundle/thrift-syntax"]
 	path = vim/bundle/thrift-syntax
 	url = https://github.com/sprsquish/thrift.vim.git
+[submodule "vim/bundle/powerline"]
+	path = vim/bundle/powerline
+	url = https://github.com/Lokaltog/powerline.git

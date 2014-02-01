@@ -171,7 +171,6 @@ map <Leader>cd :%!gpg -d --batch -<CR>
 " ====================================================================
 " Enable syntastic syntax checking
 let g:syntastic_enable_signs=1
-let g:syntastic_quiet_warnings=1
 
 "   Gist
 " ====================================================================
@@ -199,6 +198,7 @@ au BufRead,BufNewFIle *.py set softtabstop=4
 "   Powerline
 " ====================================================================
 " Settings
+set rtp+=~/.dotfiles/vim/bundle/powerline/bindings/vim
 let g:Powerline_symbols = 'fancy'
 set fillchars+=stl:\ ,stlnc:\ 
 
@@ -254,7 +254,6 @@ nmap <F3> :NumbersToggle<CR>
 " Syntastic
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
-let g:syntastic_quiet_warnings=0
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
 
 " Gundo
