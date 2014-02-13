@@ -145,6 +145,7 @@
 [submodule "vim/bundle/vim-powerline"]
 	path = vim/bundle/vim-powerline
 	url = https://github.com/Lokaltog/vim-powerline.git
+	branch = develop
 [submodule "tmux-powerline"]
 	path = tmux-powerline
 	url = git@github.com:jessedearing/tmux-powerline.git
