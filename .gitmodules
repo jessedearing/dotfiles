@@ -173,3 +173,6 @@
 [submodule "vim/bundle/vimwiki"]
 	path = vim/bundle/vimwiki
 	url = https://github.com/vim-scripts/vimwiki.git
+[submodule "vim/bundle/autofold"]
+	path = vim/bundle/autofold
+	url = https://github.com/vim-scripts/AutoFold.vim.git
