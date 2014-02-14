@@ -11,12 +11,17 @@ set ruler
 set cursorline
 set showcmd
 syntax on
-" set foldmethod=syntax
+set foldmethod=syntax
 " set foldlevelstart=99
 set visualbell t_vb=
 " Puts a line on column 80 of the screen. This is a good indicator for methods
 " that are too long
 set colorcolumn=80
+
+let $RBENV_VERSION = '2.0.0'
+let $PATH = $HOME . '/.rbenv/shims:' . $PATH
+let $PATH = './.bundle/bin' . $PATH
+set shell=/bin/zsh
 
 " Undofile directory settings
 if exists("+undofile")
@@ -101,6 +106,7 @@ au FileType make                                     set noexpandtab
 
 " Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
 au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
+au BufRead,BufNewFile serveza.manifest set filetype=ruby
 
 " md, markdown, and mk are markdown and define buffer-local preview
 au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
@@ -163,26 +169,26 @@ set clipboard=unnamed
 " Testing 
 map <Leader>r :!~/.rbenv/shims/bundle exec rake<CR>
 
-" GNUpg
-" ====================================================================
+" GNUpg                                                                    {{{
 map <Leader>cd :%!gpg -d --batch -<CR>
+" }}}
 
-"   Syntastic
-" ====================================================================
+"   Syntastic                                                              {{{
 " Enable syntastic syntax checking
 let g:syntastic_enable_signs=1
+" }}}
 
-"   Gist
-" ====================================================================
+"   Gist                                                                   {{{
 let g:gist_private = 1
 let g:gist_clip_command = 'pbcopy'
 " let g:gist_open_browser_after_post = 1
+" }}}
 
-"   Grep
-" ====================================================================
+"   Grep                                                                   {{{
 let Grep_Find_Use_Xargs = 0
 let Grep_Default_Options = '-i'
 nnoremap <silent> <F3> :Grep<CR>
+" }}}
 
 au BufRead,BufNewFile *.jbuilder setf ruby
 au BufRead,BufNewFile *.thor setf ruby
@@ -194,6 +200,7 @@ au BufRead,BufNewFile *.rb set keywordprg=rvm\ default-with-rvmrc\ do\ ri
 au BufRead,BufNewFIle *.py set tabstop=4
 au BufRead,BufNewFIle *.py set shiftwidth=4
 au BufRead,BufNewFIle *.py set softtabstop=4
+
 
 "   Powerline
 " ====================================================================
@@ -262,7 +269,8 @@ map <Leader>gd :GundoToggle<CR>
 
 " Vimwiki
 " ====================================================================
-let g:vimwiki_folding=1
+let g:vimwiki_folding='syntax'
+autocmd BufWritePost *.wiki execute '! git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki add "%"; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki commit -q -m "%"'
 
 " AutoPairs
 " ====================================================================
@@ -282,3 +290,7 @@ map <Leader>< :bp<CR>
 " ====================================================================
 
 au BufRead,BufNewFile *.thrift set filetype=thrift
+
+" RSpec
+" ====================================================================
+map <Leader>rs :RunSpec<CR>

@@ -1,7 +1,6 @@
 set antialias
 
 if has("gui_macvim")
-  set shell=/bin/zsh
   " Fullscreen takes up entire screen
   set fuoptions=maxhorz,maxvert
 
@@ -61,8 +60,6 @@ set guifont=Source\ Code\ Pro:h14
 " colorscheme tubster
 
 set clipboard=unnamed
-
-let $PATH = $HOME . '/.rbenv/shims:' . $PATH
 
 " Include user's local vim config
 if filereadable(expand("~/.gvimrc.local"))
