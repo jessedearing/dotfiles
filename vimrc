@@ -3,8 +3,6 @@ set nocompatible
 call pathogen#infect()
 
 set hidden
-" Shows relative numbers on the side
-set relativenumber
 set number
 set ruler
 " Highlights current line
