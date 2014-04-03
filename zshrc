@@ -66,7 +66,7 @@ alias irb=pry
 alias web="open -a 'Google Chrome' "
 alias g='nocorrect git'
 alias gco='git checkout'
-alias gl="git log --stat --graph --decorate"
+alias gl="git log --stat --graph --decorate -M"
 alias gs="git status -sb"
 alias ghost="sudo rvm 1.9.3 do ghost"
 alias knife="rvm 1.9.3 do knife"
@@ -79,6 +79,7 @@ alias lol="rvm 1.8.7 do lolspeak"
 alias mongod="mongod -f /usr/local/Cellar/mongodb/1.8.3-x86_64/mongod.conf"
 alias less="less -R"
 alias v=vagrant
+alias d=docker
 alias knife="nocorrect knife"
 alias ggpnp='git stash && git pull --rebase && git push && git stash pop'
 alias yard='nocorrect yard'
@@ -144,5 +145,8 @@ function printcolors() {
   done
 }
 
-export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
+# export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
+export VAGRANT_DEFAULT_PROVIDER=virtualbox
+export DOCKER_HOST="tcp://127.0.0.1:4240"
+export GOPATH=/usr/local/Cellar/go/1.2.1/
 #load_tmux
