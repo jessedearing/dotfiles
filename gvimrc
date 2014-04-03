@@ -52,7 +52,7 @@ set guioptions-=T
 set guioptions-=r
 set guioptions-=L
 
-set transparency=10
+" set transparency=10
 
 " set guifont=DejaVu\ Sans\ Mono:h12
 set guifont=Source\ Code\ Pro:h14
