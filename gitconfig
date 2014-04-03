@@ -1,6 +1,5 @@
 [user]
 	name = Jesse Dearing
-  email = jesse.dearing@gmail.com
 [color]
 	ui = true
 [mergetool "opendiff"]
