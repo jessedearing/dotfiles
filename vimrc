@@ -179,6 +179,9 @@ let g:syntastic_enable_signs=1
 "   Gist                                                                   {{{
 let g:gist_private = 1
 let g:gist_clip_command = 'pbcopy'
+if $GITHUB_HOST
+  let g:github_api_url = 'https://'.$GITHUB_HOST.'/api/v3'
+endif
 " let g:gist_open_browser_after_post = 1
 " }}}
 
