@@ -1,6 +1,11 @@
 if defined?(::Bundler)
-  global_path = File.expand_path('../../lib/ruby/gems/1.9.1/gems', `rbenv which ruby`.chomp)
-  [:wirble, :awesome_print].each do |gem|
+  ruby_version = if RUBY_VERSION < '2.0'
+                   '1.9.1'
+                 else
+                   '2.0.0'
+                 end
+  global_path = File.expand_path("../../lib/ruby/gems/#{ruby_version}/gems", `rbenv which ruby`.chomp)
+  [:wirble, :awesome_print, :'pry-nav'].each do |gem|
     path = Dir.glob("#{global_path}/*").grep(Regexp.new(gem.to_s)).first
     if path && !path.empty?
       $LOAD_PATH << "#{path}/lib"
