@@ -275,7 +275,7 @@ autocmd BufWritePost *.wiki execute '! git --git-dir=$HOME/vimwiki/.git --work-t
 
 " AutoPairs
 " ====================================================================
-let g:AutoPairsShortcutJump = '<C-\>'
+let g:AutoPairsShortcutToggle = '<C-\>'
 
 " Vimux
 " ====================================================================
