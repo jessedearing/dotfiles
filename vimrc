@@ -10,7 +10,7 @@ set cursorline
 set showcmd
 syntax on
 set foldmethod=syntax
-" set foldlevelstart=99
+set foldlevelstart=99
 set visualbell t_vb=
 " Puts a line on column 80 of the screen. This is a good indicator for methods
 " that are too long
