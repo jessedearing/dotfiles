@@ -19,6 +19,13 @@ export DISABLE_AUTO_UPDATE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git brew cloudapp vi-mode webdev)
 
+# Have to set GIT environment variables so they can be overridden by anything
+# in zsh-custom
+export GIT_AUTHOR_NAME="Jesse Dearing"
+export GIT_AUTHOR_EMAIL="jesse.dearing@gmail.com"
+export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
+export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
+
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
@@ -96,9 +103,6 @@ fi
 export ARCHFLAGS='-arch x86_64'
 
 export NODE_PATH=/usr/local/lib/node
-
-export GIT_COMMITTER_NAME="Jesse Dearing"
-export GIT_COMMITTER_EMAIL="jesse.dearing@gmail.com"
 
 export KEYTIMEOUT=5
 
