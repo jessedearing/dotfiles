@@ -195,7 +195,6 @@ au BufRead,BufNewFile *.jbuilder setf ruby
 au BufRead,BufNewFile *.thor setf ruby
 au BufRead,BufNewFile *.{md,mkd,txt} set spell
 au BufRead,BufNewFile COMMIT_EDITMSG set spell
-au BufRead,BufNewFile *.rb set keywordprg=rvm\ default-with-rvmrc\ do\ ri
 
 " Python spacing
 au BufRead,BufNewFIle *.py set tabstop=4
