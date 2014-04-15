@@ -154,4 +154,4 @@ alias dl="docker ps -ql"
 # export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
 export GOPATH=/usr/local/Cellar/go/1.2.1/
-#load_tmux
+load_tmux
