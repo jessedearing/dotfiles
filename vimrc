@@ -202,12 +202,10 @@ au BufRead,BufNewFIle *.py set shiftwidth=4
 au BufRead,BufNewFIle *.py set softtabstop=4
 
 
-"   Powerline
+"   Airline
 " ====================================================================
 " Settings
-set rtp+=~/.dotfiles/vim/bundle/powerline/bindings/vim
-let g:Powerline_symbols = 'fancy'
-set fillchars+=stl:\ ,stlnc:\ 
+let g:airline_powerline_fonts = 1
 
 "   Spell
 " ====================================================================
