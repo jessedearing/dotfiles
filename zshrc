@@ -145,8 +145,13 @@ function printcolors() {
   done
 }
 
+# Boot2Docker
+# ============================================================================
+export DOCKER_HOST="tcp://127.0.0.1:4240"
+alias b2=boot2docker
+alias dl="docker ps -ql"
+
 # export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
-export DOCKER_HOST="tcp://127.0.0.1:4240"
 export GOPATH=/usr/local/Cellar/go/1.2.1/
 #load_tmux
