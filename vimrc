@@ -269,10 +269,13 @@ map <Leader>gd :GundoToggle<CR>
 " ====================================================================
 let g:vimwiki_folding='syntax'
 autocmd BufWritePost *.wiki execute '! git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki add "%"; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki commit -q -m "%"'
+autocmd BufRead *.wiki let g:AutoPairsFlyMode = 0
+autocmd BufRead *.wiki let g:AutoPairs = {}
 
 " AutoPairs
 " ====================================================================
 let g:AutoPairsShortcutToggle = '<C-\>'
+let g:AutoPairsFlyMode = 1
 
 " Vimux
 " ====================================================================
