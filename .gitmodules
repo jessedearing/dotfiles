@@ -191,3 +191,6 @@
 [submodule "vim/bundle/vim-airline"]
 	path = vim/bundle/vim-airline
 	url = git@github.com:bling/vim-airline.git
+[submodule "vim/bundle/trailing-whitespace"]
+	path = vim/bundle/trailing-whitespace
+	url = git@github.com:bronson/vim-trailing-whitespace.git

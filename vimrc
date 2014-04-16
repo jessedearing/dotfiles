@@ -164,7 +164,7 @@ let macvim_hig_shift_movement = 1
 " set clipboard="
 set clipboard=unnamed
 
-" Testing 
+" Testing
 map <Leader>r :!~/.rbenv/shims/bundle exec rake<CR>
 
 " GNUpg                                                                    {{{
@@ -237,15 +237,15 @@ let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
 " let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
 let Tlist_WinWidth = 50
 map <Leader>tlt :TlistToggle<cr>
-map <Leader>tll :TlistSessionLoad 
-map <Leader>tls :TlistSessionSave 
-map <Leader>tla :TlistAddFilesRecursive 
+map <Leader>tll :TlistSessionLoad
+map <Leader>tls :TlistSessionSave
+map <Leader>tla :TlistAddFilesRecursive
 map <Leader>tlg :TlistSessionLoad .git/taglist<CR>
 " map <Leader>tb :TagbarToggle<CR>
 
 "   VimOrganizer
 " ====================================================================
-au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
+au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
 au BufEnter *.org            call org#SetOrgFileType()
 
 "   NarrowRegion
