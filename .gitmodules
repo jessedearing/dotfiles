@@ -146,9 +146,6 @@
 	path = vim/bundle/vim-powerline
 	url = https://github.com/Lokaltog/vim-powerline.git
 	branch = develop
-[submodule "tmux-powerline"]
-	path = tmux-powerline
-	url = git@github.com:jessedearing/tmux-powerline.git
 [submodule "vim/bundle/auto-pairs"]
 	path = vim/bundle/auto-pairs
 	url = git://github.com/vim-scripts/Auto-Pairs.git
@@ -194,3 +191,6 @@
 [submodule "vim/bundle/trailing-whitespace"]
 	path = vim/bundle/trailing-whitespace
 	url = git@github.com:bronson/vim-trailing-whitespace.git
+[submodule "powerline"]
+	path = powerline
+	url = git@github.com:Lokaltog/powerline.git
