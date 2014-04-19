@@ -194,3 +194,6 @@
 [submodule "powerline"]
 	path = powerline
 	url = git@github.com:Lokaltog/powerline.git
+[submodule "tmux-powerline"]
+	path = tmux-powerline
+	url = git@github.com:erikw/tmux-powerline.git
