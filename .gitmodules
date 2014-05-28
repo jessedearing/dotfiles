@@ -197,3 +197,6 @@
 [submodule "tmux-powerline"]
 	path = tmux-powerline
 	url = git@github.com:erikw/tmux-powerline.git
+[submodule "zsh-custom/plugins/zsh-syntax-highlighting"]
+	path = zsh-custom/plugins/zsh-syntax-highlighting
+	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
