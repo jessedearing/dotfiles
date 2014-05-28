@@ -1,6 +1,7 @@
 set nocompatible
 
 call pathogen#infect()
+set re=1
 
 set hidden
 set number
@@ -16,7 +17,7 @@ set visualbell t_vb=
 " that are too long
 set colorcolumn=80
 
-let $RBENV_VERSION = '2.0.0'
+let $RBENV_VERSION = '2.1.2'
 let $PATH = $HOME . '/.rbenv/shims:' . $PATH
 let $PATH = './.bundle/bin' . $PATH
 set shell=/bin/zsh
@@ -268,6 +269,7 @@ map <Leader>gd :GundoToggle<CR>
 " Vimwiki
 " ====================================================================
 let g:vimwiki_folding='syntax'
+let g:vimwiki_hl_cb_checked=1
 autocmd BufWritePost *.wiki execute '! git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki add "%"; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki commit -q -m "%"'
 autocmd BufRead *.wiki let g:AutoPairsFlyMode = 0
 autocmd BufRead *.wiki let g:AutoPairs = {}
