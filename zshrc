@@ -1,5 +1,6 @@
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.oh-my-zsh
+export DISABLE_AUTO_UPDATE=true
 
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -9,15 +10,12 @@ export ZSH_CUSTOM="$HOME/.zsh-custom"
 # Set to this to use case-sensitive completion
 # export CASE_SENSITIVE="true"
 
-# Comment this out to disable weekly auto-update checks
-export DISABLE_AUTO_UPDATE="true"
-
 # Uncomment following line if you want to disable colors in ls
 # export DISABLE_LS_COLORS="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew cloudapp vi-mode webdev)
+plugins=(git brew cloudapp vi-mode webdev zsh-syntax-highlighting)
 
 # Have to set GIT environment variables so they can be overridden by anything
 # in zsh-custom
@@ -54,9 +52,6 @@ if ( which rbenv 2>&1 > /dev/null ); then
 fi
 
 export PGDATA=/usr/local/var/postgresql
-if (which mvim 2>&1 > /dev/null); then
-  alias vim="mvim -v"
-fi
 alias lpup="librarian-puppet"
 alias puppet="nocorrect puppet"
 alias vi="vim"
@@ -65,11 +60,10 @@ alias ruby18="rvm use ruby-1.8.7-p174"
 alias irb=pry
 alias web="open -a 'Google Chrome' "
 alias g='nocorrect git'
+alias git=hub
 alias gco='git checkout'
 alias gl="git log --stat --graph --decorate -M"
 alias gs="git status -sb"
-alias ghost="sudo rvm 1.9.3 do ghost"
-alias knife="rvm 1.9.3 do knife"
 alias be="bundle exec"
 alias bi="bundle install"
 alias bl="bundle list"
@@ -147,11 +141,17 @@ function printcolors() {
 
 # Boot2Docker
 # ============================================================================
-export DOCKER_HOST="tcp://127.0.0.1:4240"
+export DOCKER_HOST="tcp://127.0.0.1:32000"
 alias b2=boot2docker
 alias dl="docker ps -ql"
 
 # export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
 export GOPATH=/usr/local/Cellar/go/1.2.1/
+
+# History searching
+bindkey -M vicmd '/' history-incremental-pattern-search-backward
+bindkey -M vicmd '?' history-incremental-pattern-search-forward
+bindkey -M isearch '^R' history-incremental-search-backward
+bindkey -M isearch '^F' history-incremental-search-forward
 load_tmux
