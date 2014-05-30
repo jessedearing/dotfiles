@@ -118,9 +118,6 @@
 [submodule "vim/bundle/netrw.vim"]
 	path = vim/bundle/netrw.vim
 	url = https://github.com/vim-scripts/netrw.vim.git
-[submodule "vim/bundle/go.vim"]
-	path = vim/bundle/go.vim
-	url = https://github.com/uggedal/go-vim.git
 [submodule "vim/bundle/narrow_region"]
 	path = vim/bundle/narrow_region
 	url = https://github.com/vim-scripts/narrow_region.git
