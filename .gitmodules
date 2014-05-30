@@ -197,3 +197,6 @@
 [submodule "zsh-custom/plugins/zsh-syntax-highlighting"]
 	path = zsh-custom/plugins/zsh-syntax-highlighting
 	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "vim/bundle/vim-go"]
+	path = vim/bundle/vim-go
+	url = git@github.com:fatih/vim-go.git
