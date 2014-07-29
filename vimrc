@@ -3,6 +3,8 @@ set nocompatible
 call pathogen#infect()
 set re=1
 
+runtime macros/matchit.vim
+
 set hidden
 set number
 set ruler
@@ -10,7 +12,7 @@ set ruler
 set cursorline
 set showcmd
 syntax on
-set foldmethod=syntax
+" set foldmethod=syntax
 set foldlevelstart=99
 set visualbell t_vb=
 " Puts a line on column 80 of the screen. This is a good indicator for methods
@@ -232,7 +234,7 @@ map <Leader>fa :CtrlP app/assets<CR>
 "   CTags
 " ====================================================================
 set tags=tags;/
-map <Leader>rt :!/usr/local/bin/ctags --tag-relative -ftags --extra=+q --extra=+f --exclude=.git --exclude=.bundle --exclude=doc --exclude=coverage -R<CR><CR>
+map <Leader>rt :!/usr/local/bin/ctags --tag-relative --fields=+l -ftags --extra=+q --extra=+f --exclude=.git --exclude=.bundle --exclude=doc --exclude=coverage -R<CR><CR>
 map <Leader>gt :!.git/hooks/ctags<CR><CR>
 let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
 " let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
@@ -279,6 +281,7 @@ autocmd BufRead *.wiki let g:AutoPairs = {}
 let g:AutoPairsShortcutToggle = '<C-\>'
 let g:AutoPairsFlyMode = 1
 
+
 " Vimux
 " ====================================================================
 map <Leader>vit :VimuxPromptCommand<CR>
@@ -297,3 +300,10 @@ au BufRead,BufNewFile *.thrift set filetype=thrift
 " RSpec
 " ====================================================================
 map <Leader>rs :RunSpec<CR>
+
+let g:EclimCompletionMethod = 'omnifunc'
+let g:ycm_key_list_select_completion = ['<c-j>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<c-k>', '<Up>']
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:UltiSnipsJumpForwardTrigger="<c-l>"
+let g:UltiSnipsJumpBackwardTrigger="<c-h>"
