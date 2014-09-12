@@ -141,6 +141,8 @@ function b2ip() {
   echo $ip
 }
 
+alias fuck="sudo !!"
+
 # Boot2Docker
 # ============================================================================
 export DOCKER_HOST="tcp://127.0.0.1:2375"
