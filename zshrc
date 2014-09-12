@@ -29,10 +29,6 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 export PATH=/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/Cellar/go/1.2/libexec/bin
 
-if [ -f $HOME/.rbenv/libexec/../completions/rbenv.zsh ]; then
-  source "$HOME/.rbenv/libexec/../completions/rbenv.zsh"
-fi
-
 if ( which rbenv 2>&1 > /dev/null ); then
   rbenv rehash 2>/dev/null
   rbenv() {
@@ -65,7 +61,7 @@ alias gco='git checkout'
 alias gl="git log --stat --graph --decorate -M"
 alias gs="git status -sb"
 alias be="bundle exec"
-alias bi="bundle install"
+alias bi="bundle install --path=.bundle --binstubs=.bundle/bin"
 alias bl="bundle list"
 alias bu="bundle update"
 alias bp="bundle package"
@@ -114,8 +110,8 @@ function disconnectwifi() {
   sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -z
 }
 
-function hisgrep() {
-  history | grep $1
+function histack() {
+  history | ack "$1"
 }
 
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
@@ -135,19 +131,28 @@ fi
 
 function printcolors() {
   for i in {0..255} ; do
-    printf "\x1b[38;5;${i}mcolour${i}\n"
+    printf "\\x1b[38;5;${i}m \\\x1b[38;5;${i}m\n"
   done
+}
+
+function b2ip() {
+  local ip=$(boot2docker ip)
+  echo $ip | pbcopy
+  echo $ip
 }
 
 # Boot2Docker
 # ============================================================================
-export DOCKER_HOST="tcp://127.0.0.1:32000"
+export DOCKER_HOST="tcp://127.0.0.1:2375"
 alias b2=boot2docker
 alias dl="docker ps -ql"
+alias eclimd="/Applications/eclipse/eclimd"
 
 # export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
-export GOPATH=/usr/local/Cellar/go/1.2.1/
+export GOPATH=/usr/local/opt/go
+
+export PYTHON_PATH=/usr/local/Cellar/python3/3.4.0_1
 
 # History searching
 bindkey -M vicmd '/' history-incremental-pattern-search-backward
