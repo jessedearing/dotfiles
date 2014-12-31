@@ -1,1 +1,3 @@
 vpn_*
+failover_db.sh
+puppet-clean.sh
