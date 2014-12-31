@@ -53,6 +53,7 @@ set guioptions-=r
 set guioptions-=L
 
 " set transparency=10
+let g:airline_powerline_fonts = 0
 
 " set guifont=DejaVu\ Sans\ Mono:h12
 set guifont=Source\ Code\ Pro:h14
