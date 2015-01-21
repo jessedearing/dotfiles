@@ -221,3 +221,12 @@
 [submodule "vim/bundle/lotr"]
 	path = vim/bundle/lotr
 	url = git@github.com:dahu/vim-lotr.git
+[submodule "vim/bundle/unite.vim"]
+	path = vim/bundle/unite.vim
+	url = git@github.com:Shougo/unite.vim.git
+[submodule "vim/bundle/vimproc.vim"]
+	path = vim/bundle/vimproc.vim
+	url = git@github.com:Shougo/vimproc.vim.git
+[submodule "vim/bundle/ag.vim"]
+	path = vim/bundle/ag.vim
+	url = git@github.com:rking/ag.vim.git

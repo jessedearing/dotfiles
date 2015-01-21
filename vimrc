@@ -5,6 +5,7 @@ set re=1
 
 runtime macros/matchit.vim
 
+set mouse=a
 set hidden
 set number
 set ruler
@@ -19,9 +20,8 @@ set visualbell t_vb=
 " that are too long
 set colorcolumn=80
 
-let $RBENV_VERSION = '2.1.2'
-let $PATH = $HOME . '/.rbenv/shims:' . $PATH
-let $PATH = './.bundle/bin' . $PATH
+let $RBENV_VERSION = '2.1.4'
+let $PATH = './.bundle/bin:' . $HOME . '/.rbenv/shims:' . $PATH
 set shell=/bin/zsh
 
 " Undofile directory settings
@@ -153,6 +153,8 @@ set modelines=10
 let g:aldmeris_transparent = 1
 let g:aldmeris_termcolors = "tango"
 color aldmeris
+set background=dark
+" color kalisi
 
 " Directories for swp files
 set backupdir=~/.vim/backup
@@ -233,7 +235,7 @@ map <Leader>fa :CtrlP app/assets<CR>
 
 "   CTags
 " ====================================================================
-set tags=tags;/
+set tags=./tags,tags,.git/tags
 map <Leader>rt :!/usr/local/bin/ctags --tag-relative --fields=+l -ftags --extra=+q --extra=+f --exclude=.git --exclude=.bundle --exclude=doc --exclude=coverage -R<CR><CR>
 map <Leader>gt :!.git/hooks/ctags<CR><CR>
 let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
@@ -270,7 +272,7 @@ map <Leader>gd :GundoToggle<CR>
 
 " Vimwiki
 " ====================================================================
-let g:vimwiki_folding='syntax'
+let g:vimwiki_folding='expr'
 let g:vimwiki_hl_cb_checked=1
 autocmd BufWritePost *.wiki execute '! git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki add "%"; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki commit -q -m "%"'
 autocmd BufRead *.wiki let g:AutoPairsFlyMode = 0
@@ -307,3 +309,22 @@ let g:ycm_key_list_previous_completion = ['<c-k>', '<Up>']
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:UltiSnipsJumpForwardTrigger="<c-l>"
 let g:UltiSnipsJumpBackwardTrigger="<c-h>"
+
+" Golang
+" ============================================================================
+let g:go_fmt_command = "goimports"
+let g:go_fmt_autosave = 1
+au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+
+" Platinum Searcher
+" ============================================================================
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_use_caching = 0
+endif
