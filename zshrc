@@ -27,7 +27,7 @@ export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/Cellar/go/1.2/libexec/bin
+export PATH=/usr/local/opt/go/bin:/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/Cellar/go/1.2/libexec/bin
 
 if ( which rbenv 2>&1 > /dev/null ); then
   rbenv rehash 2>/dev/null
@@ -73,6 +73,9 @@ alias d=docker
 alias knife="nocorrect knife"
 alias ggpnp='git stash && git pull --rebase && git push && git stash pop'
 alias yard='nocorrect yard'
+alias ssh="TERM=xterm-256color ssh -A"
+alias mysql="mysql -A"
+alias pt="pt --smart-case --color --follow"
 compdef ggpnp=git
 
 export EDITOR="vim"
@@ -111,7 +114,7 @@ function disconnectwifi() {
 }
 
 function histack() {
-  history | ack "$1"
+  history | pt "$1"
 }
 
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
@@ -121,7 +124,7 @@ function load_tmux() {
     if [ -z "$TMUX" ] && ( tmux ls 2>&1 ); then
       tmux new-session -t 0 && exit
     else
-      [ -z "$TMUX" ] && [ -z "$SUDO_USER" ] && [ -z "$SSH_CONNECTION" ] && tmux && exit
+      [ -z "$TMUX" ] && [ -z "$SUDO_USER" ] && [ -z "$SSH_CONNECTION" ] && ssh-agent tmux && exit
     fi
   fi
 }
@@ -141,11 +144,18 @@ function b2ip() {
   echo $ip
 }
 
-alias fuck="sudo !!"
+function fuck() {
+  sudo $(tail -n2 ~/.zsh_history | cut -d \; -f 2 | head -n 1)
+}
+
+function sshforward() {
+  eval "$(ssh-agent)"
+  ssh-add
+}
 
 # Boot2Docker
 # ============================================================================
-export DOCKER_HOST="tcp://127.0.0.1:2375"
+export DOCKER_HOST="tcp://172.18.1.5:2375"
 alias b2=boot2docker
 alias dl="docker ps -ql"
 alias eclimd="/Applications/eclipse/eclimd"
@@ -154,11 +164,22 @@ alias eclimd="/Applications/eclipse/eclimd"
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
 export GOPATH=/usr/local/opt/go
 
-export PYTHON_PATH=/usr/local/Cellar/python3/3.4.0_1
-
 # History searching
 bindkey -M vicmd '/' history-incremental-pattern-search-backward
 bindkey -M vicmd '?' history-incremental-pattern-search-forward
 bindkey -M isearch '^R' history-incremental-search-backward
 bindkey -M isearch '^F' history-incremental-search-forward
 load_tmux
+
+ssh-add $HOME/.ssh/id_rsa
+PATH="/Users/jdearing/perl5/bin${PATH+:}${PATH}"; export PATH;
+PERL5LIB="/Users/jdearing/perl5/lib/perl5${PERL5LIB+:}${PERL5LIB}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/Users/jdearing/perl5${PERL_LOCAL_LIB_ROOT+:}${PERL_LOCAL_LIB_ROOT}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/Users/jdearing/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/jdearing/perl5"; export PERL_MM_OPT;
+
+# Python Setup
+# ============================================================================
+
+VIRTUAL_ENV_DISABLE_PROMPT=1
+. $HOME/.virtualenv/bin/activate
