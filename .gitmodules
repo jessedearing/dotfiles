@@ -230,3 +230,6 @@
 [submodule "vim/bundle/ag.vim"]
 	path = vim/bundle/ag.vim
 	url = git@github.com:rking/ag.vim.git
+[submodule "vim/bundle/pgsql.vim"]
+	path = vim/bundle/pgsql.vim
+	url = git@github.com:exu/pgsql.vim.git
