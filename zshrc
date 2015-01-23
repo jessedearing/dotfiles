@@ -27,7 +27,7 @@ export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/local/opt/go/bin:/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/Cellar/go/1.2/libexec/bin
+export PATH=/usr/local/Cellar/perl/5.20.1/bin:/usr/local/opt/go/bin:/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/Cellar/go/1.2/libexec/bin
 
 if ( which rbenv 2>&1 > /dev/null ); then
   rbenv rehash 2>/dev/null
@@ -172,11 +172,6 @@ bindkey -M isearch '^F' history-incremental-search-forward
 load_tmux
 
 ssh-add $HOME/.ssh/id_rsa
-PATH="/Users/jdearing/perl5/bin${PATH+:}${PATH}"; export PATH;
-PERL5LIB="/Users/jdearing/perl5/lib/perl5${PERL5LIB+:}${PERL5LIB}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/Users/jdearing/perl5${PERL_LOCAL_LIB_ROOT+:}${PERL_LOCAL_LIB_ROOT}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/Users/jdearing/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/Users/jdearing/perl5"; export PERL_MM_OPT;
 
 # Python Setup
 # ============================================================================
