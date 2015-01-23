@@ -175,6 +175,8 @@ ssh-add $HOME/.ssh/id_rsa
 
 # Python Setup
 # ============================================================================
-
 VIRTUAL_ENV_DISABLE_PROMPT=1
 . $HOME/.virtualenv/bin/activate
+
+# NOOPing virtualenv because I just don't use python that much
+prompt_virtualenv() {}
