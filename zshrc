@@ -75,7 +75,7 @@ alias ggpnp='git stash && git pull --rebase && git push && git stash pop'
 alias yard='nocorrect yard'
 alias ssh="TERM=xterm-256color ssh -A"
 alias mysql="mysql -A"
-alias pt="pt --smart-case --color --follow"
+alias ag="ag -S"
 compdef ggpnp=git
 
 export EDITOR="vim"
@@ -114,7 +114,7 @@ function disconnectwifi() {
 }
 
 function histack() {
-  history | pt "$1"
+  history | ag "$1"
 }
 
 PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
