@@ -1,3 +1,4 @@
 .DS_Store
 tags
 tmp/
+config/database.yml

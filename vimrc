@@ -1,7 +1,10 @@
 set nocompatible
+set t_Co=256
 
 call pathogen#infect()
-set re=1
+if $ITERM_PROFILE != 'Github Dashboard'
+  set re=1
+endif
 
 runtime macros/matchit.vim
 
@@ -20,7 +23,7 @@ set visualbell t_vb=
 " that are too long
 set colorcolumn=80
 
-let $RBENV_VERSION = '2.1.4'
+let $RBENV_VERSION = '2.0.0-p451'
 let $PATH = './.bundle/bin:' . $HOME . '/.rbenv/shims:' . $PATH
 set shell=/bin/zsh
 
@@ -152,8 +155,10 @@ set modelines=10
 " color tubster
 let g:aldmeris_transparent = 1
 let g:aldmeris_termcolors = "tango"
-color aldmeris
+" color aldmeris
 set background=dark
+let base16colorspace=256
+color base16-default
 " color kalisi
 
 " Directories for swp files
@@ -274,7 +279,7 @@ map <Leader>gd :GundoToggle<CR>
 " ====================================================================
 let g:vimwiki_folding='expr'
 let g:vimwiki_hl_cb_checked=1
-autocmd BufWritePost *.wiki execute '! git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki add "%"; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki commit -q -m "%"'
+autocmd BufWritePost *.wiki silent execute '! git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki add "%" > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki commit -q -m "%" > /dev/null'
 autocmd BufRead *.wiki let g:AutoPairsFlyMode = 0
 autocmd BufRead *.wiki let g:AutoPairs = {}
 
@@ -328,3 +333,4 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l -U --nocolor -g ""'
   let g:ctrlp_use_caching = 0
 endif
+source ~/.newrelic-vimrc

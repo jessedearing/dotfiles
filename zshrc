@@ -1,6 +1,9 @@
+setopt interactivecomments
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.oh-my-zsh
 export DISABLE_AUTO_UPDATE=true
+
+source $HOME/.base16-shell/base16-default.dark.sh
 
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -76,6 +79,8 @@ alias yard='nocorrect yard'
 alias ssh="TERM=xterm-256color ssh -A"
 alias mysql="mysql -A"
 alias ag="ag -S"
+alias vims="vim -c ':Scratch'"
+alias mytop="perl /usr/local/bin/mytop"
 compdef ggpnp=git
 
 export EDITOR="vim"
@@ -113,18 +118,16 @@ function disconnectwifi() {
   sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -z
 }
 
-function histack() {
+function histag() {
   history | ag "$1"
 }
-
-PS1="$PS1"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 
 function load_tmux() {
   if (which tmux 2>&1 > /dev/null); then
     if [ -z "$TMUX" ] && ( tmux ls 2>&1 ); then
       tmux new-session -t 0 && exit
     else
-      [ -z "$TMUX" ] && [ -z "$SUDO_USER" ] && [ -z "$SSH_CONNECTION" ] && ssh-agent tmux && exit
+      [ -z "$TMUX" ] && [ -z "$SUDO_USER" ] && [ -z "$SSH_CONNECTION" ] && ssh-agent tmux -2 && exit
     fi
   fi
 }
@@ -171,7 +174,12 @@ bindkey -M isearch '^R' history-incremental-search-backward
 bindkey -M isearch '^F' history-incremental-search-forward
 load_tmux
 
-ssh-add $HOME/.ssh/id_rsa
+ssh-add $HOME/.ssh/id_rsa &> /dev/null
+
+fortune startrek computers devops_borat_twitter sadserver_twitter
+echo
+
+export PGHOST=localhost
 
 # Python Setup
 # ============================================================================
@@ -180,3 +188,4 @@ VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # NOOPing virtualenv because I just don't use python that much
 prompt_virtualenv() {}
+export EC2_HOME=/usr/local/opt/ec2-api-tools/libexec

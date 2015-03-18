@@ -233,3 +233,30 @@
 [submodule "vim/bundle/pgsql.vim"]
 	path = vim/bundle/pgsql.vim
 	url = git@github.com:exu/pgsql.vim.git
+[submodule "vim/bundle/base16-colors"]
+	path = vim/bundle/base16-colors
+	url = git@github.com:chriskempson/base16-vim.git
+[submodule "vim/bundle/github-dashbard"]
+	path = vim/bundle/github-dashbard
+	url = git@github.com:junegunn/vim-github-dashboard.git
+[submodule "base16-shell"]
+	path = base16-shell
+	url = git@github.com:chriskempson/base16-shell.git
+[submodule "vim/bundle/livedown"]
+	path = vim/bundle/livedown
+	url = git@github.com:shime/livedown.git
+[submodule "vim/bundle/vimproc"]
+	path = vim/bundle/vimproc
+	url = git@github.com:Shougo/vimproc.vim.git
+[submodule "vim/bundle/dispatch"]
+	path = vim/bundle/dispatch
+	url = git@github.com:tpope/vim-dispatch.git
+[submodule "vim/bundle/vim-multiple-cursors"]
+	path = vim/bundle/vim-multiple-cursors
+	url = git@github.com:terryma/vim-multiple-cursors.git
+[submodule "vim/bundle/hammer"]
+	path = vim/bundle/hammer
+	url = git@github.com:wikimatze/hammer.vim.git
+[submodule "vim/bundle/vim-sqlutil"]
+	path = vim/bundle/vim-sqlutil
+	url = git@github.com:smintz/vim-sqlutil.git
