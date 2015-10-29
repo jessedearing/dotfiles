@@ -260,3 +260,21 @@
 [submodule "vim/bundle/vim-sqlutil"]
 	path = vim/bundle/vim-sqlutil
 	url = git@github.com:smintz/vim-sqlutil.git
+[submodule "zsh-custom/zsh-syntax-highlighting"]
+	path = zsh-custom/zsh-syntax-highlighting
+	url = git@github.com:zsh-users/zsh-syntax-highlighting.git
+[submodule "vim/bundle/vim-yaml"]
+	path = vim/bundle/vim-yaml
+	url = git@github.com:stephpy/vim-yaml.git
+[submodule "vim/bundle/material.vim"]
+	path = vim/bundle/material.vim
+	url = https://github.com/jscappini/material.vim
+[submodule "vim/bundle/crayon"]
+	path = vim/bundle/crayon
+	url = https://github.com/dylanaraps/crayon.git
+[submodule "vim/bundle/anderson"]
+	path = vim/bundle/anderson
+	url = git@github.com:gilgigilgil/anderson.vim.git
+[submodule "vim/bundle/go-explorer"]
+	path = vim/bundle/go-explorer
+	url = git@github.com:garyburd/go-explorer.git
