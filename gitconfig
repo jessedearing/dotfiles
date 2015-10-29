@@ -28,3 +28,6 @@
 	autocorrect = 1
 [include]
   path = ~/.gitconfig.local
+[alias]
+  reuse=commit --amend --reuse-message=HEAD
+  s=status -sb
