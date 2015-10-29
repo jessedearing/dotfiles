@@ -1,9 +1,10 @@
 setopt interactivecomments
 # Path to your oh-my-zsh configuration.
-export ZSH=$HOME/.oh-my-zsh
 export DISABLE_AUTO_UPDATE=true
+export ZSH=$HOME/.oh-my-zsh
 
-source $HOME/.base16-shell/base16-default.dark.sh
+# source /Users/jdearing/.base16-shell/base16-tomorrow.dark.sh
+# source /Users/jdearing/.base16-shell/base16-default.dark.sh
 
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -18,7 +19,7 @@ export ZSH_CUSTOM="$HOME/.zsh-custom"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew cloudapp vi-mode webdev zsh-syntax-highlighting)
+plugins=(vi-mode zsh-syntax-highlighting)
 
 # Have to set GIT environment variables so they can be overridden by anything
 # in zsh-custom
@@ -30,7 +31,7 @@ export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/local/Cellar/perl/5.20.1/bin:/usr/local/opt/go/bin:/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/Cellar/go/1.2/libexec/bin
+export PATH=$HOME/go/bin:/usr/local/Cellar/perl/5.20.1/bin:/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/Cellar/go/1.2/libexec/bin
 
 if ( which rbenv 2>&1 > /dev/null ); then
   rbenv rehash 2>/dev/null
@@ -50,6 +51,8 @@ if ( which rbenv 2>&1 > /dev/null ); then
   }
 fi
 
+export RBENV_VERSION=2.0.0-p451
+
 export PGDATA=/usr/local/var/postgresql
 alias lpup="librarian-puppet"
 alias puppet="nocorrect puppet"
@@ -63,6 +66,8 @@ alias git=hub
 alias gco='git checkout'
 alias gl="git log --stat --graph --decorate -M"
 alias gs="git status -sb"
+alias ga="git add"
+alias gc="git commit -v"
 alias be="bundle exec"
 alias bi="bundle install --path=.bundle --binstubs=.bundle/bin"
 alias bl="bundle list"
@@ -81,7 +86,8 @@ alias mysql="mysql -A"
 alias ag="ag -S"
 alias vims="vim -c ':Scratch'"
 alias mytop="perl /usr/local/bin/mytop"
-compdef ggpnp=git
+alias todo="vim /Users/jdearing/Dropbox/Taskmator\\ -\\ TaskPaper\\ compatible\\ with\\ Reminders\\ for\\ iOS/todo.taskpaper"
+alias cat=ccat
 
 export EDITOR="vim"
 export GIT_EDITOR=$EDITOR
@@ -122,12 +128,20 @@ function histag() {
   history | ag "$1"
 }
 
+function bail_on_tmux() {
+  echo "Loading tmux...."
+  echo "Press CTRL-C to cancel"
+  sleep 1.5
+}
+
 function load_tmux() {
   if (which tmux 2>&1 > /dev/null); then
     if [ -z "$TMUX" ] && ( tmux ls 2>&1 ); then
-      tmux new-session -t 0 && exit
+     bail_on_tmux && tmux new-session -t 0 && exit
     else
-      [ -z "$TMUX" ] && [ -z "$SUDO_USER" ] && [ -z "$SSH_CONNECTION" ] && ssh-agent tmux -2 && exit
+      if [ -z "$TMUX" ] && [ -z "$SUDO_USER" ] && [ -z "$SSH_CONNECTION" ]; then
+        bail_on_tmux && ssh-agent tmux -2 && exit
+      fi
     fi
   fi
 }
@@ -147,9 +161,7 @@ function b2ip() {
   echo $ip
 }
 
-function fuck() {
-  sudo $(tail -n2 ~/.zsh_history | cut -d \; -f 2 | head -n 1)
-}
+alias fuck='$(thefuck $(fc -ln -1))'
 
 function sshforward() {
   eval "$(ssh-agent)"
@@ -158,29 +170,31 @@ function sshforward() {
 
 # Boot2Docker
 # ============================================================================
-export DOCKER_HOST="tcp://172.18.1.5:2375"
 alias b2=boot2docker
 alias dl="docker ps -ql"
-alias eclimd="/Applications/eclipse/eclimd"
-
+alias eclimd=/Users/jdearing/eclipse/Eclipse.app/Contents/Eclipse/eclimd
+alias eclim=/Users/jdearing/eclipse/Eclipse.app/Contents/Eclipse/eclim
 # export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
-export GOPATH=/usr/local/opt/go
+export GOPATH=$HOME/go
 
 # History searching
 bindkey -M vicmd '/' history-incremental-pattern-search-backward
 bindkey -M vicmd '?' history-incremental-pattern-search-forward
 bindkey -M isearch '^R' history-incremental-search-backward
 bindkey -M isearch '^F' history-incremental-search-forward
-load_tmux
 
-ssh-add $HOME/.ssh/id_rsa &> /dev/null
+#ssh-add $HOME/.ssh/id_rsa &> /dev/null
 
 fortune startrek computers devops_borat_twitter sadserver_twitter
 echo
 
+export PGDATA=$HOME/data/postgres
 export PGHOST=localhost
 
+function dockerinit() {
+  . "/Applications/Docker/Docker Quickstart Terminal.app/Contents/Resources/Scripts/start.sh"
+}
 # Python Setup
 # ============================================================================
 VIRTUAL_ENV_DISABLE_PROMPT=1
@@ -189,3 +203,4 @@ VIRTUAL_ENV_DISABLE_PROMPT=1
 # NOOPing virtualenv because I just don't use python that much
 prompt_virtualenv() {}
 export EC2_HOME=/usr/local/opt/ec2-api-tools/libexec
+load_tmux

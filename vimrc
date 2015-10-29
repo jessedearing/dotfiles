@@ -8,7 +8,10 @@ endif
 
 runtime macros/matchit.vim
 
-set mouse=a
+set pastetoggle=<F11>
+set ttyfast
+
+"set mouse=a
 set hidden
 set number
 set ruler
@@ -153,13 +156,17 @@ set modelines=10
 " color lucius
 " color wombat
 " color tubster
-let g:aldmeris_transparent = 1
-let g:aldmeris_termcolors = "tango"
+let g:aldmeris_transparent = 0
+" let g:aldmeris_termcolors = "tango"
 " color aldmeris
 set background=dark
 let base16colorspace=256
-color base16-default
+" color base16-default
 " color kalisi
+" color material
+" color crayon
+" color base16-tomorrow
+color anderson
 
 " Directories for swp files
 set backupdir=~/.vim/backup
@@ -170,6 +177,8 @@ let g:JSLintHighlightErrorLine = 0
 
 " MacVIM shift+arrow-keys behavior (required in .vimrc)
 let macvim_hig_shift_movement = 1
+
+let g:sqlutil_align_comma = 1
 
 " set clipboard="
 set clipboard=unnamed
@@ -236,12 +245,13 @@ map <Leader>fw :CtrlP app/workers<CR>
 map <Leader>fc :CtrlP app/controllers<CR>
 map <Leader>fo :CtrlP app/concerns<CR>
 map <Leader>fa :CtrlP app/assets<CR>
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:30,results:30'
 
 
 "   CTags
 " ====================================================================
 set tags=./tags,tags,.git/tags
-map <Leader>rt :!/usr/local/bin/ctags --tag-relative --fields=+l -ftags --extra=+q --extra=+f --exclude=.git --exclude=.bundle --exclude=doc --exclude=coverage -R<CR><CR>
+map <Leader>rt :!/usr/local/bin/ctags --exclude=.git --exclude=public --languages=-JavaScript --exclude=.bundle --exclude=doc --exclude=coverage -R<CR><CR>
 map <Leader>gt :!.git/hooks/ctags<CR><CR>
 let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
 " let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
@@ -279,7 +289,7 @@ map <Leader>gd :GundoToggle<CR>
 " ====================================================================
 let g:vimwiki_folding='expr'
 let g:vimwiki_hl_cb_checked=1
-autocmd BufWritePost *.wiki silent execute '! git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki add "%" > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki commit -q -m "%" > /dev/null'
+autocmd BufWritePost *.wiki silent execute '! git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki add "%" > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki commit -q -m "%" > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki push origin master -q > /dev/null'
 autocmd BufRead *.wiki let g:AutoPairsFlyMode = 0
 autocmd BufRead *.wiki let g:AutoPairs = {}
 
@@ -326,11 +336,15 @@ au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
 
+" Supertab
+" ============================================================================
+" let g:SuperTabDefaultCompletionType = 'context'
+
 " Platinum Searcher
 " ============================================================================
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l -U --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag %s -l -U --ignore public --ignore .bundle --ignore node_modules --nocolor -g ""'
   let g:ctrlp_use_caching = 0
 endif
 source ~/.newrelic-vimrc
