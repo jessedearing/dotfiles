@@ -27,7 +27,7 @@ set visualbell t_vb=
 set colorcolumn=80
 
 let $RBENV_VERSION = '2.0.0-p451'
-let $PATH = './.bundle/bin:' . $HOME . '/.rbenv/shims:' . $PATH
+let $PATH = $HOME . '/go/bin' . './.bundle/bin:' . $HOME . '/.rbenv/shims:' . $PATH
 set shell=/bin/zsh
 
 " Undofile directory settings
@@ -166,7 +166,9 @@ let base16colorspace=256
 " color material
 " color crayon
 " color base16-tomorrow
-color anderson
+" color anderson
+" color dracula
+color darcula
 
 " Directories for swp files
 set backupdir=~/.vim/backup
@@ -287,11 +289,11 @@ map <Leader>gd :GundoToggle<CR>
 
 " Vimwiki
 " ====================================================================
-let g:vimwiki_folding='expr'
-let g:vimwiki_hl_cb_checked=1
-autocmd BufWritePost *.wiki silent execute '! git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki add "%" > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki commit -q -m "%" > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki push origin master -q > /dev/null'
-autocmd BufRead *.wiki let g:AutoPairsFlyMode = 0
-autocmd BufRead *.wiki let g:AutoPairs = {}
+" let g:vimwiki_folding='expr'
+" let g:vimwiki_hl_cb_checked=1
+" autocmd BufWritePost *.wiki silent execute '! git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki add "%" > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki commit -q -m "%" > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki push origin master -q > /dev/null'
+" autocmd BufRead *.wiki let g:AutoPairsFlyMode = 0
+" autocmd BufRead *.wiki let g:AutoPairs = {}
 
 " AutoPairs
 " ====================================================================
@@ -347,4 +349,9 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l -U --ignore public --ignore .bundle --ignore node_modules --nocolor -g ""'
   let g:ctrlp_use_caching = 0
 endif
+
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+
+
 source ~/.newrelic-vimrc

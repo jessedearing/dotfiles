@@ -1,3 +1,6 @@
+# encoding: UTF-8
+# coding: UTF-8
+# -*- coding: UTF-8 -*-
 if defined?(::Bundler)
   ruby_version = if RUBY_VERSION < '2.0'
                    '1.9.1'

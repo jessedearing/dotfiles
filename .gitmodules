@@ -278,3 +278,12 @@
 [submodule "vim/bundle/go-explorer"]
 	path = vim/bundle/go-explorer
 	url = git@github.com:garyburd/go-explorer.git
+[submodule "vim/bundle/molokai"]
+	path = vim/bundle/molokai
+	url = git@github.com:fatih/molokai.git
+[submodule "vim/bundle/darcula"]
+	path = vim/bundle/darcula
+	url = git@github.com:blueshirts/darcula.git
+[submodule "vim/bundle/neocomplete.vim"]
+	path = vim/bundle/neocomplete.vim
+	url = git@github.com:Shougo/neocomplete.vim.git

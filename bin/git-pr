@@ -1,0 +1,5 @@
+#!/bin/bash
+
+git push origin $(git rev-parse --abbrev-ref HEAD)
+hub pull-request -o
+

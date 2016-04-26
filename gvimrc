@@ -56,9 +56,10 @@ set guioptions-=L
 let g:airline_powerline_fonts = 0
 
 " set guifont=DejaVu\ Sans\ Mono:h12
-set guifont=Source\ Code\ Pro:h14
+set guifont=Hack:h14
 
 " colorscheme tubster
+color darcula
 
 set clipboard=unnamed
 

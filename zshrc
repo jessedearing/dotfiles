@@ -2,6 +2,8 @@ setopt interactivecomments
 # Path to your oh-my-zsh configuration.
 export DISABLE_AUTO_UPDATE=true
 export ZSH=$HOME/.oh-my-zsh
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # source /Users/jdearing/.base16-shell/base16-tomorrow.dark.sh
 # source /Users/jdearing/.base16-shell/base16-default.dark.sh
@@ -82,20 +84,28 @@ alias knife="nocorrect knife"
 alias ggpnp='git stash && git pull --rebase && git push && git stash pop'
 alias yard='nocorrect yard'
 alias ssh="TERM=xterm-256color ssh -A"
-alias mysql="mysql -A"
 alias ag="ag -S"
 alias vims="vim -c ':Scratch'"
 alias mytop="perl /usr/local/bin/mytop"
 alias todo="vim /Users/jdearing/Dropbox/Taskmator\\ -\\ TaskPaper\\ compatible\\ with\\ Reminders\\ for\\ iOS/todo.taskpaper"
 alias cat=ccat
 
-export EDITOR="vim"
+export EDITOR=$HOME/.bin/editor.sh
+export LESS="-iMx4 -RX"
 export GIT_EDITOR=$EDITOR
 
 function api() {open -a 'Google Chrome' "http://apidock.com/$1/search?query=$2";}
 
 function quote() {
   echo "“$*”" | pbcopy
+}
+
+function mysql() {
+  if [[ $* =~ 'timeslice-' ]]; then
+    =mysql -A $*
+  else
+    =mysql $*
+  fi
 }
 
 if [ -d "$HOME/.ec2" ]; then
@@ -125,7 +135,7 @@ function disconnectwifi() {
 }
 
 function histag() {
-  history | ag "$1"
+  history | ag "$1" | tail
 }
 
 function bail_on_tmux() {
@@ -203,4 +213,11 @@ VIRTUAL_ENV_DISABLE_PROMPT=1
 # NOOPing virtualenv because I just don't use python that much
 prompt_virtualenv() {}
 export EC2_HOME=/usr/local/opt/ec2-api-tools/libexec
+
 load_tmux
+# JBoss Setup
+# ============================================================================
+export JBOSS_HOME=/usr/local/opt/wildfly-as/libexec
+export PATH=${PATH}:${JBOSS_HOME}/bin
+export GROOVY_HOME=/usr/local/opt/groovy/libexec
+export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
