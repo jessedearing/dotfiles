@@ -87,8 +87,8 @@ alias ssh="TERM=xterm-256color ssh -A"
 alias ag="ag -S"
 alias vims="vim -c ':Scratch'"
 alias mytop="perl /usr/local/bin/mytop"
-alias todo="vim /Users/jdearing/Dropbox/Taskmator\\ -\\ TaskPaper\\ compatible\\ with\\ Reminders\\ for\\ iOS/todo.taskpaper"
 alias cat=ccat
+alias vim=nvim
 
 export EDITOR=$HOME/.bin/editor.sh
 export LESS="-iMx4 -RX"

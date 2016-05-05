@@ -1,7 +1,26 @@
-set nocompatible
-set t_Co=256
+call plug#begin('~/.vim/plugged')
+Plug 'blueshirts/darcula'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
+Plug 'fatih/vim-go'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'vim-scripts/scratch.vim'
+Plug 'tpope/vim-surround'
+Plug 'Shougo/deoplete.nvim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'rking/ag.vim'
+Plug 'puppetlabs/puppet-syntax-vim'
+Plug 'kien/ctrlp.vim'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/syntastic'
+let g:deoplete#enable_at_startup = 1
+call plug#end()
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
-call pathogen#infect()
 if $ITERM_PROFILE != 'Github Dashboard'
   set re=1
 endif
@@ -9,9 +28,8 @@ endif
 runtime macros/matchit.vim
 
 set pastetoggle=<F11>
-set ttyfast
 
-"set mouse=a
+set mouse=a
 set hidden
 set number
 set ruler
@@ -21,7 +39,6 @@ set showcmd
 syntax on
 " set foldmethod=syntax
 set foldlevelstart=99
-set visualbell t_vb=
 " Puts a line on column 80 of the screen. This is a good indicator for methods
 " that are too long
 set colorcolumn=80
@@ -155,7 +172,7 @@ set modelines=10
 " color twilight
 " color lucius
 " color wombat
-" color tubster
+"color tubster
 let g:aldmeris_transparent = 0
 " let g:aldmeris_termcolors = "tango"
 " color aldmeris
@@ -320,12 +337,9 @@ au BufRead,BufNewFile *.thrift set filetype=thrift
 " ====================================================================
 map <Leader>rs :RunSpec<CR>
 
-let g:EclimCompletionMethod = 'omnifunc'
-let g:ycm_key_list_select_completion = ['<c-j>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<c-k>', '<Up>']
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:UltiSnipsJumpForwardTrigger="<c-l>"
-let g:UltiSnipsJumpBackwardTrigger="<c-h>"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " Golang
 " ============================================================================

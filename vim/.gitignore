@@ -15,3 +15,5 @@ ftplugin
 colors
 indent
 .VimballRecord
+plugged
+.init.vim-rplugin~
