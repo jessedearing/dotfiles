@@ -1,3 +1,3 @@
 #!/bin/sh
 
-/usr/local/bin/vim $@
+/usr/local/bin/nvim $@

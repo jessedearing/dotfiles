@@ -208,7 +208,7 @@ function dockerinit() {
 # Python Setup
 # ============================================================================
 VIRTUAL_ENV_DISABLE_PROMPT=1
-. $HOME/.virtualenv/bin/activate
+#. $HOME/.virtualenv/bin/activate
 
 # NOOPing virtualenv because I just don't use python that much
 prompt_virtualenv() {}
