@@ -376,5 +376,7 @@ endif
 let g:acp_enableAtStartup = 0
 let g:neocomplete#enable_at_startup = 1
 
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 source ~/.newrelic-vimrc
