@@ -26,6 +26,8 @@ Plug 'kien/ctrlp.vim'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/syntastic'
+Plug 'mattn/gist-vim'
+Plug 'mattn/webapi-vim'
 let g:deoplete#enable_at_startup = 1
 call plug#end()
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -378,5 +380,3 @@ let g:neocomplete#enable_at_startup = 1
 
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-
-source ~/.newrelic-vimrc

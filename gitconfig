@@ -1,6 +1,6 @@
 [user]
 	name = Jesse Dearing
-	email = jdearing@newrelic.com
+	email = jesse.dearing@gmail.com
 [color]
 	ui = true
 [mergetool "opendiff"]
@@ -10,7 +10,7 @@
 [merge]
 	tool = fugitive
 [core]
-	excludesfile = /Users/jdearing/.gitignore
+	excludesfile = ~/.gitignore
 [difftool "mvim"]
   cmd = mvim -d $LOCAL $REMOTE
 [difftool]
@@ -41,3 +41,5 @@
 	clean = git-lfs clean %f
 	smudge = git-lfs smudge %f
 	required = true
+[github]
+	user = jessedearing

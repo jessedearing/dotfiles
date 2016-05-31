@@ -33,7 +33,7 @@ export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=$HOME/go/bin:/usr/local/Cellar/perl/5.20.1/bin:/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/Cellar/go/1.2/libexec/bin
+export PATH=$HOME/go/bin:/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/Cellar/go/1.2/libexec/bin
 
 if ( which rbenv 2>&1 > /dev/null ); then
   rbenv rehash 2>/dev/null
@@ -53,7 +53,7 @@ if ( which rbenv 2>&1 > /dev/null ); then
   }
 fi
 
-export RBENV_VERSION=2.0.0-p451
+#export RBENV_VERSION=2.0.0-p451
 
 export PGDATA=/usr/local/var/postgresql
 alias lpup="librarian-puppet"
@@ -196,7 +196,7 @@ bindkey -M isearch '^F' history-incremental-search-forward
 
 #ssh-add $HOME/.ssh/id_rsa &> /dev/null
 
-fortune startrek computers devops_borat_twitter sadserver_twitter
+fortune startrek computers sadserver_tweets
 echo
 
 export PGDATA=$HOME/data/postgres
@@ -221,3 +221,9 @@ export JBOSS_HOME=/usr/local/opt/wildfly-as/libexec
 export PATH=${PATH}:${JBOSS_HOME}/bin
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
 export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
+
+PATH="/Users/jesse/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/Users/jesse/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/Users/jesse/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/Users/jesse/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/jesse/perl5"; export PERL_MM_OPT;

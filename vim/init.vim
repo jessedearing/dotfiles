@@ -1,1 +1,1 @@
-/Users/jdearing/.vimrc
+../vimrc
