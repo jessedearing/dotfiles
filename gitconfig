@@ -38,8 +38,8 @@
   fetch = +refs/pull/*:refs/remotes/origin/pr/*
   fetch = +refs/pull/*:refs/remotes/origin/pr/*
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
 	required = true
 [github]
 	user = jessedearing
