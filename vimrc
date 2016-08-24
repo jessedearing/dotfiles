@@ -1,10 +1,4 @@
 call plug#begin('~/.vim/plugged')
-function! BuildComposer(info)
-  if a:info.status != 'unchanged' || a:info.force
-    !cargo build --release
-    UpdateRemotePlugins
-  endif
-endfunction
 Plug 'blueshirts/darcula'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -16,8 +10,9 @@ Plug 'vim-scripts/scratch.vim'
 Plug 'tpope/vim-surround'
 Plug 'Shougo/deoplete.nvim'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
-Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
-Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': 'vim/update.sh' }
+"Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
+Plug 'vim-airline/vim-airline-themes'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'rking/ag.vim'
@@ -28,13 +23,24 @@ Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/syntastic'
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
+Plug 'rakr/vim-one'
+Plug 'carlitux/deoplete-ternjs'
+Plug 'hdima/python-syntax'
+Plug 'jelera/vim-javascript-syntax'
+"Plug 'suan/vim-instant-markdown', {'do': 'npm -g install instant-markdown-d' }
+Plug 'vim-scripts/Align'
+Plug 'vim-scripts/SQLUtilities'
+Plug 'vim-scripts/dbext.vim'
+Plug 'godlygeek/tabular'
+Plug 'majutsushi/tagbar'
+Plug 'jacoborus/tender.vim'
+Plug 'joshdick/onedark.vim'
+Plug 'xavierchow/vim-sequence-diagram'
+Plug 'elzr/vim-json'
 let g:deoplete#enable_at_startup = 1
 call plug#end()
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-
-if $ITERM_PROFILE != 'Github Dashboard'
-  set re=1
-endif
+let python_highlight_all = 1
 
 runtime macros/matchit.vim
 
@@ -48,14 +54,12 @@ set ruler
 set cursorline
 set showcmd
 syntax on
-" set foldmethod=syntax
+set foldmethod=syntax
 set foldlevelstart=99
 " Puts a line on column 80 of the screen. This is a good indicator for methods
 " that are too long
 set colorcolumn=80
 
-let $RBENV_VERSION = '2.0.0-p451'
-let $PATH = $HOME . '/go/bin' . './.bundle/bin:' . $HOME . '/.rbenv/shims:' . $PATH
 set shell=/bin/zsh
 
 " Undofile directory settings
@@ -84,7 +88,7 @@ set shiftwidth=2
 set softtabstop=2
 set autoindent
 set expandtab
-" set list listchars=tab:\ \ ,trail:·
+set listchars=tab:\ →
 " Disables autoindent for current file (helpful for XML and HTML)
 nnoremap <F8> :setl noai nocin nosi inde=<CR>
 
@@ -133,7 +137,6 @@ endfunction
 
 function s:setupMarkup()
   call s:setupWrapping()
-  map <buffer> <Leader>p :Mm <CR>
 endfunction
 
 " make uses real tabs
@@ -144,7 +147,7 @@ au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set f
 au BufRead,BufNewFile serveza.manifest set filetype=ruby
 
 " md, markdown, and mk are markdown and define buffer-local preview
-au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+ au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
 
 au BufRead,BufNewFile *.txt call s:setupWrapping()
 
@@ -179,24 +182,21 @@ set modeline
 set modelines=10
 
 " Default color scheme
-" color desert
-" color twilight
-" color lucius
-" color wombat
-"color tubster
 let g:aldmeris_transparent = 0
 " let g:aldmeris_termcolors = "tango"
 " color aldmeris
 set background=dark
 let base16colorspace=256
-" color base16-default
+"color base16-default
 " color kalisi
 " color material
 " color crayon
-" color base16-tomorrow
+"color base16-tomorrow
 " color anderson
 " color dracula
-color darcula
+"color darcula
+color tender
+let g:airline_theme='tomorrow'
 
 " Directories for swp files
 set backupdir=~/.vim/backup
@@ -223,15 +223,6 @@ map <Leader>cd :%!gpg -d --batch -<CR>
 "   Syntastic                                                              {{{
 " Enable syntastic syntax checking
 let g:syntastic_enable_signs=1
-" }}}
-
-"   Gist                                                                   {{{
-let g:gist_private = 1
-let g:gist_clip_command = 'pbcopy'
-if empty($GITHUB_HOST) != 1
-  let g:github_api_url = 'https://'.$GITHUB_HOST.'/api/v3'
-endif
-" let g:gist_open_browser_after_post = 1
 " }}}
 
 "   Grep                                                                   {{{
@@ -280,8 +271,8 @@ let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:30,results:30'
 
 "   CTags
 " ====================================================================
-set tags=./tags,tags,.git/tags
-map <Leader>rt :!/usr/local/bin/ctags --exclude=.git --exclude=public --languages=-JavaScript --exclude=.bundle --exclude=doc --exclude=coverage -R<CR><CR>
+set tags=tags;/
+map <Leader>rt :!/usr/local/bin/ctags --exclude=.git --exclude=public --exclude=.bundle --exclude=doc --exclude=coverage -R<CR><CR>
 map <Leader>gt :!.git/hooks/ctags<CR><CR>
 let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
 " let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
@@ -310,6 +301,7 @@ nmap <F3> :NumbersToggle<CR>
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+let g:go_fmt_fail_silently = 1
 
 " Gundo
 " ====================================================================
@@ -362,6 +354,7 @@ au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
+au FileType go TagbarOpen
 
 " Supertab
 " ============================================================================
@@ -378,5 +371,5 @@ endif
 let g:acp_enableAtStartup = 0
 let g:neocomplete#enable_at_startup = 1
 
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:syntastic_go_checkers = ['go', 'gofmt', 'govet', 'golint']
+let g:go_list_type = "quickfix"
