@@ -32,8 +32,11 @@ export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
 
 source $ZSH/oh-my-zsh.sh
 
+fpath=(/usr/local/share/zsh-completions $fpath)
+source /usr/local/share/zsh/site-functions/_*
+
 # Customize to your needs...
-export PATH=$HOME/go/bin:/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/Cellar/go/1.2/libexec/bin
+export PATH=$HOME/go/bin:/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/Cellar/go/1.2/libexec/bin:/usr/local/opt/perl/bin
 
 if ( which rbenv 2>&1 > /dev/null ); then
   rbenv rehash 2>/dev/null
@@ -76,7 +79,7 @@ alias bl="bundle list"
 alias bu="bundle update"
 alias bp="bundle package"
 alias lol="rvm 1.8.7 do lolspeak"
-alias mongod="mongod -f /usr/local/Cellar/mongodb/1.8.3-x86_64/mongod.conf"
+alias mongod="mongod --config /usr/local/etc/mongod.conf"
 alias less="less -R"
 alias v=vagrant
 alias d=docker
@@ -101,8 +104,8 @@ function quote() {
 }
 
 function mysql() {
-  if [[ $* =~ 'timeslice-' ]]; then
-    =mysql -A $*
+  if [[ $* =~ '\s?-h ' ]]; then
+    MYSQL_PWD=$MYSQL_PASSWORD =mysql -A $*
   else
     =mysql $*
   fi
@@ -129,10 +132,6 @@ hitch() {
 alias unhitch='hitch -u'
 # Uncomment to persist pair info between terminal instances
 # hitch
-
-function disconnectwifi() {
-  sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -z
-}
 
 function histag() {
   history | ag "$1" | tail
@@ -222,8 +221,8 @@ export PATH=${PATH}:${JBOSS_HOME}/bin
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
 export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 
-PATH="/Users/jesse/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/Users/jesse/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/Users/jesse/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/Users/jesse/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/Users/jesse/perl5"; export PERL_MM_OPT;
+#PERL5LIB="/Users/jesse/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+#PERL_LOCAL_LIB_ROOT="/Users/jesse/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+#PERL_MB_OPT="--install_base \"/Users/jesse/perl5\""; export PERL_MB_OPT;
+#PERL_MM_OPT="INSTALL_BASE=/Users/jesse/perl5"; export PERL_MM_OPT;
+export LIQUIBASE_HOME=/usr/local/opt/liquibase/libexec
