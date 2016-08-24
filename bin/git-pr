@@ -1,5 +1,9 @@
 #!/bin/bash
-
-git push origin $(git rev-parse --abbrev-ref HEAD)
+if ! git push origin $(git rev-parse --abbrev-ref HEAD); then
+  if ! git remote | grep jessedearing > /dev/null; then
+    hub fork
+  fi
+  git push jessedearing $(git rev-parse --abbrev-ref HEAD)
+fi
 hub pull-request -o
 
