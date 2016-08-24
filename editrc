@@ -1,2 +1,6 @@
 bind -v
 bind \\t rl_complete
+
+mysql:bind -s "^xd" "show databases;\n"
+mysql:bind -s "^xt" "show tables;\n"
+mysql:bind -s "^xh" "select substring_index(host,':', 1) as host_name, count(1) as connections from information_schema.processlist group by host_name;\n"
