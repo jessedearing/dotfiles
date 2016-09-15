@@ -8,8 +8,13 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/scratch.vim'
 Plug 'tpope/vim-surround'
-Plug 'Shougo/deoplete.nvim'
-Plug 'zchee/deoplete-go', { 'do': 'make'}
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'zchee/deoplete-go', { 'do': 'make'}
+  Plug 'carlitux/deoplete-ternjs'
+else
+  Plug 'Shougo/neocomplete.vim'
+endif
 Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': 'vim/update.sh' }
 "Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 Plug 'vim-airline/vim-airline-themes'
@@ -24,7 +29,6 @@ Plug 'scrooloose/syntastic'
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
 Plug 'rakr/vim-one'
-Plug 'carlitux/deoplete-ternjs'
 Plug 'hdima/python-syntax'
 Plug 'jelera/vim-javascript-syntax'
 "Plug 'suan/vim-instant-markdown', {'do': 'npm -g install instant-markdown-d' }
@@ -38,6 +42,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'xavierchow/vim-sequence-diagram'
 Plug 'elzr/vim-json'
 let g:deoplete#enable_at_startup = 1
+let g:neocomplete#enable_at_startup = 1
 call plug#end()
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let python_highlight_all = 1
