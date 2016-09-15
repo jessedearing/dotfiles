@@ -200,9 +200,6 @@ echo
 export PGDATA=$HOME/data/postgres
 export PGHOST=localhost
 
-function dockerinit() {
-  . "/Applications/Docker/Docker Quickstart Terminal.app/Contents/Resources/Scripts/start.sh"
-}
 # Python Setup
 # ============================================================================
 VIRTUAL_ENV_DISABLE_PROMPT=1
