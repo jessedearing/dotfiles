@@ -3,7 +3,7 @@ Plug 'blueshirts/darcula'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'branch': 'vim-8.0' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/scratch.vim'
