@@ -145,7 +145,7 @@ function bail_on_tmux() {
 function load_tmux() {
   if (which tmux 2>&1 > /dev/null); then
     if [ -z "$TMUX" ] && ( tmux ls 2>&1 ); then
-     bail_on_tmux && tmux new-session -t 0 && exit
+     bail_on_tmux && tmux attach -t 0 && exit
     else
       if [ -z "$TMUX" ] && [ -z "$SUDO_USER" ] && [ -z "$SSH_CONNECTION" ]; then
         bail_on_tmux && ssh-agent tmux -2 && exit
