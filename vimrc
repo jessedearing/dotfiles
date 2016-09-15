@@ -383,3 +383,5 @@ let g:neocomplete#enable_at_startup = 1
 
 let g:syntastic_go_checkers = ['go', 'gofmt', 'govet', 'golint']
 let g:go_list_type = "quickfix"
+set exrc
+set secure
