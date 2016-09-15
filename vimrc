@@ -47,6 +47,8 @@ call plug#end()
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let python_highlight_all = 1
 
+set updatetime=1000
+
 runtime macros/matchit.vim
 
 set pastetoggle=<F11>
@@ -59,7 +61,6 @@ set ruler
 set cursorline
 set showcmd
 syntax on
-set foldmethod=syntax
 set foldlevelstart=99
 " Puts a line on column 80 of the screen. This is a good indicator for methods
 " that are too long
@@ -351,8 +352,12 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " Golang
 " ============================================================================
+let $GOPATH = $HOME."/go"
 let g:go_fmt_command = "goimports"
+let g:go_autodetect_gopath = 0
 let g:go_fmt_autosave = 1
+let g:go_auto_sameids = 1
+
 au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go nmap <Leader>gd <Plug>(go-doc)
 au FileType go nmap <leader>r <Plug>(go-run)
