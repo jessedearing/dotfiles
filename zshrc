@@ -91,7 +91,6 @@ alias ag="ag -S"
 alias vims="vim -c ':Scratch'"
 alias mytop="perl /usr/local/bin/mytop"
 alias cat=ccat
-alias vim=nvim
 
 export EDITOR=$HOME/.bin/editor.sh
 export LESS="-iMx4 -RX"
