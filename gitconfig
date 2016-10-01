@@ -3,22 +3,18 @@
 	email = jesse.dearing@gmail.com
 [color]
 	ui = true
-[mergetool "opendiff"]
-	cmd = "opendiff   -ancestor  -merge "
 [mergetool "fugitive"]
-  cmd = mvim -f -c "Gdiff" "$MERGED"
+  cmd = vim -c "Gdiff" "$MERGED"
 [merge]
 	tool = fugitive
 [core]
 	excludesfile = ~/.gitignore
-[difftool "mvim"]
-  cmd = mvim -d $LOCAL $REMOTE
+[difftool "vim"]
+  cmd = vimdiff $LOCAL $REMOTE
 [difftool]
 	prompt = false
-[difftool "Kaleidoscope"]
-	cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
 [diff]
-	tool = Kaleidoscope
+	tool = vim
 [init]
 	templatedir = ~/.git_template
 [credential]
