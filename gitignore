@@ -4,3 +4,4 @@ tmp/
 config/database.yml
 .idea
 .bundle
+.exrc
