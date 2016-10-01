@@ -209,7 +209,7 @@ VIRTUAL_ENV_DISABLE_PROMPT=1
 prompt_virtualenv() {}
 export EC2_HOME=/usr/local/opt/ec2-api-tools/libexec
 
-load_tmux
+# load_tmux
 # JBoss Setup
 # ============================================================================
 export JBOSS_HOME=/usr/local/opt/wildfly-as/libexec
