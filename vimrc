@@ -86,6 +86,9 @@ endif
 nnoremap ' `
 nnoremap ` '
 
+" QuickFix windows are always the bottomest
+au FileType qf wincmd J
+
 " Set encoding
 set encoding=utf-8
 
