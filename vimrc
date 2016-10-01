@@ -41,6 +41,8 @@ Plug 'jacoborus/tender.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'xavierchow/vim-sequence-diagram'
 Plug 'elzr/vim-json'
+Plug 'JamshedVesuna/vim-markdown-preview'
+Plug 'lambdatoast/elm.vim'
 let g:deoplete#enable_at_startup = 1
 let g:neocomplete#enable_at_startup = 1
 call plug#end()
@@ -154,6 +156,7 @@ au BufRead,BufNewFile serveza.manifest set filetype=ruby
 
 " md, markdown, and mk are markdown and define buffer-local preview
  au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+let vim_markdown_preview_github=1
 
 au BufRead,BufNewFile *.txt call s:setupWrapping()
 
