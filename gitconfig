@@ -39,3 +39,5 @@
 	required = true
 [github]
 	user = jessedearing
+[commit]
+	gpgsign = true
