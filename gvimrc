@@ -45,7 +45,7 @@ if has("gui_macvim")
   highlight ColorColumn guibg=#550000
 endif
 
-set list listchars=tab:\ \ ,trail:·
+"set list listchars=tab:\ \ ,trail:·
 
 " Start without the toolbar or scrollbars
 set guioptions-=T
@@ -53,10 +53,10 @@ set guioptions-=r
 set guioptions-=L
 
 " set transparency=10
-let g:airline_powerline_fonts = 0
 
 " set guifont=DejaVu\ Sans\ Mono:h12
-set guifont=Hack:h14
+set macligatures
+set guifont=Fira\ Code:h14
 
 " colorscheme tubster
 color darcula
