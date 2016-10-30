@@ -3,7 +3,7 @@ Plug 'blueshirts/darcula'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
-Plug 'fatih/vim-go', { 'branch': 'vim-8.0' }
+Plug 'fatih/vim-go', {'branch': 'vim-8.0'}
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/scratch.vim'
@@ -12,10 +12,11 @@ if has('nvim')
   Plug 'Shougo/deoplete.nvim'
   Plug 'zchee/deoplete-go', { 'do': 'make'}
   Plug 'carlitux/deoplete-ternjs'
+  Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': 'vim/update.sh' }
 else
   Plug 'Shougo/neocomplete.vim'
+  Plug 'nsf/gocode', { 'rtp': 'vim', 'do': 'vim/update.sh' }
 endif
-Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': 'vim/update.sh' }
 "Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
 Plug 'vim-airline/vim-airline-themes'
 Plug 'SirVer/ultisnips'
@@ -43,6 +44,7 @@ Plug 'xavierchow/vim-sequence-diagram'
 Plug 'elzr/vim-json'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'lambdatoast/elm.vim'
+Plug 'ryanoasis/vim-devicons'
 let g:deoplete#enable_at_startup = 1
 let g:neocomplete#enable_at_startup = 1
 call plug#end()
