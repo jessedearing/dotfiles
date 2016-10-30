@@ -41,3 +41,5 @@
 	user = jessedearing
 [commit]
 	gpgsign = true
+[pull]
+  rebase = true
