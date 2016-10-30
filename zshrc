@@ -21,7 +21,7 @@ export ZSH_CUSTOM="$HOME/.zsh-custom"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(vi-mode zsh-syntax-highlighting)
+plugins=(vi-mode zsh-syntax-highlighting golang docker)
 
 # Have to set GIT environment variables so they can be overridden by anything
 # in zsh-custom
@@ -100,14 +100,6 @@ function api() {open -a 'Google Chrome' "http://apidock.com/$1/search?query=$2";
 
 function quote() {
   echo "“$*”" | pbcopy
-}
-
-function mysql() {
-  if [[ $* =~ '\s?-h ' ]]; then
-    MYSQL_PWD=$MYSQL_PASSWORD =mysql -A $*
-  else
-    =mysql $*
-  fi
 }
 
 if [ -d "$HOME/.ec2" ]; then
@@ -222,3 +214,9 @@ export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 #PERL_MB_OPT="--install_base \"/Users/jesse/perl5\""; export PERL_MB_OPT;
 #PERL_MM_OPT="INSTALL_BASE=/Users/jesse/perl5"; export PERL_MM_OPT;
 export LIQUIBASE_HOME=/usr/local/opt/liquibase/libexec
+
+autoload bashcompinit
+bashcompinit
+source $HOME/.bin/gh_complete.sh
+
+source /Users/jesse/code/github.com/InVisionApp/InVision_Docker/scripts/invision.sh
