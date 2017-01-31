@@ -1,9 +1,9 @@
 call plug#begin('~/.vim/plugged')
+"Plug 'edkolev/tmuxline.vim'
 Plug 'blueshirts/darcula'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
-Plug 'fatih/vim-go', {'branch': 'vim-8.0'}
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/scratch.vim'
@@ -11,14 +11,18 @@ Plug 'tpope/vim-surround'
 if has('nvim')
   Plug 'Shougo/deoplete.nvim'
   Plug 'zchee/deoplete-go', { 'do': 'make'}
-  Plug 'carlitux/deoplete-ternjs'
+  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+
   Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': 'vim/update.sh' }
+  Plug 'zchee/deoplete-jedi'
 else
   Plug 'Shougo/neocomplete.vim'
   Plug 'nsf/gocode', { 'rtp': 'vim', 'do': 'vim/update.sh' }
+  Plug 'davidhalter/jedi-vim'
 endif
 "Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
-Plug 'vim-airline/vim-airline-themes'
+Plug 'wannesm/wmgraphviz.vim'
+Plug 'fatih/vim-go'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'rking/ag.vim'
@@ -45,6 +49,7 @@ Plug 'elzr/vim-json'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'lambdatoast/elm.vim'
 Plug 'ryanoasis/vim-devicons'
+Plug 'vimwiki/vimwiki'
 let g:deoplete#enable_at_startup = 1
 let g:neocomplete#enable_at_startup = 1
 call plug#end()
@@ -155,10 +160,6 @@ endfunction
 " make uses real tabs
 au FileType make                                     set noexpandtab
 
-" Thorfile, Rakefile, Vagrantfile and Gemfile are Ruby
-au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru}    set ft=ruby
-au BufRead,BufNewFile serveza.manifest set filetype=ruby
-
 " md, markdown, and mk are markdown and define buffer-local preview
  au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
 let vim_markdown_preview_github=1
@@ -188,8 +189,11 @@ nmap <Leader><Down> ]e
 vmap <Leader><Up> [egv
 vmap <Leader><Down> ]egv
 
-nmap <Leader><Esc> :nohlsearch<CR>
-
+nmap <Leader><Space> :nohlsearch<CR>
+au BufReadPost quickfix map <C-n> :cn<CR>
+au BufReadPost quickfix map <C-m> :cp<CR>
+au BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+nnoremap <leader>a :cclose<CR>
 
 " Use modeline overrides
 set modeline
@@ -296,7 +300,7 @@ map <Leader>tll :TlistSessionLoad
 map <Leader>tls :TlistSessionSave
 map <Leader>tla :TlistAddFilesRecursive
 map <Leader>tlg :TlistSessionLoad .git/taglist<CR>
-" map <Leader>tb :TagbarToggle<CR>
+ map <Leader>tb :TagbarToggle<CR>
 
 "   VimOrganizer
 " ====================================================================
@@ -325,9 +329,11 @@ map <Leader>gd :GundoToggle<CR>
 " ====================================================================
 " let g:vimwiki_folding='expr'
 " let g:vimwiki_hl_cb_checked=1
-" autocmd BufWritePost *.wiki silent execute '! git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki add "%" > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki commit -q -m "%" > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki push origin master -q > /dev/null'
+ autocmd BufWritePost *.wiki silent execute '! git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki add "%" > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki commit -q -m "%" 2>&1 > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki push origin master -q > /dev/null' |
+    \ redraw!
 " autocmd BufRead *.wiki let g:AutoPairsFlyMode = 0
 " autocmd BufRead *.wiki let g:AutoPairs = {}
+autocmd Filetype vimwiki set textwidth=0
 
 " AutoPairs
 " ====================================================================
@@ -366,13 +372,14 @@ let g:go_autodetect_gopath = 0
 let g:go_fmt_autosave = 1
 let g:go_auto_sameids = 1
 
-au FileType go nmap <Leader>i <Plug>(go-info)
-au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>c <Plug>(go-coverage)
-au FileType go TagbarOpen
+augroup go
+  au FileType go nmap <Leader>i <Plug>(go-info)
+  au FileType go nmap <Leader>gd <Plug>(go-doc)
+  au FileType go nmap <leader>r <Plug>(go-run)
+  au FileType go nmap <leader>b <Plug>(go-build)
+  au FileType go nmap <leader>t <Plug>(go-test)
+  au FileType go nmap <leader>c <Plug>(go-coverage)
+augroup END
 
 " Supertab
 " ============================================================================
@@ -382,7 +389,7 @@ au FileType go TagbarOpen
 " ============================================================================
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l -U --ignore public --ignore .bundle --ignore node_modules --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag %s -l -U --ignore public --ignore .bundle --ignore node_modules --ignore vendor --nocolor -g ""'
   let g:ctrlp_use_caching = 0
 endif
 
@@ -392,3 +399,5 @@ let g:neocomplete#enable_at_startup = 1
 let g:syntastic_go_checkers = ['go', 'gofmt', 'govet', 'golint']
 set exrc
 set secure
+
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
