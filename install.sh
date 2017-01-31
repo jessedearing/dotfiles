@@ -7,6 +7,7 @@ all_dir=`find $PWD -maxdepth 1 \! -iname 'README.md' \! -iname '.*' \! -iname 'p
 
 for dir in $all_dir; do
   if [ ! -e $HOME/.`basename $dir` ]; then
+    echo Linking $dir to $HOME/.`basename $dir`
     ln -s $dir $HOME/.`basename $dir`
   else
     echo $HOME/.`basename $dir` already exists
