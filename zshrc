@@ -5,9 +5,6 @@ export ZSH=$HOME/.oh-my-zsh
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-# source /Users/jdearing/.base16-shell/base16-tomorrow.dark.sh
-# source /Users/jdearing/.base16-shell/base16-default.dark.sh
-
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
 export ZSH_THEME="agnoster"
@@ -58,6 +55,7 @@ fi
 
 #export RBENV_VERSION=2.0.0-p451
 
+#alias vim=nvim
 export PGDATA=/usr/local/var/postgresql
 alias lpup="librarian-puppet"
 alias puppet="nocorrect puppet"
@@ -102,8 +100,8 @@ function quote() {
   echo "“$*”" | pbcopy
 }
 
+export JAVA_HOME="$(/usr/libexec/java_home)"
 if [ -d "$HOME/.ec2" ]; then
-  export JAVA_HOME="$(/usr/libexec/java_home)"
   export EC2_PRIVATE_KEY="$(/bin/ls "$HOME"/.ec2/pk-*.pem | /usr/bin/head -1)"
   export EC2_CERT="$(/bin/ls "$HOME"/.ec2/cert-*.pem | /usr/bin/head -1)"
   export EC2_AMITOOL_HOME="/usr/local/Library/LinkedKegs/ec2-ami-tools/jars"
@@ -186,7 +184,7 @@ bindkey -M isearch '^F' history-incremental-search-forward
 
 #ssh-add $HOME/.ssh/id_rsa &> /dev/null
 
-fortune startrek computers sadserver_tweets
+fortune startrek computers sadserver_tweets honest_update_tweets
 echo
 
 export PGDATA=$HOME/data/postgres
@@ -201,7 +199,7 @@ VIRTUAL_ENV_DISABLE_PROMPT=1
 prompt_virtualenv() {}
 export EC2_HOME=/usr/local/opt/ec2-api-tools/libexec
 
-# load_tmux
+load_tmux
 # JBoss Setup
 # ============================================================================
 export JBOSS_HOME=/usr/local/opt/wildfly-as/libexec
@@ -215,8 +213,11 @@ export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 #PERL_MM_OPT="INSTALL_BASE=/Users/jesse/perl5"; export PERL_MM_OPT;
 export LIQUIBASE_HOME=/usr/local/opt/liquibase/libexec
 
+TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S'
+
 autoload bashcompinit
 bashcompinit
 source $HOME/.bin/gh_complete.sh
+source <(kubectl completion zsh)
 
-source /Users/jesse/code/github.com/InVisionApp/InVision_Docker/scripts/invision.sh
+source /Users/jesse/code/InVisionApp/InVision_Docker/scripts-native/invision.sh
