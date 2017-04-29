@@ -1,3 +1,11 @@
 #!/bin/bash
 
-osascript $HOME/.dotfiles/misc_scripts/vpn-connect.applescript "$@"
+if [[ "$@" == "" || "$@" == "qa" ]]; then
+  (
+    cd ~/.vpns
+    curl -H "Auth-Key: `cat /var/lib/pritunl/auth`" -H 'Content-Type: application/json' -H 'Accept: application/json' -X POST -d @connect.json http://127.0.0.1:9770/profile 2>&1 > /dev/null
+  )
+else
+  osascript $HOME/.dotfiles/misc_scripts/vpn-connect.applescript "$@"
+fi
+
