@@ -9,6 +9,7 @@
 	tool = fugitive
 [core]
 	excludesfile = ~/.gitignore
+	pager = less -iXFRr
 [difftool "vim"]
   cmd = vimdiff $LOCAL $REMOTE
 [difftool]
