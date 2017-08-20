@@ -55,7 +55,7 @@ fi
 
 #export RBENV_VERSION=2.0.0-p451
 
-#alias vim=nvim
+alias vim=nvim
 export PGDATA=/usr/local/var/postgresql
 alias lpup="librarian-puppet"
 alias puppet="nocorrect puppet"
@@ -159,7 +159,7 @@ function b2ip() {
   echo $ip
 }
 
-alias fuck='$(thefuck $(fc -ln -1))'
+eval "$(thefuck --alias)"
 
 function sshforward() {
   eval "$(ssh-agent)"
@@ -177,14 +177,14 @@ export VAGRANT_DEFAULT_PROVIDER=virtualbox
 export GOPATH=$HOME/go
 
 # History searching
-bindkey -M vicmd '/' history-incremental-pattern-search-backward
+bindkey -M vicmd '/' fzf-history-widget
 bindkey -M vicmd '?' history-incremental-pattern-search-forward
 bindkey -M isearch '^R' history-incremental-search-backward
 bindkey -M isearch '^F' history-incremental-search-forward
 
 #ssh-add $HOME/.ssh/id_rsa &> /dev/null
 
-fortune startrek computers sadserver_tweets honest_update_tweets
+fortune startrek computers $HOME/.fortunes/sadserver_tweets $HOME/.fortunes/honest_update_tweets
 echo
 
 export PGDATA=$HOME/data/postgres
@@ -207,11 +207,11 @@ export PATH=${PATH}:${JBOSS_HOME}/bin
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
 export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 
-#PERL5LIB="/Users/jesse/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-#PERL_LOCAL_LIB_ROOT="/Users/jesse/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-#PERL_MB_OPT="--install_base \"/Users/jesse/perl5\""; export PERL_MB_OPT;
-#PERL_MM_OPT="INSTALL_BASE=/Users/jesse/perl5"; export PERL_MM_OPT;
 export LIQUIBASE_HOME=/usr/local/opt/liquibase/libexec
+
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
+
 
 TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S'
 
@@ -220,4 +220,12 @@ bashcompinit
 source $HOME/.bin/gh_complete.sh
 source <(kubectl completion zsh)
 
+ulimit -S -n 2048
+
 source /Users/jesse/code/InVisionApp/InVision_Docker/scripts-native/invision.sh
+
+#if minikube status | grep "minikubeVM: Running" &> /dev/null; then
+  #eval `minikube docker-env`
+#fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

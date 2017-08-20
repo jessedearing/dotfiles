@@ -4,7 +4,7 @@
 [color]
 	ui = true
 [mergetool "fugitive"]
-  cmd = vim -c "Gdiff" "$MERGED"
+  cmd = nvim -c "Gdiff" "$MERGED"
 [merge]
 	tool = fugitive
 [core]
@@ -31,9 +31,6 @@
   s=status -sb
 [fetch]
   prune = true
-[remote "origin"]
-  fetch = +refs/pull/*:refs/remotes/origin/pr/*
-  fetch = +refs/pull/*:refs/remotes/origin/pr/*
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

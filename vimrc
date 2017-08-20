@@ -1,56 +1,55 @@
 call plug#begin('~/.vim/plugged')
-"Plug 'edkolev/tmuxline.vim'
+Plug 'tlhr/anderson.vim'
+Plug 'jacoborus/tender.vim'
 Plug 'blueshirts/darcula'
+Plug 'joshdick/onedark.vim'
+Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'vim-scripts/scratch.vim'
 Plug 'tpope/vim-surround'
+Plug 'vim-scripts/scratch.vim'
+"Plug 'vim-scripts/calendar.vim'
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'zchee/deoplete-go', { 'do': 'make'}
-  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+	Plug 'Shougo/deoplete.nvim'
+	Plug 'zchee/deoplete-go', { 'do': 'make'}
+	Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 
-  Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': 'vim/update.sh' }
-  Plug 'zchee/deoplete-jedi'
+	Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': 'vim/update.sh' }
+	Plug 'zchee/deoplete-jedi'
+	Plug 'neomake/neomake'
 else
-  Plug 'Shougo/neocomplete.vim'
-  Plug 'nsf/gocode', { 'rtp': 'vim', 'do': 'vim/update.sh' }
-  Plug 'davidhalter/jedi-vim'
+	"Plug 'Valloric/YouCompleteMe'
+	"Plug 'ervandew/supertab'
+	Plug 'nsf/gocode', { 'rtp': 'vim', 'do': 'vim/update.sh' }
+	Plug 'w0rp/ale'
 endif
-"Plug 'euclio/vim-markdown-composer', { 'do': function('BuildComposer') }
-Plug 'wannesm/wmgraphviz.vim'
 Plug 'fatih/vim-go'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'rking/ag.vim'
-Plug 'puppetlabs/puppet-syntax-vim'
-Plug 'kien/ctrlp.vim'
+Plug 'mileszs/ack.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'airblade/vim-gitgutter'
-Plug 'scrooloose/syntastic'
+"Plug 'vim-syntastic/syntastic'
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
 Plug 'rakr/vim-one'
 Plug 'hdima/python-syntax'
 Plug 'jelera/vim-javascript-syntax'
-"Plug 'suan/vim-instant-markdown', {'do': 'npm -g install instant-markdown-d' }
 Plug 'vim-scripts/Align'
 Plug 'vim-scripts/SQLUtilities'
 Plug 'vim-scripts/dbext.vim'
 Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar'
-Plug 'jacoborus/tender.vim'
-Plug 'joshdick/onedark.vim'
-Plug 'xavierchow/vim-sequence-diagram'
 Plug 'elzr/vim-json'
 Plug 'JamshedVesuna/vim-markdown-preview'
-Plug 'lambdatoast/elm.vim'
-Plug 'ryanoasis/vim-devicons'
-Plug 'vimwiki/vimwiki'
-let g:deoplete#enable_at_startup = 1
+"Plug 'vimwiki/vimwiki'
+"Plug 'Quramy/tsuquyomi'
+"Plug 'leafgarland/typescript-vim'
+Plug 'google/vim-searchindex'
 let g:neocomplete#enable_at_startup = 1
 call plug#end()
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -65,6 +64,7 @@ set pastetoggle=<F11>
 set mouse=a
 set hidden
 set number
+set relativenumber
 set ruler
 " Highlights current line
 set cursorline
@@ -75,19 +75,19 @@ set foldlevelstart=99
 " that are too long
 set colorcolumn=80
 
-set shell=/bin/zsh
+set shell=/usr/local/bin/zsh
 
 " Undofile directory settings
 if exists("+undofile")
-  " Creates an undo file so undo history is saved and can be executed
-  " after the file is reopened
-  set undofile
-  " :help undo-persistence
-  " This is only present in 7.3+
-  if isdirectory($HOME . '/.vim/undo') == 0
-    :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
-  endif
-  set undodir=~/.vim/undo//
+	" Creates an undo file so undo history is saved and can be executed
+	" after the file is reopened
+	set undofile
+	" :help undo-persistence
+	" This is only present in 7.3+
+	if isdirectory($HOME . '/.vim/undo') == 0
+		:silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
+	endif
+	set undodir=~/.vim/undo//
 endif
 
 nnoremap ' `
@@ -105,10 +105,10 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set autoindent
-set expandtab
-set listchars=tab:\ →
-" Disables autoindent for current file (helpful for XML and HTML)
-nnoremap <F8> :setl noai nocin nosi inde=<CR>
+" set expandtab
+set listchars=tab:᠁\ 
+
+set nolist
 
 " Searching
 set hlsearch
@@ -128,11 +128,6 @@ set wildignore+=*/.vagrant/*,*/.bundle/*,*.o,*.obj,.git,*.rbc
 set laststatus=2
 " set statusline=[%n]\ %<%f\ %([%1*%M%*%R%Y]%)\ \ %{SyntasticStatuslineFlag()}\ \ %=%-19(\LINE\ [%l/%L]\ COL\ [%02c%03V]%)\ %P
 
-" Without setting this, ZoomWin restores windows in a way that causes
-" equalalways behavior to be triggered the next time CommandT is used.
-" This is likely a bludgeon to solve some other issue, but it works
-set noequalalways
-
 " NERDTree configuration
 let NERDTreeIgnore=['\.rbc$', '\~$']
 map <Leader>nn :NERDTreeToggle<CR>
@@ -143,31 +138,43 @@ map <Leader>nn :NERDTreeToggle<CR>
 
 " Remember last location in file
 if has("autocmd")
-  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
-    \| exe "normal g'\"" | endif
+	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-function s:setupWrapping()
-  set wrap
-  set wm=2
-  set textwidth=80
+function! s:setupWrapping()
+	setlocal wrap
+	setlocal wm=2
+	setlocal textwidth=80
 endfunction
 
-function s:setupMarkup()
-  call s:setupWrapping()
+function! s:setupMarkup()
+	call s:setupWrapping()
+	setlocal expandtab
+	setlocal list
 endfunction
 
+function! s:setupYaml()
+	setlocal expandtab
+	setlocal list
+endfunction
+
+function! s:setupMake()
+	setlocal noexpandtab
+endfunction
 " make uses real tabs
-au FileType make                                     set noexpandtab
+au FileType make call s:setupMake()
+au Filetype yaml,yml call s:setupYaml()
 
 " md, markdown, and mk are markdown and define buffer-local preview
  au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
 let vim_markdown_preview_github=1
+let vim_markdown_preview_browser='Google Chrome'
 
 au BufRead,BufNewFile *.txt call s:setupWrapping()
 
 " make python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
-au FileType python  set tabstop=4 textwidth=79
+"au FileType python  set tabstop=4 textwidth=79
+let g:jedi#force_py_version = 3
 
 au FileType taskpaper set noautoindent
 
@@ -193,7 +200,6 @@ nmap <Leader><Space> :nohlsearch<CR>
 au BufReadPost quickfix map <C-n> :cn<CR>
 au BufReadPost quickfix map <C-m> :cp<CR>
 au BufReadPost quickfix nnoremap <buffer> <CR> <CR>
-nnoremap <leader>a :cclose<CR>
 
 " Use modeline overrides
 set modeline
@@ -210,11 +216,10 @@ let base16colorspace=256
 " color material
 " color crayon
 "color base16-tomorrow
-" color anderson
+ "color anderson
 " color dracula
 "color darcula
 color tender
-let g:airline_theme='tomorrow'
 
 " Directories for swp files
 set backupdir=~/.vim/backup
@@ -234,16 +239,16 @@ set clipboard=unnamed
 " Testing
 map <Leader>r :!~/.rbenv/shims/bundle exec rake<CR>
 
-" GNUpg                                                                    {{{
+" GNUpg																																		 {{{
 map <Leader>cd :%!gpg -d --batch -<CR>
 " }}}
 
-"   Syntastic                                                              {{{
+"		Syntastic																															 {{{
 " Enable syntastic syntax checking
 let g:syntastic_enable_signs=1
 " }}}
 
-"   Grep                                                                   {{{
+"		Grep																																	 {{{
 let Grep_Find_Use_Xargs = 0
 let Grep_Default_Options = '-i'
 nnoremap <silent> <F3> :Grep<CR>
@@ -251,43 +256,38 @@ nnoremap <silent> <F3> :Grep<CR>
 
 au BufRead,BufNewFile *.jbuilder setf ruby
 au BufRead,BufNewFile *.thor setf ruby
-au BufRead,BufNewFile *.{md,mkd,txt} set spell
-au BufRead,BufNewFile COMMIT_EDITMSG set spell
+au BufRead,BufNewFile *.{md,mkd,txt} setlocal spell
+au BufRead,BufNewFile COMMIT_EDITMSG setlocal spell
 
 " Python spacing
-au BufRead,BufNewFIle *.py set tabstop=4
-au BufRead,BufNewFIle *.py set shiftwidth=4
-au BufRead,BufNewFIle *.py set softtabstop=4
+au BufRead,BufNewFile python setlocal tabstop=4
+au BufRead,BufNewFile python setlocal shiftwidth=4
+au BufRead,BufNewFile python setlocal softtabstop=4
+au BufRead,BufNewFile python setlocal textwidth=79
 
 
-"   Airline
+"		Airline
 " ====================================================================
 " Settings
 let g:airline_powerline_fonts = 1
+let g:airline_theme='tomorrow'
+let g:airline#extensions#wordcount#filetypes = '\vhelp|markdown|rst|org|text|asciidoc|tex|mail|wiki'
 
-"   Spell
+"		Spell
 " ====================================================================
 set spelllang=en_us
-map <Leader>ds :set nospell<CR>
 
-"   CtrlP
+"		CtrlP
 " ====================================================================
 " Settings
 let g:ctrlp_extensions = ['tag', 'line']
 let g:ctrlp_open_multiple_files = 'h'
 " Keybindings
-map <Leader>ff :CtrlP<CR>
-map <Leader>fv :CtrlP app/views<CR>
-map <Leader>fm :CtrlP app/models<CR>
-map <Leader>fs :CtrlP spec/<CR>
-map <Leader>fw :CtrlP app/workers<CR>
-map <Leader>fc :CtrlP app/controllers<CR>
-map <Leader>fo :CtrlP app/concerns<CR>
-map <Leader>fa :CtrlP app/assets<CR>
+map <Leader>ff :FZF<CR>
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:30,results:30'
 
 
-"   CTags
+"		CTags
 " ====================================================================
 set tags=tags;/
 map <Leader>rt :!/usr/local/bin/ctags --exclude=.git --exclude=public --exclude=.bundle --exclude=doc --exclude=coverage -R<CR><CR>
@@ -302,25 +302,6 @@ map <Leader>tla :TlistAddFilesRecursive
 map <Leader>tlg :TlistSessionLoad .git/taglist<CR>
  map <Leader>tb :TagbarToggle<CR>
 
-"   VimOrganizer
-" ====================================================================
-au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
-au BufEnter *.org            call org#SetOrgFileType()
-
-"   NarrowRegion
-" ====================================================================
-map <Leader>nr :NarrowRegion<CR>
-
-"   Numbers
-" ====================================================================
-nmap <F3> :NumbersToggle<CR>
-
-" Syntastic
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
-let g:go_fmt_fail_silently = 1
-
 " Gundo
 " ====================================================================
 map <Leader>gd :GundoToggle<CR>
@@ -329,11 +310,6 @@ map <Leader>gd :GundoToggle<CR>
 " ====================================================================
 " let g:vimwiki_folding='expr'
 " let g:vimwiki_hl_cb_checked=1
- autocmd BufWritePost *.wiki silent execute '! git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki add "%" > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki commit -q -m "%" 2>&1 > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki push origin master -q > /dev/null' |
-    \ redraw!
-" autocmd BufRead *.wiki let g:AutoPairsFlyMode = 0
-" autocmd BufRead *.wiki let g:AutoPairs = {}
-autocmd Filetype vimwiki set textwidth=0
 
 " AutoPairs
 " ====================================================================
@@ -360,9 +336,12 @@ au BufRead,BufNewFile *.thrift set filetype=thrift
 " ====================================================================
 map <Leader>rs :RunSpec<CR>
 
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<tab>"
+"let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsExpandTrigger = '<C-j>'
+let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
 " Golang
 " ============================================================================
@@ -370,16 +349,37 @@ let $GOPATH = $HOME."/go"
 let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 0
 let g:go_fmt_autosave = 1
-let g:go_auto_sameids = 1
+"let g:go_auto_sameids = 1
+let g:go_list_type = "quickfix"
+let g:go_auto_type_info = 1
+"let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:syntastic_go_checkers = ['golint', 'govet', 'gometalinter']
+let g:syntastic_go_gometalinter_args = ['--disable-all', '--enable=errcheck', '--enable=golint']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
 
 augroup go
-  au FileType go nmap <Leader>i <Plug>(go-info)
-  au FileType go nmap <Leader>gd <Plug>(go-doc)
-  au FileType go nmap <leader>r <Plug>(go-run)
-  au FileType go nmap <leader>b <Plug>(go-build)
-  au FileType go nmap <leader>t <Plug>(go-test)
-  au FileType go nmap <leader>c <Plug>(go-coverage)
+	au FileType go nmap <Leader>i <Plug>(go-info)
+	au FileType go nmap <Leader>gd <Plug>(go-doc)
+	au FileType go nmap <leader>r <Plug>(go-run)
+	au FileType go nmap <leader>b <Plug>(go-build)
+	au FileType go nmap <leader>t <Plug>(go-test)
+	au FileType go nmap <leader>c <Plug>(go-coverage)
 augroup END
+
+" Ale
+" ============================================================================
+" let g:ale_lint_on_insert_leave = 1
+" let g:ale_lint_delay = 500
+let g:ale_linters = { 'go': ['gometalinter'] }
+let g:ale_go_gometalinter_options = "--fast"
 
 " Supertab
 " ============================================================================
@@ -388,16 +388,28 @@ augroup END
 " Platinum Searcher
 " ============================================================================
 if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l -U --ignore public --ignore .bundle --ignore node_modules --ignore vendor --nocolor -g ""'
-  let g:ctrlp_use_caching = 0
+	set grepprg=ag\ --nogroup\ --vimgrep\ --nocolor
+	let g:ctrlp_user_command = 'ag %s -l -U --ignore public --ignore .bundle --ignore node_modules --ignore vendor --nocolor -g ""'
+	let g:ctrlp_use_caching = 0
+	let g:ackprg = 'ag --vimgrep'
 endif
 
-let g:acp_enableAtStartup = 0
-let g:neocomplete#enable_at_startup = 1
-
-let g:syntastic_go_checkers = ['go', 'gofmt', 'govet', 'golint']
 set exrc
 set secure
 
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+
+set rtp+=/usr/local/opt/fzf
+
+let g:ycm_python_binary_path = '/usr/local/opt/python3/bin/python3'
+let g:ale_python_mypy_options = '--ignore-missing-imports'
+
+if has('nvim')
+	" Deoplete
+	" ===========================================================================
+	call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
+	let g:deoplete#enable_at_startup = 1
+
+	let g:neomake_go_gometalinter_args = [ '--disable-all', '--enable=errcheck', '--enable=gosimple', '--enable=staticcheck', '--enable=unused', '--enable=golint']
+	autocmd! BufWritePost * Neomake
+endif
