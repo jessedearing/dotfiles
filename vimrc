@@ -50,6 +50,7 @@ Plug 'JamshedVesuna/vim-markdown-preview'
 "Plug 'Quramy/tsuquyomi'
 "Plug 'leafgarland/typescript-vim'
 Plug 'google/vim-searchindex'
+Plug 'artur-shaik/vim-javacomplete2'
 let g:neocomplete#enable_at_startup = 1
 call plug#end()
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -300,7 +301,7 @@ map <Leader>tll :TlistSessionLoad
 map <Leader>tls :TlistSessionSave
 map <Leader>tla :TlistAddFilesRecursive
 map <Leader>tlg :TlistSessionLoad .git/taglist<CR>
- map <Leader>tb :TagbarToggle<CR>
+map <Leader>tb :TagbarToggle<CR>
 
 " Gundo
 " ====================================================================
@@ -398,6 +399,11 @@ set exrc
 set secure
 
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+"let g:deoplete#file#enable_buffer_path = 1
+let g:deoplete#omni_patterns = {}
+let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
+"autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
 
 set rtp+=/usr/local/opt/fzf
 
