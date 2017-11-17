@@ -46,7 +46,7 @@ Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar'
 Plug 'elzr/vim-json'
 Plug 'JamshedVesuna/vim-markdown-preview'
-"Plug 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki'
 "Plug 'Quramy/tsuquyomi'
 "Plug 'leafgarland/typescript-vim'
 Plug 'google/vim-searchindex'
@@ -311,6 +311,9 @@ map <Leader>gd :GundoToggle<CR>
 " ====================================================================
 " let g:vimwiki_folding='expr'
 " let g:vimwiki_hl_cb_checked=1
+autocmd BufWritePost *.wiki silent execute '! git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki add "%" > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki commit -q -m "%" 2>&1 > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki push origin master -q > /dev/null' |
+     \ redraw!
+au FileType vimwiki nnoremap <C-P> :Vimwiki2HTMLBrowse<CR>
 
 " AutoPairs
 " ====================================================================
@@ -373,26 +376,33 @@ augroup go
 	au FileType go nmap <leader>b <Plug>(go-build)
 	au FileType go nmap <leader>t <Plug>(go-test)
 	au FileType go nmap <leader>c <Plug>(go-coverage)
+	au FileType go setlocal foldmethod=syntax
 augroup END
 
+" NerdCommenter
+" ==============================================================================
+let g:NERDDefaultAlign = 'left'
+
 " Ale
-" ============================================================================
+" ==============================================================================
 " let g:ale_lint_on_insert_leave = 1
 " let g:ale_lint_delay = 500
 let g:ale_linters = { 'go': ['gometalinter'] }
 let g:ale_go_gometalinter_options = "--fast"
 
 " Supertab
-" ============================================================================
+" ==============================================================================
 " let g:SuperTabDefaultCompletionType = 'context'
 
 " Platinum Searcher
-" ============================================================================
-if executable('ag')
-	set grepprg=ag\ --nogroup\ --vimgrep\ --nocolor
-	let g:ctrlp_user_command = 'ag %s -l -U --ignore public --ignore .bundle --ignore node_modules --ignore vendor --nocolor -g ""'
+" ==============================================================================
+if executable('rg')
+	"set grepprg=ag\ --nogroup\ --vimgrep\ --nocolor
+	"let g:ctrlp_user_command = 'ag %s -l -U --ignore public --ignore .bundle --ignore node_modules --ignore vendor --nocolor -g ""'
+	let g:ctrlp_user_command = 'rg --files --no-ignore --follow -g "!{.git,node_modules,vendor}/*"'
 	let g:ctrlp_use_caching = 0
-	let g:ackprg = 'ag --vimgrep'
+	let g:ackprg = 'rg --vimgrep -g "!{node_modules,vendor}/*"'
+	set grepprg=rg\ --vimgrep\ --no-heading
 endif
 
 set exrc
