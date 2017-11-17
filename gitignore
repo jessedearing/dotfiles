@@ -6,3 +6,4 @@ config/database.yml
 .bundle
 .exrc
 .mypy_cache/
+.nvimrc
