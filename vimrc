@@ -408,7 +408,7 @@ if executable('rg')
 	"let g:ctrlp_user_command = 'ag %s -l -U --ignore public --ignore .bundle --ignore node_modules --ignore vendor --nocolor -g ""'
 	let g:ctrlp_user_command = 'rg --files --no-ignore --follow -g "!{.git,node_modules,vendor}/*"'
 	let g:ctrlp_use_caching = 0
-	let g:ackprg = 'rg --vimgrep -g "!{node_modules,vendor}/*"'
+	let g:ackprg = 'rg --vimgrep -i -g "!{node_modules,vendor}/*"'
 	set grepprg=rg\ --vimgrep\ --no-heading
 endif
 
