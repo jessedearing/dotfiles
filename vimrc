@@ -435,4 +435,8 @@ if has('nvim')
 
 	let g:neomake_go_gometalinter_args = [ '--disable-all', '--enable=errcheck', '--enable=gosimple', '--enable=staticcheck', '--enable=unused', '--enable=golint']
 	autocmd! BufWritePost * Neomake
+
+	" This does in-place updates (as opposed to a split window) when doing
+	" search and replace
+	set inccommand=nosplit
 endif
