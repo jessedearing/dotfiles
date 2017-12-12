@@ -1,4 +1,7 @@
 call plug#begin('~/.vim/plugged')
+"Plug 'rust-lang/rust.vim'
+"Plug 'racer-rust/vim-racer'
+Plug 'mhartington/oceanic-next'
 Plug 'tlhr/anderson.vim'
 Plug 'jacoborus/tender.vim'
 Plug 'blueshirts/darcula'
@@ -53,7 +56,10 @@ Plug 'google/vim-searchindex'
 Plug 'artur-shaik/vim-javacomplete2'
 let g:neocomplete#enable_at_startup = 1
 call plug#end()
+if (has("termguicolors"))
+ set termguicolors
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
 let python_highlight_all = 1
 
 set updatetime=1000
@@ -220,7 +226,8 @@ let base16colorspace=256
  "color anderson
 " color dracula
 "color darcula
-color tender
+"color tender
+color OceanicNext
 
 " Directories for swp files
 set backupdir=~/.vim/backup
