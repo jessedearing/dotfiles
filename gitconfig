@@ -11,7 +11,7 @@
 	excludesfile = ~/.gitignore
 	pager = less -iXFRr
 [difftool "vim"]
-  cmd = vimdiff $LOCAL $REMOTE
+  cmd = nvim -d $LOCAL $REMOTE
 [difftool]
 	prompt = false
 [diff]
