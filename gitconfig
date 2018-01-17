@@ -13,6 +13,7 @@
 [difftool "vim"]
   cmd = nvim -d $LOCAL $REMOTE
 [difftool]
+	trustExitCode = true
 	prompt = false
 [diff]
 	tool = vim
