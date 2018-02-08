@@ -19,8 +19,6 @@
 	tool = vim
 [init]
 	templatedir = ~/.git_template
-[credential]
-	helper = osxkeychain
 [push]
 	default = simple
 [help]
@@ -42,3 +40,5 @@
 	gpgsign = true
 [pull]
   rebase = true
+[credential]
+	helper = osxkeychain
