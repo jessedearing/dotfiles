@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+git log --graph --stat --decorate -M --color $* |  less -r
+#if [ -x /usr/local/bin/emojify ]; then
+#  git log --stat --decorate -M --color $* | emojify | less -r
+#else
+#fi
