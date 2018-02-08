@@ -1,6 +1,7 @@
 call plug#begin('~/.vim/plugged')
 "Plug 'rust-lang/rust.vim'
 "Plug 'racer-rust/vim-racer'
+Plug 'dracula/vim'
 Plug 'mhartington/oceanic-next'
 Plug 'tlhr/anderson.vim'
 Plug 'jacoborus/tender.vim'
@@ -50,10 +51,11 @@ Plug 'majutsushi/tagbar'
 Plug 'elzr/vim-json'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'vimwiki/vimwiki'
-"Plug 'Quramy/tsuquyomi'
-"Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/tsuquyomi'
+Plug 'leafgarland/typescript-vim'
 Plug 'google/vim-searchindex'
 Plug 'artur-shaik/vim-javacomplete2'
+Plug 'junegunn/vim-emoji'
 let g:neocomplete#enable_at_startup = 1
 call plug#end()
 if (has("termguicolors"))
@@ -224,7 +226,7 @@ let base16colorspace=256
 " color crayon
 "color base16-tomorrow
  "color anderson
-" color dracula
+ "color dracula
 "color darcula
 "color tender
 color OceanicNext
@@ -321,6 +323,7 @@ map <Leader>gd :GundoToggle<CR>
 autocmd BufWritePost *.wiki silent execute '! git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki add "%" > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki commit -q -m "%" 2>&1 > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki push origin master -q > /dev/null' |
      \ redraw!
 au FileType vimwiki nnoremap <C-P> :Vimwiki2HTMLBrowse<CR>
+au BufRead,BufNewFile *.wiki call s:setupWrapping()
 
 " AutoPairs
 " ====================================================================
