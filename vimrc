@@ -23,13 +23,12 @@ if has('nvim')
 
 	Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': 'vim/update.sh' }
 	Plug 'zchee/deoplete-jedi'
-	Plug 'neomake/neomake'
 else
 	"Plug 'Valloric/YouCompleteMe'
 	"Plug 'ervandew/supertab'
 	Plug 'nsf/gocode', { 'rtp': 'vim', 'do': 'vim/update.sh' }
-	Plug 'w0rp/ale'
 endif
+Plug 'neomake/neomake'
 Plug 'fatih/vim-go'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -58,7 +57,7 @@ Plug 'artur-shaik/vim-javacomplete2'
 Plug 'junegunn/vim-emoji'
 let g:neocomplete#enable_at_startup = 1
 call plug#end()
-if (has("termguicolors"))
+if (has("termguicolors") && has('nvim'))
  set termguicolors
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
@@ -226,10 +225,10 @@ let base16colorspace=256
 " color crayon
 "color base16-tomorrow
  "color anderson
- "color dracula
+ color dracula
 "color darcula
 "color tender
-color OceanicNext
+"color OceanicNext
 
 " Directories for swp files
 set backupdir=~/.vim/backup
@@ -280,7 +279,7 @@ au BufRead,BufNewFile python setlocal textwidth=79
 " ====================================================================
 " Settings
 let g:airline_powerline_fonts = 1
-let g:airline_theme='tomorrow'
+let g:airline_theme='dracula'
 let g:airline#extensions#wordcount#filetypes = '\vhelp|markdown|rst|org|text|asciidoc|tex|mail|wiki'
 
 "		Spell
@@ -320,10 +319,13 @@ map <Leader>gd :GundoToggle<CR>
 " ====================================================================
 " let g:vimwiki_folding='expr'
 " let g:vimwiki_hl_cb_checked=1
-autocmd BufWritePost *.wiki silent execute '! git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki add "%" > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki commit -q -m "%" 2>&1 > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki push origin master -q > /dev/null' |
-     \ redraw!
+"autocmd BufWritePost *.wiki silent execute '! git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki add "%" > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki commit -q -m "%" 2>&1 > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki push origin master -q > /dev/null' |
+     "\ redraw!
 au FileType vimwiki nnoremap <C-P> :Vimwiki2HTMLBrowse<CR>
-au BufRead,BufNewFile *.wiki call s:setupWrapping()
+"au BufRead,BufNewFile *.wiki call s:setupWrapping()
+au FileType vimwiki setlocal spell
+let g:vimwiki_list = [
+	\ {'path': '~/daily/', 'ext': '.md'}]
 
 " AutoPairs
 " ====================================================================
@@ -344,7 +346,7 @@ map <Leader>< :bp<CR>
 " Thrift Syntax
 " ====================================================================
 
-au BufRead,BufNewFile *.thrift set filetype=thrift
+au BufRead,BufNewFile *.thrift setlocal filetype=thrift
 
 " RSpec
 " ====================================================================
@@ -438,6 +440,14 @@ if has('nvim')
 
 	let g:neomake_go_gometalinter_args = [ '--disable-all', '--enable=errcheck', '--enable=gosimple', '--enable=staticcheck', '--enable=unused', '--enable=golint']
 	autocmd! BufWritePost * Neomake
+
+	let g:neomake_vimwiki_writegood_maker = {
+				\ 'exe': 'writegood',
+				\ 'args': ['--parse'],
+				\ 'errorformat': '%W%f:%l:%c:%m,%C%m,%-G',
+				\ 'postprocess': function('neomake#makers#ft#text#PostprocessWritegood')
+				\ }
+	let g:neomake_vimwiki_enabled_makers = ['writegood']
 
 	" This does in-place updates (as opposed to a split window) when doing
 	" search and replace

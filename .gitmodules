@@ -16,3 +16,18 @@
 [submodule "tmux/plugins/tpm"]
 	path = tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule "dracula/vim"]
+	path = dracula/vim
+	url = https://github.com/dracula/vim
+[submodule "dracula/zsh"]
+	path = dracula/zsh
+	url = https://github.com/dracula/zsh
+[submodule "dracula/alfred"]
+	path = dracula/alfred
+	url = https://github.com/dracula/alfred
+[submodule "dracula/slack"]
+	path = dracula/slack
+	url = https://github.com/dracula/slack
+[submodule "dracula/pygments"]
+	path = dracula/pygments
+	url = https://github.com/dracula/pygments
