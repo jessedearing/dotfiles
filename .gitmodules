@@ -31,3 +31,6 @@
 [submodule "dracula/pygments"]
 	path = dracula/pygments
 	url = https://github.com/dracula/pygments
+[submodule "dracula/google-chrome"]
+	path = dracula/google-chrome
+	url = https://github.com/dracula/google-chrome
