@@ -34,3 +34,12 @@
 [submodule "dracula/google-chrome"]
 	path = dracula/google-chrome
 	url = https://github.com/dracula/google-chrome
+[submodule "themes/tomorrow-theme"]
+	path = themes/tomorrow-theme
+	url = https://github.com/chriskempson/tomorrow-theme
+[submodule "themes/base16"]
+	path = themes/base16
+	url = https://github.com/chriskempson/base16
+[submodule "themes/base16-fzf"]
+	path = themes/base16-fzf
+	url = https://github.com/nicodebo/base16-fzf
