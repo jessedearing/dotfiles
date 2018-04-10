@@ -1,7 +1,8 @@
 call plug#begin('~/.vim/plugged')
 "Plug 'rust-lang/rust.vim'
 "Plug 'racer-rust/vim-racer'
-Plug 'dracula/vim'
+"Plug 'dracula/vim', { 'as': 'dracula-theme' }
+Plug 'chriskempson/base16-vim'
 Plug 'mhartington/oceanic-next'
 Plug 'tlhr/anderson.vim'
 Plug 'jacoborus/tender.vim'
@@ -223,9 +224,9 @@ let base16colorspace=256
 " color kalisi
 " color material
 " color crayon
-"color base16-tomorrow
+color base16-tomorrow-night
  "color anderson
- color dracula
+"color dracula
 "color darcula
 "color tender
 "color OceanicNext
@@ -279,7 +280,7 @@ au BufRead,BufNewFile python setlocal textwidth=79
 " ====================================================================
 " Settings
 let g:airline_powerline_fonts = 1
-let g:airline_theme='dracula'
+let g:airline_theme='base16_tomorrow'
 let g:airline#extensions#wordcount#filetypes = '\vhelp|markdown|rst|org|text|asciidoc|tex|mail|wiki'
 
 "		Spell
@@ -409,12 +410,16 @@ let g:ale_go_gometalinter_options = "--fast"
 " Platinum Searcher
 " ==============================================================================
 if executable('rg')
-	"set grepprg=ag\ --nogroup\ --vimgrep\ --nocolor
-	"let g:ctrlp_user_command = 'ag %s -l -U --ignore public --ignore .bundle --ignore node_modules --ignore vendor --nocolor -g ""'
-	let g:ctrlp_user_command = 'rg --files --no-ignore --follow -g "!{.git,node_modules,vendor}/*"'
-	let g:ctrlp_use_caching = 0
-	let g:ackprg = 'rg --vimgrep -i -g "!{node_modules,vendor}/*"'
-	set grepprg=rg\ --vimgrep\ --no-heading
+	"let g:ctrlp_user_command = 'rg --files --no-ignore --follow -g "!{.git,node_modules,vendor}/*"'
+	"let g:ctrlp_use_caching = 0
+	"let g:ackprg = 'rg --vimgrep -i -g "!{node_modules,vendor}/*"'
+	"set grepprg=rg\ --vimgrep\ --no-heading
+endif
+
+if executable('ag')
+	set grepprg=ag\ --nogroup\ --vimgrep\ --nocolor
+	let g:ctrlp_user_command = 'ag %s -l -U --ignore public --ignore .bundle --ignore node_modules --ignore vendor --nocolor -g ""'
+	let g:ackprg = 'ag --vimgrep'
 endif
 
 set exrc
@@ -435,7 +440,7 @@ let g:ale_python_mypy_options = '--ignore-missing-imports'
 if has('nvim')
 	" Deoplete
 	" ===========================================================================
-	call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
+	call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 	let g:deoplete#enable_at_startup = 1
 
 	let g:neomake_go_gometalinter_args = [ '--disable-all', '--enable=errcheck', '--enable=gosimple', '--enable=staticcheck', '--enable=unused', '--enable=golint']
