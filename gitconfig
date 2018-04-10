@@ -17,6 +17,7 @@
 	prompt = false
 [diff]
 	tool = vim
+	colorMoved = default
 [init]
 	templatedir = ~/.git_template
 [push]
