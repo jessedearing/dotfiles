@@ -2,6 +2,7 @@ call plug#begin('~/.vim/plugged')
 "Plug 'rust-lang/rust.vim'
 "Plug 'racer-rust/vim-racer'
 "Plug 'dracula/vim', { 'as': 'dracula-theme' }
+Plug 'isRuslan/vim-es6'
 Plug 'chriskempson/base16-vim'
 Plug 'mhartington/oceanic-next'
 Plug 'tlhr/anderson.vim'
