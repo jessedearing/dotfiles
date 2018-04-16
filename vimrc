@@ -66,6 +66,7 @@ endif
 let python_highlight_all = 1
 
 set updatetime=1000
+set lazyredraw
 
 runtime macros/matchit.vim
 
@@ -77,7 +78,7 @@ set number
 set relativenumber
 set ruler
 " Highlights current line
-set cursorline
+"set cursorline
 set showcmd
 syntax on
 set foldlevelstart=99
