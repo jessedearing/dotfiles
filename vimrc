@@ -179,7 +179,7 @@ au Filetype yaml,yml call s:setupYaml()
 " md, markdown, and mk are markdown and define buffer-local preview
  au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
 let vim_markdown_preview_github=1
-let vim_markdown_preview_browser='Firefox'
+let vim_markdown_preview_browser='Google Chrome'
 
 au BufRead,BufNewFile *.txt call s:setupWrapping()
 

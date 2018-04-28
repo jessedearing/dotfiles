@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-open -a "Firefox" $@
+open -a "Google Chrome" $@
