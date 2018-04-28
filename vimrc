@@ -111,7 +111,8 @@ au FileType qf wincmd J
 set encoding=utf-8
 
 " Whitespace stuff
-set nowrap
+set wrap
+set lbr
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -153,7 +154,6 @@ if has("autocmd")
 endif
 
 function! s:setupWrapping()
-	setlocal wrap
 	setlocal wm=2
 	setlocal textwidth=80
 endfunction
@@ -327,8 +327,8 @@ map <Leader>gd :GundoToggle<CR>
 au FileType vimwiki nnoremap <C-P> :Vimwiki2HTMLBrowse<CR>
 "au BufRead,BufNewFile *.wiki call s:setupWrapping()
 au FileType vimwiki setlocal spell
-let g:vimwiki_list = [
-	\ {'path': '~/daily/', 'ext': '.md'}]
+"let g:vimwiki_list = [
+"  \ {'path': '~/daily/', 'ext': '.md'}]
 
 " AutoPairs
 " ====================================================================
