@@ -7,7 +7,7 @@ export LANG=en_US.UTF-8
 
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
-export ZSH_THEME="agnoster"
+#export ZSH_THEME="sorin"
 export ZSH_CUSTOM="$HOME/.zsh-custom"
 
 # Set to this to use case-sensitive completion
@@ -32,8 +32,11 @@ source $ZSH/oh-my-zsh.sh
 fpath=(/usr/local/share/zsh-completions $fpath)
 source /usr/local/share/zsh/site-functions/_*
 
-# Customize to your needs...
-export PATH=$HOME/go/bin:/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/Cellar/go/1.2/libexec/bin:/usr/local/opt/perl/bin
+BASE16_SHELL=$HOME/.dotfiles/themes/base16-shell
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+base16_tomorrow-night
+
+export PATH=.virtualenv/bin:$HOME/go/bin:/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/opt/curl/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/Cellar/go/1.2/libexec/bin:/usr/local/opt/perl/bin
 
 if ( which rbenv 2>&1 > /dev/null ); then
   rbenv rehash 2>/dev/null
@@ -55,44 +58,41 @@ fi
 
 #export RBENV_VERSION=2.0.0-p451
 
-alias vim=nvim
 export PGDATA=/usr/local/var/postgresql
-alias lpup="librarian-puppet"
-alias puppet="nocorrect puppet"
-alias vi="vim"
-alias sgem="sudo gem"
-alias ruby18="rvm use ruby-1.8.7-p174"
-alias irb=pry
 alias web="open -a 'Google Chrome' "
 alias g='nocorrect git'
 alias git=hub
 alias gco='git checkout'
-alias gl="git log --stat --decorate -M"
 alias gs="git status -sb"
 alias ga="git add"
 alias gc="git commit -v"
-alias be="bundle exec"
-alias bi="bundle install --path=.bundle --binstubs=.bundle/bin"
-alias bl="bundle list"
-alias bu="bundle update"
-alias bp="bundle package"
-alias lol="rvm 1.8.7 do lolspeak"
 alias mongod="mongod --config /usr/local/etc/mongod.conf"
 alias less="less -R"
-alias v=vagrant
 alias d=docker
 alias knife="nocorrect knife"
 alias ggpnp='git stash && git pull --rebase && git push && git stash pop'
 alias yard='nocorrect yard'
 alias ssh="TERM=xterm-256color ssh -A"
 alias ag="ag -S"
-alias vims="vim -c ':Scratch'"
+alias vims="editor.sh -c ':Scratch'"
 alias mytop="perl /usr/local/bin/mytop"
-alias cat=ccat
+if [ -x /usr/local/bin/richgo ]; then
+	alias go=richgo
+fi
+if [ -x /usr/local/bin/ccat ]; then
+	alias cat=ccat
+fi
+alias vim="editor.sh"
+
+if [ -x /usr/local/bin/exa ]; then
+	alias ls=exa
+fi
+alias rg="rg -i -g \"!{vendor}\""
 
 export EDITOR=$HOME/.bin/editor.sh
 export LESS="-iMx4 -RX"
 export GIT_EDITOR=$EDITOR
+export BROWSER=$HOME/.bin/browser.sh
 
 function api() {open -a 'Google Chrome' "http://apidock.com/$1/search?query=$2";}
 
@@ -138,7 +138,7 @@ function load_tmux() {
      bail_on_tmux && tmux attach -t 0 && exit
     else
       if [ -z "$TMUX" ] && [ -z "$SUDO_USER" ] && [ -z "$SSH_CONNECTION" ]; then
-        bail_on_tmux && ssh-agent tmux -2 && exit
+        bail_on_tmux && ssh-agent tmux && exit
       fi
     fi
   fi
@@ -166,6 +166,10 @@ function sshforward() {
   ssh-add
 }
 
+function jstags() {
+	find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exec jsctags {} -f \; | sed '/^$/d' | sort > tags
+}
+
 # Boot2Docker
 # ============================================================================
 alias b2=boot2docker
@@ -183,6 +187,7 @@ bindkey -M isearch '^R' history-incremental-search-backward
 bindkey -M isearch '^F' history-incremental-search-forward
 
 #ssh-add $HOME/.ssh/id_rsa &> /dev/null
+ssh-add -K $HOME/.ssh/id_ed25519 2>&1 > /dev/null
 
 fortune startrek computers $HOME/.fortunes/sadserver_tweets $HOME/.fortunes/honest_update_tweets
 echo
@@ -199,18 +204,18 @@ VIRTUAL_ENV_DISABLE_PROMPT=1
 prompt_virtualenv() {}
 export EC2_HOME=/usr/local/opt/ec2-api-tools/libexec
 
-load_tmux
+#load_tmux
 # JBoss Setup
 # ============================================================================
 export JBOSS_HOME=/usr/local/opt/wildfly-as/libexec
 export PATH=${PATH}:${JBOSS_HOME}/bin
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
-export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
+#export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 
 export LIQUIBASE_HOME=/usr/local/opt/liquibase/libexec
 
-export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
+# export NVM_DIR="$HOME/.nvm"
+# . "/usr/local/opt/nvm/nvm.sh"
 
 
 TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S'
@@ -222,10 +227,16 @@ source <(kubectl completion zsh)
 
 ulimit -S -n 2048
 
-source /Users/jesse/code/InVisionApp/InVision_Docker/scripts-native/invision.sh
-
 #if minikube status | grep "minikubeVM: Running" &> /dev/null; then
   #eval `minikube docker-env`
 #fi
 
+#export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules,vendor}/*" 2> /dev/null'
+export FZF_DEFAULT_COMMAND='ag -l -U --nocolor --ignore .git -g ""'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+source /Users/jesse/code/InVisionApp/InVision_Docker/scripts-native/invision.sh
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
