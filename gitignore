@@ -7,3 +7,4 @@ config/database.yml
 .exrc
 .mypy_cache/
 .nvimrc
+.vscode/
