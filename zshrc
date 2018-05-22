@@ -236,7 +236,5 @@ export FZF_DEFAULT_COMMAND='ag -l -U --nocolor --ignore .git -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-source /Users/jesse/code/InVisionApp/InVision_Docker/scripts-native/invision.sh
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
