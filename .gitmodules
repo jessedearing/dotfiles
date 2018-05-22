@@ -3,16 +3,16 @@
 	url = https://github.com/robbyrussell/oh-my-zsh.git
 [submodule "powerline"]
 	path = powerline
-	url = git@github.com:Lokaltog/powerline.git
+	url = https://github.com/Lokaltog/powerline.git
 [submodule "zsh-custom/plugins/zsh-syntax-highlighting"]
 	path = zsh-custom/plugins/zsh-syntax-highlighting
 	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule "base16-shell"]
 	path = base16-shell
-	url = git@github.com:chriskempson/base16-shell.git
+	url = https://github.com/chriskempson/base16-shell.git
 [submodule "zsh-custom/zsh-syntax-highlighting"]
 	path = zsh-custom/zsh-syntax-highlighting
-	url = git@github.com:zsh-users/zsh-syntax-highlighting.git
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule "tmux/plugins/tpm"]
 	path = tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
