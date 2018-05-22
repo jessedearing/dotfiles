@@ -1,0 +1,13 @@
+caskroom/cask
+caskroom/fonts
+eddieantonio/eddieantonio
+esphen/wsta
+go-delve/delve
+grpc/grpc
+heroku/brew
+homebrew/core
+homebrew/services
+hybridgroup/tools
+kyoh86/tap
+neovim/neovim
+ravenac95/sudolikeaboss
