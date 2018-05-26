@@ -68,6 +68,9 @@ let python_highlight_all = 1
 set updatetime=1000
 set lazyredraw
 
+let did_install_default_menus = 1
+set synmaxcol=500
+
 runtime macros/matchit.vim
 
 set pastetoggle=<F11>
