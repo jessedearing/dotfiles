@@ -388,12 +388,12 @@ let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 
 augroup go
-	au FileType go nmap <Leader>i <Plug>(go-import)
+	au FileType go nmap <Leader>i <Plug>(go-implements)
 	au FileType go nmap <Leader>gd <Plug>(go-doc)
 	au FileType go nmap <leader>r <Plug>(go-rename)
 	au FileType go nmap <leader>/ <Plug>(go-referrers)
 	au FileType go nmap <leader>t <Plug>(go-test)
-	au FileType go nmap <leader>c <Plug>(go-coverage)
+	au FileType go nmap <leader>c <Plug>(go-callers)
 	au FileType go setlocal foldmethod=syntax
 augroup END
 
