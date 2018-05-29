@@ -2,6 +2,7 @@ call plug#begin('~/.vim/plugged')
 "Plug 'rust-lang/rust.vim'
 "Plug 'racer-rust/vim-racer'
 "Plug 'dracula/vim', { 'as': 'dracula-theme' }
+Plug 'rakr/vim-one'
 Plug 'isRuslan/vim-es6'
 Plug 'chriskempson/base16-vim'
 Plug 'mhartington/oceanic-next'
@@ -229,7 +230,9 @@ let base16colorspace=256
 " color kalisi
 " color material
 " color crayon
-color base16-tomorrow-night
+"color base16-tomorrow-night
+let g:one_allow_italics = 1
+color one
  "color anderson
 "color dracula
 "color darcula
@@ -285,7 +288,8 @@ au BufRead,BufNewFile python setlocal textwidth=79
 " ====================================================================
 " Settings
 let g:airline_powerline_fonts = 1
-let g:airline_theme='base16_tomorrow'
+"let g:airline_theme='base16_tomorrow'
+let g:airline_theme='one'
 let g:airline#extensions#wordcount#filetypes = '\vhelp|markdown|rst|org|text|asciidoc|tex|mail|wiki'
 
 "		Spell
