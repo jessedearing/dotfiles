@@ -3,6 +3,7 @@ call plug#begin('~/.vim/plugged')
 "Plug 'racer-rust/vim-racer'
 "Plug 'dracula/vim', { 'as': 'dracula-theme' }
 Plug 'rakr/vim-one'
+Plug 'mxw/vim-jsx'
 Plug 'isRuslan/vim-es6'
 Plug 'chriskempson/base16-vim'
 Plug 'mhartington/oceanic-next'
@@ -466,6 +467,10 @@ if has('nvim')
 	" This does in-place updates (as opposed to a split window) when doing
 	" search and replace
 	set inccommand=nosplit
+
+	let g:deoplete#sources#ternjs#filetypes = [
+                \ 'jsx'
+								\ ]
 endif
 
 function! WinMove(key)

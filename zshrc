@@ -179,6 +179,7 @@ alias eclim=/Users/jdearing/eclipse/Eclipse.app/Contents/Eclipse/eclim
 # export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
 export GOPATH=$HOME/go
+export GOROOT=/usr/local/opt/go/libexec
 
 # History searching
 bindkey -M vicmd '/' fzf-history-widget

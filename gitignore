@@ -8,3 +8,4 @@ config/database.yml
 .mypy_cache/
 .nvimrc
 .vscode/
+.tern-port
