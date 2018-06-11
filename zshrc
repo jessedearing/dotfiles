@@ -69,9 +69,8 @@ alias gc="git commit -v"
 alias mongod="mongod --config /usr/local/etc/mongod.conf"
 alias less="less -R"
 alias d=docker
-alias knife="nocorrect knife"
+alias k=kubectl
 alias ggpnp='git stash && git pull --rebase && git push && git stash pop'
-alias yard='nocorrect yard'
 alias ssh="TERM=xterm-256color ssh -A"
 alias ag="ag -S"
 alias vims="editor.sh -c ':Scratch'"
