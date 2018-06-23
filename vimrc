@@ -453,8 +453,12 @@ if has('nvim')
 	call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 	let g:deoplete#enable_at_startup = 1
 
-	let g:neomake_go_gometalinter_args = [ '--disable-all', '--enable=errcheck', '--enable=gosimple', '--enable=staticcheck', '--enable=unused', '--enable=golint']
-	autocmd! BufWritePost * Neomake
+	highlight NeomakeError ctermfg=168 ctermbg=16 guifg=#e06c75 guibg=#282c34
+	highlight NeomakeWarning ctermfg=180 guifg=#e5c07b
+	let g:neomake_error_sign = {'text': '✖', 'texthl': 'NeomakeError'}
+	let g:neomake_warning_sign={'text': '⚠', 'texthl': 'NeomakeWarning'}
+	let g:neomake_go_gometalinter_args = [ '--disable-all', '--enable=vet', '--enable=errcheck', '--enable=gosimple', '--enable=staticcheck', '--enable=unused', '--enable=golint']
+	call neomake#configure#automake('w')
 
 	let g:neomake_vimwiki_writegood_maker = {
 				\ 'exe': 'writegood',
