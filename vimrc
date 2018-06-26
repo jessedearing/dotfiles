@@ -36,7 +36,7 @@ Plug 'neomake/neomake'
 Plug 'fatih/vim-go'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'mileszs/ack.vim'
+Plug 'dyng/ctrlsf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'airblade/vim-gitgutter'
@@ -429,8 +429,9 @@ endif
 if executable('ag')
 	set grepprg=ag\ --nogroup\ --vimgrep\ --nocolor
 	let g:ctrlp_user_command = 'ag %s -l -U --ignore public --ignore .bundle --ignore node_modules --ignore vendor --nocolor -g ""'
-	let g:ackprg = 'ag --vimgrep'
 endif
+
+nmap     <C-F>f <Plug>CtrlSFPrompt
 
 set exrc
 set secure
