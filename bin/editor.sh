@@ -1,25 +1,18 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 
 VIM=/usr/local/bin/nvim
-args=""
 daily=""
 
-while (( "$#" )); do
-	if [[ "$1" == "-daily" ]]; then
-		daily=1
-		break
-	fi
-
-	args="$args $1"
-	shift
-done
+if [[ "$1" == "-daily" ]]; then
+	daily=1
+fi
 
 if [ ! -z "$daily" ]; then
 	(
 		cd $HOME/daily
-		$VIM index.md
+		exec $VIM index.md
 	)
 else
-	$VIM $args
+	exec $VIM $*
 fi
 
