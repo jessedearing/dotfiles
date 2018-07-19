@@ -399,6 +399,7 @@ augroup go
 	au FileType go nmap <leader>/ <Plug>(go-referrers)
 	au FileType go nmap <leader>t <Plug>(go-test)
 	au FileType go nmap <leader>c <Plug>(go-callers)
+	au FileType go imap <C-e> <C-o><Plug>(go-iferr)
 	au FileType go setlocal foldmethod=syntax
 augroup END
 
