@@ -2,6 +2,7 @@ call plug#begin('~/.vim/plugged')
 "Plug 'rust-lang/rust.vim'
 "Plug 'racer-rust/vim-racer'
 "Plug 'dracula/vim', { 'as': 'dracula-theme' }
+Plug 'RRethy/vim-illuminate'
 Plug 'rakr/vim-one'
 Plug 'mxw/vim-jsx'
 Plug 'isRuslan/vim-es6'
@@ -496,3 +497,5 @@ map <silent> <C-h> :call WinMove('h')<cr>
 map <silent> <C-j> :call WinMove('j')<cr>
 map <silent> <C-k> :call WinMove('k')<cr>
 map <silent> <C-l> :call WinMove('l')<cr>
+
+hi illuminatedWord cterm=underline gui=underline
