@@ -1,0 +1,12 @@
+disk-inventory-x
+font-firacode-nerd-font
+font-hasklig-nerd-font
+font-monoid-nerd-font
+iterm2
+java
+jet
+seil
+vagrant
+virtualbox
+wireshark-chmodbpf
+yujitach-menumeters
