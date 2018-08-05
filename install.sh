@@ -3,7 +3,7 @@
 (
 cd $HOME/.dotfiles
 
-all_dir=`find $PWD -maxdepth 1 \! -iname 'pkg' \! -iname 'themes' \! -iname 'README.md' \! -iname '.*' \! -iname 'powerline-fonts' \! -iname misc_scripts \! -iname 'install.sh' \! -iname 'global.gems'`
+all_dir=`find $PWD -maxdepth 1 \! -iname 'pkg' \! -iname 'themes' \! -iname 'README.md' \! -iname '.*' \! -iname 'powerline-fonts' \! -iname misc_scripts \! -iname 'install.sh' \! -iname 'global.gems' \! -iname 'gpg-agent.conf'`
 
 for dir in $all_dir; do
   if [ ! -e $HOME/.`basename $dir` ]; then
@@ -13,4 +13,12 @@ for dir in $all_dir; do
     echo $HOME/.`basename $dir` already exists
   fi
 done
+
+mkdir -p $HOME/.gnupg
+if [ -L $HOME/.gnupg/gpg-agent.conf ]; then
+	echo $HOME/.gnupg/gpg-agent.conf already exists
+else
+	echo Linking gpg-agent.conf to $HOME/.gnupg/gpg-agent.conf
+	ln -s $HOME/.dotfiles/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
+fi
 )
