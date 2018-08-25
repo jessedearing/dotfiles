@@ -60,6 +60,9 @@ Plug 'leafgarland/typescript-vim'
 Plug 'google/vim-searchindex'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'junegunn/vim-emoji'
+Plug 'hashivim/vim-terraform'
+Plug 'jessedearing/vim-terraform-completion'
+
 let g:neocomplete#enable_at_startup = 1
 call plug#end()
 if (has("termguicolors") && has('nvim'))
@@ -123,7 +126,7 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set autoindent
-" set expandtab
+set expandtab
 set listchars=tab:᠁\ 
 
 set nolist
@@ -402,6 +405,8 @@ augroup go
 	au FileType go nmap <leader>c <Plug>(go-callers)
 	au FileType go imap <C-e> <C-o><Plug>(go-iferr)
 	au FileType go setlocal foldmethod=syntax
+  " It's a spacey world out there, thankfully not in Go
+  au FileType go setlocal noexpandtab
 augroup END
 
 " NerdCommenter
@@ -444,6 +449,7 @@ let g:deoplete#omni_patterns = {}
 let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
 "autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
+let g:deoplete#omni_patterns.terraform = '[^ *\t"{=$]\w*'
 
 set rtp+=/usr/local/opt/fzf
 
