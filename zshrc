@@ -59,6 +59,7 @@ fi
 #export RBENV_VERSION=2.0.0-p451
 
 export PGDATA=/usr/local/var/postgresql
+alias tf=terraform
 alias web="open -a 'Google Chrome' "
 alias g='nocorrect git'
 alias git=hub
@@ -71,7 +72,8 @@ alias less="less -R"
 alias d=docker
 alias k=kubectl
 alias ggpnp='git stash && git pull --rebase && git push && git stash pop'
-alias ssh="TERM=xterm-256color ssh -A"
+alias ssh="TERM=xterm-256color ssh"
+alias ssha="TERM=xterm-256color ssh -A"
 alias ag="ag -S"
 alias vims="editor.sh -c ':Scratch'"
 alias mytop="perl /usr/local/bin/mytop"
@@ -186,9 +188,6 @@ bindkey -M vicmd '?' history-incremental-pattern-search-forward
 bindkey -M isearch '^R' history-incremental-search-backward
 bindkey -M isearch '^F' history-incremental-search-forward
 
-#ssh-add $HOME/.ssh/id_rsa &> /dev/null
-ssh-add -K $HOME/.ssh/id_ed25519 2>&1 > /dev/null
-
 fortune startrek computers $HOME/.fortunes/sadserver_tweets $HOME/.fortunes/honest_update_tweets
 echo
 
@@ -204,7 +203,13 @@ VIRTUAL_ENV_DISABLE_PROMPT=1
 prompt_virtualenv() {}
 export EC2_HOME=/usr/local/opt/ec2-api-tools/libexec
 
-#load_tmux
+if [ -z "${_JESSE_ADD_SSH_KEY}" ]; then
+  #ssh-add $HOME/.ssh/id_rsa &> /dev/null
+  ssh-add -K $HOME/.ssh/id_ed25519 2>&1 > /dev/null
+  export _JESSE_ADD_SSH_KEY=true
+fi
+load_tmux
+
 # JBoss Setup
 # ============================================================================
 export JBOSS_HOME=/usr/local/opt/wildfly-as/libexec
