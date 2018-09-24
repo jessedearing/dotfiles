@@ -49,3 +49,6 @@
 [submodule "tmux-themepack"]
 	path = tmux-themepack
 	url = https://github.com/jimeh/tmux-themepack
+[submodule "zsh-custom/plugins/zsh-aws-vault"]
+	path = zsh-custom/plugins/zsh-aws-vault
+	url = https://github.com/blimmer/zsh-aws-vault
