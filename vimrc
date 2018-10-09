@@ -2,6 +2,7 @@ call plug#begin('~/.vim/plugged')
 "Plug 'rust-lang/rust.vim'
 "Plug 'racer-rust/vim-racer'
 "Plug 'dracula/vim', { 'as': 'dracula-theme' }
+Plug 'christianrondeau/vim-base64'
 Plug 'RRethy/vim-illuminate'
 Plug 'rakr/vim-one'
 Plug 'mxw/vim-jsx'
@@ -48,7 +49,7 @@ Plug 'rakr/vim-one'
 Plug 'hdima/python-syntax'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'vim-scripts/Align'
-Plug 'vim-scripts/SQLUtilities'
+"Plug 'vim-scripts/SQLUtilities'
 Plug 'vim-scripts/dbext.vim'
 Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar'
@@ -91,6 +92,7 @@ set ruler
 set showcmd
 syntax on
 set foldlevelstart=99
+set foldmethod=marker
 " Puts a line on column 80 of the screen. This is a good indicator for methods
 " that are too long
 set colorcolumn=80
@@ -188,7 +190,7 @@ au Filetype yaml,yml call s:setupYaml()
 " md, markdown, and mk are markdown and define buffer-local preview
  au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
 let vim_markdown_preview_github=1
-let vim_markdown_preview_browser='Google Chrome'
+let vim_markdown_preview_browser='Firefox'
 
 au BufRead,BufNewFile *.txt call s:setupWrapping()
 
@@ -373,6 +375,7 @@ map <Leader>rs :RunSpec<CR>
 let g:UltiSnipsExpandTrigger = '<C-j>'
 let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+let g:snips_author = 'Jesse Dearing'
 
 " Golang
 " ============================================================================
@@ -449,7 +452,13 @@ let g:deoplete#omni_patterns = {}
 let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
 "autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
+"""""""""""""""
+"  Terraform  "
+"""""""""""""""
 let g:deoplete#omni_patterns.terraform = '[^ *\t"{=$]\w*'
+let g:terraform_completion_keys = 1
+
+let g:terraform_fmt_on_save = 1
 
 set rtp+=/usr/local/opt/fzf
 
@@ -505,3 +514,8 @@ map <silent> <C-k> :call WinMove('k')<cr>
 map <silent> <C-l> :call WinMove('l')<cr>
 
 hi illuminatedWord cterm=underline gui=underline
+
+""""""""""
+"  JSON  "
+""""""""""
+au Filetype json setlocal foldmethod=syntax

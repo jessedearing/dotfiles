@@ -1,15 +1,31 @@
 # sorin.zsh-theme
 # screenshot: http://i.imgur.com/aipDQ.png
 
-function background_procs() {
+export AWS_EXPIRY=""
+
+function _background_procs() {
 	[[ $(jobs -l | wc -l) -gt 0 ]] && echo -n "⚙  "
+}
+
+function _aws_vault_segment() {
+  local color_indicator
+  if [ ! -z "$AWS_EXPIRY" ]; then
+    if [[ $AWS_EXPIRY > `date +%s` ]]; then
+      color_indicator="%{$fg[blue]%}"
+    else
+      color_indicator="%{$fg[red]%}"
+    fi
+  fi
+  local vault_segment
+  vault_segment="$color_indicator`prompt_aws_vault_segment`%{$reset_color%}"
+  [[ `prompt_aws_vault_segment` != '' ]] && echo "$vault_segment "
 }
 
 if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
   MODE_INDICATOR="%{$fg_bold[red]%}❮%{$reset_color%}%{$fg[red]%}❮❮%{$reset_color%}"
   local return_status="%{$fg[red]%}%(?..⏎)%{$reset_color%}"
-  
-	PROMPT='$(background_procs)%{$fg[cyan]%}%c$(git_prompt_info) %(!.%{$fg_bold[red]%}#.%{$fg_bold[green]%}❯)%{$reset_color%} '
+
+  PROMPT='$(_aws_vault_segment)$(_background_procs)%{$fg[cyan]%}%c$(git_prompt_info) %(!.%{$fg_bold[red]%}#.%{$fg_bold[green]%}❯)%{$reset_color%} '
 
   ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg[blue]%}git%{$reset_color%}:%{$fg[red]%}"
   ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"

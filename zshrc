@@ -18,7 +18,7 @@ export ZSH_CUSTOM="$HOME/.zsh-custom"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(vi-mode zsh-syntax-highlighting golang docker)
+plugins=(vi-mode zsh-syntax-highlighting golang docker zsh-aws-vault)
 
 # Have to set GIT environment variables so they can be overridden by anything
 # in zsh-custom
@@ -60,7 +60,7 @@ fi
 
 export PGDATA=/usr/local/var/postgresql
 alias tf=terraform
-alias web="open -a 'Google Chrome' "
+alias web="open -a 'Firefox' "
 alias g='nocorrect git'
 alias git=hub
 alias gco='git checkout'
@@ -80,9 +80,6 @@ alias mytop="perl /usr/local/bin/mytop"
 if [ -x /usr/local/bin/richgo ]; then
 	alias go=richgo
 fi
-if [ -x /usr/local/bin/ccat ]; then
-	alias cat=ccat
-fi
 alias vim="editor.sh"
 
 if [ -x /usr/local/bin/exa ]; then
@@ -90,12 +87,17 @@ if [ -x /usr/local/bin/exa ]; then
 fi
 alias rg="rg -i -g \"!{vendor}\""
 
+if [ -x /usr/local/bin/bat ]; then
+  export BAT_THEME=TwoDark
+  alias cat=bat
+fi
+
 export EDITOR=$HOME/.bin/editor.sh
 export LESS="-iMx4 -RX"
+export LESS_TERMCAP_so=$'\E[30;43m'
+export LESS_TERMCAP_se=$'\E[39;49m'
 export GIT_EDITOR=$EDITOR
 export BROWSER=$HOME/.bin/browser.sh
-
-function api() {open -a 'Google Chrome' "http://apidock.com/$1/search?query=$2";}
 
 function quote() {
   echo "“$*”" | pbcopy
@@ -179,7 +181,7 @@ alias eclimd=/Users/jdearing/eclipse/Eclipse.app/Contents/Eclipse/eclimd
 alias eclim=/Users/jdearing/eclipse/Eclipse.app/Contents/Eclipse/eclim
 # export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
-export GOPATH=$HOME/go
+export GOPATH=$HOME/Documents/Code/Go
 export GOROOT=/usr/local/opt/go/libexec
 
 # History searching
@@ -203,11 +205,8 @@ VIRTUAL_ENV_DISABLE_PROMPT=1
 prompt_virtualenv() {}
 export EC2_HOME=/usr/local/opt/ec2-api-tools/libexec
 
-if [ -z "${_JESSE_ADD_SSH_KEY}" ]; then
   #ssh-add $HOME/.ssh/id_rsa &> /dev/null
-  ssh-add -K $HOME/.ssh/id_ed25519 2>&1 > /dev/null
-  export _JESSE_ADD_SSH_KEY=true
-fi
+ssh-add -qK $HOME/.ssh/id_ed25519 &> /dev/null &!
 load_tmux
 
 # JBoss Setup
@@ -243,3 +242,18 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+if [ -z "$AWS_EXPIRY" ]; then
+  if [ ! -z "$AWS_VAULT" ]; then
+    local ttl
+    if [ -z "$AWS_ASSUME_ROLE_TTL" ]; then
+      ttl="15M"
+    else
+      ttl=`echo $AWS_ASSUME_ROLE_TTL | tr '[a-z]' '[A-Z]'`
+    fi
+    export AWS_EXPIRY=`date -v+${ttl} +%s`
+  fi
+fi
+
+export VAULT_ADDR='http://127.0.0.1:8200'
+export VAULT_FORMAT=json
+export ETCDCTL_API=3
