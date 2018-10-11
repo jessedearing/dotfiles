@@ -242,6 +242,12 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+###############
+#  AWS Vault  #
+###############
+
+export AWS_VAULT_KEYCHAIN_NAME=login
+
 if [ -z "$AWS_EXPIRY" ]; then
   if [ ! -z "$AWS_VAULT" ]; then
     local ttl
