@@ -52,3 +52,6 @@
 [submodule "zsh-custom/plugins/zsh-aws-vault"]
 	path = zsh-custom/plugins/zsh-aws-vault
 	url = https://github.com/blimmer/zsh-aws-vault
+[submodule "tmux/plugins/tmux-kubernetes"]
+	path = tmux/plugins/tmux-kubernetes
+	url = https://github.com/jonmosco/kube-tmux
