@@ -41,8 +41,6 @@ if has("gui_macvim")
   imap <D-8> <Esc>8gt
   map  <D-9> 9gt
   imap <D-9> <Esc>9gt
-
-  highlight ColorColumn guibg=#550000
 endif
 
 "set list listchars=tab:\ \ ,trail:·
@@ -56,10 +54,10 @@ set guioptions-=L
 
 " set guifont=DejaVu\ Sans\ Mono:h12
 set macligatures
-set guifont=Fira\ Code:h14
+set guifont=Hack\ Regular\ Nerd\ Font\ Complete:h14
 
 " colorscheme tubster
-color darcula
+"color darcula
 
 set clipboard=unnamed
 

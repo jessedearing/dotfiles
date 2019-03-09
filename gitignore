@@ -9,3 +9,4 @@ config/database.yml
 .nvimrc
 .vscode/
 .tern-port
+vim-markdown-preview.html

@@ -1,41 +1,47 @@
 call plug#begin('~/.vim/plugged')
+Plug 'tarekbecker/vim-yaml-formatter'
+Plug 'pedrohdz/vim-yaml-folds'
 "Plug 'rust-lang/rust.vim'
 "Plug 'racer-rust/vim-racer'
-"Plug 'dracula/vim', { 'as': 'dracula-theme' }
-Plug 'christianrondeau/vim-base64'
+"Plug 'christianrondeau/vim-base64'
 Plug 'RRethy/vim-illuminate'
-Plug 'rakr/vim-one'
+"Plug 'rakr/vim-one'
+Plug 'arcticicestudio/nord-vim'
 Plug 'mxw/vim-jsx'
 Plug 'isRuslan/vim-es6'
-Plug 'chriskempson/base16-vim'
-Plug 'mhartington/oceanic-next'
-Plug 'tlhr/anderson.vim'
-Plug 'jacoborus/tender.vim'
-Plug 'blueshirts/darcula'
-Plug 'joshdick/onedark.vim'
+"Plug 'chriskempson/base16-vim'
+"Plug 'mhartington/oceanic-next'
+"Plug 'tlhr/anderson.vim'
+"Plug 'jacoborus/tender.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/scratch.vim'
 "Plug 'vim-scripts/calendar.vim'
 if has('nvim')
-	Plug 'Shougo/deoplete.nvim'
-	Plug 'zchee/deoplete-go', { 'do': 'make'}
-	Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+  Plug 'Shougo/denite.nvim'
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  "Plug 'zchee/deoplete-go', { 'do': 'make'}
+	"Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 
 	Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': 'vim/update.sh' }
-	Plug 'zchee/deoplete-jedi'
+	"Plug 'zchee/deoplete-jedi'
+  "Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+  "Plug 'autozimu/LanguageClient-neovim', {
+  "  \ 'branch': 'next',
+  "  \ 'do': 'bash install.sh',
+  "  \ }
 else
 	"Plug 'Valloric/YouCompleteMe'
-	"Plug 'ervandew/supertab'
 	Plug 'nsf/gocode', { 'rtp': 'vim', 'do': 'vim/update.sh' }
 endif
+"Plug 'ervandew/supertab'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'neomake/neomake'
-Plug 'fatih/vim-go'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'dyng/ctrlsf.vim'
@@ -45,7 +51,6 @@ Plug 'airblade/vim-gitgutter'
 "Plug 'vim-syntastic/syntastic'
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
-Plug 'rakr/vim-one'
 Plug 'hdima/python-syntax'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'vim-scripts/Align'
@@ -57,12 +62,14 @@ Plug 'elzr/vim-json'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'vimwiki/vimwiki'
 Plug 'Quramy/tsuquyomi'
-Plug 'leafgarland/typescript-vim'
+"Plug 'leafgarland/typescript-vim'
 Plug 'google/vim-searchindex'
-Plug 'artur-shaik/vim-javacomplete2'
-Plug 'junegunn/vim-emoji'
+"Plug 'artur-shaik/vim-javacomplete2'
+"Plug 'junegunn/vim-emoji'
 Plug 'hashivim/vim-terraform'
-Plug 'jessedearing/vim-terraform-completion'
+"Plug '~/Documents/Code/vim-terraform-completion'
+Plug 'juliosueiras/vim-terraform-snippets'
+Plug 'martinda/Jenkinsfile-vim-syntax'
 
 let g:neocomplete#enable_at_startup = 1
 call plug#end()
@@ -133,15 +140,20 @@ set listchars=tab:᠁\
 
 set nolist
 
-" Searching
+"""""""""""""""
+"  Searching  "
+"""""""""""""""
 set hlsearch
 set incsearch
 set ignorecase
 set smartcase
 
-" Mapping leader
+""""""""""""""""""""
+"  Mapping leader  "
+""""""""""""""""""""
 let mapleader = ","
 let g:mapleader = ","
+let maplocalleader = ","
 
 " Tab completion
 set wildmode=list:longest,list:full
@@ -170,7 +182,7 @@ function! s:setupWrapping()
 endfunction
 
 function! s:setupMarkup()
-	call s:setupWrapping()
+	"call s:setupWrapping()
 	setlocal expandtab
 	setlocal list
 endfunction
@@ -183,12 +195,15 @@ endfunction
 function! s:setupMake()
 	setlocal noexpandtab
 endfunction
+
 " make uses real tabs
 au FileType make call s:setupMake()
 au Filetype yaml,yml call s:setupYaml()
+au BufWrite *.{yaml,yml} %!prettier --parser yaml
 
 " md, markdown, and mk are markdown and define buffer-local preview
- au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+let vim_markdown_preview_toggle=1
 let vim_markdown_preview_github=1
 let vim_markdown_preview_browser='Firefox'
 
@@ -228,23 +243,29 @@ set modeline
 set modelines=10
 
 " Default color scheme
-let g:aldmeris_transparent = 0
+"let g:aldmeris_transparent = 0
 " let g:aldmeris_termcolors = "tango"
 " color aldmeris
-set background=dark
-let base16colorspace=256
+"set background=dark
+"let base16colorspace=256
 "color base16-default
 " color kalisi
 " color material
 " color crayon
 "color base16-tomorrow-night
-let g:one_allow_italics = 1
-color one
+"let g:one_allow_italics = 1
+"color one
  "color anderson
 "color dracula
 "color darcula
 "color tender
 "color OceanicNext
+let g:nord_italic = 1
+let g:nord_underline = 1
+let g:nord_italic_comments = 1
+let g:nord_uniform_diff_background = 1
+let g:nord_cursor_line_number_background = 1
+color nord
 
 " Directories for swp files
 set backupdir=~/.vim/backup
@@ -260,18 +281,6 @@ let g:sqlutil_align_comma = 1
 
 " set clipboard="
 set clipboard=unnamed
-
-" Testing
-map <Leader>r :!~/.rbenv/shims/bundle exec rake<CR>
-
-" GNUpg																																		 {{{
-map <Leader>cd :%!gpg -d --batch -<CR>
-" }}}
-
-"		Syntastic																															 {{{
-" Enable syntastic syntax checking
-let g:syntastic_enable_signs=1
-" }}}
 
 "		Grep																																	 {{{
 let Grep_Find_Use_Xargs = 0
@@ -290,13 +299,12 @@ au BufRead,BufNewFile python setlocal shiftwidth=4
 au BufRead,BufNewFile python setlocal softtabstop=4
 au BufRead,BufNewFile python setlocal textwidth=79
 
-
 "		Airline
 " ====================================================================
 " Settings
 let g:airline_powerline_fonts = 1
 "let g:airline_theme='base16_tomorrow'
-let g:airline_theme='one'
+let g:airline_theme='nord'
 let g:airline#extensions#wordcount#filetypes = '\vhelp|markdown|rst|org|text|asciidoc|tex|mail|wiki'
 
 "		Spell
@@ -316,7 +324,7 @@ let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:30,results:30'
 "		CTags
 " ====================================================================
 set tags=tags;/
-map <Leader>rt :!/usr/local/bin/ctags --exclude=.git --exclude=public --exclude=.bundle --exclude=doc --exclude=coverage -R<CR><CR>
+"map <Leader>rt :!/usr/local/bin/ctags --exclude=.git --exclude=public --exclude=.bundle --exclude=doc --exclude=coverage -R<CR><CR>
 map <Leader>gt :!.git/hooks/ctags<CR><CR>
 let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
 " let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
@@ -332,17 +340,18 @@ map <Leader>tb :TagbarToggle<CR>
 " ====================================================================
 map <Leader>gd :GundoToggle<CR>
 
-" Vimwiki
-" ====================================================================
+"""""""""""""
+"  Vimwiki  "
+"""""""""""""
+
 " let g:vimwiki_folding='expr'
-" let g:vimwiki_hl_cb_checked=1
-"autocmd BufWritePost *.wiki silent execute '! git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki add "%" > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki commit -q -m "%" 2>&1 > /dev/null; git --git-dir=$HOME/vimwiki/.git --work-tree=$HOME/vimwiki push origin master -q > /dev/null' |
-     "\ redraw!
+ let g:vimwiki_hl_cb_checked=1
 au FileType vimwiki nnoremap <C-P> :Vimwiki2HTMLBrowse<CR>
 "au BufRead,BufNewFile *.wiki call s:setupWrapping()
 au FileType vimwiki setlocal spell
-"let g:vimwiki_list = [
-"  \ {'path': '~/daily/', 'ext': '.md'}]
+let g:vimwiki_list = [
+  \ {'path': '~/.vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+autocmd BufWritePost /Users/jesse/.vimwiki/*.md silent execute '! git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki add "%" > /dev/null; git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki commit -q -m "%" 2>&1 > /dev/null; git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki push origin master -q > /dev/null' |
 
 " AutoPairs
 " ====================================================================
@@ -365,10 +374,6 @@ map <Leader>< :bp<CR>
 
 au BufRead,BufNewFile *.thrift setlocal filetype=thrift
 
-" RSpec
-" ====================================================================
-map <Leader>rs :RunSpec<CR>
-
 "let g:UltiSnipsExpandTrigger="<tab>"
 "let g:UltiSnipsJumpForwardTrigger="<tab>"
 "let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
@@ -377,8 +382,9 @@ let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 let g:snips_author = 'Jesse Dearing'
 
-" Golang
-" ============================================================================
+""""""""
+"  Go  "
+""""""""
 let $GOPATH = $HOME."/go"
 let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 0
@@ -400,10 +406,10 @@ let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 
 augroup go
-	au FileType go nmap <Leader>i <Plug>(go-implements)
+  au FileType go nmap <Leader>i <Plug>(go-implements)
 	au FileType go nmap <Leader>gd <Plug>(go-doc)
-	au FileType go nmap <leader>r <Plug>(go-rename)
-	au FileType go nmap <leader>/ <Plug>(go-referrers)
+  "au FileType go nmap <leader>r <Plug>(go-rename)
+  au FileType go nmap <leader>/ <Plug>(go-referrers)
 	au FileType go nmap <leader>t <Plug>(go-test)
 	au FileType go nmap <leader>c <Plug>(go-callers)
 	au FileType go imap <C-e> <C-o><Plug>(go-iferr)
@@ -468,7 +474,7 @@ let g:ale_python_mypy_options = '--ignore-missing-imports'
 if has('nvim')
 	" Deoplete
 	" ===========================================================================
-	call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
+  "call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 	let g:deoplete#enable_at_startup = 1
 
 	highlight NeomakeError ctermfg=168 ctermbg=16 guifg=#e06c75 guibg=#282c34
@@ -519,3 +525,7 @@ hi illuminatedWord cterm=underline gui=underline
 "  JSON  "
 """"""""""
 au Filetype json setlocal foldmethod=syntax
+
+
+"inoremap <silent><expr> <c-space> coc#refresh()
+"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"

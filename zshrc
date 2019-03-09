@@ -32,11 +32,7 @@ source $ZSH/oh-my-zsh.sh
 fpath=(/usr/local/share/zsh-completions $fpath)
 source /usr/local/share/zsh/site-functions/_*
 
-BASE16_SHELL=$HOME/.dotfiles/themes/base16-shell
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-base16_tomorrow-night
-
-export PATH=$HOME/go/bin:/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/opt/curl/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/Cellar/go/1.2/libexec/bin:/usr/local/opt/perl/bin
+export PATH=${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.cargo/bin:$HOME/go/bin:/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/opt/curl/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/Cellar/go/1.2/libexec/bin:/usr/local/opt/perl/bin
 
 if ( which rbenv 2>&1 > /dev/null ); then
   rbenv rehash 2>/dev/null
@@ -56,13 +52,18 @@ if ( which rbenv 2>&1 > /dev/null ); then
   }
 fi
 
-#export RBENV_VERSION=2.0.0-p451
+function git() {
+  if pgrep openconnect &> /dev/null ; then
+    lab $*
+  else
+    hub $*
+  fi
+}
 
 export PGDATA=/usr/local/var/postgresql
 alias tf=terraform
 alias web="open -a 'Firefox' "
-alias g='nocorrect git'
-alias git=hub
+alias g='git'
 alias gco='git checkout'
 alias gs="git status -sb"
 alias ga="git add"
@@ -88,8 +89,12 @@ fi
 alias rg="rg -i -g \"!{vendor}\""
 
 if [ -x /usr/local/bin/bat ]; then
-  export BAT_THEME=TwoDark
+  export BAT_THEME=Nord
   alias cat=bat
+fi
+
+if [ -x /usr/local/bin/fd ]; then
+  alias find=fd
 fi
 
 export EDITOR=$HOME/.bin/editor.sh
@@ -104,30 +109,10 @@ function quote() {
 }
 
 export JAVA_HOME="$(/usr/libexec/java_home)"
-if [ -d "$HOME/.ec2" ]; then
-  export EC2_PRIVATE_KEY="$(/bin/ls "$HOME"/.ec2/pk-*.pem | /usr/bin/head -1)"
-  export EC2_CERT="$(/bin/ls "$HOME"/.ec2/cert-*.pem | /usr/bin/head -1)"
-  export EC2_AMITOOL_HOME="/usr/local/Library/LinkedKegs/ec2-ami-tools/jars"
-fi
-
-export ARCHFLAGS='-arch x86_64'
 
 export NODE_PATH=/usr/local/lib/node
 
 export KEYTIMEOUT=5
-
-# Add the following to your ~/.bashrc or ~/.zshrc
-hitch() {
-  command hitch "$@"
-  if [[ -s "$HOME/.hitch_export_authors" ]] ; then source "$HOME/.hitch_export_authors" ; fi
-}
-alias unhitch='hitch -u'
-# Uncomment to persist pair info between terminal instances
-# hitch
-
-function histag() {
-  history | ag "$1" | tail
-}
 
 function bail_on_tmux() {
   echo "Loading tmux...."
@@ -181,7 +166,7 @@ alias eclimd=/Users/jdearing/eclipse/Eclipse.app/Contents/Eclipse/eclimd
 alias eclim=/Users/jdearing/eclipse/Eclipse.app/Contents/Eclipse/eclim
 # export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
-export GOPATH=$HOME/Documents/Code/Go
+export GOPATH=$HOME/go
 export GOROOT=/usr/local/opt/go/libexec
 
 # History searching
@@ -207,19 +192,16 @@ export EC2_HOME=/usr/local/opt/ec2-api-tools/libexec
 
   #ssh-add $HOME/.ssh/id_rsa &> /dev/null
 ssh-add -qK $HOME/.ssh/id_ed25519 &> /dev/null &!
-load_tmux
+ssh-add -qK $HOME/.ssh/vmware-ed25519 &> /dev/null &!
+#load_tmux
+
+stty discard undef
 
 # JBoss Setup
 # ============================================================================
 export JBOSS_HOME=/usr/local/opt/wildfly-as/libexec
 export PATH=${PATH}:${JBOSS_HOME}/bin
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
-#export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
-
-export LIQUIBASE_HOME=/usr/local/opt/liquibase/libexec
-
-# export NVM_DIR="$HOME/.nvm"
-# . "/usr/local/opt/nvm/nvm.sh"
 
 
 TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S'
@@ -246,8 +228,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 #  AWS Vault  #
 ###############
 
-export AWS_VAULT_KEYCHAIN_NAME=login
-
 if [ -z "$AWS_EXPIRY" ]; then
   if [ ! -z "$AWS_VAULT" ]; then
     local ttl
@@ -263,3 +243,4 @@ fi
 export VAULT_ADDR='http://127.0.0.1:8200'
 export VAULT_FORMAT=json
 export ETCDCTL_API=3
+. /usr/local/etc/grc.zsh
