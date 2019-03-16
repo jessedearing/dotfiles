@@ -93,10 +93,6 @@ if [ -x /usr/local/bin/bat ]; then
   alias cat=bat
 fi
 
-if [ -x /usr/local/bin/fd ]; then
-  alias find=fd
-fi
-
 export EDITOR=$HOME/.bin/editor.sh
 export LESS="-iMx4 -RX"
 export LESS_TERMCAP_so=$'\E[30;43m'
@@ -126,7 +122,11 @@ function load_tmux() {
      bail_on_tmux && tmux attach -t 0 && exit
     else
       if [ -z "$TMUX" ] && [ -z "$SUDO_USER" ] && [ -z "$SSH_CONNECTION" ]; then
-        bail_on_tmux && ssh-agent tmux && exit
+        eval "$(ssh-agent)"
+        #ssh-add $HOME/.ssh/id_rsa &> /dev/null
+        ssh-add -qK $HOME/.ssh/id_ed25519 &> /dev/null &!
+        ssh-add -qK $HOME/.ssh/vmware-ed25519 &> /dev/null &!
+        bail_on_tmux && tmux && exit
       fi
     fi
   fi
@@ -189,11 +189,6 @@ VIRTUAL_ENV_DISABLE_PROMPT=1
 # NOOPing virtualenv because I just don't use python that much
 prompt_virtualenv() {}
 export EC2_HOME=/usr/local/opt/ec2-api-tools/libexec
-
-  #ssh-add $HOME/.ssh/id_rsa &> /dev/null
-ssh-add -qK $HOME/.ssh/id_ed25519 &> /dev/null &!
-ssh-add -qK $HOME/.ssh/vmware-ed25519 &> /dev/null &!
-#load_tmux
 
 stty discard undef
 
