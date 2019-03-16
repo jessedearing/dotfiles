@@ -24,13 +24,13 @@ Plug 'vim-scripts/scratch.vim'
 "Plug 'vim-scripts/calendar.vim'
 if has('nvim')
   Plug 'Shougo/denite.nvim'
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   "Plug 'zchee/deoplete-go', { 'do': 'make'}
 	"Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 
-	Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': 'vim/update.sh' }
+	"Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': 'vim/update.sh' }
 	"Plug 'zchee/deoplete-jedi'
-  "Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+  Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
   "Plug 'autozimu/LanguageClient-neovim', {
   "  \ 'branch': 'next',
   "  \ 'do': 'bash install.sh',
@@ -39,6 +39,8 @@ else
 	"Plug 'Valloric/YouCompleteMe'
 	Plug 'nsf/gocode', { 'rtp': 'vim', 'do': 'vim/update.sh' }
 endif
+Plug 'Shougo/neco-vim'
+Plug 'neoclide/coc-neco'
 "Plug 'ervandew/supertab'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'neomake/neomake'
@@ -70,6 +72,7 @@ Plug 'hashivim/vim-terraform'
 "Plug '~/Documents/Code/vim-terraform-completion'
 Plug 'juliosueiras/vim-terraform-snippets'
 Plug 'martinda/Jenkinsfile-vim-syntax'
+Plug 'cohama/agit.vim'
 
 let g:neocomplete#enable_at_startup = 1
 call plug#end()
@@ -97,6 +100,7 @@ set ruler
 " Highlights current line
 "set cursorline
 set showcmd
+set cmdheight=2
 syntax on
 set foldlevelstart=99
 set foldmethod=marker
