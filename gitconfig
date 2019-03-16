@@ -24,6 +24,7 @@
 [alias]
   reuse=commit --amend --reuse-message=HEAD
   s=status -sb
+  glinit=config --local --add remote.origin.fetch '+refs/merge-requests/*/head:refs/remotes/origin/merge-request/*'
 [fetch]
   prune = true
 [filter "lfs"]
