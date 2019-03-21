@@ -1,0 +1,12 @@
+#compdef use-aws-config
+
+__aws_configs() {
+  _files -W $HOME/.aws
+}
+
+__use-aws-config() {
+  _arguments \
+    '1:file:__aws_configs'
+}
+
+__use-aws-config

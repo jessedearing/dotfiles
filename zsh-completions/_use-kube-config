@@ -1,0 +1,12 @@
+#compdef use-kube-config
+
+__kube_configs() {
+  _files -W $HOME/.kube
+}
+
+__use-kube-config() {
+  _arguments \
+    '1:file:__kube_configs'
+}
+
+__use-kube-config
