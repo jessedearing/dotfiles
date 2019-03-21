@@ -7,6 +7,29 @@ function _background_procs() {
 	[[ $(jobs -l | wc -l) -gt 0 ]] && echo -n "⚙  "
 }
 
+function _kube_info() {
+  if ! type kubectl &> /dev/null; then
+    return
+  fi
+
+  context=`kubectl config current-context 2> /dev/null`
+  if [ $? != 0 ]; then
+    return
+  fi
+
+  if [[ "$context" =~ 'prod' ]]; then
+    context="%{$fg[red]%}prod"
+  elif [[ "$context" =~ 'dev' ]]; then
+    context="%{$fg[blue]%}dev"
+  elif [[ "$context" =~ '.*\@(.*)' ]]; then
+    context="%{$fg[blue]%}${match[1]}"
+  else
+    context="%{$fg[blue]%}`echo $context | cut -c-21`"
+  fi
+
+  print "%{$fg[blue]%}ﴱ $context "
+}
+
 function _aws_vault_segment() {
   local color_indicator
   if [ ! -z "$AWS_EXPIRY" ]; then
@@ -25,7 +48,7 @@ if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
   MODE_INDICATOR="%{$fg_bold[red]%}❮%{$reset_color%}%{$fg[red]%}❮❮%{$reset_color%}"
   local return_status="%{$fg[red]%}%(?..⏎)%{$reset_color%}"
 
-  PROMPT='$(_aws_vault_segment)$(_background_procs)%{$fg[cyan]%}%c$(git_prompt_info) %(!.%{$fg_bold[red]%}#.%{$fg_bold[green]%}❯)%{$reset_color%} '
+  PROMPT='$(_kube_info)$(_aws_vault_segment)$(_background_procs)%{$fg[cyan]%}%c$(git_prompt_info) %(!.%{$fg_bold[red]%}#.%{$fg_bold[green]%}❯)%{$reset_color%} '
 
   ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg[blue]%}git%{$reset_color%}:%{$fg[red]%}"
   ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
