@@ -61,6 +61,7 @@ function git() {
 }
 
 export PGDATA=/usr/local/var/postgresql
+alias node='NODE_NO_READLINE=1 rlwrap node'
 alias tf=terraform
 alias web="open -a 'Firefox' "
 alias g='git'
