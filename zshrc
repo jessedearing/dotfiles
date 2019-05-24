@@ -20,19 +20,12 @@ export ZSH_CUSTOM="$HOME/.zsh-custom"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(vi-mode zsh-syntax-highlighting golang docker zsh-aws-vault)
 
-# Have to set GIT environment variables so they can be overridden by anything
-# in zsh-custom
-export GIT_AUTHOR_NAME="Jesse Dearing"
-export GIT_AUTHOR_EMAIL="jesse.dearing@gmail.com"
-export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
-export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
-
 source $ZSH/oh-my-zsh.sh
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 source /usr/local/share/zsh/site-functions/_*
 
-export PATH=${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.cargo/bin:$HOME/go/bin:/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/opt/curl/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/Cellar/go/1.2/libexec/bin:/usr/local/opt/perl/bin
+export PATH=/usr/local/kubebuilder/bin:${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.cargo/bin:$HOME/go/bin:/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/opt/curl/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/Cellar/go/1.2/libexec/bin:/usr/local/opt/perl/bin
 
 if ( which rbenv 2>&1 > /dev/null ); then
   rbenv rehash 2>/dev/null
@@ -51,14 +44,6 @@ if ( which rbenv 2>&1 > /dev/null ); then
     esac
   }
 fi
-
-function git() {
-  if pgrep openconnect &> /dev/null ; then
-    lab $*
-  else
-    hub $*
-  fi
-}
 
 export PGDATA=/usr/local/var/postgresql
 alias node='NODE_NO_READLINE=1 rlwrap node'
@@ -120,13 +105,16 @@ function bail_on_tmux() {
 function load_tmux() {
   if (which tmux 2>&1 > /dev/null); then
     if [ -z "$TMUX" ] && ( tmux ls 2>&1 ); then
+     eval "$(ssh-agent)"
+     ssh-add -A
      bail_on_tmux && tmux attach -t 0 && exit
     else
       if [ -z "$TMUX" ] && [ -z "$SUDO_USER" ] && [ -z "$SSH_CONNECTION" ]; then
         eval "$(ssh-agent)"
         #ssh-add $HOME/.ssh/id_rsa &> /dev/null
-        ssh-add -qK $HOME/.ssh/id_ed25519 &> /dev/null &!
-        ssh-add -qK $HOME/.ssh/vmware-ed25519 &> /dev/null &!
+        #ssh-add -qK $HOME/.ssh/id_ed25519 &> /dev/null &!
+        #ssh-add -qK $HOME/.ssh/vmware-ed25519 &> /dev/null &!
+        ssh-add -A
         bail_on_tmux && tmux && exit
       fi
     fi
