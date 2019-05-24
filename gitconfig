@@ -1,3 +1,5 @@
+[user]
+	email = jesse.dearing@gmail.com
 [color]
 	ui = true
 [mergetool "fugitive"]
@@ -31,6 +33,7 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	required = true
+	process = git-lfs filter-process
 [github]
 	user = jessedearing
 [commit]
