@@ -23,26 +23,18 @@ Plug 'tpope/vim-surround'
 Plug 'vim-scripts/scratch.vim'
 "Plug 'vim-scripts/calendar.vim'
 if has('nvim')
-  Plug 'Shougo/denite.nvim'
-  "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  "Plug 'zchee/deoplete-go', { 'do': 'make'}
-	"Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
-
-	"Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': 'vim/update.sh' }
-	"Plug 'zchee/deoplete-jedi'
-  Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-  "Plug 'autozimu/LanguageClient-neovim', {
-  "  \ 'branch': 'next',
-  "  \ 'do': 'bash install.sh',
-  "  \ }
-else
-	"Plug 'Valloric/YouCompleteMe'
-	Plug 'nsf/gocode', { 'rtp': 'vim', 'do': 'vim/update.sh' }
+"  Plug 'Shougo/denite.nvim'
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+  "Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 endif
-Plug 'Shougo/neco-vim'
-Plug 'neoclide/coc-neco'
+"Plug 'Shougo/neco-vim'
+"Plug 'neoclide/coc-neco'
 "Plug 'ervandew/supertab'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', { 'tag': '*', 'do': ':GoUpdateBinaries' }
 Plug 'neomake/neomake'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
@@ -69,12 +61,11 @@ Plug 'google/vim-searchindex'
 "Plug 'artur-shaik/vim-javacomplete2'
 "Plug 'junegunn/vim-emoji'
 Plug 'hashivim/vim-terraform'
-"Plug '~/Documents/Code/vim-terraform-completion'
-Plug 'juliosueiras/vim-terraform-snippets'
+"Plug 'juliosueiras/vim-terraform-snippets'
+Plug 'juliosueiras/vim-terraform-completion'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'cohama/agit.vim'
 
-let g:neocomplete#enable_at_startup = 1
 call plug#end()
 if (has("termguicolors") && has('nvim'))
  set termguicolors
@@ -356,6 +347,16 @@ au FileType vimwiki setlocal spell
 let g:vimwiki_list = [
   \ {'path': '~/.vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 autocmd BufWritePost /Users/jesse/.vimwiki/*.md silent execute '! git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki add "%" > /dev/null; git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki commit -q -m "%" 2>&1 > /dev/null; git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki push origin master -q > /dev/null' |
+let g:tagbar_type_vimwiki = {
+          \   'ctagstype':'vimwiki'
+          \ , 'kinds':['h:header']
+          \ , 'sro':'&&&'
+          \ , 'kind2scope':{'h':'header'}
+          \ , 'sort':0
+          \ , 'ctagsbin':'/Users/jesse/.vimwiki/utils/vwtags.py'
+          \ , 'ctagsargs': 'markdown'
+          \ }
+let g:vimwiki_listsyms = ' ○◐●✓'
 
 " AutoPairs
 " ====================================================================
@@ -386,9 +387,14 @@ let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 let g:snips_author = 'Jesse Dearing'
 
-""""""""
-"  Go  "
-""""""""
+""""""""""""
+"  Golang  "
+""""""""""""
+let g:LanguageClient_serverCommands = {
+       \ 'go': ['gopls']
+       \ }
+" Run gofmt and goimports on save
+autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
 let $GOPATH = $HOME."/go"
 let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 0
@@ -408,6 +414,7 @@ let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
+let g:go_def_mode = "gopls"
 
 augroup go
   au FileType go nmap <Leader>i <Plug>(go-implements)
@@ -458,17 +465,17 @@ set secure
 
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 "let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete#omni_patterns = {}
-let g:deoplete#omni_patterns.java = '[^. *\t]\.\w*'
 "autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 """""""""""""""
 "  Terraform  "
 """""""""""""""
-let g:deoplete#omni_patterns.terraform = '[^ *\t"{=$]\w*'
 let g:terraform_completion_keys = 1
 
 let g:terraform_fmt_on_save = 1
+" (Optional)Hide Info(Preview) window after completions
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 set rtp+=/usr/local/opt/fzf
 
@@ -476,33 +483,39 @@ let g:ycm_python_binary_path = '/usr/local/opt/python3/bin/python3'
 let g:ale_python_mypy_options = '--ignore-missing-imports'
 
 if has('nvim')
-	" Deoplete
-	" ===========================================================================
-  "call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
-	let g:deoplete#enable_at_startup = 1
+  " Deoplete
+  " ===========================================================================
+  call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy', 'matcher_length'])
+  let g:deoplete#enable_at_startup = 1
+  call deoplete#custom#option('omni_patterns', { 'java': '[^. *\t]\.\w*' })
+  call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
+  "call deoplete#custom#option('omni_patterns', { 'complete_method': 'omnifunc', 'terraform': '[^ *\t"{=$]\w*' })
 
-	highlight NeomakeError ctermfg=168 ctermbg=16 guifg=#e06c75 guibg=#282c34
-	highlight NeomakeWarning ctermfg=180 guifg=#e5c07b
-	let g:neomake_error_sign = {'text': '✖', 'texthl': 'NeomakeError'}
-	let g:neomake_warning_sign={'text': '⚠', 'texthl': 'NeomakeWarning'}
-	let g:neomake_go_gometalinter_args = [ '--disable-all', '--enable=vet', '--enable=errcheck', '--enable=gosimple', '--enable=staticcheck', '--enable=unused', '--enable=golint']
-	call neomake#configure#automake('w')
+  call deoplete#initialize()
 
-	let g:neomake_vimwiki_writegood_maker = {
-				\ 'exe': 'writegood',
-				\ 'args': ['--parse'],
-				\ 'errorformat': '%W%f:%l:%c:%m,%C%m,%-G',
-				\ 'postprocess': function('neomake#makers#ft#text#PostprocessWritegood')
-				\ }
-	let g:neomake_vimwiki_enabled_makers = ['writegood']
 
-	" This does in-place updates (as opposed to a split window) when doing
-	" search and replace
-	set inccommand=nosplit
+  highlight NeomakeError ctermfg=168 ctermbg=16 guifg=#e06c75 guibg=#282c34
+  highlight NeomakeWarning ctermfg=180 guifg=#e5c07b
+  let g:neomake_error_sign = {'text': '✖', 'texthl': 'NeomakeError'}
+  let g:neomake_warning_sign={'text': '⚠', 'texthl': 'NeomakeWarning'}
+  let g:neomake_go_gometalinter_args = [ '--disable-all', '--enable=vet', '--enable=errcheck', '--enable=gosimple', '--enable=staticcheck', '--enable=unused', '--enable=golint']
+  call neomake#configure#automake('w')
 
-	let g:deoplete#sources#ternjs#filetypes = [
+  let g:neomake_vimwiki_writegood_maker = {
+        \ 'exe': 'writegood',
+        \ 'args': ['--parse'],
+        \ 'errorformat': '%W%f:%l:%c:%m,%C%m,%-G',
+        \ 'postprocess': function('neomake#makers#ft#text#PostprocessWritegood')
+        \ }
+  let g:neomake_vimwiki_enabled_makers = ['writegood']
+
+  " This does in-place updates (as opposed to a split window) when doing
+  " search and replace
+  set inccommand=nosplit
+
+  let g:deoplete#sources#ternjs#filetypes = [
                 \ 'jsx'
-								\ ]
+                \ ]
 endif
 
 function! WinMove(key)
@@ -531,5 +544,14 @@ hi illuminatedWord cterm=underline gui=underline
 au Filetype json setlocal foldmethod=syntax
 
 
-"inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <c-space> coc#refresh()
 "inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+
+"""""""""""""
+"  Crontab  "
+"""""""""""""
+au filetype crontab setlocal nobackup nowritebackup
+
+"""""""""""""
+"  coc.vim  "
+"""""""""""""
