@@ -1,9 +1,11 @@
 {
   "languageserver": {
-    "command": "gopls",
-    "args": [],
-    "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-    "filetypes": ["go"]
+    "golang": {
+      "command": "gopls",
+      "args": [],
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
+    }
   },
   "yaml.schemas": {
     "Kubernetes": "*.yaml"
