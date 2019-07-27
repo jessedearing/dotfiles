@@ -25,7 +25,7 @@ source $ZSH/oh-my-zsh.sh
 fpath=(/usr/local/share/zsh-completions $fpath)
 source /usr/local/share/zsh/site-functions/_*
 
-export PATH=/usr/local/kubebuilder/bin:${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.cargo/bin:$HOME/go/bin:/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/opt/curl/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/Cellar/go/1.2/libexec/bin:/usr/local/opt/perl/bin
+export PATH=/usr/local/go/bin:/usr/local/kubebuilder/bin:${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.cargo/bin:$HOME/go/bin:/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/opt/curl/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/opt/perl/bin
 
 if ( which rbenv 2>&1 > /dev/null ); then
   rbenv rehash 2>/dev/null
@@ -75,7 +75,7 @@ fi
 alias rg="rg -i -g \"!{vendor}\""
 
 if [ -x /usr/local/bin/bat ]; then
-  export BAT_THEME=Nord
+  export BAT_THEME=OneHalfLight
   alias cat=bat
 fi
 
@@ -127,6 +127,7 @@ fi
 function printcolors() {
   for i in {0..255} ; do
     printf "\\x1b[38;5;${i}m \\\x1b[38;5;${i}m\n"
+    printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"
   done
 }
 
@@ -156,7 +157,7 @@ alias eclim=/Users/jdearing/eclipse/Eclipse.app/Contents/Eclipse/eclim
 # export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
 export GOPATH=$HOME/go
-export GOROOT=/usr/local/opt/go/libexec
+export GOROOT=/usr/local/go
 
 # History searching
 bindkey -M vicmd '/' fzf-history-widget
@@ -204,6 +205,7 @@ ulimit -S -n 2048
 #export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules,vendor}/*" 2> /dev/null'
 export FZF_DEFAULT_COMMAND='ag -l -U --nocolor --ignore .git -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_DEFAULT_OPTS="--color light"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
@@ -224,7 +226,10 @@ if [ -z "$AWS_EXPIRY" ]; then
   fi
 fi
 
+#####################
+#  Hashicorp Vault  #
+#####################
+
 export VAULT_ADDR='http://127.0.0.1:8200'
-export VAULT_FORMAT=json
 export ETCDCTL_API=3
 . /usr/local/etc/grc.zsh

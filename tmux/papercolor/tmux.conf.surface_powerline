@@ -21,21 +21,23 @@ ArLt=""
 
 # separators left side
 #
-LbLt="#[fg=colour236,bg=colour234]$ArRt"
-OmLs="#[fg=colour234,bg=colour208]$ArRt"
-OmRs="#[fg=colour208,bg=colour236]$ArRt"
-GmLs="#[fg=colour234,bg=colour148]$ArRt"
-GmRs="#[fg=colour148,bg=colour236]$ArRt"
-AqLs="#[fg=colour234,bg=colour037]$ArRt"
-AqRs="#[fg=colour037,bg=colour234]$ArRt"
+#LbLt="#[fg=colour236,bg=colour234]$ArRt"
+LbLt="#[fg=colour015,bg=colour253]$ArRt"
+OmLs="#[fg=colour253,bg=colour208]$ArRt"
+OmRs="#[fg=colour208,bg=colour015]$ArRt"
+GmLs="#[fg=colour253,bg=colour148]$ArRt"
+GmRs="#[fg=colour148,bg=colour015]$ArRt"
+AqLs="#[fg=colour015,bg=colour037]$ArRt"
+AqRs="#[fg=colour037,bg=colour253]$ArRt"
 
 # separators right side
 #
-LbRt="#[fg=colour236,bg=colour234]$ArLt"
-YmLs="#[fg=colour214,bg=colour236]$ArLt"
-YmRs="#[fg=colour234,bg=colour214]$ArLt"
-PmLs="#[fg=colour205,bg=colour236]$ArLt"
-PmRs="#[fg=colour234,bg=colour205]$ArLt"
+LbRt="#[fg=colour015,bg=colour253]$ArLt"
+LbRt2="#[fg=colour253,bg=colour015]$ArLt"
+YmLs="#[fg=colour214,bg=colour253]$ArLt"
+YmRs="#[fg=colour253,bg=colour214]$ArLt"
+PmLs="#[fg=colour205,bg=colour253]$ArLt"
+PmRs="#[fg=colour015,bg=colour205]$ArLt"
 
 # colors for marker labels (colored bg, black fg)
 #
@@ -48,12 +50,12 @@ MkAq="#[fg=colour234,bg=colour037,bold]"
 
 # colors for status labels (colored fg, black bg)
 #
-LbOr="#[fg=colour208,bg=colour236,nobold]"
-LbGn="#[fg=colour148,bg=colour236,nobold]"
-LbYe="#[fg=colour214,bg=colour236,nobold]"
-LbBl="#[fg=colour074,bg=colour236,nobold]"
-LbPu="#[fg=colour205,bg=colour236,nobold]"
-LbAq="#[fg=colour037,bg=colour236,nobold]"
+LbOr="#[fg=colour208,bg=colour015,nobold]"
+LbGn="#[fg=colour148,bg=colour015,nobold]"
+LbYe="#[fg=colour214,bg=colour015,nobold]"
+LbBl="#[fg=colour074,bg=colour015,nobold]"
+LbPu="#[fg=colour205,bg=colour015,nobold]"
+LbAq="#[fg=colour037,bg=colour015,nobold]"
 
 # left side of the statusbar
 #
@@ -63,21 +65,21 @@ WnSt="$OmLs$MkOr #I $OmRs$LbOr #W#F $LbLt"            # passive window
 
 # right side of the statusbar
 #
-DtTm="$LbRt$LbYe %a %-d. %B %Y $YmLs$MkYe %H:%M $YmRs"# date     | time
-HsWh="$LbRt$LbPu #h $PmLs$MkPu #(whoami) $PmRs"       # hostname | username
+DtTm="$LbRt$LbYe %a %B %d %Y $LbRt2$YmLs$MkYe %H:%M $YmRs"# date     | time
+HsWh="$LbRt$LbPu #h $LbRt2$PmLs$MkPu #(whoami) $PmRs"       # hostname | username
 StRt="$DtTm$HsWh"                                     # build right side
 
 # statusbar settings
 #
-set -g pane-active-border-bg default                  # we dont want to see
-set -g pane-active-border-fg colour148                # border for splits a
-set -g pane-border-bg default                         # we dont want to see
-set -g pane-border-fg colour214                       # border for splits p
-set -g message-fg colour148                           # messagebar fg
-set -g message-bg colour234                           # messagebar bg
+#set -g pane-active-border-bg default                  # we dont want to see
+#set -g pane-active-border-fg colour148                # border for splits a
+#set -g pane-border-bg default                         # we dont want to see
+#set -g pane-border-fg colour214                       # border for splits p
 set -g status-justify left                            # place window list left
-set -g status-bg colour234                            # statusbar itself
-set -g status-fg colour000                            # statusbar itself
+# set -g status-bg colour234                            # statusbar itself
+set -g status-bg colour253
+# set -g status-fg colour000                            # statusbar itself
+set -g status-fg colour015
 
 # print left side of the statusbar
 #

@@ -24,21 +24,23 @@ Plug 'vim-scripts/scratch.vim'
 "Plug 'vim-scripts/calendar.vim'
 if has('nvim')
 "  Plug 'Shougo/denite.nvim'
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-  "Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+  "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'autozimu/LanguageClient-neovim', {
+"    \ 'branch': 'next',
+"    \ 'do': 'bash install.sh',
+"    \ }
+  Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 endif
 "Plug 'Shougo/neco-vim'
 "Plug 'neoclide/coc-neco'
 "Plug 'ervandew/supertab'
-Plug 'fatih/vim-go', { 'tag': '*', 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go', { 'tag': '*'}
+Plug 'andrewstuart/vim-kubernetes'
 Plug 'neomake/neomake'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'dyng/ctrlsf.vim'
+"Plug 'dyng/ctrlsf.vim'
+Plug 'gabesoft/vim-ags'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'airblade/vim-gitgutter'
@@ -65,6 +67,7 @@ Plug 'hashivim/vim-terraform'
 Plug 'juliosueiras/vim-terraform-completion'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'cohama/agit.vim'
+Plug 'NLKNguyen/papercolor-theme'
 
 call plug#end()
 if (has("termguicolors") && has('nvim'))
@@ -161,6 +164,7 @@ set laststatus=2
 " NERDTree configuration
 let NERDTreeIgnore=['\.rbc$', '\~$']
 map <Leader>nn :NERDTreeToggle<CR>
+map <Leader>nf :NERDTreeFind<CR>
 
 " ZoomWin configuration
 " map <Leader><Leader> :ZoomWin<CR>
@@ -241,8 +245,8 @@ set modelines=10
 "let g:aldmeris_transparent = 0
 " let g:aldmeris_termcolors = "tango"
 " color aldmeris
-"set background=dark
-"let base16colorspace=256
+set background=light
+let base16colorspace=256
 "color base16-default
 " color kalisi
 " color material
@@ -260,7 +264,8 @@ let g:nord_underline = 1
 let g:nord_italic_comments = 1
 let g:nord_uniform_diff_background = 1
 let g:nord_cursor_line_number_background = 1
-color nord
+"color nord
+color papercolor
 
 " Directories for swp files
 set backupdir=~/.vim/backup
@@ -298,8 +303,8 @@ au BufRead,BufNewFile python setlocal textwidth=79
 " ====================================================================
 " Settings
 let g:airline_powerline_fonts = 1
-"let g:airline_theme='base16_tomorrow'
-let g:airline_theme='nord'
+"let g:airline_theme='nord'
+let g:airline_theme='papercolor'
 let g:airline#extensions#wordcount#filetypes = '\vhelp|markdown|rst|org|text|asciidoc|tex|mail|wiki'
 
 "		Spell
@@ -382,9 +387,11 @@ au BufRead,BufNewFile *.thrift setlocal filetype=thrift
 "let g:UltiSnipsExpandTrigger="<tab>"
 "let g:UltiSnipsJumpForwardTrigger="<tab>"
 "let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsExpandTrigger = '<C-j>'
-let g:UltiSnipsJumpForwardTrigger = '<C-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+"let g:UltiSnipsExpandTrigger = '<C-j>'
+"let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+"let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+inoremap <expr> <c-j> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
 let g:snips_author = 'Jesse Dearing'
 
 """"""""""""
@@ -394,7 +401,7 @@ let g:LanguageClient_serverCommands = {
        \ 'go': ['gopls']
        \ }
 " Run gofmt and goimports on save
-autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
+"autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
 let $GOPATH = $HOME."/go"
 let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 0
@@ -403,9 +410,6 @@ let g:go_fmt_autosave = 1
 let g:go_list_type = "quickfix"
 let g:go_auto_type_info = 1
 "let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-let g:syntastic_go_checkers = ['golint', 'govet', 'gometalinter']
-let g:syntastic_go_gometalinter_args = ['--disable-all', '--enable=errcheck', '--enable=golint']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_fields = 1
@@ -415,6 +419,9 @@ let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 let g:go_def_mode = "gopls"
+let g:go_info_mode = 'gopls'
+" Disable because coc.vim handles this
+let g:go_def_mapping_enabled = 0
 
 augroup go
   au FileType go nmap <Leader>i <Plug>(go-implements)
@@ -459,6 +466,7 @@ if executable('ag')
 endif
 
 nmap     <C-F>f <Plug>CtrlSFPrompt
+let g:ctrlsf_ackprg = '/usr/local/bin/ag'
 
 set exrc
 set secure
@@ -485,20 +493,19 @@ let g:ale_python_mypy_options = '--ignore-missing-imports'
 if has('nvim')
   " Deoplete
   " ===========================================================================
-  call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy', 'matcher_length'])
-  let g:deoplete#enable_at_startup = 1
-  call deoplete#custom#option('omni_patterns', { 'java': '[^. *\t]\.\w*' })
-  call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
-  "call deoplete#custom#option('omni_patterns', { 'complete_method': 'omnifunc', 'terraform': '[^ *\t"{=$]\w*' })
+  "call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy', 'matcher_length'])
+  "let g:deoplete#enable_at_startup = 1
+  "call deoplete#custom#option('omni_patterns', { 'java': '[^. *\t]\.\w*' })
+  "call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
+  ""call deoplete#custom#option('omni_patterns', { 'complete_method': 'omnifunc', 'terraform': '[^ *\t"{=$]\w*' })
 
-  call deoplete#initialize()
+  "call deoplete#initialize()
 
 
   highlight NeomakeError ctermfg=168 ctermbg=16 guifg=#e06c75 guibg=#282c34
   highlight NeomakeWarning ctermfg=180 guifg=#e5c07b
   let g:neomake_error_sign = {'text': '✖', 'texthl': 'NeomakeError'}
   let g:neomake_warning_sign={'text': '⚠', 'texthl': 'NeomakeWarning'}
-  let g:neomake_go_gometalinter_args = [ '--disable-all', '--enable=vet', '--enable=errcheck', '--enable=gosimple', '--enable=staticcheck', '--enable=unused', '--enable=golint']
   call neomake#configure#automake('w')
 
   let g:neomake_vimwiki_writegood_maker = {
@@ -543,10 +550,6 @@ hi illuminatedWord cterm=underline gui=underline
 """"""""""
 au Filetype json setlocal foldmethod=syntax
 
-
-inoremap <silent><expr> <c-space> coc#refresh()
-"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
-
 """""""""""""
 "  Crontab  "
 """""""""""""
@@ -555,3 +558,10 @@ au filetype crontab setlocal nobackup nowritebackup
 """""""""""""
 "  coc.vim  "
 """""""""""""
+inoremap <silent><expr> <c-space> coc#refresh()
+"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
