@@ -75,7 +75,7 @@ fi
 alias rg="rg -i -g \"!{vendor}\""
 
 if [ -x /usr/local/bin/bat ]; then
-  export BAT_THEME=OneHalfLight
+  export BAT_THEME=Nord
   alias cat=bat
 fi
 
@@ -205,7 +205,7 @@ ulimit -S -n 2048
 #export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules,vendor}/*" 2> /dev/null'
 export FZF_DEFAULT_COMMAND='ag -l -U --nocolor --ignore .git -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_DEFAULT_OPTS="--color light"
+export FZF_DEFAULT_OPTS="--color dark"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

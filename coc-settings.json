@@ -5,6 +5,11 @@
       "args": [],
       "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
       "filetypes": ["go"]
+    },
+    "dot": {
+      "command": "dot-language-server",
+      "args": ["--stdio"],
+      "filetypes": ["dot"]
     }
   },
   "yaml.schemas": {

@@ -245,7 +245,7 @@ set modelines=10
 "let g:aldmeris_transparent = 0
 " let g:aldmeris_termcolors = "tango"
 " color aldmeris
-set background=light
+"set background=light
 let base16colorspace=256
 "color base16-default
 " color kalisi
@@ -264,8 +264,8 @@ let g:nord_underline = 1
 let g:nord_italic_comments = 1
 let g:nord_uniform_diff_background = 1
 let g:nord_cursor_line_number_background = 1
-"color nord
-color papercolor
+color nord
+"color papercolor
 
 " Directories for swp files
 set backupdir=~/.vim/backup
@@ -304,7 +304,8 @@ au BufRead,BufNewFile python setlocal textwidth=79
 " Settings
 let g:airline_powerline_fonts = 1
 "let g:airline_theme='nord'
-let g:airline_theme='papercolor'
+"let g:airline_theme='papercolor'
+let g:airline_theme='nord'
 let g:airline#extensions#wordcount#filetypes = '\vhelp|markdown|rst|org|text|asciidoc|tex|mail|wiki'
 
 "		Spell
