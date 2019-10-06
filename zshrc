@@ -188,13 +188,8 @@ TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S'
 autoload bashcompinit
 bashcompinit
 source $HOME/.bin/gh_complete.sh
-source <(kubectl completion zsh)
 
 ulimit -S -n 2048
-
-#if minikube status | grep "minikubeVM: Running" &> /dev/null; then
-  #eval `minikube docker-env`
-#fi
 
 #export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules,vendor}/*" 2> /dev/null'
 export FZF_DEFAULT_COMMAND='ag -l -U --nocolor --ignore .git -g ""'
