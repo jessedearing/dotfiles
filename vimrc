@@ -1,3 +1,4 @@
+" Plugins {{{1 "
 call plug#begin('~/.vim/plugged')
 Plug 'tarekbecker/vim-yaml-formatter'
 Plug 'pedrohdz/vim-yaml-folds'
@@ -29,7 +30,7 @@ if has('nvim')
 "    \ 'branch': 'next',
 "    \ 'do': 'bash install.sh',
 "    \ }
-  Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+  Plug 'neoclide/coc.nvim', {'tag': '*'}
 endif
 "Plug 'Shougo/neco-vim'
 "Plug 'neoclide/coc-neco'
@@ -39,6 +40,7 @@ Plug 'andrewstuart/vim-kubernetes'
 Plug 'neomake/neomake'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'masukomi/vim-markdown-folding'
 "Plug 'dyng/ctrlsf.vim'
 Plug 'gabesoft/vim-ags'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -70,6 +72,9 @@ Plug 'cohama/agit.vim'
 Plug 'NLKNguyen/papercolor-theme'
 
 call plug#end()
+" 1}}} "
+
+" Stock nvim & vim settings {{{1 "
 if (has("termguicolors") && has('nvim'))
  set termguicolors
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -92,11 +97,11 @@ set number
 set relativenumber
 set ruler
 " Highlights current line
-"set cursorline
+set nocursorline
 set showcmd
 set cmdheight=2
 syntax on
-set foldlevelstart=99
+set nofoldenable
 set foldmethod=marker
 " Puts a line on column 80 of the screen. This is a good indicator for methods
 " that are too long
@@ -160,20 +165,19 @@ set wildignore+=*/.vagrant/*,*/.bundle/*,*.o,*.obj,.git,*.rbc
 " Status bar
 set laststatus=2
 " set statusline=[%n]\ %<%f\ %([%1*%M%*%R%Y]%)\ \ %{SyntasticStatuslineFlag()}\ \ %=%-19(\LINE\ [%l/%L]\ COL\ [%02c%03V]%)\ %P
-
-" NERDTree configuration
-let NERDTreeIgnore=['\.rbc$', '\~$']
-map <Leader>nn :NERDTreeToggle<CR>
-map <Leader>nf :NERDTreeFind<CR>
-
-" ZoomWin configuration
-" map <Leader><Leader> :ZoomWin<CR>
-
-
+"
 " Remember last location in file
 if has("autocmd")
 	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+" 1}}} "
+
+" NERDTree Configuration {{{1 "
+let NERDTreeIgnore=['\.rbc$', '\~$']
+map <Leader>nn :NERDTreeToggle<CR>
+map <Leader>nf :NERDTreeFind<CR>
+
+" 1}}} "
 
 function! s:setupWrapping()
 	setlocal wm=2
@@ -198,7 +202,7 @@ endfunction
 " make uses real tabs
 au FileType make call s:setupMake()
 au Filetype yaml,yml call s:setupYaml()
-au BufWrite *.{yaml,yml} %!prettier --parser yaml
+"au BufWrite *.{yaml,yml} %!prettier --parser yaml
 
 " md, markdown, and mk are markdown and define buffer-local preview
 au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
@@ -223,14 +227,6 @@ filetype plugin indent on
 " Opens an edit command with the path of the currently edited file filled in
 " Normal mode: <Leader>e
 map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
-
-" Unimpaired configuration
-" Bubble single lines
-nmap <Leader><Up> [e
-nmap <Leader><Down> ]e
-" Bubble multiple lines
-vmap <Leader><Up> [egv
-vmap <Leader><Down> ]egv
 
 nmap <Leader><Space> :nohlsearch<CR>
 au BufReadPost quickfix map <C-n> :cn<CR>
@@ -345,14 +341,14 @@ map <Leader>gd :GundoToggle<CR>
 "  Vimwiki  "
 """""""""""""
 
-" let g:vimwiki_folding='expr'
- let g:vimwiki_hl_cb_checked=1
+let g:vimwiki_folding='custom'
+let g:vimwiki_hl_cb_checked=1
 au FileType vimwiki nnoremap <C-P> :Vimwiki2HTMLBrowse<CR>
 "au BufRead,BufNewFile *.wiki call s:setupWrapping()
 au FileType vimwiki setlocal spell
 let g:vimwiki_list = [
   \ {'path': '~/.vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
-autocmd BufWritePost /Users/jesse/.vimwiki/*.md silent execute '! git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki add "%" > /dev/null; git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki commit -q -m "%" 2>&1 > /dev/null; git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki push origin master -q > /dev/null' |
+autocmd BufWritePost /Users/jesse/.vimwiki/*.md silent execute '! git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki add "%" > /dev/null; git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki commit -q -m "%" 2>&1 > /dev/null'
 let g:tagbar_type_vimwiki = {
           \   'ctagstype':'vimwiki'
           \ , 'kinds':['h:header']
@@ -391,25 +387,24 @@ au BufRead,BufNewFile *.thrift setlocal filetype=thrift
 "let g:UltiSnipsExpandTrigger = '<C-j>'
 "let g:UltiSnipsJumpForwardTrigger = '<C-j>'
 "let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
-inoremap <expr> <c-j> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"inoremap <expr> <c-j> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 let g:snips_author = 'Jesse Dearing'
 
-""""""""""""
-"  Golang  "
-""""""""""""
+" Golang {{{1 "
 let g:LanguageClient_serverCommands = {
        \ 'go': ['gopls']
        \ }
 " Run gofmt and goimports on save
 "autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
 let $GOPATH = $HOME."/go"
-let g:go_fmt_command = "goimports"
+let g:go_fmt_command = "gofmt"
 let g:go_autodetect_gopath = 0
-let g:go_fmt_autosave = 1
+let g:go_fmt_autosave = 0
+let g:go_template_autocreate = 0
 "let g:go_auto_sameids = 1
 let g:go_list_type = "quickfix"
-let g:go_auto_type_info = 1
+let g:go_auto_type_info = 0
 "let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
@@ -419,10 +414,10 @@ let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
-let g:go_def_mode = "gopls"
+let g:go_def_mode = 'gopls'
 let g:go_info_mode = 'gopls'
-" Disable because coc.vim handles this
 let g:go_def_mapping_enabled = 0
+"autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
 augroup go
   au FileType go nmap <Leader>i <Plug>(go-implements)
@@ -432,41 +427,27 @@ augroup go
 	au FileType go nmap <leader>t <Plug>(go-test)
 	au FileType go nmap <leader>c <Plug>(go-callers)
 	au FileType go imap <C-e> <C-o><Plug>(go-iferr)
+  au FileType go nmap <Leader>y <Plug>(go-info)
 	au FileType go setlocal foldmethod=syntax
   " It's a spacey world out there, thankfully not in Go
   au FileType go setlocal noexpandtab
+  au BufWritePre *.go :CocCommand editor.action.organizeImport
+  au BufWritePost *.go normal! zv
 augroup END
 
-" NerdCommenter
-" ==============================================================================
+" 1}}} "
+
+" NerdCommenter {{{1 "
 let g:NERDDefaultAlign = 'left'
-
-" Ale
-" ==============================================================================
-" let g:ale_lint_on_insert_leave = 1
-" let g:ale_lint_delay = 500
-let g:ale_linters = { 'go': ['gometalinter'] }
-let g:ale_go_gometalinter_options = "--fast"
-
-" Supertab
-" ==============================================================================
-" let g:SuperTabDefaultCompletionType = 'context'
+" 1}}} "
 
 " Platinum Searcher
 " ==============================================================================
-if executable('rg')
-	"let g:ctrlp_user_command = 'rg --files --no-ignore --follow -g "!{.git,node_modules,vendor}/*"'
-	"let g:ctrlp_use_caching = 0
-	"let g:ackprg = 'rg --vimgrep -i -g "!{node_modules,vendor}/*"'
-	"set grepprg=rg\ --vimgrep\ --no-heading
-endif
-
 if executable('ag')
 	set grepprg=ag\ --nogroup\ --vimgrep\ --nocolor
 	let g:ctrlp_user_command = 'ag %s -l -U --ignore public --ignore .bundle --ignore node_modules --ignore vendor --nocolor -g ""'
 endif
 
-nmap     <C-F>f <Plug>CtrlSFPrompt
 let g:ctrlsf_ackprg = '/usr/local/bin/ag'
 
 set exrc
@@ -487,9 +468,6 @@ autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 set rtp+=/usr/local/opt/fzf
-
-let g:ycm_python_binary_path = '/usr/local/opt/python3/bin/python3'
-let g:ale_python_mypy_options = '--ignore-missing-imports'
 
 if has('nvim')
   " Deoplete
@@ -539,30 +517,27 @@ function! WinMove(key)
     endif
 endfunction
 
-map <silent> <C-h> :call WinMove('h')<cr>
-map <silent> <C-j> :call WinMove('j')<cr>
-map <silent> <C-k> :call WinMove('k')<cr>
-map <silent> <C-l> :call WinMove('l')<cr>
+nmap <silent> <C-h> :call WinMove('h')<cr>
+nmap <silent> <C-j> :call WinMove('j')<cr>
+nmap <silent> <C-k> :call WinMove('k')<cr>
+nmap <silent> <C-l> :call WinMove('l')<cr>
 
 hi illuminatedWord cterm=underline gui=underline
 
-""""""""""
-"  JSON  "
-""""""""""
+" JSON {{{1 "
 au Filetype json setlocal foldmethod=syntax
+" 1}}} "
 
-"""""""""""""
-"  Crontab  "
-"""""""""""""
+" Crontab {{{1 "
 au filetype crontab setlocal nobackup nowritebackup
+" 1}}} "
 
-"""""""""""""
-"  coc.vim  "
-"""""""""""""
+" coc.nvim {{{1 "
 inoremap <silent><expr> <c-space> coc#refresh()
-"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+" 1}}} "
