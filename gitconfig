@@ -46,3 +46,8 @@
 	insteadOf = https://github.com/
 [rebase]
 	autoStash = true
+  autoSquash = true
+[protocol]
+	version = 2
+[rerere]
+	enabled = true
