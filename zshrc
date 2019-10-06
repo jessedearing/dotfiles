@@ -46,11 +46,10 @@ fi
 alias node='NODE_NO_READLINE=1 rlwrap node'
 alias tf=terraform
 alias web="open -a 'Firefox' "
-alias g='git'
-alias gco='git checkout'
-alias gs="git status -sb"
-alias ga="git add"
-alias gc="git commit -v"
+alias gco='g checkout'
+alias gs="g status -sb"
+alias ga="g add"
+alias gc="g commit -v"
 alias mongod="mongod --config /usr/local/etc/mongod.conf"
 alias less="less -R"
 alias d=docker
@@ -61,6 +60,9 @@ alias ssha="TERM=xterm-256color ssh -A"
 alias ag="ag -S"
 alias vims="editor.sh -c ':Scratch'"
 alias mytop="perl /usr/local/bin/mytop"
+alias g="~/git"
+alias lab="~/lab"
+
 if [ -x /usr/local/bin/richgo ]; then
 	alias go=richgo
 fi
