@@ -18,14 +18,12 @@ export ZSH_CUSTOM="$HOME/.zsh-custom"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(vi-mode zsh-syntax-highlighting golang docker zsh-aws-vault)
+plugins=(vi-mode zsh-syntax-highlighting docker zsh-aws-vault)
 
 source $ZSH/oh-my-zsh.sh
 
 fpath=(/usr/local/share/zsh-completions $fpath)
 source /usr/local/share/zsh/site-functions/_*
-
-export PATH=/usr/local/go/bin:/usr/local/kubebuilder/bin:${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.cargo/bin:$HOME/go/bin:/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/opt/curl/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/opt/perl/bin
 
 if ( which rbenv 2>&1 > /dev/null ); then
   rbenv rehash 2>/dev/null
@@ -45,7 +43,6 @@ if ( which rbenv 2>&1 > /dev/null ); then
   }
 fi
 
-export PGDATA=/usr/local/var/postgresql
 alias node='NODE_NO_READLINE=1 rlwrap node'
 alias tf=terraform
 alias web="open -a 'Firefox' "
@@ -79,7 +76,6 @@ if [ -x /usr/local/bin/bat ]; then
   alias cat=bat
 fi
 
-export EDITOR=$HOME/.bin/editor.sh
 export LESS="-iMx4 -RX"
 export LESS_TERMCAP_so=$'\E[30;43m'
 export LESS_TERMCAP_se=$'\E[39;49m'
@@ -156,8 +152,7 @@ alias eclimd=/Users/jdearing/eclipse/Eclipse.app/Contents/Eclipse/eclimd
 alias eclim=/Users/jdearing/eclipse/Eclipse.app/Contents/Eclipse/eclim
 # export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
-export GOPATH=$HOME/go
-export GOROOT=/usr/local/go
+unset GOROOT
 
 # History searching
 bindkey -M vicmd '/' fzf-history-widget
@@ -167,9 +162,6 @@ bindkey -M isearch '^F' history-incremental-search-forward
 
 fortune startrek computers $HOME/.fortunes/sadserver_tweets $HOME/.fortunes/honest_update_tweets
 echo
-
-export PGDATA=$HOME/data/postgres
-export PGHOST=localhost
 
 # Python Setup
 # ============================================================================
@@ -226,10 +218,4 @@ if [ -z "$AWS_EXPIRY" ]; then
   fi
 fi
 
-#####################
-#  Hashicorp Vault  #
-#####################
-
-export VAULT_ADDR='http://127.0.0.1:8200'
-export ETCDCTL_API=3
 . /usr/local/etc/grc.zsh
