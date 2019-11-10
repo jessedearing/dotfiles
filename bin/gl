@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-git log --graph --stat --decorate -M --color --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' $* |  less -r
+git log --graph --stat --decorate -M --color --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' $* |  less -iXFR
 #if [ -x /usr/local/bin/emojify ]; then
 #  git log --stat --decorate -M --color $* | emojify | less -r
 #else
