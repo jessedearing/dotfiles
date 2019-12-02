@@ -2,18 +2,10 @@
 call plug#begin('~/.vim/plugged')
 Plug 'tarekbecker/vim-yaml-formatter'
 Plug 'pedrohdz/vim-yaml-folds'
-"Plug 'rust-lang/rust.vim'
-"Plug 'racer-rust/vim-racer'
-"Plug 'christianrondeau/vim-base64'
 Plug 'RRethy/vim-illuminate'
-"Plug 'rakr/vim-one'
 Plug 'arcticicestudio/nord-vim'
 Plug 'mxw/vim-jsx'
 Plug 'isRuslan/vim-es6'
-"Plug 'chriskempson/base16-vim'
-"Plug 'mhartington/oceanic-next'
-"Plug 'tlhr/anderson.vim'
-"Plug 'jacoborus/tender.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -42,8 +34,8 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'masukomi/vim-markdown-folding'
 "Plug 'dyng/ctrlsf.vim'
-Plug 'gabesoft/vim-ags'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'airblade/vim-gitgutter'
 "Plug 'vim-syntastic/syntastic'
@@ -70,6 +62,7 @@ Plug 'juliosueiras/vim-terraform-completion'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'cohama/agit.vim'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'kristijanhusak/vim-carbon-now-sh'
 
 call plug#end()
 " 1}}} "
@@ -315,6 +308,15 @@ let g:ctrlp_extensions = ['tag', 'line']
 let g:ctrlp_open_multiple_files = 'h'
 " Keybindings
 map <Leader>ff :FZF<CR>
+map <Leader>fb :Buffers<CR>
+map <Leader>fc :Commits<CR>
+noremap <Leader>\ :execute 'Rg! '.expand('<cword>')<CR>
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:30,results:30'
 
 
@@ -441,15 +443,19 @@ augroup END
 let g:NERDDefaultAlign = 'left'
 " 1}}} "
 
-" Platinum Searcher
-" ==============================================================================
-if executable('ag')
-	set grepprg=ag\ --nogroup\ --vimgrep\ --nocolor
-	let g:ctrlp_user_command = 'ag %s -l -U --ignore public --ignore .bundle --ignore node_modules --ignore vendor --nocolor -g ""'
+" Platinum Searcher (Ag) {{{ "
+if executable('rg')
+	set grepprg=rg\ --vimgrep\ -g\ !\.git/*\ -g\ !vendor/*
+	"let g:ctrlp_user_command = 'ag %s -l -U --ignore public --ignore .bundle --ignore node_modules --ignore vendor --nocolor -g ""'
+
+  " bind \ (backward slash) to grep shortcut
+  "command -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
+  nnoremap \ :Rg<SPACE>
 endif
 
-let g:ctrlsf_ackprg = '/usr/local/bin/ag'
+"let g:ctrlsf_ackprg = '/usr/local/bin/ag'
 
+" }}} Platinum Searcher (Ag) "
 set exrc
 set secure
 
@@ -464,8 +470,6 @@ let g:terraform_completion_keys = 1
 
 let g:terraform_fmt_on_save = 1
 " (Optional)Hide Info(Preview) window after completions
-autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 set rtp+=/usr/local/opt/fzf
 
@@ -535,6 +539,7 @@ au filetype crontab setlocal nobackup nowritebackup
 " coc.nvim {{{1 "
 inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <c-j> pumvisible() ? "\<C-y>" : "\<CR>"
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)

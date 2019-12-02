@@ -1,3 +1,4 @@
 \set PROMPT1 ' (%n@%M) %x [(%/)] %R%# '
 \set PROMPT2 '⋮ %# '
 \timing
+\x

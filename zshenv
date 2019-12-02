@@ -1,5 +1,4 @@
-export PATH=${KREW_ROOT:-$HOME/.krew}/bin:/usr/local/opt/make/libexec/gnubin:$HOME/.cargo/bin:$HOME/go/bin:/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/opt/curl/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/opt/perl/bin
-
+export PATH=$HOME/.fzf/bin:${KREW_ROOT:-$HOME/.krew}/bin:/usr/local/opt/make/libexec/gnubin:$HOME/.cargo/bin:$HOME/go/bin:/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/opt/curl/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/opt/perl/bin
 export EDITOR=$HOME/.bin/editor.sh
 if [[ $(uname -s) == "Darwin" ]]; then
   export RVC_READLINE="/usr/local/Cellar/readline/6.2.4/lib/libreadline.6.dylib"
@@ -20,3 +19,18 @@ export PGUSER=postgres
 
 export ETCDCTL_API=3
 export VAULT_ADDR='http://127.0.0.1:8200'
+
+#########
+#  fzf  #
+#########
+export FZF_DEFAULT_COMMAND=$'rg --files --no-ignore --hidden --follow -g \'\!\.git/*\' -g \'\!node_modules/*\' -g \'\!vendor/*\' 2> /dev/null'
+export FZF_DEFAULT_OPTS="--color fg:#D8DEE9,bg:#2E3440,hl:#A3BE8C,fg+:#D8DEE9,bg+:#434C5E,hl+:#A3BE8C --color pointer:#BF616A,info:#4C566A,spinner:#4C566A,header:#4C566A,prompt:#81A1C1,marker:#EBCB8B"
+
+###########
+#  pyenv  #
+###########
+export PYENV_ROOT=$HOME/.pyenv
+export PATH=$PYENV_ROOT/bin:$PATH
+
+export PATH="/Users/jesse/.pyenv/shims:${PATH}"
+export PYENV_SHELL=zsh

@@ -22,6 +22,8 @@ plugins=(vi-mode zsh-syntax-highlighting docker zsh-aws-vault)
 
 source $ZSH/oh-my-zsh.sh
 
+eval "$(starship init zsh)"
+
 fpath=(/usr/local/share/zsh-completions $fpath)
 source /usr/local/share/zsh/site-functions/_*
 
@@ -58,7 +60,7 @@ alias ggpnp='git stash && git pull --rebase && git push && git stash pop'
 alias ssh="TERM=xterm-256color ssh"
 alias ssha="TERM=xterm-256color ssh -A"
 alias ag="ag -S"
-alias vims="editor.sh -c ':Scratch'"
+alias vscr="v -c ':Scratch'"
 alias mytop="perl /usr/local/bin/mytop"
 alias g="~/git"
 alias lab="~/lab"
@@ -99,6 +101,8 @@ function bail_on_tmux() {
   echo "Press CTRL-C to cancel"
   sleep 1.5
 }
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 function load_tmux() {
   if (which tmux 2>&1 > /dev/null); then
@@ -165,13 +169,6 @@ bindkey -M isearch '^F' history-incremental-search-forward
 fortune startrek computers $HOME/.fortunes/sadserver_tweets $HOME/.fortunes/honest_update_tweets
 echo
 
-# Python Setup
-# ============================================================================
-VIRTUAL_ENV_DISABLE_PROMPT=1
-#. $HOME/.virtualenv/bin/activate
-
-# NOOPing virtualenv because I just don't use python that much
-prompt_virtualenv() {}
 export EC2_HOME=/usr/local/opt/ec2-api-tools/libexec
 
 stty discard undef
@@ -191,11 +188,6 @@ source $HOME/.bin/gh_complete.sh
 
 ulimit -S -n 2048
 
-#export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow -g "!{.git,node_modules,vendor}/*" 2> /dev/null'
-export FZF_DEFAULT_COMMAND='ag -l -U --nocolor --ignore .git -g ""'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_DEFAULT_OPTS="--color dark"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
@@ -216,3 +208,20 @@ if [ -z "$AWS_EXPIRY" ]; then
 fi
 
 . /usr/local/etc/grc.zsh
+source '/usr/local/opt/pyenv/libexec/../completions/pyenv.zsh'
+command pyenv rehash 2>/dev/null
+pyenv() {
+  local command
+  command="${1:-}"
+  if [ "$#" -gt 0 ]; then
+    shift
+  fi
+
+  case "$command" in
+  rehash|shell)
+    eval "$(pyenv "sh-$command" "$@")";;
+  *)
+    command pyenv "$command" "$@";;
+  esac
+}
+
