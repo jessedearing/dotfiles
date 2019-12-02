@@ -2,31 +2,33 @@
 
 set -e
 
+if [ ! -z "$SUDO_USER" ]; then
+  exec nvim $*
+fi
+
 local TMUX_WINDOW=`tmux display -p "#{window_id}"`
 local NVIM_LISTEN_ADDRESS="/tmp/nvim_${TMUX_WINDOW}"
-if ! nvr --serverlist | grep "$NVIM_LISTEN_ADDRESS"; then
+if ! nvr --serverlist | grep "^$NVIM_LISTEN_ADDRESS$"; then
   rm -f $NVIM_LISTEN_ADDRESS
   NVIM_LISTEN_ADDRESS=$NVIM_LISTEN_ADDRESS exec nvim $*
 fi
 
 paneToSwitchTo=`tmux lsp -F "#{pane_id} #{pane_current_command}" | awk '/nvim/ { print $1 }' | head -1`
 
-typeset -A panelocation
-panelocation=(
-  bottom `tmux display -p "#{pane_at_bottom}"`
-  top `tmux display -p "#{pane_at_top}"`
-  left `tmux display -p "#{pane_at_left}"`
-  right `tmux display -p "#{pane_at_right}"`
+typeset -A pane
+pane=(
+  width `tmux display -p "#{pane_width}"`
+  height `tmux display -p "#{pane_height}"`
 )
 
 # If the panes are horizontal
-if [[ (${panelocation[bottom]} == "1" || ${panelocation[top]} == "1") && (${panelocation[right]} == "1" && ${panelocation[left]} == "1") ]]; then
+if [[ "${pane[width]}" > "${pane[height]}" ]]; then
   tmux selectp -t "$paneToSwitchTo"
   exec nvr --servername "$NVIM_LISTEN_ADDRESS" -O $*
 fi
 
 # If the panes are vertical
-if [[ (${panelocation[bottom]} == "1" && ${panelocation[top]} == "1") && (${panelocation[right]} == "1" || ${panelocation[left]} == "1") ]]; then
+if [[ "${pane[width]}" < "${pane[height]}" ]]; then
   tmux selectp -t "$paneToSwitchTo"
   exec nvr --servername "$NVIM_LISTEN_ADDRESS" -o $*
 fi
