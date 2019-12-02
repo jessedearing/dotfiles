@@ -1,0 +1,11 @@
+[time]
+disabled = false
+
+[kubernetes]
+symbol = "ﴱ "
+disabled = false
+
+[env_var]
+variable = "AWS_VAULT"
+symbol = " "
+style = "blue"

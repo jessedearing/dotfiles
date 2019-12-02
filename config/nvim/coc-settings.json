@@ -1,11 +1,5 @@
 {
   "languageserver": {
-    "golang": {
-      "command": "gopls",
-      "args": [],
-      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["go"]
-    },
     "dot": {
       "command": "dot-language-server",
       "args": ["--stdio"],
@@ -15,5 +9,6 @@
   "yaml.schemas": {
     "Kubernetes": "*.yaml"
   },
+  "python.pythonPath": "python3",
   "suggest.snippetIndicator": "⭐︎"
 }
