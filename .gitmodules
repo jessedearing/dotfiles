@@ -49,3 +49,6 @@
 [submodule "tmux/plugins/tmux-kubernetes"]
 	path = tmux/plugins/tmux-kubernetes
 	url = https://github.com/jonmosco/kube-tmux
+[submodule "zsh-custom/plugins/zsh-syntax-highlighting"]
+	path = zsh-custom/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting
