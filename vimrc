@@ -453,6 +453,8 @@ if executable('rg')
   nnoremap \ :Rg<SPACE>
 endif
 
+map <leader>! :redraw!<cr>
+
 "let g:ctrlsf_ackprg = '/usr/local/bin/ag'
 
 " }}} Platinum Searcher (Ag) "
