@@ -47,6 +47,7 @@ cask "spotify"
 cask "vimr"
 cask "xquartz"
 cask "yujitach-menumeters"
+cask "homebrew/cask-drivers/uhk-agent"
 # 1}}} #
 
 # Packages {{{1 #
