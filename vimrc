@@ -22,7 +22,7 @@ if has('nvim')
 "    \ 'branch': 'next',
 "    \ 'do': 'bash install.sh',
 "    \ }
-  Plug 'neoclide/coc.nvim', {'tag': '*'}
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 endif
 "Plug 'Shougo/neco-vim'
 "Plug 'neoclide/coc-neco'
@@ -36,7 +36,7 @@ Plug 'masukomi/vim-markdown-folding'
 "Plug 'dyng/ctrlsf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'bronson/vim-trailing-whitespace'
+Plug 'ntpeters/vim-better-whitespace'
 Plug 'airblade/vim-gitgutter'
 "Plug 'vim-syntastic/syntastic'
 Plug 'mattn/gist-vim'
@@ -47,7 +47,7 @@ Plug 'vim-scripts/Align'
 "Plug 'vim-scripts/SQLUtilities'
 Plug 'vim-scripts/dbext.vim'
 Plug 'godlygeek/tabular'
-Plug 'majutsushi/tagbar'
+Plug 'liuchengxu/vista.vim'
 Plug 'elzr/vim-json'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'vimwiki/vimwiki'
@@ -63,7 +63,7 @@ Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'cohama/agit.vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'kristijanhusak/vim-carbon-now-sh'
-
+Plug 'rust-lang/rust.vim'
 call plug#end()
 " 1}}} "
 
@@ -79,6 +79,7 @@ set lazyredraw
 
 let did_install_default_menus = 1
 set synmaxcol=500
+set maxmempattern=2000
 
 runtime macros/matchit.vim
 
@@ -132,7 +133,7 @@ set shiftwidth=2
 set softtabstop=2
 set autoindent
 set expandtab
-set listchars=tab:᠁\ 
+set listchars=tab:᠁\
 
 set nolist
 
@@ -313,7 +314,7 @@ map <Leader>fc :Commits<CR>
 noremap <Leader>\ :execute 'Rg! '.expand('<cword>')<CR>
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.<q-args>, 1,
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
@@ -339,10 +340,7 @@ map <Leader>tb :TagbarToggle<CR>
 " ====================================================================
 map <Leader>gd :GundoToggle<CR>
 
-"""""""""""""
-"  Vimwiki  "
-"""""""""""""
-
+" Vimwiki {{{1 "
 let g:vimwiki_folding='custom'
 let g:vimwiki_hl_cb_checked=1
 au FileType vimwiki nnoremap <C-P> :Vimwiki2HTMLBrowse<CR>
@@ -360,7 +358,8 @@ let g:tagbar_type_vimwiki = {
           \ , 'ctagsbin':'/Users/jesse/.vimwiki/utils/vwtags.py'
           \ , 'ctagsargs': 'markdown'
           \ }
-let g:vimwiki_listsyms = ' ○◐●✓'
+let g:taskwiki_markup_syntax = "markdown"
+" 1}}} "
 
 " AutoPairs
 " ====================================================================
@@ -402,7 +401,7 @@ let g:LanguageClient_serverCommands = {
 let $GOPATH = $HOME."/go"
 let g:go_fmt_command = "gofmt"
 let g:go_autodetect_gopath = 0
-let g:go_fmt_autosave = 0
+let g:go_fmt_autosave = 1
 let g:go_template_autocreate = 0
 "let g:go_auto_sameids = 1
 let g:go_list_type = "quickfix"
@@ -419,7 +418,6 @@ let g:go_highlight_types = 1
 let g:go_def_mode = 'gopls'
 let g:go_info_mode = 'gopls'
 let g:go_def_mapping_enabled = 0
-"autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
 augroup go
   au FileType go nmap <Leader>i <Plug>(go-implements)
@@ -433,7 +431,7 @@ augroup go
 	au FileType go setlocal foldmethod=syntax
   " It's a spacey world out there, thankfully not in Go
   au FileType go setlocal noexpandtab
-  au BufWritePre *.go :CocCommand editor.action.organizeImport
+  au BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
   au BufWritePost *.go normal! zv
 augroup END
 
@@ -453,7 +451,7 @@ if executable('rg')
   nnoremap \ :Rg<SPACE>
 endif
 
-map <leader>! :redraw!<cr>
+map <leader>! :mode<cr>
 
 "let g:ctrlsf_ackprg = '/usr/local/bin/ag'
 
@@ -548,3 +546,12 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 " 1}}} "
+
+" Better Whitesapce {{{1 "
+let g:strip_whitespace_on_save = 1
+" 1}}} "
+
+" Vista {{{ "
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+let g:vista_default_executive = 'ctags'
+" }}} Vista "
