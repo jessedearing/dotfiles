@@ -19,13 +19,10 @@ export ZSH_CUSTOM="$HOME/.zsh-custom"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(vi-mode zsh-syntax-highlighting docker zsh-aws-vault)
-
+fpath=(~/.zsh-completions $fpath)
 source $ZSH/oh-my-zsh.sh
 
 eval "$(starship init zsh)"
-
-fpath=(/usr/local/share/zsh-completions $fpath)
-source /usr/local/share/zsh/site-functions/_*
 
 if ( which rbenv 2>&1 > /dev/null ); then
   rbenv rehash 2>/dev/null
@@ -122,6 +119,7 @@ function load_tmux() {
     fi
   fi
 }
+
 if [[ $(uname -s) == "Darwin" ]]; then
   export RVC_READLINE="/usr/local/Cellar/readline/6.2.4/lib/libreadline.6.dylib"
 fi
@@ -150,12 +148,6 @@ function jstags() {
 	find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exec jsctags {} -f \; | sed '/^$/d' | sort > tags
 }
 
-# Boot2Docker
-# ============================================================================
-alias b2=boot2docker
-alias dl="docker ps -ql"
-alias eclimd=/Users/jdearing/eclipse/Eclipse.app/Contents/Eclipse/eclimd
-alias eclim=/Users/jdearing/eclipse/Eclipse.app/Contents/Eclipse/eclim
 # export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
 unset GOROOT
@@ -172,12 +164,6 @@ echo
 export EC2_HOME=/usr/local/opt/ec2-api-tools/libexec
 
 stty discard undef
-
-# JBoss Setup
-# ============================================================================
-export JBOSS_HOME=/usr/local/opt/wildfly-as/libexec
-export PATH=${PATH}:${JBOSS_HOME}/bin
-export GROOVY_HOME=/usr/local/opt/groovy/libexec
 
 
 TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S'
