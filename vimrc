@@ -15,15 +15,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/scratch.vim'
 "Plug 'vim-scripts/calendar.vim'
-if has('nvim')
-"  Plug 'Shougo/denite.nvim'
-  "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'autozimu/LanguageClient-neovim', {
-"    \ 'branch': 'next',
-"    \ 'do': 'bash install.sh',
-"    \ }
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-endif
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'Shougo/neco-vim'
 "Plug 'neoclide/coc-neco'
 "Plug 'ervandew/supertab'
@@ -68,9 +60,12 @@ call plug#end()
 " 1}}} "
 
 " Stock nvim & vim settings {{{1 "
-if (has("termguicolors") && has('nvim'))
- set termguicolors
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set termguicolors
+if has('nvim')
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+else
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 endif
 let python_highlight_all = 1
 
@@ -318,27 +313,6 @@ command! -bang -nargs=* Rg
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:30,results:30'
-
-
-"		CTags
-" ====================================================================
-set tags=tags;/
-"map <Leader>rt :!/usr/local/bin/ctags --exclude=.git --exclude=public --exclude=.bundle --exclude=doc --exclude=coverage -R<CR><CR>
-map <Leader>gt :!.git/hooks/ctags<CR><CR>
-let Tlist_Ctags_Cmd = "/usr/local/bin/ctags"
-" let g:tagbar_ctags_bin = "/usr/local/bin/ctags"
-let Tlist_WinWidth = 50
-map <Leader>tlt :TlistToggle<cr>
-map <Leader>tll :TlistSessionLoad
-map <Leader>tls :TlistSessionSave
-map <Leader>tla :TlistAddFilesRecursive
-map <Leader>tlg :TlistSessionLoad .git/taglist<CR>
-map <Leader>tb :TagbarToggle<CR>
-
-" Gundo
-" ====================================================================
-map <Leader>gd :GundoToggle<CR>
 
 " Vimwiki {{{1 "
 let g:vimwiki_folding='custom'
@@ -463,49 +437,32 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 "let g:deoplete#file#enable_buffer_path = 1
 "autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
-"""""""""""""""
-"  Terraform  "
-"""""""""""""""
+" Terraform {{{1 "
 let g:terraform_completion_keys = 1
 
 let g:terraform_fmt_on_save = 1
-" (Optional)Hide Info(Preview) window after completions
+" 1}}} "
 
 set rtp+=/usr/local/opt/fzf
 
+highlight NeomakeError ctermfg=168 ctermbg=16 guifg=#e06c75 guibg=#282c34
+highlight NeomakeWarning ctermfg=180 guifg=#e5c07b
+call neomake#configure#automake('w')
+
+let g:neomake_go_go_maker = {}
+
+let g:neomake_vimwiki_writegood_maker = {
+      \ 'exe': 'writegood',
+      \ 'args': ['--parse'],
+      \ 'errorformat': '%W%f:%l:%c:%m,%C%m,%-G',
+      \ 'postprocess': function('neomake#makers#ft#text#PostprocessWritegood')
+      \ }
+let g:neomake_vimwiki_enabled_makers = ['writegood']
+
 if has('nvim')
-  " Deoplete
-  " ===========================================================================
-  "call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy', 'matcher_length'])
-  "let g:deoplete#enable_at_startup = 1
-  "call deoplete#custom#option('omni_patterns', { 'java': '[^. *\t]\.\w*' })
-  "call deoplete#custom#option('omni_patterns', { 'go': '[^. *\t]\.\w*' })
-  ""call deoplete#custom#option('omni_patterns', { 'complete_method': 'omnifunc', 'terraform': '[^ *\t"{=$]\w*' })
-
-  "call deoplete#initialize()
-
-
-  highlight NeomakeError ctermfg=168 ctermbg=16 guifg=#e06c75 guibg=#282c34
-  highlight NeomakeWarning ctermfg=180 guifg=#e5c07b
-  let g:neomake_error_sign = {'text': '✖', 'texthl': 'NeomakeError'}
-  let g:neomake_warning_sign={'text': '⚠', 'texthl': 'NeomakeWarning'}
-  call neomake#configure#automake('w')
-
-  let g:neomake_vimwiki_writegood_maker = {
-        \ 'exe': 'writegood',
-        \ 'args': ['--parse'],
-        \ 'errorformat': '%W%f:%l:%c:%m,%C%m,%-G',
-        \ 'postprocess': function('neomake#makers#ft#text#PostprocessWritegood')
-        \ }
-  let g:neomake_vimwiki_enabled_makers = ['writegood']
-
   " This does in-place updates (as opposed to a split window) when doing
   " search and replace
   set inccommand=nosplit
-
-  let g:deoplete#sources#ternjs#filetypes = [
-                \ 'jsx'
-                \ ]
 endif
 
 function! WinMove(key)
