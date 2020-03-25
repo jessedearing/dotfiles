@@ -120,10 +120,6 @@ function load_tmux() {
   fi
 }
 
-if [[ $(uname -s) == "Darwin" ]]; then
-  export RVC_READLINE="/usr/local/opt/readline/lib/libreadline.dylib"
-fi
-
 function printcolors() {
   for i in {0..255} ; do
     printf "\\x1b[38;5;${i}m \\\x1b[38;5;${i}m\n"
@@ -147,10 +143,6 @@ function sshforward() {
 function jstags() {
 	find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exec jsctags {} -f \; | sed '/^$/d' | sort > tags
 }
-
-# export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
-export VAGRANT_DEFAULT_PROVIDER=virtualbox
-unset GOROOT
 
 # History searching
 bindkey -M vicmd '/' fzf-history-widget
