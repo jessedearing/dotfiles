@@ -121,7 +121,7 @@ function load_tmux() {
 }
 
 if [[ $(uname -s) == "Darwin" ]]; then
-  export RVC_READLINE="/usr/local/Cellar/readline/6.2.4/lib/libreadline.6.dylib"
+  export RVC_READLINE="/usr/local/opt/readline/lib/libreadline.dylib"
 fi
 
 function printcolors() {
@@ -174,6 +174,7 @@ source $HOME/.bin/gh_complete.sh
 
 ulimit -S -n 2048
 
+load_tmux
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
