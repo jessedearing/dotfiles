@@ -10,8 +10,6 @@ export GO111MODULE=on
 export PGDATA=$HOME/data/postgres
 export PGHOST=localhost
 
-export KUBECTL_EXTERNAL_DIFF=/usr/local/bin/diff-so-fancy
-
 ###############
 #  Databases  #
 ###############
