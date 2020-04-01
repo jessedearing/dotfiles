@@ -11,5 +11,7 @@
   },
   "python.pythonPath": "python3",
   "suggest.snippetIndicator": "·",
-  "go.goplsPath": "/Users/jesse/go/bin/gopls"
+  "go.goplsPath": "/Users/jesse/go/bin/gopls",
+  "diagnostic.warningSign": "⁉",
+  "diagnostic.errorSign": "‼"
 }

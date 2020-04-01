@@ -445,9 +445,19 @@ let g:terraform_fmt_on_save = 1
 
 set rtp+=/usr/local/opt/fzf
 
+" Neomake {{{1 "
 highlight NeomakeError ctermfg=168 ctermbg=16 guifg=#e06c75 guibg=#282c34
 highlight NeomakeWarning ctermfg=180 guifg=#e5c07b
 call neomake#configure#automake('w')
+
+let g:neomake_error_sign = {
+      \ 'text': '‼',
+      \ 'texthl': 'NeomakeErrorSign',
+      \ }
+let g:neomake_warning_sign = {
+      \ 'text': '⁉',
+      \ 'texthl': 'NeomakeWarningSign',
+      \ }
 
 let g:neomake_go_go_maker = {}
 
@@ -458,6 +468,7 @@ let g:neomake_vimwiki_writegood_maker = {
       \ 'postprocess': function('neomake#makers#ft#text#PostprocessWritegood')
       \ }
 let g:neomake_vimwiki_enabled_makers = ['writegood']
+" 1}}} "
 
 if has('nvim')
   " This does in-place updates (as opposed to a split window) when doing
