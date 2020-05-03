@@ -1,0 +1,4 @@
+#!/usr/bin/env zsh
+
+curl -L $@ -o ~/Downloads/giphy.gif
+copy-image ~/Downloads/giphy.gif

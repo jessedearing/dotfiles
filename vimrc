@@ -35,7 +35,7 @@ Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
 Plug 'hdima/python-syntax'
 Plug 'jelera/vim-javascript-syntax'
-Plug 'vim-scripts/Align'
+Plug 'junegunn/vim-easy-align'
 "Plug 'vim-scripts/SQLUtilities'
 Plug 'vim-scripts/dbext.vim'
 Plug 'godlygeek/tabular'
@@ -284,24 +284,18 @@ au BufRead,BufNewFile python setlocal shiftwidth=4
 au BufRead,BufNewFile python setlocal softtabstop=4
 au BufRead,BufNewFile python setlocal textwidth=79
 
-"		Airline
-" ====================================================================
-" Settings
+" Airline {{{1 "
 let g:airline_powerline_fonts = 1
-"let g:airline_theme='nord'
 "let g:airline_theme='papercolor'
 let g:airline_theme='nord'
 let g:airline#extensions#wordcount#filetypes = '\vhelp|markdown|rst|org|text|asciidoc|tex|mail|wiki'
+" 1}}} "
 
-"		Spell
-" ====================================================================
+" Spell {{{1 "
 set spelllang=en_us
+" 1}}} "
 
-"		CtrlP
-" ====================================================================
-" Settings
-let g:ctrlp_extensions = ['tag', 'line']
-let g:ctrlp_open_multiple_files = 'h'
+" FZF {{{1 "
 " Keybindings
 map <Leader>ff :FZF<CR>
 map <Leader>fb :Buffers<CR>
@@ -313,6 +307,8 @@ command! -bang -nargs=* Rg
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
+set rtp+=/usr/local/opt/fzf
+" 1}}} "
 
 " Vimwiki {{{1 "
 let g:vimwiki_folding='custom'
@@ -333,36 +329,17 @@ let g:tagbar_type_vimwiki = {
           \ , 'ctagsargs': 'markdown'
           \ }
 let g:taskwiki_markup_syntax = "markdown"
+" Disable <CR> mapping
+inoremap <F13> <Esc>:VimwikiReturn 1 5<CR>
+
+" Only run VimwikiReturn if the popup menu is not showing, otherwise close it
+inoremap <silent><expr><CR>
+            \ pumvisible() ? "\<C-y>"
+            \ : "<Esc>:VimwikiReturn 1 5<CR>"
 " 1}}} "
-
-" AutoPairs
-" ====================================================================
-let g:AutoPairsShortcutToggle = '<C-\>'
-let g:AutoPairsFlyMode = 1
-
-
-" Vimux
-" ====================================================================
-map <Leader>vit :VimuxPromptCommand<CR>
-map <Leader>vii :VimuxInspectRunner<CR>
-map <Leader>vil :VimuxRunLastCommand<CR>
-
 
 map <Leader>> :bn<CR>
 map <Leader>< :bp<CR>
-
-" Thrift Syntax
-" ====================================================================
-
-au BufRead,BufNewFile *.thrift setlocal filetype=thrift
-
-"let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<tab>"
-"let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-"let g:UltiSnipsExpandTrigger = '<C-j>'
-"let g:UltiSnipsJumpForwardTrigger = '<C-j>'
-"let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
-"inoremap <expr> <c-j> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 let g:snips_author = 'Jesse Dearing'
 
@@ -392,6 +369,8 @@ let g:go_highlight_types = 1
 let g:go_def_mode = 'gopls'
 let g:go_info_mode = 'gopls'
 let g:go_def_mapping_enabled = 0
+let g:go_gopls_enabled = 1
+let g:go_gopls_options = ['-remote=auto']
 
 augroup go
   au FileType go nmap <Leader>i <Plug>(go-implements)
@@ -417,7 +396,7 @@ let g:NERDDefaultAlign = 'left'
 
 " Platinum Searcher (Ag) {{{ "
 if executable('rg')
-	set grepprg=rg\ --vimgrep\ -g\ !\.git/*\ -g\ !vendor/*
+	set grepprg=rg\ --vimgrep\ -g\ \\!\.git/\\*\ -g\ \\!vendor/\\*
 	"let g:ctrlp_user_command = 'ag %s -l -U --ignore public --ignore .bundle --ignore node_modules --ignore vendor --nocolor -g ""'
 
   " bind \ (backward slash) to grep shortcut
@@ -442,8 +421,6 @@ let g:terraform_completion_keys = 1
 
 let g:terraform_fmt_on_save = 1
 " 1}}} "
-
-set rtp+=/usr/local/opt/fzf
 
 " Neomake {{{1 "
 highlight NeomakeError ctermfg=168 ctermbg=16 guifg=#e06c75 guibg=#282c34
@@ -513,6 +490,16 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 " 1}}} "
 
 " Better Whitesapce {{{1 "

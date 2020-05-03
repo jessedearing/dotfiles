@@ -12,6 +12,12 @@
   "python.pythonPath": "python3",
   "suggest.snippetIndicator": "·",
   "go.goplsPath": "/Users/jesse/go/bin/gopls",
+  "go.goplsOptions": {
+    "completeUnimported": true
+  },
+  "go.goplsArgs": [
+    "-remote=auto"
+  ],
   "diagnostic.warningSign": "⁉",
   "diagnostic.errorSign": "‼"
 }

@@ -5,7 +5,6 @@ disabled = false
 symbol = "ﴱ "
 disabled = false
 
-[env_var]
-variable = "AWS_VAULT"
-symbol = " "
+[aws]
+symbol = "  "
 style = "blue"
