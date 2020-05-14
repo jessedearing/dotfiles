@@ -1,4 +1,8 @@
 #!/usr/bin/env zsh
 
 curl -L $@ -o ~/Downloads/giphy.gif
-copy-image ~/Downloads/giphy.gif
+if [[ $(uname -s) == "Linux" ]]; then
+  xsel -i -c < ~/Downloads/giphy.gif
+else
+  copy-image ~/Downloads/giphy.gif
+fi

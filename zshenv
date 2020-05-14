@@ -1,4 +1,4 @@
-export PATH=$HOME/.fzf/bin:${KREW_ROOT:-$HOME/.krew}/bin:/usr/local/opt/make/libexec/gnubin:$HOME/.cargo/bin:$HOME/go/bin:/usr/local/heroku/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/opt/curl-openssl/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/opt/perl/bin
+export PATH=$HOME/.fzf/bin:${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.yarn/bin:$HOME/.cargo/bin:$HOME/go/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/opt/perl/bin
 export EDITOR=$HOME/.bin/editor.sh
 if [[ $(uname -s) == "Darwin" ]]; then
   export RVC_READLINE="/usr/local/opt/readline/lib/libreadline.dylib"
@@ -32,5 +32,5 @@ export FZF_DEFAULT_OPTS="--color fg:#D8DEE9,bg:#2E3440,hl:#A3BE8C,fg+:#D8DEE9,bg
 export PYENV_ROOT=$HOME/.pyenv
 export PATH=$PYENV_ROOT/bin:$PATH
 
-export PATH="/Users/jesse/.pyenv/shims:${PATH}"
+export PATH="$HOME/.pyenv/shims:${PATH}"
 export PYENV_SHELL=zsh

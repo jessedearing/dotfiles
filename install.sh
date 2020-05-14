@@ -16,13 +16,16 @@ for dir in $all_dir; do
   fi
 done
 
-mkdir -p $HOME/.gnupg
-if [ -e $HOME/.gnupg/gpg-agent.conf ]; then
-	echo $HOME/.gnupg/gpg-agent.conf already exists
-else
-	echo Linking gpg-agent.conf to $HOME/.gnupg/gpg-agent.conf
-	ln -s $HOME/.dotfiles/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
-fi
+for configitem in `find $HOME/.dotfiles/gnupg -type f`; do
+  homeconfigitem=`echo $configitem | sed -e 's/\.dotfiles\//./'`
+  if [ -e $homeconfigitem ]; then
+    echo "$homeconfigitem already exists"
+  else
+    echo "Linking $configitem to $homeconfigitem"
+    mkdir -p `dirname $homeconfigitem`
+    ln -s $configitem $homeconfigitem
+  fi
+done
 
 for configitem in `find $HOME/.dotfiles/config -type f`; do
   homeconfigitem=`echo $configitem | sed -e 's/\.dotfiles\//./'`

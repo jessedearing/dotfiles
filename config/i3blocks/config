@@ -1,0 +1,24 @@
+command=/usr/lib/i3blocks/$BLOCK_NAME/$BLOCK_NAME
+separator_block_width=15
+markup=none
+
+[mediaplayer]
+instance=spotify
+interval=5
+signal=10
+
+[bandwidth2]
+LABEL=
+interval=persist
+markup=pango
+
+[memory]
+label=MEM
+interval=30
+
+[cpu_usage]
+interval=persist
+
+[time]
+command=date '+%Y-%m-%d %H:%M'
+interval=10

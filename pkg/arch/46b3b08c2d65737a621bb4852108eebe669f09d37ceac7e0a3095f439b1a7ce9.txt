@@ -1,0 +1,3 @@
+vmware-systemd-services 0.2-1
+xf86-input-vmmouse 13.1.0-4
+xf86-video-vmware 13.3.0-1

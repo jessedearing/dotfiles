@@ -1,4 +1,5 @@
 [user]
+  name = Jesse Dearing
 	email = jesse.dearing@gmail.com
 [color]
 	ui = true
@@ -39,8 +40,6 @@
 	gpgsign = true
 [pull]
   rebase = true
-[credential]
-	helper = osxkeychain
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
 [rebase]
@@ -50,3 +49,5 @@
 	version = 2
 [rerere]
 	enabled = true
+[gpg]
+  program = /usr/bin/gpg

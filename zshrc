@@ -5,6 +5,11 @@ export ZSH=$HOME/.oh-my-zsh
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+__USR_PATH="/usr"
+if [[ $(uname -s) == "Darwin" ]]; then
+  __USR_PATH="/usr/local"
+fi
+
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
 #export ZSH_THEME="sorin"
@@ -59,20 +64,22 @@ alias ssha="TERM=xterm-256color ssh -A"
 alias ag="ag -S"
 alias vscr="v -c ':Scratch'"
 alias mytop="perl /usr/local/bin/mytop"
-alias g="~/git"
-alias lab="~/lab"
+alias g=git
+#alias g="~/git"
+#alias lab="~/lab"
 
-if [ -x /usr/local/bin/richgo ]; then
+if [ -x $__USR_PATH/bin/richgo ]; then
 	alias go=richgo
 fi
 alias vim="editor.sh"
 
-if [ -x /usr/local/bin/exa ]; then
+if [ -x $__USR_PATH/bin/exa ]; then
 	alias ls=exa
 fi
+
 alias rg="rg -i -g \"!{vendor}\""
 
-if [ -x /usr/local/bin/bat ]; then
+if [ -x /usr/bin/bat ]; then
   export BAT_THEME=Nord
   alias cat=bat
 fi
@@ -87,9 +94,11 @@ function quote() {
   echo "“$*”" | pbcopy
 }
 
-export JAVA_HOME="$(/usr/libexec/java_home)"
+if [ -x /usr/libexec/java_home ]; then
+  export JAVA_HOME="$(/usr/libexec/java_home)"
+fi
 
-export NODE_PATH=/usr/local/lib/node
+export NODE_PATH=$__USR_PATH/lib/node
 
 export KEYTIMEOUT=5
 
@@ -104,16 +113,17 @@ function bail_on_tmux() {
 function load_tmux() {
   if (which tmux 2>&1 > /dev/null); then
     if [ -z "$TMUX" ] && ( tmux ls 2>&1 ); then
-     eval "$(ssh-agent)"
-     ssh-add -A
-     bail_on_tmux && tmux attach -t 0 && exit
+      eval "$(ssh-agent)"
+      ssh-add $HOME/.ssh/id_rsa &> /dev/null
+      ssh-add -qK $HOME/.ssh/id_ed25519 &> /dev/null &!
+      ssh-add -qK $HOME/.ssh/vmware-ed25519 &> /dev/null &!
+      bail_on_tmux && tmux attach -t 0 && exit
     else
       if [ -z "$TMUX" ] && [ -z "$SUDO_USER" ] && [ -z "$SSH_CONNECTION" ]; then
         eval "$(ssh-agent)"
-        #ssh-add $HOME/.ssh/id_rsa &> /dev/null
-        #ssh-add -qK $HOME/.ssh/id_ed25519 &> /dev/null &!
-        #ssh-add -qK $HOME/.ssh/vmware-ed25519 &> /dev/null &!
-        ssh-add -A
+        ssh-add $HOME/.ssh/id_rsa &> /dev/null
+        ssh-add -qK $HOME/.ssh/id_ed25519 &> /dev/null &!
+        ssh-add -qK $HOME/.ssh/vmware-ed25519 &> /dev/null &!
         bail_on_tmux && tmux && exit
       fi
     fi
@@ -170,24 +180,15 @@ load_tmux
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-###############
-#  AWS Vault  #
-###############
-
-if [ -z "$AWS_EXPIRY" ]; then
-  if [ ! -z "$AWS_VAULT" ]; then
-    local ttl
-    if [ -z "$AWS_ASSUME_ROLE_TTL" ]; then
-      ttl="15M"
-    else
-      ttl=`echo $AWS_ASSUME_ROLE_TTL | tr '[a-z]' '[A-Z]'`
-    fi
-    export AWS_EXPIRY=`date -v+${ttl} +%s`
-  fi
+if [ -f /usr/local/etc/grc.zsh ]; then
+  . /usr/local/etc/grc.zsh
 fi
-
-. /usr/local/etc/grc.zsh
-source '/usr/local/opt/pyenv/libexec/../completions/pyenv.zsh'
+if [ -f /etc/grc.zsh ]; then
+  . /etc/grc.zsh
+fi
+if [ -f $__USR_PATH/opt/pyenv/libexec/../completions/pyenv.zsh ]; then
+  source "$__USR_PATH/opt/pyenv/libexec/../completions/pyenv.zsh"
+fi
 command pyenv rehash 2>/dev/null
 pyenv() {
   local command
@@ -204,3 +205,6 @@ pyenv() {
   esac
 }
 
+if [ -f $__USR_PATH/bin/aws_zsh_completer.sh ]; then
+  . $__USR_PATH/bin/aws_zsh_completer.sh
+fi

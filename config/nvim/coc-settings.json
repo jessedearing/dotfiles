@@ -11,7 +11,7 @@
   },
   "python.pythonPath": "python3",
   "suggest.snippetIndicator": "·",
-  "go.goplsPath": "/Users/jesse/go/bin/gopls",
+  "go.goplsPath": "/home/jesse/go/bin/gopls",
   "go.goplsOptions": {
     "completeUnimported": true
   },

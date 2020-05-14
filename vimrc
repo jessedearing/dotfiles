@@ -42,7 +42,7 @@ Plug 'godlygeek/tabular'
 Plug 'liuchengxu/vista.vim'
 Plug 'elzr/vim-json'
 Plug 'JamshedVesuna/vim-markdown-preview'
-Plug 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki', {'branch': 'dev' }
 Plug 'Quramy/tsuquyomi'
 "Plug 'leafgarland/typescript-vim'
 Plug 'google/vim-searchindex'
@@ -96,7 +96,7 @@ set foldmethod=marker
 " that are too long
 set colorcolumn=80
 
-set shell=/usr/local/bin/zsh
+set shell=/usr/bin/zsh
 
 " Undofile directory settings
 if exists("+undofile")
@@ -265,7 +265,7 @@ let macvim_hig_shift_movement = 1
 let g:sqlutil_align_comma = 1
 
 " set clipboard="
-set clipboard=unnamed
+set clipboard+=unnamedplus
 
 "		Grep																																	 {{{
 let Grep_Find_Use_Xargs = 0
@@ -318,24 +318,21 @@ au FileType vimwiki nnoremap <C-P> :Vimwiki2HTMLBrowse<CR>
 au FileType vimwiki setlocal spell
 let g:vimwiki_list = [
   \ {'path': '~/.vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
-autocmd BufWritePost /Users/jesse/.vimwiki/*.md silent execute '! git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki add "%" > /dev/null; git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki commit -q -m "%" 2>&1 > /dev/null'
+autocmd BufWritePost /home/jesse/.vimwiki/*.md silent execute '! git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki add "%" > /dev/null; git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki commit -q -m "%" 2>&1 > /dev/null'
 let g:tagbar_type_vimwiki = {
           \   'ctagstype':'vimwiki'
           \ , 'kinds':['h:header']
           \ , 'sro':'&&&'
           \ , 'kind2scope':{'h':'header'}
           \ , 'sort':0
-          \ , 'ctagsbin':'/Users/jesse/.vimwiki/utils/vwtags.py'
+          \ , 'ctagsbin':'/home/jesse/.vimwiki/utils/vwtags.py'
           \ , 'ctagsargs': 'markdown'
           \ }
 let g:taskwiki_markup_syntax = "markdown"
-" Disable <CR> mapping
-inoremap <F13> <Esc>:VimwikiReturn 1 5<CR>
 
 " Only run VimwikiReturn if the popup menu is not showing, otherwise close it
-inoremap <silent><expr><CR>
-            \ pumvisible() ? "\<C-y>"
-            \ : "<Esc>:VimwikiReturn 1 5<CR>"
+"au FileType /home/jesse/.vimwiki/*.md inoremap <silent> <buffer> <expr> <CR>   pumvisible() ? "\<CR>"   : "<Esc>:VimwikiReturn 3 5<CR>"
+autocmd FileType vimwiki inoremap <silent><buffer> <expr> <CR> pumvisible() ? "<C-y>" : "<C-]><Esc>:VimwikiReturn 1 5<CR>"
 " 1}}} "
 
 map <Leader>> :bn<CR>
