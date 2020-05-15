@@ -42,7 +42,7 @@ Plug 'godlygeek/tabular'
 Plug 'liuchengxu/vista.vim'
 Plug 'elzr/vim-json'
 Plug 'JamshedVesuna/vim-markdown-preview'
-Plug 'vimwiki/vimwiki', {'branch': 'dev' }
+Plug 'vimwiki/vimwiki'
 Plug 'Quramy/tsuquyomi'
 "Plug 'leafgarland/typescript-vim'
 Plug 'google/vim-searchindex'
