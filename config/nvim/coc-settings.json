@@ -13,7 +13,8 @@
   "suggest.snippetIndicator": "·",
   "go.goplsPath": "/home/jesse/go/bin/gopls",
   "go.goplsOptions": {
-    "completeUnimported": true
+    "completeUnimported": true,
+    "usePlaceholders": true
   },
   "go.goplsArgs": [
     "-remote=auto"

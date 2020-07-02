@@ -45,7 +45,7 @@ configuration {
 /*	hide-scrollbar: false;*/
 /*	fullscreen: false;*/
 /*	fake-transparency: false;*/
-	dpi: 192;
+/*	dpi: 192; */
 /*	threads: 0;*/
 /*	scrollbar-width: 8;*/
 /*	scroll-method: 0;*/
@@ -107,16 +107,16 @@ configuration {
 /*	kb-toggle-case-sensitivity: "grave,dead_grave";*/
 /*	kb-toggle-sort: "Alt+grave";*/
 /*	kb-cancel: "Escape,Control+g,Control+bracketleft";*/
-/*	kb-custom-1: "Alt+1";*/
-/*	kb-custom-2: "Alt+2";*/
-/*	kb-custom-3: "Alt+3";*/
-/*	kb-custom-4: "Alt+4";*/
-/*	kb-custom-5: "Alt+5";*/
-/*	kb-custom-6: "Alt+6";*/
-/*	kb-custom-7: "Alt+7";*/
-/*	kb-custom-8: "Alt+8";*/
-/*	kb-custom-9: "Alt+9";*/
-/*	kb-custom-10: "Alt+0";*/
+kb-custom-1: "Alt+1";
+kb-custom-2: "Alt+2";
+kb-custom-3: "Alt+3";
+kb-custom-4: "Alt+4";
+kb-custom-5: "Alt+5";
+kb-custom-6: "Alt+6";
+kb-custom-7: "Alt+7";
+kb-custom-8: "Alt+8";
+kb-custom-9: "Alt+9";
+kb-custom-10: "Alt+0";
 /*	kb-custom-11: "Alt+exclam";*/
 /*	kb-custom-12: "Alt+at";*/
 /*	kb-custom-13: "Alt+numbersign";*/

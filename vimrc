@@ -56,6 +56,7 @@ Plug 'cohama/agit.vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'kristijanhusak/vim-carbon-now-sh'
 Plug 'rust-lang/rust.vim'
+Plug 'tpope/vim-eunuch'
 call plug#end()
 " 1}}} "
 
@@ -218,6 +219,7 @@ filetype plugin indent on
 map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
 nmap <Leader><Space> :nohlsearch<CR>
+au InsertEnter * let @/ = ''
 au BufReadPost quickfix map <C-n> :cn<CR>
 au BufReadPost quickfix map <C-m> :cp<CR>
 au BufReadPost quickfix nnoremap <buffer> <CR> <CR>
@@ -352,7 +354,7 @@ let g:go_autodetect_gopath = 0
 let g:go_fmt_autosave = 1
 let g:go_template_autocreate = 0
 "let g:go_auto_sameids = 1
-let g:go_list_type = "quickfix"
+let g:go_list_type = ""
 let g:go_auto_type_info = 0
 "let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:go_highlight_build_constraints = 1
@@ -363,10 +365,11 @@ let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
-let g:go_def_mode = 'gopls'
-let g:go_info_mode = 'gopls'
+"let g:go_def_mode = 'gopls'
+"let g:go_info_mode = 'gopls'
 let g:go_def_mapping_enabled = 0
-let g:go_gopls_enabled = 1
+let g:go_code_completion_enabled = 0
+let g:go_gopls_enabled = 0
 let g:go_gopls_options = ['-remote=auto']
 
 augroup go

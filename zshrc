@@ -56,7 +56,7 @@ alias ga="g add"
 alias gc="g commit -v"
 alias mongod="mongod --config /usr/local/etc/mongod.conf"
 alias less="less -R"
-alias d=docker
+alias d="grc --colour=auto docker"
 alias k=kubectl
 alias ggpnp='git stash && git pull --rebase && git push && git stash pop'
 alias ssh="TERM=xterm-256color ssh"
@@ -68,7 +68,7 @@ alias g=git
 #alias g="~/git"
 #alias lab="~/lab"
 
-if [ -x $__USR_PATH/bin/richgo ]; then
+if [ -x $__USR_PATH/bin/richgo ] || [ -x $HOME/go/bin/richgo ]; then
 	alias go=richgo
 fi
 alias vim="editor.sh"
@@ -189,6 +189,7 @@ fi
 if [ -f $__USR_PATH/opt/pyenv/libexec/../completions/pyenv.zsh ]; then
   source "$__USR_PATH/opt/pyenv/libexec/../completions/pyenv.zsh"
 fi
+
 command pyenv rehash 2>/dev/null
 pyenv() {
   local command

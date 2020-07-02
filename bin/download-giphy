@@ -3,6 +3,7 @@
 curl -L $@ -o ~/Downloads/giphy.gif
 if [[ $(uname -s) == "Linux" ]]; then
   xsel -i -c < ~/Downloads/giphy.gif
+  cp ~/Downloads/giphy.gif /mnt/hgfs/Downloads
 else
   copy-image ~/Downloads/giphy.gif
 fi
