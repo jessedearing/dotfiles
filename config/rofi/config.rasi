@@ -1,5 +1,5 @@
 configuration {
-modi: "window,drun,run";
+modi: "window,drun,calc,run";
 /*	width: 50;*/
 /*	lines: 15;*/
 /*	columns: 1;*/
@@ -34,7 +34,7 @@ modi: "window,drun,run";
 /*	auto-select: false;*/
 /*	parse-hosts: false;*/
 /*	parse-known-hosts: true;*/
-	combi-modi: "window,run,emoji";
+combi-modi: "window,drun,run";
 /*	matching: "normal";*/
 /*	tokenize: true;*/
 /*	m: "-5";*/

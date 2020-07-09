@@ -16,3 +16,4 @@ vim/sessions
 vim/undo
 gemrc
 versioned_secrets/
+gnupg/
