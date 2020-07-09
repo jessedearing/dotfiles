@@ -80,7 +80,6 @@ fi
 alias rg="rg -i -g \"!{vendor}\""
 
 if [ -x /usr/bin/bat ]; then
-  export BAT_THEME=Nord
   alias cat=bat
 fi
 

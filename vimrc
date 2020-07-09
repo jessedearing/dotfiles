@@ -3,12 +3,13 @@ call plug#begin('~/.vim/plugged')
 Plug 'tarekbecker/vim-yaml-formatter'
 Plug 'pedrohdz/vim-yaml-folds'
 Plug 'RRethy/vim-illuminate'
-Plug 'arcticicestudio/nord-vim'
+"Plug 'arcticicestudio/nord-vim'
+Plug 'dracula/vim'
 Plug 'mxw/vim-jsx'
 Plug 'isRuslan/vim-es6'
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -57,6 +58,7 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'kristijanhusak/vim-carbon-now-sh'
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-eunuch'
+Plug 'skbolton/embark'
 call plug#end()
 " 1}}} "
 
@@ -251,7 +253,8 @@ let g:nord_underline = 1
 let g:nord_italic_comments = 1
 let g:nord_uniform_diff_background = 1
 let g:nord_cursor_line_number_background = 1
-color nord
+"color nord
+color embark
 "color papercolor
 
 " Directories for swp files
@@ -289,7 +292,7 @@ au BufRead,BufNewFile python setlocal textwidth=79
 " Airline {{{1 "
 let g:airline_powerline_fonts = 1
 "let g:airline_theme='papercolor'
-let g:airline_theme='nord'
+let g:airline_theme='dracula'
 let g:airline#extensions#wordcount#filetypes = '\vhelp|markdown|rst|org|text|asciidoc|tex|mail|wiki'
 " 1}}} "
 
