@@ -213,8 +213,3 @@ bar {
   }
   separator_symbol ""
 }
-
-<<<<<<< HEAD
-=======
-#gaps inner 10
->>>>>>> 9c61643... Add other tweaks and helpers
