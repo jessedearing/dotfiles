@@ -111,8 +111,10 @@ function bail_on_tmux() {
 
 function load_tmux() {
   if (which tmux 2>&1 > /dev/null); then
-    if [ -z "$TMUX" ] && ( tmux ls 2>&1 ); then
-      eval "$(ssh-agent)"
+    if [ -z "$TMUX" ] && ( tmux ls &> /dev/null ); then
+      if ! ps aux | grep '[s]sh-agent' &> /dev/null; then
+        eval "$(ssh-agent)"
+      fi
       ssh-add $HOME/.ssh/id_rsa &> /dev/null
       ssh-add -qK $HOME/.ssh/id_ed25519 &> /dev/null &!
       ssh-add -qK $HOME/.ssh/vmware-ed25519 &> /dev/null &!
@@ -136,18 +138,7 @@ function printcolors() {
   done
 }
 
-function b2ip() {
-  local ip=$(boot2docker ip)
-  echo $ip | pbcopy
-  echo $ip
-}
-
 eval "$(thefuck --alias)"
-
-function sshforward() {
-  eval "$(ssh-agent)"
-  ssh-add
-}
 
 function jstags() {
 	find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exec jsctags {} -f \; | sed '/^$/d' | sort > tags
@@ -161,8 +152,6 @@ bindkey -M isearch '^F' history-incremental-search-forward
 
 fortune startrek computers $HOME/.fortunes/sadserver_tweets $HOME/.fortunes/honest_update_tweets
 echo
-
-export EC2_HOME=/usr/local/opt/ec2-api-tools/libexec
 
 stty discard undef
 

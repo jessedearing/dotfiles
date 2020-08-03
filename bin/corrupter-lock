@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
+param=("--insidecolor=0000001c" "--ringcolor=0000003e" \
+        "--linecolor=00000000" "--keyhlcolor=ffffff80" "--ringvercolor=ffffff00" \
+        "--separatorcolor=22222260" "--insidevercolor=ffffff1c" \
+        "--ringwrongcolor=ffffff55" "--insidewrongcolor=ffffff1c" \
+        "--verifcolor=ffffff00" "--wrongcolor=ff000000" "--timecolor=ffffff00" \
+        "--datecolor=ffffff00" "--layoutcolor=ffffff00")
 
 tmpbg="/tmp/screen.png"
 scrot "$tmpbg"; corrupter -mag 5 "$tmpbg" "$tmpbg"
-i3lock -i "$tmpbg"; rm "$tmpbg"
+convert "$tmpbg" -font Liberation-Sans \
+    -pointsize 26 -fill white -gravity center \
+    -annotate +0+160 "Type Password to Unlock" /usr/share/i3lock-fancy/icons/lock.png \
+    -gravity center -composite "$tmpbg"
+i3lock -i "$tmpbg" "${param[@]}"; rm "$tmpbg"

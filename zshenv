@@ -10,6 +10,8 @@ export GO111MODULE=on
 export PGDATA=$HOME/data/postgres
 export PGHOST=localhost
 
+export ZSH_DISABLE_COMPFIX=true
+
 ###############
 #  Databases  #
 ###############
