@@ -1,4 +1,6 @@
 \set PROMPT1 ' (%n@%M) %x [(%/)] %R%# '
 \set PROMPT2 '⋮ %# '
 \timing
-\x
+\x auto
+\pset null 'Ø'
+\set HISTFILE ~/.psql_history/history-:HOST
