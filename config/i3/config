@@ -215,3 +215,4 @@ bar {
 }
 
 assign [class="^firefox$"] 2
+#gaps inner 10
