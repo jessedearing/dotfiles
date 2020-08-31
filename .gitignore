@@ -17,3 +17,6 @@ vim/undo
 gemrc
 versioned_secrets/
 gnupg/
+
+bin/envsubst
+bin/tmc
