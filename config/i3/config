@@ -61,7 +61,7 @@ bindsym $mod+Shift+q kill
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+d exec --no-startup-id "rofi -show combi -combi-modi window,drun,run -modi combi,calc"
-bindsym $mod+mod1+space exec --no-startup-id "rofimoji"
+bindsym $mod+mod1+space exec --no-startup-id "rofimoji -c"
 bindsym mod1+shift+1 exec --no-startup-id "i3-scrot -d"
 bindsym mod1+shift+2 exec --no-startup-id "i3-scrot -w"
 bindsym --release mod1+shift+3 exec --no-startup-id "i3-scrot -s"
@@ -215,4 +215,4 @@ bar {
 }
 
 assign [class="^firefox$"] 2
-#gaps inner 10
+assign [class="^Slack$"] 3
