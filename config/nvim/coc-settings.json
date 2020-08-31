@@ -10,6 +10,7 @@
     "Kubernetes": "*.yaml"
   },
   "python.pythonPath": "python3",
+  "python.jediEnabled": false,
   "suggest.snippetIndicator": "·",
   "go.goplsPath": "/home/jesse/go/bin/gopls",
   "go.goplsOptions": {
