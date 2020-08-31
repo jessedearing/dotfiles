@@ -1,6 +1,21 @@
 #!/usr/bin/env bash
 
-git log --graph --stat --decorate -M --color --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' $* |  less -iXFR
+__PRETTY='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+
+while [[ $# > 0 ]]; do
+  __key="$1"
+  case $__key in
+    -c|--committer)
+      __PRETTY="$__PRETTY  %C(bold blue)<%cn>%Creset"
+      shift
+    ;;
+    *)
+      shift
+    ;;
+  esac
+done
+
+git log --graph --stat --decorate -M --color --pretty="$__PRETTY" $* |  less -iXFR
 #if [ -x /usr/local/bin/emojify ]; then
 #  git log --stat --decorate -M --color $* | emojify | less -r
 #else
