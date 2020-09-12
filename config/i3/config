@@ -216,3 +216,9 @@ bar {
 
 assign [class="^firefox$"] 2
 assign [class="^Slack$"] 3
+
+mode "pass-through" {
+  bindsym $mod+t mode "default"
+}
+
+bindsym $mod+t mode "pass-through"
