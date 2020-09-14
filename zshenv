@@ -43,4 +43,4 @@ export PYENV_SHELL=zsh
 #########
 export BAT_THEME=Dracula
 
-export TERMINAL=kitty
+export TERMINAL=alacritty
