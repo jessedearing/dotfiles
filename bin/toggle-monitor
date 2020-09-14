@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 #display=$(xrandr | grep -v eDP-1| awk '$2 == "connected" { print $1;}')
-__monitor_on=$(xrandr --listmonitors | awk 'BEGIN {enabled = "0";} $2 ~ /\+DP1/ { enabled = "1"; } END { print enabled; }')
+__monitor_on=$(xrandr --listmonitors | awk 'BEGIN {enabled = "0";} $2 ~ /\+DP-1/ { enabled = "1"; } END { print enabled; }')
 
 function __monitoron() {
-  xrandr --output DP1 --auto  --scale 1.75 --right-of eDP1
+  xrandr --output DP-1 --auto --scale 1.75 --right-of eDP-1
 }
 
 function __monitoroff() {
-  xrandr --output DP1 --off
+  xrandr --output DP-1 --off
 }
 
 if [[ $1 == "only-off" ]]; then
