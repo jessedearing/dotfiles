@@ -199,19 +199,7 @@ client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 client.background       #F8F8F2
 
 bar {
-  status_command ~/.bin/conky-i3bar
-  colors {
-    background #282A36
-    statusline #F8F8F2
-    separator  #44475A
-
-    focused_workspace  #44475A #44475A #F8F8F2
-    active_workspace   #282A36 #44475A #F8F8F2
-    inactive_workspace #282A36 #282A36 #BFBFBF
-    urgent_workspace   #FF5555 #FF5555 #F8F8F2
-    binding_mode       #FF5555 #FF5555 #F8F8F2
-  }
-  separator_symbol ""
+  swaybar_command waybar
 }
 
 assign [class="^firefox$"] 2
@@ -222,3 +210,16 @@ mode "pass-through" {
 }
 
 bindsym $mod+t mode "pass-through"
+
+input "2:7:SynPS/2_Synaptics_TouchPad" {
+  tap enabled
+  natural_scroll enabled
+}
+
+input "1452:613:Apple_Inc._Magic_Trackpad_2" {
+  tap enabled
+  natural_scroll enabled
+}
+
+output "eDP1" pos 0 0
+output "DP1" pos 3840 0
