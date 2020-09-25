@@ -73,8 +73,8 @@ if [ -x $__USR_PATH/bin/richgo ] || [ -x $HOME/go/bin/richgo ]; then
 fi
 alias vim="editor.sh"
 
-if [ -x $__USR_PATH/bin/exa ]; then
-	alias ls=exa
+if [ -x $__USR_PATH/bin/lsd ]; then
+	alias ls=lsd
 fi
 
 alias rg="rg -i -g \"!{vendor}\""
