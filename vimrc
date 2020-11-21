@@ -12,7 +12,7 @@ Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/scratch.vim'
 "Plug 'vim-scripts/calendar.vim'
@@ -50,8 +50,6 @@ Plug 'google/vim-searchindex'
 "Plug 'artur-shaik/vim-javacomplete2'
 "Plug 'junegunn/vim-emoji'
 Plug 'hashivim/vim-terraform'
-"Plug 'juliosueiras/vim-terraform-snippets'
-Plug 'juliosueiras/vim-terraform-completion'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'cohama/agit.vim'
 Plug 'NLKNguyen/papercolor-theme'
@@ -244,7 +242,7 @@ let base16colorspace=256
 "let g:one_allow_italics = 1
 "color one
  "color anderson
-"color dracula
+color dracula
 "color darcula
 "color tender
 "color OceanicNext
@@ -254,7 +252,7 @@ let g:nord_italic_comments = 1
 let g:nord_uniform_diff_background = 1
 let g:nord_cursor_line_number_background = 1
 "color nord
-color embark
+"color embark
 "color papercolor
 
 " Directories for swp files
@@ -387,7 +385,6 @@ augroup go
 	au FileType go setlocal foldmethod=syntax
   " It's a spacey world out there, thankfully not in Go
   au FileType go setlocal noexpandtab
-  au BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
   au BufWritePost *.go normal! zv
 augroup END
 
