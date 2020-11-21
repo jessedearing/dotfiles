@@ -4,10 +4,19 @@
       "command": "dot-language-server",
       "args": ["--stdio"],
       "filetypes": ["dot"]
+    },
+    "terraform": {
+      "command": "terraform-ls",
+      "filetypes": [
+        "tf",
+        "terraform"
+      ],
+      "args": ["serve"]
     }
   },
   "yaml.schemas": {
-    "Kubernetes": "*.yaml"
+    "Kubernetes": "*.yaml",
+    "https://json.schemastore.org/kustomization": "kustomization.yaml"
   },
   "python.pythonPath": "python3",
   "python.jediEnabled": false,

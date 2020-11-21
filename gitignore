@@ -10,3 +10,4 @@ config/database.yml
 .vscode/
 .tern-port
 vim-markdown-preview.html
+.glab-cli/
