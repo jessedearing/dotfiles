@@ -323,14 +323,14 @@ au FileType vimwiki nnoremap <C-P> :Vimwiki2HTMLBrowse<CR>
 au FileType vimwiki setlocal spell
 let g:vimwiki_list = [
   \ {'path': '~/.vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
-autocmd BufWritePost /home/jesse/.vimwiki/*.md silent execute '! git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki add "%" > /dev/null; git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki commit -q -m "%" 2>&1 > /dev/null'
+autocmd BufWritePost $HOME/.vimwiki/*.md silent execute '! git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki add "%" > /dev/null; git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki commit -q -m "%" 2>&1 > /dev/null'
 let g:tagbar_type_vimwiki = {
           \   'ctagstype':'vimwiki'
           \ , 'kinds':['h:header']
           \ , 'sro':'&&&'
           \ , 'kind2scope':{'h':'header'}
           \ , 'sort':0
-          \ , 'ctagsbin':'/home/jesse/.vimwiki/utils/vwtags.py'
+          \ , 'ctagsbin':'~/.vimwiki/utils/vwtags.py'
           \ , 'ctagsargs': 'markdown'
           \ }
 let g:taskwiki_markup_syntax = "markdown"

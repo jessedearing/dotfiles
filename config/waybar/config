@@ -70,7 +70,7 @@
 
     "clock#date": {
       "interval": 10,
-      "format": "  {:%e %b %Y}", // Icon: calendar-alt
+      "format": "  {:%b %e %Y}", // Icon: calendar-alt
       "tooltip-format": "{:%e %B %Y}"
     },
 
@@ -105,9 +105,9 @@
     "network": {
         "interval": 5,
         "format-wifi": "  {essid} ({signalStrength}%)", // Icon: wifi
-        "format-ethernet": "  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
+        "format-ethernet": "  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
         "format-disconnected": "⚠  Disconnected",
-        "tooltip-format": "{ifname}: {ipaddr}"
+        "tooltip-format": "{ifname}: {ipaddr} U:{bandwidthUpBits} D:{bandwidthDownBits}"
     },
 
     "pulseaudio": {
@@ -156,9 +156,9 @@
     },
 
     "temperature": {
-      "critical-threshold": 80,
+      "critical-threshold": 175,
       "interval": 5,
-      "format": "{icon}  {temperatureC}°C",
+      "format": "{icon}  {temperatureF}°F",
       "format-icons": [
           "", // Icon: temperature-empty
           "", // Icon: temperature-quarter

@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Cantarell 14px
+font pango:Hack Nerd Font 14px
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -24,8 +24,8 @@ font pango:Cantarell 14px
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/jesse/.bin/corrupter-lock
-bindsym $mod+Control+Escape exec --no-startup-id "/home/jesse/.bin/corrupter-lock"
+#exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/$USER/.bin/corrupter-lock
+bindsym $mod+Control+Escape exec --no-startup-id "/home/$USER/.bin/corrupter-lock"
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -62,9 +62,9 @@ bindsym $mod+Shift+q kill
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+d exec --no-startup-id "rofi -show combi -combi-modi window,drun,run -modi combi,calc"
 bindsym $mod+mod1+space exec --no-startup-id "rofimoji -c"
-bindsym mod1+shift+1 exec --no-startup-id "i3-scrot -d"
-bindsym mod1+shift+2 exec --no-startup-id "i3-scrot -w"
-bindsym --release mod1+shift+3 exec --no-startup-id "i3-scrot -s"
+bindsym mod1+shift+1 exec --no-startup-id "swayshot display"
+bindsym mod1+shift+2 exec --no-startup-id "swayshot window"
+bindsym --release mod1+shift+3 exec --no-startup-id "swayshot region"
 
 
 bindsym $mod+Tab workspace back_and_forth
@@ -157,10 +157,10 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your X session.' -B 'Yes, exit sway' 'swaymsg exit'"
+
+bindsym Ctrl+Space exec --no-startup-id "makoctl dismiss"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -203,6 +203,7 @@ bar {
 }
 
 assign [class="^firefox$"] 2
+assign [class="^brave-browser"] 2
 assign [class="^Slack$"] 3
 
 mode "pass-through" {
@@ -221,5 +222,10 @@ input "1452:613:Apple_Inc._Magic_Trackpad_2" {
   natural_scroll enabled
 }
 
-output "eDP1" pos 0 0
-output "DP1" pos 3840 0
+default_border pixel 5
+default_floating_border pixel 10
+
+output eDP-1 pos 0 0
+output DP-1 pos 1920 0
+
+exec /home/$USER/.bin/swayidle-start

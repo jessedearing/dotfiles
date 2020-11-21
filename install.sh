@@ -10,7 +10,7 @@ all_dir=`find $PWD -maxdepth 1 \! -name 'root' \! -iname 'pkg' \! -iname 'themes
 for dir in $all_dir; do
   if [ ! -e $HOME/.`basename $dir` ]; then
     echo Linking $dir to $HOME/.`basename $dir`
-    ln -s $dir $HOME/.`basename $dir`
+    ln -fs $dir $HOME/.`basename $dir`
   else
     echo $HOME/.`basename $dir` already exists
   fi
@@ -23,7 +23,7 @@ for configitem in `find $HOME/.dotfiles/gnupg -type f`; do
   else
     echo "Linking $configitem to $homeconfigitem"
     mkdir -p `dirname $homeconfigitem`
-    ln -s $configitem $homeconfigitem
+    ln -fs $configitem $homeconfigitem
   fi
 done
 
@@ -34,7 +34,7 @@ for configitem in `find $HOME/.dotfiles/config -type f`; do
   else
     echo "Linking $configitem to $homeconfigitem"
     mkdir -p `dirname $homeconfigitem`
-    ln -s $configitem $homeconfigitem
+    ln -fs $configitem $homeconfigitem
   fi
 done
 

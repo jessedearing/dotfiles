@@ -10,6 +10,10 @@ if [[ $(uname -s) == "Darwin" ]]; then
   __USR_PATH="/usr/local"
 fi
 
+if [[ "$HOME" == "/home/$USER.active" ]]; then
+  export HOME="/home/$USER"
+fi
+
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
 #export ZSH_THEME="sorin"
@@ -87,7 +91,6 @@ export LESS="-iMx4 -RX"
 export LESS_TERMCAP_so=$'\E[30;43m'
 export LESS_TERMCAP_se=$'\E[39;49m'
 export GIT_EDITOR=$EDITOR
-export BROWSER=$HOME/.bin/browser.sh
 
 function quote() {
   echo "“$*”" | pbcopy
