@@ -21,14 +21,10 @@
   "python.pythonPath": "python3",
   "python.jediEnabled": false,
   "suggest.snippetIndicator": "·",
-  "go.goplsPath": "/home/jesse/go/bin/gopls",
   "go.goplsOptions": {
     "completeUnimported": true,
     "usePlaceholders": true
   },
-  "go.goplsArgs": [
-    "-remote=auto"
-  ],
   "diagnostic.warningSign": "⁉",
   "diagnostic.errorSign": "‼"
 }
