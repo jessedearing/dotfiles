@@ -1,5 +1,5 @@
-export PATH=$HOME/.fzf/bin:${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.yarn/bin:$HOME/.cargo/bin:$HOME/go/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/opt/perl/bin
-export EDITOR=$HOME/.bin/editor.sh
+export PATH=$HOME/.fzf/bin:${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.yarn/bin:$HOME/.cargo/bin:$HOME/go/bin:.bundle/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/opt/perl/bin
+export EDITOR=$HOME/.local/bin/editor.sh
 if [[ $(uname -s) == "Darwin" ]]; then
   export RVC_READLINE="/usr/local/opt/readline/lib/libreadline.dylib"
 fi

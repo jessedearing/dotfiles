@@ -163,7 +163,7 @@ TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S'
 
 autoload bashcompinit
 bashcompinit
-source $HOME/.bin/gh_complete.sh
+source $HOME/.local/bin/gh_complete.sh
 
 ulimit -S -n 2048
 
