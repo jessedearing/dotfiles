@@ -128,6 +128,7 @@ function load_tmux() {
         ssh-add $HOME/.ssh/id_rsa &> /dev/null
         ssh-add -qK $HOME/.ssh/id_ed25519 &> /dev/null &!
         ssh-add -qK $HOME/.ssh/vmware-ed25519 &> /dev/null &!
+        cd
         bail_on_tmux && tmux && exit
       fi
     fi
@@ -200,5 +201,3 @@ pyenv() {
 if [ -f $__USR_PATH/bin/aws_zsh_completer.sh ]; then
   . $__USR_PATH/bin/aws_zsh_completer.sh
 fi
-
-cd

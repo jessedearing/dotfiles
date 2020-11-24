@@ -2,7 +2,6 @@
 disabled = false
 
 [kubernetes]
-symbol = "ﴱ "
 disabled = false
 
 [aws]
