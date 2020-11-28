@@ -77,10 +77,6 @@ if [ -x $__USR_PATH/bin/richgo ] || [ -x $HOME/go/bin/richgo ]; then
 fi
 alias vim="editor.sh"
 
-if [ -x $__USR_PATH/bin/lsd ]; then
-	alias ls=lsd
-fi
-
 alias rg="rg -i -g \"!{vendor}\""
 
 if [ -x /usr/bin/bat ]; then
@@ -154,6 +150,8 @@ bindkey -M vicmd '?' history-incremental-pattern-search-forward
 bindkey -M isearch '^R' history-incremental-search-backward
 bindkey -M isearch '^F' history-incremental-search-forward
 
+bindkey "^Q" push-input
+
 fortune startrek computers $HOME/.fortunes/sadserver_tweets $HOME/.fortunes/honest_update_tweets
 echo
 
@@ -178,6 +176,12 @@ fi
 if [ -f /etc/grc.zsh ]; then
   . /etc/grc.zsh
 fi
+
+# Alias ls after grc since lsd is colorized
+if [ -x $__USR_PATH/bin/lsd ]; then
+	alias ls=lsd
+fi
+
 if [ -f $__USR_PATH/opt/pyenv/libexec/../completions/pyenv.zsh ]; then
   source "$__USR_PATH/opt/pyenv/libexec/../completions/pyenv.zsh"
 fi
