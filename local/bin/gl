@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-__PRETTY='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+__PRETTY='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an> %C(italic yellow)%G?%Creset'
 
 while [[ $# > 0 ]]; do
   __key="$1"
