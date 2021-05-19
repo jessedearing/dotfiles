@@ -1,10 +1,10 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 killall swayidle || true
 swayidle -w \
   timeout 30 'blight set 9000' \
     resume 'blight set 20000' \
-  timeout 90 'swaylock -f -c 000000' \
-  before-sleep 'swaylock -f -c 000000' \
+  timeout 90 'swaylock -f' \
+  before-sleep 'swaylock -f' \
   timeout 900 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' &!

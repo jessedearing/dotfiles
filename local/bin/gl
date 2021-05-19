@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-__PRETTY='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an> %C(italic yellow)%G?%Creset'
+__PRETTY='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset %Cgreen%G?%Creset'
+
+__args=""
 
 while [[ $# > 0 ]]; do
   __key="$1"
@@ -10,12 +12,13 @@ while [[ $# > 0 ]]; do
       shift
     ;;
     *)
+      __args+=" $1"
       shift
     ;;
   esac
 done
 
-git log --graph --stat --decorate -M --color --pretty="$__PRETTY" $* |  less -iXFR
+git log --graph --stat --decorate -M --color --pretty="$__PRETTY" $__args |  less -iXFR
 #if [ -x /usr/local/bin/emojify ]; then
 #  git log --stat --decorate -M --color $* | emojify | less -r
 #else

@@ -10,10 +10,6 @@ if [[ $(uname -s) == "Darwin" ]]; then
   __USR_PATH="/usr/local"
 fi
 
-if [[ "$HOME" == "/home/$USER.active" ]]; then
-  export HOME="/home/$USER"
-fi
-
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
 #export ZSH_THEME="sorin"
@@ -167,8 +163,6 @@ source $HOME/.local/bin/gh_complete.sh
 ulimit -S -n 2048
 
 load_tmux
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 if [ -f /usr/local/etc/grc.zsh ]; then
   . /usr/local/etc/grc.zsh
