@@ -482,7 +482,7 @@ au filetype crontab setlocal nobackup nowritebackup
 " 1}}} "
 
 " coc.nvim {{{1 "
-inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <c-\> coc#refresh()
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
 inoremap <expr> <c-j> pumvisible() ? "\<C-y>" : "\<CR>"
 " Remap keys for gotos

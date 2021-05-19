@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Hack Nerd Font 14px
+font pango:VictorMono Nerd Font
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -25,20 +25,22 @@ font pango:Hack Nerd Font 14px
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 #exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/$USER/.bin/corrupter-lock
-bindsym $mod+Control+Escape exec --no-startup-id "/home/$USER/.bin/corrupter-lock"
+bindsym $mod+Control+Escape exec --no-startup-id "/home/$USER/.local/bin/corrupter-lock"
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-exec /usr/bin/vmware-user
-
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86AudioRaiseVolume exec volumectl raise
+bindsym XF86AudioLowerVolume exec volumectl lower
+bindsym XF86AudioMute exec volumectl mute
+#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+#bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+exec "avizo-service"
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause
@@ -49,7 +51,7 @@ bindsym XF86AudioPrev exec playerctl previous
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec kitty -1 --listen-on=unix:$XDG_RUNTIME_DIR/kitty.sock
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -60,8 +62,8 @@ bindsym $mod+Shift+q kill
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+d exec --no-startup-id "rofi -show combi -combi-modi window,drun,run -modi combi,calc"
-bindsym $mod+mod1+space exec --no-startup-id "rofimoji -c"
+bindsym $mod+d exec --no-startup-id "rofi -show combi -combi-modi window,drun,run"
+bindsym $mod+mod1+space exec --no-startup-id "rofimoji"
 bindsym mod1+shift+1 exec --no-startup-id "swayshot display"
 bindsym mod1+shift+2 exec --no-startup-id "swayshot window"
 bindsym --release mod1+shift+3 exec --no-startup-id "swayshot region"
@@ -160,7 +162,7 @@ bindsym $mod+Shift+c reload
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your X session.' -B 'Yes, exit sway' 'swaymsg exit'"
 
-bindsym Ctrl+Space exec --no-startup-id "makoctl dismiss"
+bindsym Ctrl+Shift+Space exec --no-startup-id "makoctl dismiss"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -202,10 +204,6 @@ bar {
   swaybar_command waybar
 }
 
-assign [class="^firefox$"] 2
-assign [class="^brave-browser"] 2
-assign [class="^Slack$"] 3
-
 mode "pass-through" {
   bindsym $mod+t mode "default"
 }
@@ -225,7 +223,20 @@ input "1452:613:Apple_Inc._Magic_Trackpad_2" {
 default_border pixel 5
 default_floating_border pixel 10
 
-output eDP-1 pos 0 0
-output DP-1 pos 1920 0
+output * {
+  background ~/Pictures/arch-bg.jpg stretch
+}
 
-exec /home/$USER/.bin/swayidle-start
+output eDP-1 {
+  pos 0 0
+}
+
+output DP-1 {
+  pos 1920 0
+}
+
+for_window [app_id="avizo-service"] border none
+no_focus [app_id="avizo-service"]
+
+exec ~/.local/bin/swayinit
+exec systemctl --user isolate window-manager
