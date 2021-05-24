@@ -54,7 +54,7 @@ set guioptions-=L
 
 " set guifont=DejaVu\ Sans\ Mono:h12
 set macligatures
-set guifont=Hack\ Regular\ Nerd\ Font\ Complete:h14
+set guifont=VictorMono\ Nerd\ Font:h14
 
 " colorscheme tubster
 "color darcula

@@ -1,5 +1,5 @@
 " Plugins {{{1 "
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 Plug 'tarekbecker/vim-yaml-formatter'
 Plug 'pedrohdz/vim-yaml-folds'
 Plug 'RRethy/vim-illuminate'
@@ -106,10 +106,10 @@ if exists("+undofile")
 	set undofile
 	" :help undo-persistence
 	" This is only present in 7.3+
-	if isdirectory($HOME . '/.vim/undo') == 0
-		:silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
-	endif
-	set undodir=~/.vim/undo//
+  if isdirectory($HOME . '/.config/nvim/undo') == 0
+		:silent !mkdir -p ~/.config/nvim/undo > /dev/null 2>&1
+  endif
+	set undodir=~/.config/nvim/undo//
 endif
 
 nnoremap ' `

@@ -1,5 +1,5 @@
 configuration {
-modi: "window,calc,emoji,drun";
+modi: "calc,emoji,window,drun";
 /*	width: 50;*/
 /*	lines: 15;*/
 /*	columns: 1;*/
