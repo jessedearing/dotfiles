@@ -52,4 +52,4 @@
 [gpg]
   program = /usr/bin/gpg
 [init]
-	defaultBranch = main
+  defaultBranch = main

@@ -19,7 +19,6 @@
     "https://json.schemastore.org/kustomization": "kustomization.yaml"
   },
   "python.pythonPath": "python3",
-  "python.jediEnabled": false,
   "suggest.snippetIndicator": "·",
   "go.goplsOptions": {
     "completeUnimported": true,

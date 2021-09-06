@@ -3,7 +3,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'tarekbecker/vim-yaml-formatter'
 Plug 'pedrohdz/vim-yaml-folds'
 Plug 'RRethy/vim-illuminate'
-"Plug 'arcticicestudio/nord-vim'
+Plug 'arcticicestudio/nord-vim'
 Plug 'dracula/vim'
 Plug 'mxw/vim-jsx'
 Plug 'isRuslan/vim-es6'
@@ -56,7 +56,7 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'kristijanhusak/vim-carbon-now-sh'
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-eunuch'
-Plug 'skbolton/embark'
+Plug 'neovim/nvim-lspconfig'
 call plug#end()
 " 1}}} "
 
@@ -234,26 +234,12 @@ set modelines=10
 " color aldmeris
 "set background=light
 let base16colorspace=256
-"color base16-default
-" color kalisi
-" color material
-" color crayon
-"color base16-tomorrow-night
-"let g:one_allow_italics = 1
-"color one
- "color anderson
 color dracula
-"color darcula
-"color tender
-"color OceanicNext
 let g:nord_italic = 1
 let g:nord_underline = 1
 let g:nord_italic_comments = 1
 let g:nord_uniform_diff_background = 1
 let g:nord_cursor_line_number_background = 1
-"color nord
-"color embark
-"color papercolor
 
 " Directories for swp files
 set backupdir=~/.vim/backup
@@ -496,8 +482,10 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
   else
-    call CocAction('doHover')
+    execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
 " 1}}} "

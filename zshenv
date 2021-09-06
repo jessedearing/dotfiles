@@ -9,6 +9,7 @@ export GOPRIVATE=*.vmware.com
 export GO111MODULE=on
 export PGDATA=$HOME/data/postgres
 export PGHOST=localhost
+export CDPATH=~/.dotfiles/shell-bookmarks
 
 export ZSH_DISABLE_COMPFIX=true
 
@@ -44,3 +45,4 @@ export PYENV_SHELL=zsh
 export BAT_THEME=Dracula
 
 export TERMINAL=kitty
+export BROWSER=firefox

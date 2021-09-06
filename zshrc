@@ -1,4 +1,5 @@
-setopt interactivecomments
+setopt interactive_comments
+setopt chase_links
 # Path to your oh-my-zsh configuration.
 export DISABLE_AUTO_UPDATE=true
 export ZSH=$HOME/.oh-my-zsh
@@ -170,6 +171,16 @@ fi
 if [ -f /etc/grc.zsh ]; then
   . /etc/grc.zsh
 fi
+
+unalias kubectl &> /dev/null
+unfunction kubectl &> /dev/null
+kubectl() {
+  if [[ "$@" =~ '(^|\s)(attach|run|exec|logs|edit)\s' ]]; then
+    /usr/bin/kubectl "$@"
+  else
+    grc -e -s -c conf.kubectl kubectl "$@"
+  fi
+}
 
 # Alias ls after grc since lsd is colorized
 if [ -x $__USR_PATH/bin/lsd ]; then
