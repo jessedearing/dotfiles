@@ -42,7 +42,11 @@ combi-modi: "window,drun,run";
 /*	scroll-method: 0;*/
 /*	window-format: "{w}    {c}   {t}";*/
 /*	click-to-exit: true;*/
-theme: "~/.config/rofi/dracula.rasi" ;
+/*	show-match: true;*/
+/*	color-normal: ;*/
+/*	color-urgent: ;*/
+/*	color-active: ;*/
+/*	color-window: ;*/
 /*	max-history-size: 25;*/
 /*	combi-hide-mode-prefix: false;*/
 /*	matching-negate-char: '-' /* unsupported */;*/
@@ -146,4 +150,10 @@ theme: "~/.config/rofi/dracula.rasi" ;
       directories-first: true;
       sorting-method:    "name";
   }
+}
+@theme "~/.config/rofi/dracula.rasi"
+
+element-text, element-icon {
+    background-color: inherit;
+    text-color:       inherit;
 }
