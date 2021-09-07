@@ -15,8 +15,8 @@ export DBUS_SESSION_BUS_ADDRESS WAYLAND_DISPLAY DESKTOP_SESSION XDG_SESSION_DESK
 . /var/run/user/1000/dbus.env
 
 exec swayidle -w \
-  timeout 30 'backlight 9000' \
-    resume 'backlight 20000' \
+  timeout 30 'backlight 64' \
+    resume 'backlight 300' \
   timeout 90 'swaylock -f' \
   before-sleep 'swaylock -f' \
   timeout 900 'swaymsg -s /run/user/1000/sway-ipc.1000.*.sock "output * dpms off"' \
