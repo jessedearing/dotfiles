@@ -39,3 +39,4 @@ export BAT_THEME=Dracula
 
 export TERMINAL=kitty
 export BROWSER=firefox
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
