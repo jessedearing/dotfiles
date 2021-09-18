@@ -5,39 +5,31 @@ Plug 'pedrohdz/vim-yaml-folds'
 Plug 'RRethy/vim-illuminate'
 Plug 'arcticicestudio/nord-vim'
 Plug 'dracula/vim'
-Plug 'mxw/vim-jsx'
-Plug 'isRuslan/vim-es6'
+"Plug 'mxw/vim-jsx'
+"Plug 'isRuslan/vim-es6'
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/scratch.vim'
-"Plug 'vim-scripts/calendar.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'Shougo/neco-vim'
-"Plug 'neoclide/coc-neco'
-"Plug 'ervandew/supertab'
 Plug 'fatih/vim-go', { 'tag': '*'}
 Plug 'andrewstuart/vim-kubernetes'
 Plug 'neomake/neomake'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'masukomi/vim-markdown-folding'
-"Plug 'dyng/ctrlsf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'airblade/vim-gitgutter'
-"Plug 'vim-syntastic/syntastic'
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
 Plug 'hdima/python-syntax'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'junegunn/vim-easy-align'
-"Plug 'vim-scripts/SQLUtilities'
 Plug 'vim-scripts/dbext.vim'
 Plug 'godlygeek/tabular'
 Plug 'liuchengxu/vista.vim'
@@ -45,10 +37,7 @@ Plug 'elzr/vim-json'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'vimwiki/vimwiki'
 Plug 'Quramy/tsuquyomi'
-"Plug 'leafgarland/typescript-vim'
 Plug 'google/vim-searchindex'
-"Plug 'artur-shaik/vim-javacomplete2'
-"Plug 'junegunn/vim-emoji'
 Plug 'hashivim/vim-terraform'
 Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'cohama/agit.vim'
@@ -56,7 +45,6 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'kristijanhusak/vim-carbon-now-sh'
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-eunuch'
-Plug 'neovim/nvim-lspconfig'
 call plug#end()
 " 1}}} "
 
@@ -476,6 +464,8 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
