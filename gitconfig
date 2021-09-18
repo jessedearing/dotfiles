@@ -23,6 +23,8 @@
 	autocorrect = 1
 [includeIf "gitdir:~/Documents/code/vmware/"]
   path = ~/.gitconfig.vmware
+[include]
+  path = ~/.gitconfig.local
 [alias]
   reuse=commit --amend --reuse-message=HEAD
   s=status -sb
