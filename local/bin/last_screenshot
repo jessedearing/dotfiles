@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+dragon-drag-and-drop $(ls -1 -c ~/Pictures/*_scrot.png | head -1)

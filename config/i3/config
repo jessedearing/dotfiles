@@ -63,7 +63,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+d exec --no-startup-id "rofi -show combi"
 bindsym mod1+shift+1 exec --no-startup-id "i3-scrot -d"
 bindsym mod1+shift+2 exec --no-startup-id "i3-scrot -w"
-bindsym --release mod1+shift+3 exec --no-startup-id "i3-scrot -s"
+bindsym --release mod1+shift+3 exec --no-startup-id "i3-scrot -s && ~/.local/bin/last_screenshot"
 
 
 bindsym $mod+Tab workspace back_and_forth
