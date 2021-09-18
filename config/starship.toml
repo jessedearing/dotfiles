@@ -5,4 +5,5 @@ disabled = false
 disabled = false
 
 [aws]
+symbol = "  "
 style = "blue"
