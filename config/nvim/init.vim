@@ -251,8 +251,8 @@ let g:clipboard = {
 		\      '*': ['tmux', 'load-buffer', '-w', '-'],
 		\    },
 		\   'paste': {
-		\      '+': ['xclip', '-bo'],
-		\      '*': ['xclip', '-bo'],
+		\      '+': ['xclip', '-b', '-o'],
+		\      '*': ['xclip', '-b', '-o'],
 		\   },
 		\   'cache_enabled': 1,
 		\ }
