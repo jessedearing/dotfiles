@@ -244,6 +244,19 @@ let g:sqlutil_align_comma = 1
 " set clipboard="
 set clipboard+=unnamedplus
 
+let g:clipboard = {
+		\   'name': 'myClipboard',
+		\   'copy': {
+		\      '+': ['tmux', 'load-buffer', '-w', '-'],
+		\      '*': ['tmux', 'load-buffer', '-w', '-'],
+		\    },
+		\   'paste': {
+		\      '+': ['xclip', '-bo'],
+		\      '*': ['xclip', '-bo'],
+		\   },
+		\   'cache_enabled': 1,
+		\ }
+
 "		Grep																																	 {{{
 let Grep_Find_Use_Xargs = 0
 let Grep_Default_Options = '-i'
@@ -411,6 +424,11 @@ let g:neomake_warning_sign = {
       \ }
 
 let g:neomake_go_go_maker = {}
+
+let g:neomake_yaml_yamllint_maker = {
+      \ 'args': ['-f', 'parsable', '-d', 'relaxed'],
+      \ 'errorformat': '%E%f:%l:%c: [error] %m,%W%f:%l:%c: [warning] %m',
+      \ }
 
 let g:neomake_vimwiki_writegood_maker = {
       \ 'exe': 'writegood',
