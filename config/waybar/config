@@ -166,7 +166,8 @@
           "", // Icon: temperature-three-quarters
           ""  // Icon: temperature-full
       ],
-      "tooltip": true
+      "tooltip": true,
+      "hwmon-path": "/sys/class/hwmon/hwmon5/temp1_input"
     },
 
     "tray": {

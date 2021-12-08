@@ -61,7 +61,6 @@ bindsym $mod+Shift+q kill
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+d exec --no-startup-id "rofi -show combi -combi-modi window,drun,run"
-bindsym $mod+mod1+space exec --no-startup-id "rofimoji"
 bindsym mod1+shift+1 exec --no-startup-id "swayshot display"
 bindsym mod1+shift+2 exec --no-startup-id "swayshot window"
 bindsym --release mod1+shift+3 exec --no-startup-id "swayshot region"
@@ -93,10 +92,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-#bindsym $mod+- split h
+#bindsym $mod+minus split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+#bindsym $mod+backslash split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -218,8 +217,8 @@ input "1452:613:Apple_Inc._Magic_Trackpad_2" {
   natural_scroll enabled
 }
 
-default_border pixel 5
-default_floating_border pixel 10
+default_border pixel 2
+default_floating_border pixel 2
 
 output * {
   background ~/Pictures/arch-bg.jpg stretch
@@ -237,4 +236,4 @@ for_window [app_id="avizo-service"] border none
 no_focus [app_id="avizo-service"]
 
 exec ~/.local/bin/swayinit
-exec systemctl --user isolate window-manager
+exec systemctl --user start window-manager.target
