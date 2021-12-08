@@ -68,6 +68,7 @@ alias mytop="perl /usr/local/bin/mytop"
 alias g=git
 #alias g="~/git"
 #alias lab="~/lab"
+alias t=task
 
 if [ -x $__USR_PATH/bin/richgo ] || [ -x $HOME/go/bin/richgo ]; then
 	alias go=richgo
