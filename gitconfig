@@ -1,6 +1,6 @@
 [user]
   name = Jesse Dearing
-	email = jesse.dearing@gmail.com
+	email = code@me.jesse.dev
 [color]
 	ui = true
 [mergetool "fugitive"]
