@@ -38,6 +38,8 @@ data.location=$HOME/.task
 #include solarized-dark-256.theme
 #include solarized-light-256.theme
 #include no-color.theme
+uda.url.type=string
+uda.url.label=URL
 
 include $HOME/.taskrc.local
 
