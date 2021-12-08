@@ -32,6 +32,7 @@ data.location=$HOME/.task
 #include dark-green-256.theme
 #include dark-blue-256.theme
 #include dark-violets-256.theme
+include /usr/share/doc/task/rc/dark-violets-256.theme
 #include dark-yellow-green.theme
 #include dark-gray-256.theme
 #include dark-gray-blue-256.theme
@@ -44,3 +45,10 @@ uda.url.label=URL
 include $HOME/.taskrc.local
 
 news.version=2.6.0
+
+context.personal.read=project:personal
+context.personal.write=project:personal
+context.work.read=project:vmware
+context.work.write=project:vmware
+
+context=work
