@@ -107,23 +107,28 @@ function bail_on_tmux() {
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 function load_tmux() {
+  tmux_session="local"
+  if [ ! -z "$SSH_CONNECTION" ]; then
+    tmux_session="ssh"
+  fi
+
   if (which tmux 2>&1 > /dev/null); then
-    if [ -z "$TMUX" ] && ( tmux ls &> /dev/null ); then
+    if [ -z "$TMUX" ] && ( tmux ls | grep "${tmux_session}:" &> /dev/null ); then
       if ! ps aux | grep '[s]sh-agent' &> /dev/null; then
         eval "$(ssh-agent)"
       fi
       ssh-add $HOME/.ssh/id_rsa &> /dev/null
       ssh-add -qK $HOME/.ssh/id_ed25519 &> /dev/null &!
       ssh-add -qK $HOME/.ssh/vmware-ed25519 &> /dev/null &!
-      bail_on_tmux && tmux attach -t 0 && exit
+      bail_on_tmux && tmux attach -t $tmux_session && exit
     else
-      if [ -z "$TMUX" ] && [ -z "$SUDO_USER" ] && [ -z "$SSH_CONNECTION" ]; then
+      if [ -z "$TMUX" ] && [ -z "$SUDO_USER" ]; then
         eval "$(ssh-agent)"
         ssh-add $HOME/.ssh/id_rsa &> /dev/null
         ssh-add -qK $HOME/.ssh/id_ed25519 &> /dev/null &!
         ssh-add -qK $HOME/.ssh/vmware-ed25519 &> /dev/null &!
         cd
-        bail_on_tmux && tmux && exit
+        bail_on_tmux && tmux new-session -s $tmux_session && exit
       fi
     fi
   fi
