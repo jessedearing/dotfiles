@@ -213,6 +213,7 @@ bar {
   separator_symbol ""
 }
 
+for_window [class="Dia" window_role="toolbox_window"] resize set width 5 ppt
 
 mode "pass-through" {
   bindsym $mod+t mode "default"
