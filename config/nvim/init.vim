@@ -45,6 +45,8 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'kristijanhusak/vim-carbon-now-sh'
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-eunuch'
+"Plug 'tools-life/taskwiki'
+Plug 'powerman/vim-plugin-AnsiEsc'
 call plug#end()
 " 1}}} "
 
@@ -251,8 +253,8 @@ let g:clipboard = {
 		\      '*': ['tmux', 'load-buffer', '-w', '-'],
 		\    },
 		\   'paste': {
-		\      '+': ['xclip', '-b', '-o'],
-		\      '*': ['xclip', '-b', '-o'],
+		\      '+': ['tmux', 'save-buffer', '-'],
+		\      '*': ['tmux', 'save-buffer', '-'],
 		\   },
 		\   'cache_enabled': 1,
 		\ }
