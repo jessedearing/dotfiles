@@ -1,7 +1,15 @@
+global !p
+from vimsnippets import foldmarker, make_box, get_comment_format
+endglobal
+
 snippet awsrole "AWS Assume Role URL"
 https://signin.aws.amazon.com/switchrole?account=${1:account}&roleName=${2:OrganizationAccountAccessRole}&displayName=${3}
 endsnippet
 
 snippet nobodyuid "Typical UID for the nobody user in Linux"
 65534
+endsnippet
+
+snippet todo "TODO comment" bw
+`!p snip.rv=get_comment_format()[0]` ${2:TODO}: $0${3: <${4:`!v strftime('%Y-%m-%d')`}${5:, `!v g:snips_author`}>} `!p snip.rv=get_comment_format()[2]`
 endsnippet
