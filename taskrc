@@ -39,18 +39,10 @@ include /usr/share/doc/task/rc/dark-violets-256.theme
 #include solarized-dark-256.theme
 #include solarized-light-256.theme
 #include no-color.theme
-uda.url.type=string
-uda.url.label=URL
-uda.computer.type=string
-uda.computer.label=Computer
 
+include $HOME/.taskrc.global
 include $HOME/.taskrc.local
 
 news.version=2.6.0
 
-context.personal.read=(project:personal or computer:personal)
-context.personal.write=project:personal
-context.work.read=(project:vmware or computer:work)
-context.work.write=project:vmware
-
-context=work
+context=personal
