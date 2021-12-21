@@ -49,8 +49,8 @@ include $HOME/.taskrc.local
 news.version=2.6.0
 
 context.personal.read=(project:personal or computer:personal)
-context.personal.write=(project:personal or computer:personal)
+context.personal.write=project:personal
 context.work.read=(project:vmware or computer:work)
-context.work.write=(project:vmware or computer:work)
+context.work.write=project:vmware
 
 context=work
