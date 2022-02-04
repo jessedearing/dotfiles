@@ -163,8 +163,6 @@ stty discard undef
 
 TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S'
 
-autoload bashcompinit
-bashcompinit
 source $HOME/.local/bin/gh_complete.sh
 
 ulimit -S -n 2048
@@ -184,7 +182,7 @@ kubectl() {
   if [[ "$@" =~ '(^|\s)(attach|run|exec|logs|edit)\s' ]]; then
     /usr/bin/kubectl "$@"
   else
-    grc -e -s -c conf.kubectl kubectl "$@"
+    grc -e -s -c conf.kubectl -- kubectl "$@"
   fi
 }
 
@@ -197,22 +195,9 @@ if [ -f $__USR_PATH/opt/pyenv/libexec/../completions/pyenv.zsh ]; then
   source "$__USR_PATH/opt/pyenv/libexec/../completions/pyenv.zsh"
 fi
 
-command pyenv rehash 2>/dev/null
-pyenv() {
-  local command
-  command="${1:-}"
-  if [ "$#" -gt 0 ]; then
-    shift
-  fi
-
-  case "$command" in
-  rehash|shell)
-    eval "$(pyenv "sh-$command" "$@")";;
-  *)
-    command pyenv "$command" "$@";;
-  esac
-}
-
 if [ -f $__USR_PATH/bin/aws_zsh_completer.sh ]; then
   . $__USR_PATH/bin/aws_zsh_completer.sh
 fi
+
+autoload bashcompinit
+bashcompinit
