@@ -45,7 +45,7 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'kristijanhusak/vim-carbon-now-sh'
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-eunuch'
-"Plug 'tools-life/taskwiki'
+Plug 'tools-life/taskwiki'
 Plug 'powerman/vim-plugin-AnsiEsc'
 call plug#end()
 " 1}}} "
@@ -308,6 +308,7 @@ let g:vimwiki_hl_cb_checked=1
 au FileType vimwiki nnoremap <C-P> :Vimwiki2HTMLBrowse<CR>
 "au BufRead,BufNewFile *.wiki call s:setupWrapping()
 au FileType vimwiki setlocal spell
+au FileType vimwiki :DisableWhitespace
 let g:vimwiki_list = [
   \ {'path': '~/.vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 autocmd BufWritePost $HOME/.vimwiki/*.md silent execute '! git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki add "%" > /dev/null; git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki commit -q -m "%" 2>&1 > /dev/null'
