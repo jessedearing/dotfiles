@@ -45,6 +45,9 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
+bindsym XF86MonBrightnessUp exec lightctl up
+bindsym XF86MonBrightnessDown exec lightctl down
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -207,6 +210,11 @@ mode "pass-through" {
 
 bindsym $mod+t mode "pass-through"
 
+input "1267:12572:DLL0945:00_04F3:311C_Touchpad" {
+  tap enabled
+  natural_scroll enabled
+}
+
 input "2:7:SynPS/2_Synaptics_TouchPad" {
   tap enabled
   natural_scroll enabled
@@ -232,8 +240,13 @@ output DP-1 {
   pos 1920 0
 }
 
+for_window [class="zoom"] floating true
+assign [class="davmail-DavGateway"] → 99
+assign [class="davmail-DavGateway
+
 for_window [app_id="avizo-service"] border none
 no_focus [app_id="avizo-service"]
 
 exec ~/.local/bin/swayinit
-exec systemctl --user start window-manager.target
+exec systemctl --user start graphical-session.target
+exec nm-applet --indicator
