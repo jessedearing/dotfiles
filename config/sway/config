@@ -242,11 +242,11 @@ output DP-1 {
 
 for_window [class="zoom"] floating true
 assign [class="davmail-DavGateway"] → 99
-assign [class="davmail-DavGateway
+assign [class="zoom"] → 10
 
 for_window [app_id="avizo-service"] border none
 no_focus [app_id="avizo-service"]
 
 exec ~/.local/bin/swayinit
-exec systemctl --user start graphical-session.target
+exec systemctl --user start sway-session.target
 exec nm-applet --indicator
