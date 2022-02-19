@@ -80,7 +80,8 @@
         "states": {
           "warning": 70,
           "critical": 90
-        }
+        },
+        "on-click": "kitty --title='htop' -- htop --sort-key=PERCENT_CPU"
     },
 
     "custom/keyboard-layout": {
@@ -99,7 +100,8 @@
         "states": {
             "warning": 70,
             "critical": 90
-        }
+        },
+        "on-click": "kitty --title='htop' -- htop --sort-key=PERCENT_MEM"
     },
 
     "network": {
@@ -123,7 +125,7 @@
             "car": "", // Icon: car
             "default": ["", ""] // Icons: volume-down, volume-up
         },
-        "on-click": "alacritty --title='Sound Mixer' --command='pulsemixer'",
+        "on-click": "kitty --title='Sound Mixer' 'pacmixer'",
         "tooltip": true
     },
 
@@ -142,13 +144,12 @@
         "disable-scroll": true,
         "format": "{icon} {name}",
         "format-icons": {
-            "1:WWW": "龜", // Icon: firefox-browser
-            "2:Mail": "", // Icon: mail
-            "3:Editor": "", // Icon: code
-            "4:Terminals": "", // Icon: terminal
-            "8:Documents": "", // Icon: book
-            "9:Multimedia": "", // Icon: play-circle
-            "10:Torrent": "", // Icon: cloud-download-alt
+            "1:Music": "",
+            "3:WWW": "",
+            "5:Mail": "",
+            "2:Terminals": "",
+            "10:Zoom": "",
+            "4:Slack": "",
             "urgent": "",
             "focused": "",
             "default": ""

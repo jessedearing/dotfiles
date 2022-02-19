@@ -1,9 +1,4 @@
 #!/usr/bin/env zsh
 
 curl -L $@ -o ~/Downloads/giphy.gif
-if [[ $(uname -s) == "Linux" ]]; then
-  cp ~/Downloads/giphy.gif /mnt/hgfs/Downloads
-  dragon-drag-and-drop ~/Downloads/giphy.gif
-else
-  copy-image ~/Downloads/giphy.gif
-fi
+dragon-drag-and-drop ~/Downloads/giphy.gif

@@ -211,12 +211,18 @@ bar {
     binding_mode       #FF5555 #FF5555 #F8F8F2
   }
   separator_symbol ""
+  position top
+  workspace_min_width 40
 }
 
 for_window [class="Dia" window_role="toolbox_window"] resize set width 5 ppt
+
+for_window [class="zoom"] floating true
+assign [class="zoom"] → 10
 
 mode "pass-through" {
   bindsym $mod+t mode "default"
 }
 
 bindsym $mod+t mode "pass-through"
+exec systemctl --user start i3-session.target

@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-if [ ! -f /var/run/user/1000/dbus.env ]; then
-  cat <<EOF > /var/run/user/1000/dbus.env
+cat <<EOF > /var/run/user/1000/dbus.env
 DBUS_SESSION_BUS_ADDRESS=$DBUS_SESSION_BUS_ADDRESS
 WAYLAND_DISPLAY=$WAYLAND_DISPLAY
 DESKTOP_SESSION=$DESKTOP_SESSION
@@ -12,10 +11,10 @@ XDG_SESSION_ID=$XDG_SESSION_ID
 GDMSESSION=$GDMSESSION
 SWAYSOCK=$SWAYSOCK
 I3SOCK=$I3SOCK
+XDG_VTNR=$XDG_VTNR
+XDG_SEAT=$XDG_SEAT
 EOF
-fi
 
 /usr/bin/gnome-keyring-daemon -s
 
-systemctl --user import-environment DISPLAY DBUS_SESSION_BUS_ADDRESS WAYLAND_DISPLAY DESKTOP_SESSION XDG_SESSION_DESKTOP XDG_SESSION_TYPE XDG_SESSION_CLASS XDG_SESSION_ID GDMSESSION SWAYSOCK I3SOCK
-dbus-update-activation-environment DISPLAY
+dbus-update-activation-environment --systemd --all

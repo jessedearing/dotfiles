@@ -1,5 +1,5 @@
 configuration {
-modi: "calc,emoji,clipboard:greenclip print,window,drun";
+modi: "calc,emoji,window,drun";
 /*	font: "mono 12";*/
 /*	location: 0;*/
 /*	yoffset: 0;*/

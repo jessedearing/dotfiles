@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ ! -z "$WAYLAND_DISPLAY" ]; then
-  exec wl-paste
+  exec wl-paste -n
 else
   exec xsel -b -o
 fi

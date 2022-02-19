@@ -1,23 +1,9 @@
 #!/usr/bin/env zsh
 
-__count=0
-while [ ! -f /var/run/user/1000/dbus.env ]; do
-  echo "Dbus environment file is not there, waiting and retrying"
-  sleep 2
-  ((__count+=1))
-  if [[ $__count > 20 ]]; then
-    echo "No dbus environment file, giving up"
-    exit 1
-  fi
-done
-
-export DBUS_SESSION_BUS_ADDRESS WAYLAND_DISPLAY DESKTOP_SESSION XDG_SESSION_DESKTOP XDG_SESSION_TYPE XDG_SESSION_CLASS XDG_SESSION_ID GDMSESSION SWAYSOCK I3SOCK
-. /var/run/user/1000/dbus.env
-
 exec swayidle -w \
-  timeout 30 'backlight 64' \
-    resume 'backlight 300' \
-  timeout 90 'swaylock -f' \
+  timeout 30 'brightnessctl set 64' \
+    resume 'brightnessctl set 300' \
+  timeout 240 'swaylock -f' \
   before-sleep 'swaylock -f' \
   timeout 900 'swaymsg -s /run/user/1000/sway-ipc.1000.*.sock "output * dpms off"' \
     resume 'swaymsg -s /run/user/1000/sway-ipc.1000.*.sock "output * dpms on"'
