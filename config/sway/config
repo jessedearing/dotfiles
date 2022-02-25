@@ -243,7 +243,7 @@ output DP-1 {
 
 for_window [class="zoom"] floating true
 assign [class="davmail-DavGateway"] → 99
-assign [class="zoom"] → 10
+assign [class="zoom"] → $ws10
 
 for_window [app_id="avizo-service"] border none
 no_focus [app_id="avizo-service"]
