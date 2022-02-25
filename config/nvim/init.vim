@@ -1,20 +1,22 @@
 " Plugins {{{1 "
 call plug#begin('~/.config/nvim/plugged')
+Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'tarekbecker/vim-yaml-formatter'
 Plug 'pedrohdz/vim-yaml-folds'
 Plug 'RRethy/vim-illuminate'
 Plug 'arcticicestudio/nord-vim'
-Plug 'dracula/vim'
-"Plug 'mxw/vim-jsx'
-"Plug 'isRuslan/vim-es6'
+Plug 'Mofiqul/dracula.nvim'
 Plug 'ryanoasis/vim-devicons'
-Plug 'vim-airline/vim-airline'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/scratch.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'fatih/vim-go', { 'tag': '*'}
 Plug 'andrewstuart/vim-kubernetes'
 Plug 'neomake/neomake'
@@ -24,7 +26,6 @@ Plug 'masukomi/vim-markdown-folding'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'airblade/vim-gitgutter'
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
 Plug 'hdima/python-syntax'
@@ -34,21 +35,136 @@ Plug 'vim-scripts/dbext.vim'
 Plug 'godlygeek/tabular'
 Plug 'liuchengxu/vista.vim'
 Plug 'elzr/vim-json'
-Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'vimwiki/vimwiki'
 Plug 'Quramy/tsuquyomi'
 Plug 'google/vim-searchindex'
 Plug 'hashivim/vim-terraform'
-Plug 'martinda/Jenkinsfile-vim-syntax'
 Plug 'cohama/agit.vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'kristijanhusak/vim-carbon-now-sh'
-Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-eunuch'
 Plug 'tools-life/taskwiki'
 Plug 'powerman/vim-plugin-AnsiEsc'
+Plug 'neovim/nvim-lspconfig'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
 call plug#end()
 " 1}}} "
+set completeopt=menu,menuone,noselect
+
+lua << END
+require'lualine'.setup{}
+require'gitsigns'.setup{}
+require'nvim-tree'.setup{}
+
+-- Setup nvim-cmp.
+local cmp = require'cmp'
+
+cmp.setup({
+  snippet = {
+    -- REQUIRED - you must specify a snippet engine
+    expand = function(args)
+      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+      vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+    end,
+  },
+  mapping = {
+    ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+    ['<C-e>'] = cmp.mapping({
+      i = cmp.mapping.abort(),
+      c = cmp.mapping.close(),
+    }),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  },
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'ultisnips' }, -- For ultisnips users.
+  }, {
+    { name = 'buffer' },
+  })
+})
+
+-- Set configuration for specific filetype.
+cmp.setup.filetype('gitcommit', {
+  sources = cmp.config.sources({
+    { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+  }, {
+    { name = 'buffer' },
+  })
+})
+
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', {
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
+})
+-- Mappings.
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local opts = { noremap=true, silent=true }
+vim.api.nvim_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+end
+
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { 'gopls', 'yamlls' }
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+for _, lsp in pairs(servers) do
+  require('lspconfig')[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      -- This will be the default in neovim 0.7+
+      debounce_text_changes = 150,
+    },
+    capabilities = capabilities
+  }
+end
+
+END
 
 " Stock nvim & vim settings {{{1 "
 set termguicolors
@@ -153,9 +269,8 @@ endif
 " 1}}} "
 
 " NERDTree Configuration {{{1 "
-let NERDTreeIgnore=['\.rbc$', '\~$']
-map <Leader>nn :NERDTreeToggle<CR>
-map <Leader>nf :NERDTreeFind<CR>
+map <Leader>nn :NvimTreeToggle<CR>
+map <Leader>nf :NvimTreeFindFile<CR>
 
 " 1}}} "
 
@@ -276,13 +391,6 @@ au BufRead,BufNewFile python setlocal shiftwidth=4
 au BufRead,BufNewFile python setlocal softtabstop=4
 au BufRead,BufNewFile python setlocal textwidth=79
 
-" Airline {{{1 "
-let g:airline_powerline_fonts = 1
-"let g:airline_theme='papercolor'
-let g:airline_theme='dracula'
-let g:airline#extensions#wordcount#filetypes = '\vhelp|markdown|rst|org|text|asciidoc|tex|mail|wiki'
-" 1}}} "
-
 " Spell {{{1 "
 set spelllang=en_us
 " 1}}} "
@@ -362,23 +470,6 @@ let g:go_def_mapping_enabled = 0
 let g:go_code_completion_enabled = 0
 let g:go_gopls_enabled = 0
 let g:go_gopls_options = ['-remote=auto']
-
-augroup go
-  au FileType go nmap <Leader>i <Plug>(go-implements)
-	au FileType go nmap <Leader>gd <Plug>(go-doc)
-  "au FileType go nmap <leader>r <Plug>(go-rename)
-  au FileType go nmap <leader>/ <Plug>(go-referrers)
-	au FileType go nmap <leader>t <Plug>(go-test)
-	au FileType go nmap <leader>c <Plug>(go-callers)
-	au FileType go imap <C-e> <C-o><Plug>(go-iferr)
-  au FileType go nmap <Leader>y <Plug>(go-info)
-	au FileType go setlocal foldmethod=syntax
-  " It's a spacey world out there, thankfully not in Go
-  au FileType go setlocal noexpandtab
-  au BufWritePost *.go normal! zv
-augroup END
-
-" 1}}} "
 
 " NerdCommenter {{{1 "
 let g:NERDDefaultAlign = 'left'
@@ -476,30 +567,6 @@ au Filetype json setlocal foldmethod=syntax
 au filetype crontab setlocal nobackup nowritebackup
 " 1}}} "
 
-" coc.nvim {{{1 "
-inoremap <silent><expr> <c-\> coc#refresh()
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
-inoremap <expr> <c-j> pumvisible() ? "\<C-y>" : "\<CR>"
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-nnoremap <silent> <space>y  :<C-u>CocList -A --normal yank<cr>
-
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
-" 1}}} "
 
 " Better Whitesapce {{{1 "
 let g:strip_whitespace_on_save = 1
