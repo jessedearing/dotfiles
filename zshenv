@@ -12,6 +12,7 @@ export PGHOST=localhost
 export CDPATH=~/.dotfiles/shell-bookmarks
 
 export AWS_VAULT_PROMPT=ykman
+export AWS_REGION=us-west-2
 
 export ZSH_DISABLE_COMPFIX=true
 

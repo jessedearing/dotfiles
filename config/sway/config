@@ -245,9 +245,12 @@ for_window [class="zoom"] floating true
 assign [class="davmail-DavGateway"] → 99
 assign [class="zoom"] → $ws10
 
+for_window [title="Dia v.*"] resize set width 120px
+
 for_window [app_id="avizo-service"] border none
 no_focus [app_id="avizo-service"]
 
 exec ~/.local/bin/swayinit
 exec systemctl --user start sway-session.target
 exec nm-applet --indicator
+exec systemctl --user start davmail@vmware.service

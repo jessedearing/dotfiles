@@ -4,7 +4,6 @@ Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'tarekbecker/vim-yaml-formatter'
 Plug 'pedrohdz/vim-yaml-folds'
 Plug 'RRethy/vim-illuminate'
-Plug 'arcticicestudio/nord-vim'
 Plug 'Mofiqul/dracula.nvim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'nvim-lualine/lualine.nvim'
@@ -15,7 +14,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'kyazdani42/nvim-tree.lua'
-Plug 'tpope/vim-surround'
 Plug 'vim-scripts/scratch.vim'
 Plug 'fatih/vim-go', { 'tag': '*'}
 Plug 'andrewstuart/vim-kubernetes'
@@ -40,7 +38,6 @@ Plug 'Quramy/tsuquyomi'
 Plug 'google/vim-searchindex'
 Plug 'hashivim/vim-terraform'
 Plug 'cohama/agit.vim'
-Plug 'NLKNguyen/papercolor-theme'
 Plug 'kristijanhusak/vim-carbon-now-sh'
 Plug 'tpope/vim-eunuch'
 Plug 'tools-life/taskwiki'
@@ -54,6 +51,7 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'windwp/nvim-autopairs'
 call plug#end()
 " 1}}} "
 set completeopt=menu,menuone,noselect
@@ -138,7 +136,7 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-/>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
@@ -164,6 +162,7 @@ for _, lsp in pairs(servers) do
   }
 end
 
+require('nvim-autopairs').setup{}
 END
 
 " Stock nvim & vim settings {{{1 "
@@ -417,8 +416,19 @@ au FileType vimwiki nnoremap <C-P> :Vimwiki2HTMLBrowse<CR>
 "au BufRead,BufNewFile *.wiki call s:setupWrapping()
 au FileType vimwiki setlocal spell
 au FileType vimwiki :DisableWhitespace
-let g:vimwiki_list = [
-  \ {'path': '~/.vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{
+  \ 'syntax': 'markdown',
+  \ 'index': '_index',
+  \ 'ext': '.md',
+  \ 'auto_export': 1,
+  \ 'automatic_nested_syntaxes':1,
+  \ 'path_html': '$HOME/.vimwiki/_site',
+  \ 'path': '$HOME/.vimwiki/content',
+  \ 'template_path': '$HOME/.vimwiki/templates/',
+  \ 'template_default':'markdown',
+  \ 'custom_wiki2html': '$HOME/.vimwiki/wiki2html.sh',
+  \ 'template_ext':'.html'
+  \ }]
 autocmd BufWritePost $HOME/.vimwiki/*.md silent execute '! git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki add "%" > /dev/null; git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki commit -q -m "%" 2>&1 > /dev/null'
 let g:tagbar_type_vimwiki = {
           \   'ctagstype':'vimwiki'
@@ -448,7 +458,7 @@ let g:LanguageClient_serverCommands = {
 " Run gofmt and goimports on save
 "autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
 let $GOPATH = $HOME."/go"
-let g:go_fmt_command = "gofmt"
+let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 0
 let g:go_fmt_autosave = 1
 let g:go_template_autocreate = 0
