@@ -136,7 +136,8 @@
 
     "sway/window": {
         "format": "{}",
-        "max-length": 120
+        "max-length": 120,
+        "icon": false
     },
 
     "sway/workspaces": {

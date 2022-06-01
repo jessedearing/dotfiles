@@ -1,4 +1,4 @@
-export PATH=$HOME/.fzf/bin:${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.yarn/bin:$HOME/.cargo/bin:$HOME/go/bin:$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/opt/perl/bin
+export PATH=$HOME/.fzf/bin:$HOME/.yarn/bin:$HOME/.cargo/bin:$HOME/go/bin:$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/opt/perl/bin:$PATH
 export EDITOR=$HOME/.local/bin/editor.sh
 if [[ $(uname -s) == "Darwin" ]]; then
   export RVC_READLINE="/usr/local/opt/readline/lib/libreadline.dylib"
@@ -15,6 +15,8 @@ export AWS_VAULT_PROMPT=ykman
 export AWS_REGION=us-west-2
 
 export ZSH_DISABLE_COMPFIX=true
+
+export SSH_AUTH_SOCK=${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh
 
 ###############
 #  Databases  #

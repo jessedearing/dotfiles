@@ -114,20 +114,9 @@ function load_tmux() {
 
   if (which tmux 2>&1 > /dev/null); then
     if [ -z "$TMUX" ] && ( tmux ls | grep "${tmux_session}:" &> /dev/null ); then
-      if ! ps aux | grep '[s]sh-agent' &> /dev/null; then
-        eval "$(ssh-agent)"
-      fi
-      ssh-add $HOME/.ssh/id_rsa &> /dev/null
-      ssh-add -qK $HOME/.ssh/id_ed25519 &> /dev/null &!
-      ssh-add -qK $HOME/.ssh/vmware-ed25519 &> /dev/null &!
       bail_on_tmux && tmux attach -t $tmux_session && exit
     else
       if [ -z "$TMUX" ] && [ -z "$SUDO_USER" ]; then
-        eval "$(ssh-agent)"
-        ssh-add $HOME/.ssh/id_rsa &> /dev/null
-        ssh-add -qK $HOME/.ssh/id_ed25519 &> /dev/null &!
-        ssh-add -qK $HOME/.ssh/vmware-ed25519 &> /dev/null &!
-        cd
         bail_on_tmux && tmux new-session -s $tmux_session && exit
       fi
     fi

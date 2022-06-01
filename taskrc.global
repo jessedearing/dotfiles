@@ -4,5 +4,4 @@ uda.computer.type=string
 uda.computer.label=Computer
 context.personal.read=(project:personal or computer:personal)
 context.personal.write=project:personal
-context.work.read=(project:vmware or computer:work)
 context.work.write=project:vmware

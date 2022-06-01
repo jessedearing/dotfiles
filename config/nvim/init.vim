@@ -1,6 +1,6 @@
 " Plugins {{{1 "
 call plug#begin('~/.config/nvim/plugged')
-Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'tarekbecker/vim-yaml-formatter'
 Plug 'pedrohdz/vim-yaml-folds'
 Plug 'RRethy/vim-illuminate'
@@ -12,10 +12,10 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'vim-scripts/scratch.vim'
-Plug 'fatih/vim-go', { 'tag': '*'}
+"Plug 'fatih/vim-go', { 'tag': '*'}
+Plug 'ray-x/go.nvim', { 'dir': '~/Documents/code/go.nvim'}
 Plug 'andrewstuart/vim-kubernetes'
 Plug 'neomake/neomake'
 Plug 'SirVer/ultisnips'
@@ -32,7 +32,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'vim-scripts/dbext.vim'
 Plug 'godlygeek/tabular'
 Plug 'liuchengxu/vista.vim'
-Plug 'elzr/vim-json'
+"Plug 'elzr/vim-json'
 Plug 'vimwiki/vimwiki'
 Plug 'Quramy/tsuquyomi'
 Plug 'google/vim-searchindex'
@@ -52,11 +52,17 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'windwp/nvim-autopairs'
+Plug 'sindrets/diffview.nvim'
 call plug#end()
 " 1}}} "
 set completeopt=menu,menuone,noselect
 
 lua << END
+require('go').setup({
+  goimport = "gopls", -- if set to 'gopls' will use gopls format, also goimport
+  fillstruct = "gopls",
+  gofmt = "gopls", -- if set to gopls will use gopls format
+})
 require'lualine'.setup{}
 require'gitsigns'.setup{}
 require'nvim-tree'.setup{}
@@ -73,7 +79,7 @@ cmp.setup({
       vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
     end,
   },
-  mapping = {
+  mapping = cmp.mapping.preset.insert({
     ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
     ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
@@ -83,7 +89,7 @@ cmp.setup({
       c = cmp.mapping.close(),
     }),
     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-  },
+  }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'ultisnips' }, -- For ultisnips users.
@@ -147,12 +153,14 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
+vim.api.nvim_set_keymap('i', '<c-e>','<cmd>lua require("go.iferr").run()<CR>', { silent=true, noremap=true})
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'gopls', 'yamlls' }
+local servers = { 'gopls', 'yamlls', 'terraformls' }
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local lspconfig = require('lspconfig')
 for _, lsp in pairs(servers) do
-  require('lspconfig')[lsp].setup {
+  lspconfig[lsp].setup {
     on_attach = on_attach,
     flags = {
       -- This will be the default in neovim 0.7+
@@ -162,7 +170,140 @@ for _, lsp in pairs(servers) do
   }
 end
 
+-- vim.lsp.set_log_level('debug')
+
+local cb = require'diffview.config'.diffview_callback
+
+require'diffview'.setup {
+  diff_binaries = false,    -- Show diffs for binaries
+  enhanced_diff_hl = false, -- See ':h diffview-config-enhanced_diff_hl'
+  use_icons = true,         -- Requires nvim-web-devicons
+  icons = {                 -- Only applies when use_icons is true.
+    folder_closed = "",
+    folder_open = "",
+  },
+  signs = {
+    fold_closed = "",
+    fold_open = "",
+  },
+  file_panel = {
+    position = "left",                  -- One of 'left', 'right', 'top', 'bottom'
+    width = 35,                         -- Only applies when position is 'left' or 'right'
+    height = 10,                        -- Only applies when position is 'top' or 'bottom'
+    listing_style = "tree",             -- One of 'list' or 'tree'
+    tree_options = {                    -- Only applies when listing_style is 'tree'
+      flatten_dirs = true,              -- Flatten dirs that only contain one single dir
+      folder_statuses = "only_folded",  -- One of 'never', 'only_folded' or 'always'.
+    },
+  },
+  file_history_panel = {
+    position = "bottom",
+    width = 35,
+    height = 16,
+    log_options = {
+      max_count = 256,      -- Limit the number of commits
+      follow = false,       -- Follow renames (only for single file)
+      all = false,          -- Include all refs under 'refs/' including HEAD
+      merges = false,       -- List only merge commits
+      no_merges = false,    -- List no merge commits
+      reverse = false,      -- List commits in reverse order
+    },
+  },
+  default_args = {    -- Default args prepended to the arg-list for the listed commands
+    DiffviewOpen = {},
+    DiffviewFileHistory = {},
+  },
+  hooks = {},         -- See ':h diffview-config-hooks'
+  key_bindings = {
+    disable_defaults = false,                   -- Disable the default key bindings
+    -- The `view` bindings are active in the diff buffers, only when the current
+    -- tabpage is a Diffview.
+    view = {
+      ["<tab>"]      = cb("select_next_entry"),  -- Open the diff for the next file
+      ["<s-tab>"]    = cb("select_prev_entry"),  -- Open the diff for the previous file
+      ["gf"]         = cb("goto_file"),          -- Open the file in a new split in previous tabpage
+      ["<C-w><C-f>"] = cb("goto_file_split"),    -- Open the file in a new split
+      ["<C-w>gf"]    = cb("goto_file_tab"),      -- Open the file in a new tabpage
+      ["<leader>e"]  = cb("focus_files"),        -- Bring focus to the files panel
+      ["<leader>b"]  = cb("toggle_files"),       -- Toggle the files panel.
+    },
+    file_panel = {
+      ["j"]             = cb("next_entry"),           -- Bring the cursor to the next file entry
+      ["<down>"]        = cb("next_entry"),
+      ["k"]             = cb("prev_entry"),           -- Bring the cursor to the previous file entry.
+      ["<up>"]          = cb("prev_entry"),
+      ["<cr>"]          = cb("select_entry"),         -- Open the diff for the selected entry.
+      ["o"]             = cb("select_entry"),
+      ["<2-LeftMouse>"] = cb("select_entry"),
+      ["-"]             = cb("toggle_stage_entry"),   -- Stage / unstage the selected entry.
+      ["S"]             = cb("stage_all"),            -- Stage all entries.
+      ["U"]             = cb("unstage_all"),          -- Unstage all entries.
+      ["X"]             = cb("restore_entry"),        -- Restore entry to the state on the left side.
+      ["R"]             = cb("refresh_files"),        -- Update stats and entries in the file list.
+      ["<tab>"]         = cb("select_next_entry"),
+      ["<s-tab>"]       = cb("select_prev_entry"),
+      ["gf"]            = cb("goto_file"),
+      ["<C-w><C-f>"]    = cb("goto_file_split"),
+      ["<C-w>gf"]       = cb("goto_file_tab"),
+      ["i"]             = cb("listing_style"),        -- Toggle between 'list' and 'tree' views
+      ["f"]             = cb("toggle_flatten_dirs"),  -- Flatten empty subdirectories in tree listing style.
+      ["<leader>e"]     = cb("focus_files"),
+      ["<leader>b"]     = cb("toggle_files"),
+    },
+    file_history_panel = {
+      ["g!"]            = cb("options"),            -- Open the option panel
+      ["<C-A-d>"]       = cb("open_in_diffview"),   -- Open the entry under the cursor in a diffview
+      ["y"]             = cb("copy_hash"),          -- Copy the commit hash of the entry under the cursor
+      ["zR"]            = cb("open_all_folds"),
+      ["zM"]            = cb("close_all_folds"),
+      ["j"]             = cb("next_entry"),
+      ["<down>"]        = cb("next_entry"),
+      ["k"]             = cb("prev_entry"),
+      ["<up>"]          = cb("prev_entry"),
+      ["<cr>"]          = cb("select_entry"),
+      ["o"]             = cb("select_entry"),
+      ["<2-LeftMouse>"] = cb("select_entry"),
+      ["<tab>"]         = cb("select_next_entry"),
+      ["<s-tab>"]       = cb("select_prev_entry"),
+      ["gf"]            = cb("goto_file"),
+      ["<C-w><C-f>"]    = cb("goto_file_split"),
+      ["<C-w>gf"]       = cb("goto_file_tab"),
+      ["<leader>e"]     = cb("focus_files"),
+      ["<leader>b"]     = cb("toggle_files"),
+    },
+    option_panel = {
+      ["<tab>"] = cb("select"),
+      ["q"]     = cb("close"),
+    },
+  },
+}
+
 require('nvim-autopairs').setup{}
+
+require'nvim-treesitter.configs'.setup {
+  -- A list of parser names, or "all"
+  ensure_installed = { "lua", "json" },
+
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- List of parsers to ignore installing (for "all")
+  ignore_install = { "javascript" },
+
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
+
+    -- list of language that will be disabled
+    disable = { },
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
 END
 
 " Stock nvim & vim settings {{{1 "
@@ -324,9 +465,9 @@ map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 
 nmap <Leader><Space> :nohlsearch<CR>
 au InsertEnter * let @/ = ''
-au BufReadPost quickfix map <C-n> :cn<CR>
-au BufReadPost quickfix map <C-m> :cp<CR>
-au BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+"au BufReadPost quickfix map <C-n> :cn<CR>
+"au BufReadPost quickfix map <C-m> :cp<CR>
+"au BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 
 " Use modeline overrides
 set modeline
@@ -418,15 +559,11 @@ au FileType vimwiki setlocal spell
 au FileType vimwiki :DisableWhitespace
 let g:vimwiki_list = [{
   \ 'syntax': 'markdown',
-  \ 'index': '_index',
   \ 'ext': '.md',
-  \ 'auto_export': 1,
   \ 'automatic_nested_syntaxes':1,
-  \ 'path_html': '$HOME/.vimwiki/_site',
-  \ 'path': '$HOME/.vimwiki/content',
+  \ 'path': '$HOME/.vimwiki',
   \ 'template_path': '$HOME/.vimwiki/templates/',
   \ 'template_default':'markdown',
-  \ 'custom_wiki2html': '$HOME/.vimwiki/wiki2html.sh',
   \ 'template_ext':'.html'
   \ }]
 autocmd BufWritePost $HOME/.vimwiki/*.md silent execute '! git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki add "%" > /dev/null; git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki commit -q -m "%" 2>&1 > /dev/null'
@@ -452,9 +589,7 @@ map <Leader>< :bp<CR>
 let g:snips_author = 'Jesse Dearing'
 
 " Golang {{{1 "
-let g:LanguageClient_serverCommands = {
-       \ 'go': ['gopls']
-       \ }
+autocmd BufWritePre *.go :silent! lua f = require('go.format'); f.gofmt(); f.org_imports()
 " Run gofmt and goimports on save
 "autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
 let $GOPATH = $HOME."/go"
@@ -570,7 +705,8 @@ nmap <silent> <C-l> :call WinMove('l')<cr>
 hi illuminatedWord cterm=underline gui=underline
 
 " JSON {{{1 "
-au Filetype json setlocal foldmethod=syntax
+au Filetype json setlocal foldmethod=expr
+au Filetype json setlocal foldexpr=nvim_treesitter#foldexpr()
 " 1}}} "
 
 " Crontab {{{1 "
