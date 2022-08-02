@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
-param=("--insidecolor=0000001c" "--ringcolor=0000003e" \
-        "--linecolor=00000000" "--keyhlcolor=ffffff80" "--ringvercolor=ffffff00" \
-        "--separatorcolor=22222260" "--insidevercolor=ffffff1c" \
-        "--ringwrongcolor=ffffff55" "--insidewrongcolor=ffffff1c" \
-        "--verifcolor=ffffff00" "--wrongcolor=ff000000" "--timecolor=ffffff00" \
-        "--datecolor=ffffff00" "--layoutcolor=ffffff00")
+param=()
 
 tmpbg="/tmp/screen.png"
 scrot "$tmpbg"; corrupter -mag 5 "$tmpbg" "$tmpbg"

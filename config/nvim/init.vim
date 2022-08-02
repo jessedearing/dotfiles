@@ -156,7 +156,7 @@ end
 vim.api.nvim_set_keymap('i', '<c-e>','<cmd>lua require("go.iferr").run()<CR>', { silent=true, noremap=true})
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'gopls', 'yamlls', 'terraformls' }
+local servers = { 'gopls', 'yamlls', 'terraformls', 'pylsp' }
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 for _, lsp in pairs(servers) do
@@ -187,9 +187,11 @@ require'diffview'.setup {
     fold_open = "",
   },
   file_panel = {
-    position = "left",                  -- One of 'left', 'right', 'top', 'bottom'
-    width = 35,                         -- Only applies when position is 'left' or 'right'
-    height = 10,                        -- Only applies when position is 'top' or 'bottom'
+    win_config = {
+      position = "left",                  -- One of 'left', 'right', 'top', 'bottom'
+      width = 35,                         -- Only applies when position is 'left' or 'right'
+      height = 10,                        -- Only applies when position is 'top' or 'bottom'
+    },
     listing_style = "tree",             -- One of 'list' or 'tree'
     tree_options = {                    -- Only applies when listing_style is 'tree'
       flatten_dirs = true,              -- Flatten dirs that only contain one single dir
@@ -197,16 +199,20 @@ require'diffview'.setup {
     },
   },
   file_history_panel = {
-    position = "bottom",
-    width = 35,
-    height = 16,
+    win_config = {
+      position = "bottom",
+      width = 35,
+      height = 16,
+    },
     log_options = {
-      max_count = 256,      -- Limit the number of commits
-      follow = false,       -- Follow renames (only for single file)
-      all = false,          -- Include all refs under 'refs/' including HEAD
-      merges = false,       -- List only merge commits
-      no_merges = false,    -- List no merge commits
-      reverse = false,      -- List commits in reverse order
+      single_file = {
+        max_count = 256,      -- Limit the number of commits
+        follow = false,       -- Follow renames (only for single file)
+        all = false,          -- Include all refs under 'refs/' including HEAD
+        merges = false,       -- List only merge commits
+        no_merges = false,    -- List no merge commits
+        reverse = false,      -- List commits in reverse order
+      },
     },
   },
   default_args = {    -- Default args prepended to the arg-list for the listed commands
@@ -436,14 +442,14 @@ endfunction
 
 " make uses real tabs
 au FileType make call s:setupMake()
-au Filetype yaml,yml call s:setupYaml()
+au FileType yaml,yml call s:setupYaml()
 "au BufWrite *.{yaml,yml} %!prettier --parser yaml
 
 " md, markdown, and mk are markdown and define buffer-local preview
 au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
 let vim_markdown_preview_toggle=1
 let vim_markdown_preview_github=1
-let vim_markdown_preview_browser='Firefox'
+let vim_markdown_preview_browser='Chromium'
 
 au BufRead,BufNewFile *.txt call s:setupWrapping()
 
