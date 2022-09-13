@@ -152,8 +152,3 @@ combi-modi: "window,drun,run";
   }
 }
 @theme "~/.config/rofi/dracula.rasi"
-
-element-text, element-icon {
-    background-color: inherit;
-    text-color:       inherit;
-}

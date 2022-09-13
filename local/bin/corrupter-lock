@@ -7,4 +7,4 @@ convert "$tmpbg" -font Liberation-Sans \
     -pointsize 26 -fill white -gravity center \
     -annotate +0+160 "Type Password to Unlock" /usr/share/i3lock-fancy/icons/lock.png \
     -gravity center -composite "$tmpbg"
-i3lock -i "$tmpbg" "${param[@]}"; rm "$tmpbg"
+i3lock -i "$tmpbg" ; rm "$tmpbg"

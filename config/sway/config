@@ -241,9 +241,9 @@ output DP-1 {
   pos 1920 0
 }
 
-for_window [class="zoom"] floating true
+for_window [app_id="zoom"] floating true
 assign [class="davmail-DavGateway"] → 99
-assign [class="zoom"] → $ws10
+assign [app_id="zoom"] → $ws10
 
 for_window [title="Dia v.*"] resize set width 120px
 

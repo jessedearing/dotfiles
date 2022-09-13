@@ -45,4 +45,3 @@ include $HOME/.taskrc.local
 
 news.version=2.6.0
 
-context=personal
