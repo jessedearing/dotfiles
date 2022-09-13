@@ -232,3 +232,6 @@ bindsym $mod+t mode "pass-through"
 exec systemctl --user start i3-session.target
 exec nm-applet --indicator
 exec systemctl --user start dunst
+
+bindsym $mod+Shift+greater move workspace to output right
+bindsym $mod+Shift+less move workspace to output left

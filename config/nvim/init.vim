@@ -156,7 +156,7 @@ end
 vim.api.nvim_set_keymap('i', '<c-e>','<cmd>lua require("go.iferr").run()<CR>', { silent=true, noremap=true})
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'gopls', 'yamlls', 'terraformls', 'pylsp' }
+local servers = { 'gopls', 'terraformls', 'pylsp' }
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 for _, lsp in pairs(servers) do
@@ -169,6 +169,19 @@ for _, lsp in pairs(servers) do
     capabilities = capabilities
   }
 end
+lspconfig['yamlls'].setup {
+  on_attach = on_attach,
+  flags = {
+  },
+  capabilities = capabilities,
+  settings = {
+    yaml = {
+      schemas = {
+        kubernetes = {"kubectl-edit-*.yaml", "*-k8s.yaml"},
+      },
+    },
+  },
+}
 
 -- vim.lsp.set_log_level('debug')
 
@@ -288,7 +301,12 @@ require('nvim-autopairs').setup{}
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "lua", "json" },
+  ensure_installed = {
+    "lua",
+    "json",
+    "yaml",
+    "go",
+    },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -310,6 +328,7 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+
 END
 
 " Stock nvim & vim settings {{{1 "
