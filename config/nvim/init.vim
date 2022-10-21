@@ -1,5 +1,6 @@
 " Plugins {{{1 "
 call plug#begin('~/.config/nvim/plugged')
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'tarekbecker/vim-yaml-formatter'
 Plug 'pedrohdz/vim-yaml-folds'
@@ -58,6 +59,8 @@ call plug#end()
 set completeopt=menu,menuone,noselect
 
 lua << END
+require('catppuccin').setup()
+
 require('go').setup({
   goimport = "gopls", -- if set to 'gopls' will use gopls format, also goimport
   fillstruct = "gopls",
@@ -157,7 +160,7 @@ vim.api.nvim_set_keymap('i', '<c-e>','<cmd>lua require("go.iferr").run()<CR>', {
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local servers = { 'gopls', 'terraformls', 'pylsp' }
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {
@@ -504,7 +507,9 @@ set modelines=10
 " color aldmeris
 "set background=light
 let base16colorspace=256
-color dracula
+" color dracula
+color catppuccin
+let g:catppuccin_flavour = "frappe" " latte, frappe, macchiato, mocha"
 let g:nord_italic = 1
 let g:nord_underline = 1
 let g:nord_italic_comments = 1

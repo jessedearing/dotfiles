@@ -38,7 +38,7 @@ export FZF_DEFAULT_OPTS='--color=dark --color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:
 #########
 #  bat  #
 #########
-export BAT_THEME=Dracula
+export BAT_THEME=Catppuccin-macchiato
 
 export TERMINAL=kitty
 export BROWSER=chromium
