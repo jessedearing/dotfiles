@@ -4,6 +4,13 @@ disabled = false
 [kubernetes]
 disabled = false
 
+[gcloud]
+symbol = "󱇶"
+style = "blue"
+
 [aws]
 symbol = "  "
 style = "blue"
+
+[golang]
+symbol = " "

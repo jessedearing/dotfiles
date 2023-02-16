@@ -53,7 +53,7 @@ bindsym XF86AudioPrev exec playerctl previous
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty -1 --listen-on=unix:$XDG_RUNTIME_DIR/kitty.sock
+bindsym $mod+Return exec konsole
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -222,6 +222,7 @@ bar {
 for_window [class="Dia" window_role="toolbox_window"] resize set width 5 ppt
 
 for_window [class="zoom"] floating enable
+assign [class="davmail-DavGateway"] → 99
 assign [class="zoom"] → $ws10
 
 mode "pass-through" {
@@ -231,7 +232,9 @@ mode "pass-through" {
 bindsym $mod+t mode "pass-through"
 exec systemctl --user start i3-session.target
 exec nm-applet --indicator
+exec systemctl --user start davmail@vmware.service
 exec systemctl --user start dunst
 
 bindsym $mod+Shift+greater move workspace to output right
 bindsym $mod+Shift+less move workspace to output left
+bindsym mod1+control+equal exec ~/.local/bin/switch-monitor-input.sh

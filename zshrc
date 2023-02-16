@@ -188,5 +188,9 @@ if [ -f $__USR_PATH/bin/aws_zsh_completer.sh ]; then
   . $__USR_PATH/bin/aws_zsh_completer.sh
 fi
 
+if [ -f $__USR_PATH/share/nvm/init-nvm.sh ]; then
+  source /usr/share/nvm/init-nvm.sh
+fi
+
 autoload bashcompinit
 bashcompinit
