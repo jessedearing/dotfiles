@@ -47,7 +47,33 @@ require("lazy").setup({
 'vim-scripts/dbext.vim',
 'godlygeek/tabular',
 'liuchengxu/vista.vim',
-'vimwiki/vimwiki',
+-- 'vimwiki/vimwiki',
+{ 'nvim-neorg/neorg',
+   build = ":Neorg sync-parsers",
+    opts = {
+        load = {
+            ["core.export"] = {},
+            ["core.export.markdown"] = {},
+            ["core.norg.completion"] = {
+              config = {
+                engine = "nvim-cmp",
+                name = "[Neorg]",
+              },
+            },
+            ["core.defaults"] = {}, -- Loads default behaviour
+            ["core.norg.concealer"] = {}, -- Adds pretty icons to your documents
+            ["core.norg.dirman"] = { -- Manages Neorg workspaces
+                config = {
+                  default_workspace = 'pensieve',
+                    workspaces = {
+                        pensieve = "~/pensieve",
+                    },
+                },
+            },
+        },
+    },
+    dependencies = { { "nvim-lua/plenary.nvim" } },
+  },
 'Quramy/tsuquyomi',
 'google/vim-searchindex',
 'hashivim/vim-terraform',
@@ -64,10 +90,11 @@ require("lazy").setup({
 'hrsh7th/cmp-buffer',
 'hrsh7th/cmp-path',
 'hrsh7th/cmp-cmdline',
-'hrsh7th/nvim-cmp',
 'windwp/nvim-autopairs',
 'sindrets/diffview.nvim',
 'towolf/vim-helm',
+'DerSaidin/vim-urlencode',
+'Apeiros-46B/qalc.nvim',
 })
 
 vim.opt.rtp:prepend(lazypath)
@@ -110,6 +137,7 @@ cmp.setup({
     { name = 'ultisnips' }, -- For ultisnips users.
   }, {
     { name = 'buffer' },
+    { name = 'neorg' },
   })
 })
 

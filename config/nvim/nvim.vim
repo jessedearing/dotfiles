@@ -249,38 +249,8 @@ command! -bang -nargs=* Rg
 set rtp+=/usr/local/opt/fzf
 " 1}}} "
 
-" Vimwiki {{{1 "
-let g:vimwiki_folding='custom'
-let g:vimwiki_hl_cb_checked=1
-au FileType vimwiki nnoremap <C-P> :Vimwiki2HTMLBrowse<CR>
-"au BufRead,BufNewFile *.wiki call s:setupWrapping()
-au FileType vimwiki setlocal spell
-au FileType vimwiki :DisableWhitespace
-let g:vimwiki_list = [{
-  \ 'syntax': 'markdown',
-  \ 'ext': '.md',
-  \ 'automatic_nested_syntaxes':1,
-  \ 'path': '$HOME/.vimwiki',
-  \ 'template_path': '$HOME/.vimwiki/templates/',
-  \ 'template_default':'markdown',
-  \ 'template_ext':'.html'
-  \ }]
-autocmd BufWritePost $HOME/.vimwiki/*.md silent execute '! git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki add "%" > /dev/null; git --git-dir=$HOME/.vimwiki/.git --work-tree=$HOME/.vimwiki commit -q -m "%" 2>&1 > /dev/null'
-let g:tagbar_type_vimwiki = {
-          \   'ctagstype':'vimwiki'
-          \ , 'kinds':['h:header']
-          \ , 'sro':'&&&'
-          \ , 'kind2scope':{'h':'header'}
-          \ , 'sort':0
-          \ , 'ctagsbin':'~/.vimwiki/utils/vwtags.py'
-          \ , 'ctagsargs': 'markdown'
-          \ }
-let g:taskwiki_markup_syntax = "markdown"
-
-" Only run VimwikiReturn if the popup menu is not showing, otherwise close it
-"au FileType /home/jesse/.vimwiki/*.md inoremap <silent> <buffer> <expr> <CR>   pumvisible() ? "\<CR>"   : "<Esc>:VimwikiReturn 3 5<CR>"
-autocmd FileType vimwiki inoremap <silent><buffer> <expr> <CR> pumvisible() ? "<C-y>" : "<C-]><Esc>:VimwikiReturn 1 5<CR>"
-" 1}}} "
+map <Leader>ww :Neorg index<CR>
+map <Leader>wd :Neorg journal<CR>
 
 map <Leader>> :bn<CR>
 map <Leader>< :bp<CR>
