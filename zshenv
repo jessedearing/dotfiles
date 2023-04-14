@@ -40,7 +40,7 @@ export FZF_DEFAULT_OPTS='--color=dark --color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:
 #########
 export BAT_THEME=Catppuccin-macchiato
 
-export TERMINAL=konsole
-export BROWSER=chromium
+export TERMINAL=kitty
+export BROWSER=firefox
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export XCURSOR_THEME=Adwaita

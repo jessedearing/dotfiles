@@ -3,6 +3,7 @@ disabled = false
 
 [kubernetes]
 disabled = false
+symbol = "󱃾 "
 
 [gcloud]
 symbol = "󱇶"
