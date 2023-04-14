@@ -14,7 +14,6 @@ set updatetime=1000
 set lazyredraw
 
 let did_install_default_menus = 1
-set synmaxcol=500
 set maxmempattern=2000
 
 runtime macros/matchit.vim
@@ -285,10 +284,6 @@ let g:go_code_completion_enabled = 0
 let g:go_gopls_enabled = 0
 let g:go_gopls_options = ['-remote=auto']
 
-" NerdCommenter {{{1 "
-let g:NERDDefaultAlign = 'left'
-" 1}}} "
-
 " Platinum Searcher (Ag) {{{ "
 if executable('rg')
 	set grepprg=rg\ --vimgrep\ -g\ \\!\.git/\\*\ -g\ \\!vendor/\\*
@@ -391,3 +386,7 @@ let g:strip_whitespace_on_save = 1
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_default_executive = 'ctags'
 " }}} Vista "
+
+" Neorg {{{1 "
+autocmd BufWritePost $HOME/pensieve/*.norg silent execute '! git --git-dir=$HOME/pensieve/.git --work-tree=$HOME/pensieve add "%" > /dev/null; git --git-dir=$HOME/pensieve/.git --work-tree=$HOME/pensieve commit -q -m "%" 2>&1 > /dev/null'
+" 1}}} "

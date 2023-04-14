@@ -15,6 +15,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 {'catppuccin/nvim',  name = 'catppuccin' },
 {'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
+{'jessedearing/nvim-systemd', dir = '~/code/nvim-systemd'},
 'tarekbecker/vim-yaml-formatter',
 'pedrohdz/vim-yaml-folds',
 'RRethy/vim-illuminate',
@@ -25,10 +26,19 @@ require("lazy").setup({
 'lewis6991/gitsigns.nvim',
 'kyazdani42/nvim-web-devicons',
 'tpope/vim-fugitive',
-'scrooloose/nerdcommenter',
 'kyazdani42/nvim-tree.lua',
 'vim-scripts/scratch.vim',
-'jessedearing/go.nvim',
+{
+  "ray-x/go.nvim",
+  dependencies = {  -- optional packages
+    "ray-x/guihua.lua",
+    "neovim/nvim-lspconfig",
+    "nvim-treesitter/nvim-treesitter",
+  },
+  event = {"CmdlineEnter"},
+  ft = {"go", 'gomod'},
+  build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+},
 'andrewstuart/vim-kubernetes',
 'neomake/neomake',
 'SirVer/ultisnips',
@@ -74,7 +84,6 @@ require("lazy").setup({
     },
     dependencies = { { "nvim-lua/plenary.nvim" } },
   },
-'Quramy/tsuquyomi',
 'google/vim-searchindex',
 'hashivim/vim-terraform',
 'cohama/agit.vim',
@@ -90,11 +99,11 @@ require("lazy").setup({
 'hrsh7th/cmp-buffer',
 'hrsh7th/cmp-path',
 'hrsh7th/cmp-cmdline',
-'windwp/nvim-autopairs',
 'sindrets/diffview.nvim',
 'towolf/vim-helm',
 'DerSaidin/vim-urlencode',
 'Apeiros-46B/qalc.nvim',
+{ 'echasnovski/mini.nvim', version = false },
 })
 
 vim.opt.rtp:prepend(lazypath)
@@ -199,16 +208,12 @@ end
 vim.api.nvim_set_keymap('i', '<c-e>','<cmd>lua require("go.iferr").run()<CR>', { silent=true, noremap=true})
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'gopls', 'terraformls', 'pylsp' }
+local servers = { 'gopls', 'terraformls', 'pylsp', 'tsserver' }
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
-    flags = {
-      -- This will be the default in neovim 0.7+
-      debounce_text_changes = 150,
-    },
     capabilities = capabilities
   }
 end
@@ -237,8 +242,6 @@ lspconfig['yamlls'].setup {
 -- vim.lsp.set_log_level('debug')
 
 require('diffview').setup({})
-
-require('nvim-autopairs').setup{}
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
@@ -269,6 +272,14 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+
+require('mini.comment').setup({
+
+})
+require('mini.splitjoin').setup()
+require('mini.align').setup()
+require('mini.pairs').setup()
+require('mini.surround').setup()
 
 vim.cmd.colorscheme "catppuccin"
 
