@@ -1,0 +1,11 @@
+[Unit]
+Description=NoiseTorch
+After=pipewire.socket
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/noisetorch.start.sh
+ExecStop=/usr/bin/noisetorch -u
+
+[Install]
+WantedBy=graphical-session.target

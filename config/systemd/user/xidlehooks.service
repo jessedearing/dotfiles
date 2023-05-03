@@ -1,0 +1,13 @@
+[Unit]
+Description=X Idle Hooks
+
+[Service]
+Type=simple
+Environment=DISPLAY=:1
+Environment=XIDLEHOOK_SOCK=%t/xidlehook.socket
+ExecStart=/usr/bin/xidlehook --not-when-fullscreen --socket $XIDLEHOOK_SOCK --timer 60 'xrandr --output eDP1 --brightness .4' 'xrandr --output eDP1 --brightness 1' --timer 90 %h/.local/bin/corrupter-lock '' --timer 60 'xset dpms force standby' ''
+Restart=on-failure
+RestartSec=30s
+
+[Install]
+WantedBy=i3-session.target
