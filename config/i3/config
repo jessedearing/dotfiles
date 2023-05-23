@@ -24,8 +24,8 @@ font pango:DejaVu Sans Mono 11
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/jesse/.bin/corrupter-lock
-bindsym $mod+Control+Escape exec --no-startup-id "/home/jesse/.bin/corrupter-lock"
+exec --no-startup-id xss-lock --transfer-sleep-lock -- ~/.local/bin/corrupter-lock
+#bindsym $mod+Control+Escape exec --no-startup-id "/home/jesse/.bin/corrupter-lock"
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -192,27 +192,52 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# class                 border  bground text    indicator child_border
-client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
-client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
-client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
-client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
-client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+set $rosewater #f5e0dc
+set $flamingo  #f2cdcd
+set $pink      #f5c2e7
+set $mauve     #cba6f7
+set $red       #f38ba8
+set $maroon    #eba0ac
+set $peach     #fab387
+set $green     #a6e3a1
+set $teal      #94e2d5
+set $sky       #89dceb
+set $sapphire  #74c7ec
+set $blue      #89b4fa
+set $lavender  #b4befe
+set $text      #cdd6f4
+set $subtext1  #bac2de
+set $subtext0  #a6adc8
+set $overlay2  #9399b2
+set $overlay1  #7f849c
+set $overlay0  #6c7086
+set $surface2  #585b70
+set $surface1  #45475a
+set $surface0  #313244
+set $base      #1e1e2e
+set $mantle    #181825
+set $crust     #11111b
 
-client.background       #F8F8F2
+# class                 border  bground text    indicator child_border
+client.focused           $pink     $base $text  $rosewater $pink
+client.focused_inactive  $mauve    $base $text  $rosewater $mauve
+client.unfocused         $mauve    $base $text  $rosewater $mauve
+client.urgent            $peach    $base $peach $overlay0  $peach
+client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
+client.background        $base
 
 bar {
   status_command ~/.local/bin/conky-i3bar
   colors {
-    background #282A36
-    statusline #F8F8F2
-    separator  #44475A
-
-    focused_workspace  #44475A #44475A #F8F8F2
-    active_workspace   #282A36 #44475A #F8F8F2
-    inactive_workspace #282A36 #282A36 #BFBFBF
-    urgent_workspace   #FF5555 #FF5555 #F8F8F2
-    binding_mode       #FF5555 #FF5555 #F8F8F2
+    background $base
+    statusline $text
+    separator  $subtext0
+#                      border     background   text
+    focused_workspace  $pink      $mantle      $text
+    active_workspace   $pink      $base        $text
+    inactive_workspace $base      $base        $text
+    urgent_workspace   $peach     $base        $text
+    binding_mode       $red       $base        $text
   }
   separator_symbol ""
   position top
@@ -235,3 +260,4 @@ exec systemctl --user start i3-session.target
 bindsym $mod+Shift+greater move workspace to output right
 bindsym $mod+Shift+less move workspace to output left
 bindsym mod1+control+equal exec ~/.local/bin/switch-monitor-input.sh
+bindsym $mod+Shift+m exec ~/.xprofile

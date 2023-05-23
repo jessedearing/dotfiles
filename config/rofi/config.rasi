@@ -1,5 +1,17 @@
 configuration {
-modi: "calc,emoji,window,drun";
+    modi: "calc,emoji,run,drun,window";
+    icon-theme: "Oranchelo";
+    show-icons: true;
+    terminal: "alacritty";
+    drun-display-format: "{icon} {name}";
+    location: 0;
+    disable-history: false;
+    hide-scrollbar: true;
+    display-drun: "   Apps ";
+    display-run: "   Run ";
+    display-window: " 﩯  Window";
+    display-Network: " 󰤨  Network";
+    sidebar-mode: true;
 /*	font: "mono 12";*/
 /*	location: 0;*/
 /*	yoffset: 0;*/
@@ -32,7 +44,7 @@ modi: "calc,emoji,window,drun";
 /*	auto-select: false;*/
 /*	parse-hosts: false;*/
 /*	parse-known-hosts: true;*/
-combi-modi: "window,drun,run";
+combi-modi: "drun,run";
 /*	matching: "normal";*/
 /*	tokenize: true;*/
 /*	m: "-5";*/
@@ -151,4 +163,6 @@ combi-modi: "window,drun,run";
       sorting-method:    "name";
   }
 }
-@theme "~/.config/rofi/dracula.rasi"
+
+@theme "catppuccin-latte"
+

@@ -58,38 +58,11 @@ require("lazy").setup({
 'godlygeek/tabular',
 'liuchengxu/vista.vim',
 -- 'vimwiki/vimwiki',
-{ 'nvim-neorg/neorg',
-   build = ":Neorg sync-parsers",
-    opts = {
-        load = {
-            ["core.export"] = {},
-            ["core.export.markdown"] = {},
-            ["core.norg.completion"] = {
-              config = {
-                engine = "nvim-cmp",
-                name = "[Neorg]",
-              },
-            },
-            ["core.defaults"] = {}, -- Loads default behaviour
-            ["core.norg.concealer"] = {}, -- Adds pretty icons to your documents
-            ["core.norg.dirman"] = { -- Manages Neorg workspaces
-                config = {
-                  default_workspace = 'pensieve',
-                    workspaces = {
-                        pensieve = "~/pensieve",
-                    },
-                },
-            },
-        },
-    },
-    dependencies = { { "nvim-lua/plenary.nvim" } },
-  },
 'google/vim-searchindex',
 'hashivim/vim-terraform',
 'cohama/agit.vim',
 'kristijanhusak/vim-carbon-now-sh',
 'tpope/vim-eunuch',
-'tools-life/taskwiki',
 'powerman/vim-plugin-AnsiEsc',
 'neovim/nvim-lspconfig',
 'L3MON4D3/LuaSnip',
@@ -107,7 +80,9 @@ require("lazy").setup({
 })
 
 vim.opt.rtp:prepend(lazypath)
-require('catppuccin').setup()
+require('catppuccin').setup({
+  flavour = 'macchiato',
+})
 
 require('go').setup({
   goimport = "gopls", -- if set to 'gopls' will use gopls format, also goimport
@@ -233,7 +208,7 @@ lspconfig['yamlls'].setup {
   settings = {
     yaml = {
       schemas = {
-        kubernetes = {"kubectl-edit-*.yaml", "*-k8s.yaml", "deployment.yaml"},
+        kubernetes = {"kubectl-edit-*.yaml", "*-k8s.yaml", "deployment.yaml", "*cronjob*.yaml"},
       },
     },
   },
