@@ -17,6 +17,7 @@ export AWS_REGION=us-west-2
 export ZSH_DISABLE_COMPFIX=true
 
 export SSH_AUTH_SOCK=${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh
+export GTK_THEME=Catppuccin-Mocha-Standard-Blue-Dark
 
 ###############
 #  Databases  #

@@ -86,7 +86,7 @@
 
     ### Text ###
 
-    font = Deja Vu Sans Mono 10
+    font = Noto Sans 10
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
@@ -296,6 +296,22 @@
     # Icon for notifications with critical urgency, uncomment to enable
     #icon = /path/to/icon
 
+[global]
+frame_color = "#89B4FA"
+separator_color= frame
+
+[urgency_low]
+background = "#1E1E2E"
+foreground = "#CDD6F4"
+
+[urgency_normal]
+background = "#1E1E2E"
+foreground = "#CDD6F4"
+
+[urgency_critical]
+background = "#1E1E2E"
+foreground = "#CDD6F4"
+frame_color = "#FAB387"
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
 #
