@@ -5,7 +5,7 @@ Description=X Idle Hooks
 Type=simple
 Environment=DISPLAY=:1
 Environment=XIDLEHOOK_SOCK=%t/xidlehook.socket
-ExecStart=/usr/bin/xidlehook --not-when-fullscreen --socket $XIDLEHOOK_SOCK --timer 60 'xrandr --output eDP1 --brightness .4' 'xrandr --output eDP1 --brightness 1' --timer 90 %h/.local/bin/corrupter-lock '' --timer 60 'xset dpms force standby' ''
+ExecStart=/usr/bin/xidlehook --not-when-fullscreen --socket /run/user/1000/xidlehook.socket --timer 60 "xrandr --output eDP-1 --brightness .4" "xrandr --output eDP-1 --brightness 1" --timer 90 "loginctl lock-session" "xrandr --output eDP-1 --brightness 1" --timer 60 "xset dpms force standby" "xrandr --output eDP-1 --brightness 1"
 Restart=on-failure
 RestartSec=30s
 
