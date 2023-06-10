@@ -13,7 +13,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-{'catppuccin/nvim',  name = 'catppuccin' },
+{'shaunsingh/nord.nvim'},
 {'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
 {'jessedearing/nvim-systemd', dir = '~/code/nvim-systemd'},
 'tarekbecker/vim-yaml-formatter',
@@ -80,9 +80,6 @@ require("lazy").setup({
 })
 
 vim.opt.rtp:prepend(lazypath)
-require('catppuccin').setup({
-  flavour = 'macchiato',
-})
 
 require('go').setup({
   goimport = "gopls", -- if set to 'gopls' will use gopls format, also goimport
@@ -256,6 +253,6 @@ require('mini.align').setup()
 require('mini.pairs').setup()
 require('mini.surround').setup()
 
-vim.cmd.colorscheme "catppuccin"
+vim.cmd.colorscheme "nord"
 
 vim.cmd.source "~/.config/nvim/nvim.vim"
