@@ -233,6 +233,7 @@ mode "pass-through" {
 
 bindsym $mod+t mode "pass-through"
 exec systemctl --user start i3-session.target
+exec dex -ae i3
 
 bindsym $mod+Shift+greater move workspace to output right
 bindsym $mod+Shift+less move workspace to output left

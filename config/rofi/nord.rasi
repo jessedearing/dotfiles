@@ -1,180 +1,127 @@
-/************************************************
- * ROFI Color theme
- * User: rulrok
- * Copyright: 2019 rulrok
- ***********************************************/
+/**
+ * Nordic rofi theme
+ * Adapted by undiabler <undiabler@gmail.com>
+ *
+ * Nord Color palette imported from https://www.nordtheme.com/
+ *
+ */
+
 
 * {
-    /* Polar night */
-    nord-0: #2e3440;
-    nord-1: #3b4252;
-    nord-2: #434c5e;
-    nord-3: #4c566a;
-    /* Snow Storm */
-    nord-4: #d8dee9;
-    nord-5: #e5e9f0;
-    nord-6: #eceff4;
-    /* Frost */
-    nord-7: #8fbcbb;
-    nord-8: #88c0d0;
-    nord-9: #81a1c1;
-    nord-10: #5e81ac;
-    /* Aurora */
-    nord-11: #bf616a;
-    nord-12: #d08770;
-    nord-13: #ebcb8b;
-    nord-14: #a3be8c;
-    nord-15: #b48ead;
+	nord0: #2e3440;
+	nord1: #3b4252;
+	nord2: #434c5e;
+	nord3: #4c566a;
+
+	nord4: #d8dee9;
+	nord5: #e5e9f0;
+	nord6: #eceff4;
+
+	nord7: #8fbcbb;
+	nord8: #88c0d0;
+	nord9: #81a1c1;
+	nord10: #5e81ac;
+	nord11: #bf616a;
+
+	nord12: #d08770;
+	nord13: #ebcb8b;
+	nord14: #a3be8c;
+	nord15: #b48ead;
+
+    foreground:  @nord9;
+    backlight:   #ccffeedd;
+    background-color:  transparent;
     
-    background-color: @nord-3;
-    text-color: @nord-4;
+    highlight:     underline bold #eceff4;
+
+    transparent: rgba(46,52,64,0);
 }
 
+window {
+    location: center;
+    anchor:   center;
+    transparency: "screenshot";
+    padding: 10px;
+    border:  0px;
+    border-radius: 6px;
 
-#window {
-    background-color: @nord-1;
-    border:           0px;
-    padding:          0px;
+    background-color: @transparent;
+    spacing: 0;
+    children:  [mainbox];
+    orientation: horizontal;
 }
 
-#mainbox {
-    border:  2;
-    padding: 3;
-    background-color: @nord-1;
+mainbox {
+    spacing: 0;
+    children: [ inputbar, message, listview ];
 }
 
-#message {
-    border:  2px 0px 0px;
-    border-color: @nord-1; 
-    padding:      1px;
+message {
+    color: @nord0;
+    padding: 5;
+    border-color: @foreground;
+    border:  0px 2px 2px 2px;
+    background-color: @nord7;
 }
 
-#textbox {
-    text-color: 4;
+inputbar {
+    color: @nord6;
+    padding: 11px;
+    background-color: #3b4252;
+
+    border: 1px;
+    border-radius:  6px 6px 0px 0px;
+    border-color: @nord10;
 }
 
-#listview {
-    fixed-height: 0;
-    border:       2px 0px 0px 0px;
-    border-color: @nord-1;
-    spacing:      0;
-    scrollbar:    true;
-    padding:      0;
+entry, prompt, case-indicator {
+    text-font: inherit;
+    text-color:inherit;
 }
 
-#element {
-    border:  1;
-    padding: 3px 10px;
-    margin: 0px;
+prompt {
+    margin: 0px 1em 0em 0em ;
 }
 
-#element.normal.normal {
-    background-color: @nord-3;
-    text-color:       @nord-6;
+listview {
+    padding: 8px;
+    border-radius: 0px 0px 6px 6px;
+    border-color: @nord10;
+    border: 0px 1px 1px 1px;
+    background-color: rgba(46,52,64,0.9);
+    dynamic: false;
 }
 
-#element.normal.urgent {
-    background-color: @nord-11;
-    text-color:       @nord-1;
+element {
+    padding: 3px;
+    vertical-align: 0.5;
+    border-radius: 4px;
+    background-color: transparent;
+    color: @foreground;
+    text-color: rgb(216, 222, 233);
 }
 
-#element.normal.active {
-    background-color: @nord-14;
-    text-color:       @nord-1;
+element selected.normal {
+	background-color: @nord7;
+	text-color: #2e3440;
 }
 
-#element.selected.normal {
-    background-color: @nord-8;
-    text-color:       @nord-3;
+element-text, element-icon {
+    background-color: inherit;
+    text-color:       inherit;
 }
 
-#element.selected.urgent {
-    background-color: @nord-15;
-    text-color:       @nord-1;
+button {
+    padding: 6px;
+    color: @foreground;
+    horizontal-align: 0.5;
+
+    border: 2px 0px 2px 2px;
+    border-radius: 4px 0px 0px 4px;
+    border-color: @foreground;
 }
 
-#element.selected.active {
-    background-color: @nord-7;
-    text-color:       @nord-1;
-}
-
-#element.alternate.normal {
-    background-color: @nord-3;
-    text-color:       @nord-6;
-}
-
-#element.alternate.urgent {
-    background-color: @nord-11;
-    text-color:       @nord-1;
-}
-
-#element.alternate.active {
-    background-color: @nord-14;
-    text-color:       @nord-1;
-}
-
-#scrollbar {
-    width:        5px;
-    border:       0;
-    handle-color: @nord-0;
-    handle-width: 8px;
-    padding:      0 0 0 5px;
-    margin: 0;
-    background-color: @nord-1;
-}
-
-#sidebar {
-    border:       0px 0px 0px 0px;
-    border-color: @nord-3;
-}
-
-#button {
-    spacing:    0;
-    text-color: @nord-4;
-}
-
-#button.selected {
-    background-color: @nord-8;
-    text-color:       @nord-3;
-}
-
-#inputbar {
-    spacing:    0;
-    text-color: @nord-4;
-    padding:    1px ;
-}
-
-#case-indicator {
-    spacing:    0;
-    text-color: @nord-1;
-    background-color: @nord-9;
-}
-
-#entry {
-    spacing:    0;
-    text-color: @nord-1;
-    background-color: @nord-9;
-}
-
-#prompt {
-    spacing:    0;
-    text-color: @nord-1;
-    background-color: @nord-9;
-    padding: 0 0 0 5px;
-}
-
-#inputbar {
-    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
-    padding: 3px 5px 3px 5px;
-    background-color: @nord-9;
-}
-
-#textbox-prompt-colon {
-    expand:    false;
-    str:        " : ";
-    margin:     0 0 0 10px ;
-    margin: 0px;
-    border: 0 0 0 0px;
-    text-color: @nord-1;
-    background-color: @nord-9;
+button selected normal {
+    border: 2px 0px 2px 2px;
+    border-color: @foreground;
 }

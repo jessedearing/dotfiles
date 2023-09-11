@@ -7,12 +7,18 @@ configuration {
     location: 0;
     disable-history: false;
     hide-scrollbar: true;
-    display-drun: "   Apps ";
-    display-run: "   Run ";
-    display-window: " 﩯  Window";
-    display-Network: " 󰤨  Network";
+    display-ssh:    "";
+    display-run:    "";
+    display-drun:   "";
+    display-window: "";
+    display-combi:  "";
+    display-calc: "󰪚";
+    display-emoji: "😃";
+    show-icons:     true;
     sidebar-mode: true;
 /*	font: "mono 12";*/
+    /*font: "Envy Code R 10";*/
+    line-margin: 10;
 /*	location: 0;*/
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
@@ -164,5 +170,13 @@ combi-modi: "drun,run";
   }
 }
 
-@theme "catppuccin-latte"
+@theme "~/.config/rofi/nord.rasi"
 
+listview {
+	lines: 6;
+	columns: 2;
+}
+
+window {
+	width: 30%;
+}

@@ -77,6 +77,7 @@ require("lazy").setup({
 'DerSaidin/vim-urlencode',
 'Apeiros-46B/qalc.nvim',
 { 'echasnovski/mini.nvim', version = false },
+{ "lukas-reineke/indent-blankline.nvim" },
 })
 
 vim.opt.rtp:prepend(lazypath)
