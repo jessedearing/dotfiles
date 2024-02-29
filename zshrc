@@ -8,7 +8,7 @@ export LANG=en_US.UTF-8
 
 __USR_PATH="/usr"
 if [[ $(uname -s) == "Darwin" ]]; then
-  __USR_PATH="/usr/local"
+  __USR_PATH="/opt/homebrew"
 fi
 
 # Set to the name theme to load.
@@ -24,29 +24,11 @@ export ZSH_CUSTOM="$HOME/.zsh-custom"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(vi-mode zsh-syntax-highlighting docker zsh-aws-vault)
-fpath=(~/.zsh-completions $fpath)
+plugins=(vi-mode zsh-syntax-highlighting)
+fpath=(~/.zsh-completions /opt/homebrew/share/zsh/site-functions $fpath)
 source $ZSH/oh-my-zsh.sh
 
 eval "$(starship init zsh)"
-
-if ( which rbenv 2>&1 > /dev/null ); then
-  rbenv rehash 2>/dev/null
-  rbenv() {
-    typeset command
-    command="$1"
-    if [ "$#" -gt 0  ]; then
-      shift
-    fi
-
-    case "$command" in
-    rehash|shell)
-      eval "`rbenv "sh-$command" "$@"`";;
-    *)
-      command rbenv "$command" "$@";;
-    esac
-  }
-fi
 
 alias node='NODE_NO_READLINE=1 rlwrap node'
 alias tf=terraform
@@ -68,8 +50,6 @@ alias mytop="perl /usr/local/bin/mytop"
 alias g=git
 #alias g="~/git"
 #alias lab="~/lab"
-alias t=task
-
 if [ -x $__USR_PATH/bin/richgo ] || [ -x $HOME/go/bin/richgo ]; then
 	alias go=richgo
 fi
@@ -77,7 +57,7 @@ alias vim="editor.sh"
 
 alias rg="rg -i -g \"!{vendor}\""
 
-if [ -x /usr/bin/bat ]; then
+if [ -x $__USR_PATH/bin/bat ]; then
   alias cat=bat
 fi
 
@@ -152,16 +132,15 @@ stty discard undef
 
 TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S'
 
-source $HOME/.local/bin/gh_complete.sh
-
 ulimit -S -n 2048
 
 load_tmux
 
-if [ -f /usr/local/etc/grc.zsh ]; then
+if [ -f /opt/homebrew/etc/grc.zsh ]; then
+  . /opt/homebrew/etc/grc.zsh
+elif [ -f /usr/local/etc/grc.zsh ]; then
   . /usr/local/etc/grc.zsh
-fi
-if [ -f /etc/grc.zsh ]; then
+elif [ -f /etc/grc.zsh ]; then
   . /etc/grc.zsh
 fi
 
@@ -169,9 +148,9 @@ unalias kubectl &> /dev/null
 unfunction kubectl &> /dev/null
 kubectl() {
   if [[ "$@" =~ '(^|\s)(attach|run|exec|logs|edit)\s' ]]; then
-    /usr/bin/kubectl "$@"
+    $__USR_PATH/bin/kubectl "$@"
   else
-    grc -e -s -c conf.kubectl -- kubectl "$@"
+    grc -e -s -c conf.kubectl -- $__USR_PATH/bin/kubectl "$@"
   fi
 }
 
@@ -191,13 +170,12 @@ func dig() {
 aws() {
   (
     if [[ "$@" =~ 'help$' ]]; then
-      MANPAGER="sh -c 'col  -bx | bat -l man -p'" /usr/bin/env -u PAGER /usr/bin/aws $@
+      MANPAGER="sh -c 'col  -bx | bat -l man -p'" /usr/bin/env -u PAGER $__USR_PATH/bin/aws $@
     else
-      /usr/bin/aws $@
+      $__USR_PATH/bin/aws $@
     fi
   )
 }
-
 
 # Alias ls after grc since lsd is colorized
 if [ -x $__USR_PATH/bin/lsd ]; then
@@ -213,7 +191,7 @@ if [ -f $__USR_PATH/bin/aws_zsh_completer.sh ]; then
 fi
 
 if [ -f $__USR_PATH/share/nvm/init-nvm.sh ]; then
-  source /usr/share/nvm/init-nvm.sh
+  source $__USR_PATH/share/nvm/init-nvm.sh
 fi
 
 autoload bashcompinit

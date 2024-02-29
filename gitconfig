@@ -1,6 +1,7 @@
 [user]
   name = Jesse Dearing
 	email = code@me.jesse.dev
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGfCasenYEZVtFRFusAa5Xvd4n1ImgX6vTgSg4uTpkAJ
 [color]
 	ui = true
 [mergetool "fugitive"]
@@ -21,8 +22,8 @@
 	default = simple
 [help]
 	autocorrect = 1
-[includeIf "gitdir:~/Documents/code/vmware/"]
-  path = ~/.gitconfig.vmware
+[includeIf "gitdir:~/Documents/code/lacework/"]
+  path = ~/.gitconfig.lacework
 [include]
   path = ~/.gitconfig.local
 [alias]
@@ -50,6 +51,11 @@
 [rerere]
 	enabled = true
 [gpg]
-  program = /usr/bin/gpg
+  format = ssh
 [init]
   defaultBranch = main
+[credential]
+	helper = 
+	helper = /usr/local/share/gcm-core/git-credential-manager
+[credential "https://dev.azure.com"]
+	useHttpPath = true

@@ -1,3 +1,7 @@
 #!/usr/bin/env zsh
 
-exec /usr/bin/nvim $*
+if [ -x /opt/homebrew/bin/nvim ]; then
+  exec /opt/homebrew/bin/nvim $*
+else
+  exec /usr/bin/nvim $*
+fi

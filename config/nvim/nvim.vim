@@ -1,4 +1,6 @@
 set completeopt=menu,menuone,noselect
+let g:python_host_prog  = '/opt/homebrew/bin/python3'
+let g:python3_host_prog = '/opt/homebrew/bin/python3'
 
 " Stock nvim & vim settings {{{1 "
 set termguicolors
@@ -35,7 +37,7 @@ set foldmethod=marker
 " that are too long
 set colorcolumn=80
 
-set shell=/usr/bin/zsh
+set shell=/bin/zsh
 
 " Undofile directory settings
 if exists("+undofile")
