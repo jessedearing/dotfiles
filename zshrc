@@ -70,10 +70,6 @@ function quote() {
   echo "“$*”" | pbcopy
 }
 
-if [ -x /usr/libexec/java_home ]; then
-  export JAVA_HOME="$(/usr/libexec/java_home)"
-fi
-
 export NODE_PATH=$__USR_PATH/lib/node
 
 export KEYTIMEOUT=5
@@ -147,7 +143,9 @@ fi
 unalias kubectl &> /dev/null
 unfunction kubectl &> /dev/null
 kubectl() {
-  if [[ "$@" =~ '(^|\s)(attach|run|exec|logs|edit)\s' ]]; then
+  if [[ "$1" == "node-shell" ]]; then
+    $__USR_PATH/bin/kubectl "$@"
+  elif [[ "$@" =~ '(^|\s)(attach|run|exec|logs|edit)\s' ]]; then
     $__USR_PATH/bin/kubectl "$@"
   else
     grc -e -s -c conf.kubectl -- $__USR_PATH/bin/kubectl "$@"

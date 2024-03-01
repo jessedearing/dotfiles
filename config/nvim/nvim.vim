@@ -201,18 +201,6 @@ let macvim_hig_shift_movement = 1
 let g:sqlutil_align_comma = 1
 
 set clipboard+=unnamedplus
-let g:clipboard = {
-		\   'name': 'tmux',
-		\   'copy': {
-		\      '+': ['xsel', '-i', '-b'],
-		\      '*': ['xsel', '-i', '-b'],
-		\    },
-		\   'paste': {
-		\      '+': ['paste-from-clipboard'],
-		\      '*': ['paste-from-clipboard'],
-		\   },
-		\   'cache_enabled': 1,
-		\ }
 
 "		Grep																																	 {{{
 let Grep_Find_Use_Xargs = 0
