@@ -1,7 +1,6 @@
 [user]
   name = Jesse Dearing
 	email = code@me.jesse.dev
-  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGfCasenYEZVtFRFusAa5Xvd4n1ImgX6vTgSg4uTpkAJ
 [color]
 	ui = true
 [mergetool "fugitive"]
@@ -50,8 +49,6 @@
 	version = 2
 [rerere]
 	enabled = true
-[gpg]
-  format = ssh
 [init]
   defaultBranch = main
 [credential]

@@ -37,4 +37,5 @@ brew "thefuck"
 brew "starship"
 brew "grip"
 brew "stats"
+brew "stern"
 # 1}}} #

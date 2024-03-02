@@ -1,7 +1,8 @@
+# setopt XTRACE
 setopt interactive_comments
 setopt chase_links
 # Path to your oh-my-zsh configuration.
-export DISABLE_AUTO_UPDATE=true
+zstyle ':omz:update' mode disabled
 export ZSH=$HOME/.oh-my-zsh
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -10,6 +11,8 @@ __USR_PATH="/usr"
 if [[ $(uname -s) == "Darwin" ]]; then
   __USR_PATH="/opt/homebrew"
 fi
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Set to the name theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -106,7 +109,7 @@ function printcolors() {
   done
 }
 
-eval "$(thefuck --alias)"
+# eval "$(thefuck --alias)"
 
 function jstags() {
 	find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exec jsctags {} -f \; | sed '/^$/d' | sort > tags
