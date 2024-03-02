@@ -16,7 +16,7 @@ export AWS_REGION=us-west-2
 
 export ZSH_DISABLE_COMPFIX=true
 
-export GTK_THEME=Catppuccin-Mocha-Standard-Blue-Dark
+export KEYTIMEOUT=20
 
 ###############
 #  Databases  #

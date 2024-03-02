@@ -75,7 +75,6 @@ function quote() {
 
 export NODE_PATH=$__USR_PATH/lib/node
 
-export KEYTIMEOUT=5
 
 function bail_on_tmux() {
   echo "Loading tmux...."
