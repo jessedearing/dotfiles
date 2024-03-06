@@ -19,6 +19,8 @@ export ZSH_DISABLE_COMPFIX=true
 export KEYTIMEOUT=20
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
 
+export GPG_TTY=$(tty)
+
 ###############
 #  Databases  #
 ###############
