@@ -1,8 +1,7 @@
-# setopt XTRACE
+#setopt XTRACE
 setopt interactive_comments
 setopt chase_links
 # Path to your oh-my-zsh configuration.
-zstyle ':omz:update' mode disabled
 export ZSH=$HOME/.oh-my-zsh
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -13,29 +12,21 @@ if [[ $(uname -s) == "Darwin" ]]; then
 fi
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(pyenv init -)"
 
-# Set to the name theme to load.
-# Look in ~/.oh-my-zsh/themes/
-#export ZSH_THEME="sorin"
-export ZSH_CUSTOM="$HOME/.zsh-custom"
-
-# Set to this to use case-sensitive completion
-# export CASE_SENSITIVE="true"
-
-# Uncomment following line if you want to disable colors in ls
-# export DISABLE_LS_COLORS="true"
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+source $HOME/.zsh-custom/*.zsh
+source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(vi-mode zsh-syntax-highlighting)
 fpath=(~/.zsh-completions /opt/homebrew/share/zsh/site-functions $fpath)
-source $ZSH/oh-my-zsh.sh
 
 eval "$(starship init zsh)"
 
 alias node='NODE_NO_READLINE=1 rlwrap node'
 alias tf=terraform
-alias web="open -a 'Firefox' "
 alias gco='g checkout'
 alias gs="g status -sb"
 alias ga="g add"
@@ -45,8 +36,6 @@ alias less="less -R"
 alias d="grc --colour=auto docker"
 alias k=kubectl
 alias ggpnp='git stash && git pull --rebase && git push && git stash pop'
-alias ssh="TERM=xterm-256color ssh"
-alias ssha="TERM=xterm-256color ssh -A"
 alias ag="ag -S"
 alias vscr="v -c ':Scratch'"
 alias mytop="perl /usr/local/bin/mytop"
@@ -107,8 +96,6 @@ function printcolors() {
     printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"
   done
 }
-
-# eval "$(thefuck --alias)"
 
 function jstags() {
 	find . -type f -iregex ".*\.js$" -not -path "./node_modules/*" -exec jsctags {} -f \; | sed '/^$/d' | sort > tags
@@ -181,10 +168,7 @@ aws() {
 if [ -x $__USR_PATH/bin/lsd ]; then
 	alias ls=lsd
 fi
-
-if [ -f $__USR_PATH/opt/pyenv/libexec/../completions/pyenv.zsh ]; then
-  source "$__USR_PATH/opt/pyenv/libexec/../completions/pyenv.zsh"
-fi
+alias l='ls -l'
 
 if [ -f $__USR_PATH/bin/aws_zsh_completer.sh ]; then
   . $__USR_PATH/bin/aws_zsh_completer.sh
@@ -196,3 +180,4 @@ fi
 
 autoload bashcompinit
 bashcompinit
+unsetopt XTRACE

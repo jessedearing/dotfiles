@@ -1,9 +1,10 @@
-export PATH=${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.fzf/bin:$HOME/.yarn/bin:$HOME/.cargo/bin:$HOME/go/bin:$HOME/.local/bin:/opt/homebrew/opt/openjdk/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/opt/perl/bin:$PATH
+export PATH=${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.pyenv/bin:$HOME/.fzf/bin:$HOME/.yarn/bin:$HOME/.cargo/bin:$HOME/go/bin:$HOME/.local/bin:/opt/homebrew/opt/openjdk/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/opt/perl/bin:$PATH
 export EDITOR=$HOME/.local/bin/editor.sh
 if [[ $(uname -s) == "Darwin" ]]; then
   export RVC_READLINE="/usr/local/opt/readline/lib/libreadline.dylib"
 fi
 export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
 unset GOROOT
 export GOPRIVATE=*.vmware.com
 export GO111MODULE=on
@@ -11,12 +12,12 @@ export PGDATA=$HOME/data/postgres
 export PGHOST=localhost
 export CDPATH=~/.dotfiles/shell-bookmarks
 
-export AWS_VAULT_PROMPT=ykman
 export AWS_REGION=us-west-2
 
 export ZSH_DISABLE_COMPFIX=true
 
 export KEYTIMEOUT=20
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
 
 ###############
 #  Databases  #

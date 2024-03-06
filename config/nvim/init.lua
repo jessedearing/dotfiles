@@ -13,10 +13,19 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+{'vimwiki/vimwiki',
+  init = function()
+    vim.g.vimwiki_list = {
+      {
+        path = '~/Google Drive/My Drive/vimwiki',
+        ext = '.md',
+        syntax = 'markdown',
+      },
+    }
+  end
+},
 {'shaunsingh/nord.nvim'},
 {'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
-{'jessedearing/nvim-systemd', dir = '~/code/nvim-systemd'},
-'tarekbecker/vim-yaml-formatter',
 'pedrohdz/vim-yaml-folds',
 'RRethy/vim-illuminate',
 'Mofiqul/dracula.nvim',
@@ -41,7 +50,6 @@ require("lazy").setup({
 },
 'andrewstuart/vim-kubernetes',
 'neomake/neomake',
-'SirVer/ultisnips',
 'honza/vim-snippets',
 'masukomi/vim-markdown-folding',
 {'junegunn/fzf.vim', dependencies = {
@@ -57,7 +65,6 @@ require("lazy").setup({
 'vim-scripts/dbext.vim',
 'godlygeek/tabular',
 'liuchengxu/vista.vim',
--- 'vimwiki/vimwiki',
 'google/vim-searchindex',
 'hashivim/vim-terraform',
 'cohama/agit.vim',
@@ -65,13 +72,17 @@ require("lazy").setup({
 'tpope/vim-eunuch',
 'powerman/vim-plugin-AnsiEsc',
 'neovim/nvim-lspconfig',
-'L3MON4D3/LuaSnip',
-'quangnguyen30192/cmp-nvim-ultisnips',
+{
+	"L3MON4D3/LuaSnip",
+	-- follow latest release.
+	version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+},
 'hrsh7th/nvim-cmp',
 'hrsh7th/cmp-nvim-lsp',
 'hrsh7th/cmp-buffer',
 'hrsh7th/cmp-path',
 'hrsh7th/cmp-cmdline',
+'saadparwaiz1/cmp_luasnip',
 'sindrets/diffview.nvim',
 'towolf/vim-helm',
 'DerSaidin/vim-urlencode',
@@ -91,16 +102,25 @@ require'lualine'.setup{}
 require'gitsigns'.setup{}
 require'nvim-tree'.setup{}
 
+require("luasnip.loaders.from_snipmate").lazy_load()
+
 -- Setup nvim-cmp.
+local has_words_before = function()
+  unpack = unpack or table.unpack
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+local luasnip = require("luasnip")
 local cmp = require'cmp'
 
 cmp.setup({
   snippet = {
     -- REQUIRED - you must specify a snippet engine
     expand = function(args)
-      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
       -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-      vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
     end,
   },
   mapping = cmp.mapping.preset.insert({
@@ -116,8 +136,7 @@ cmp.setup({
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
-    { name = 'ultisnips' }, -- For ultisnips users.
-  }, {
+    { name = 'luasnip' }, -- For luasnip users.
     { name = 'buffer' },
     { name = 'neorg' },
   })

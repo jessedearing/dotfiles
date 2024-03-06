@@ -1,6 +1,5 @@
 set completeopt=menu,menuone,noselect
-let g:python_host_prog  = '/opt/homebrew/bin/python3'
-let g:python3_host_prog = '/opt/homebrew/bin/python3'
+let g:python3_host_prog = $HOME."/.pyenv/shims/python3"
 
 " Stock nvim & vim settings {{{1 "
 set termguicolors
@@ -238,8 +237,12 @@ command! -bang -nargs=* Rg
 set rtp+=/usr/local/opt/fzf
 " 1}}} "
 
-map <Leader>ww :Neorg index<CR>
-map <Leader>wd :Neorg journal<CR>
+let g:vimwiki_list = [{
+      \ 'path': '~/vimwiki',
+      \ 'syntax': 'markdown',
+      \ 'ext': '.md' }]
+map <Leader>ww :VimwikiIndex<CR>
+map <Leader>wd :VimwikiMakeDiaryNote<CR>
 
 map <Leader>> :bn<CR>
 map <Leader>< :bp<CR>
