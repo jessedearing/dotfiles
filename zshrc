@@ -180,6 +180,9 @@ if [ -f $__USR_PATH/share/nvm/init-nvm.sh ]; then
   source $__USR_PATH/share/nvm/init-nvm.sh
 fi
 
+source "$__USR_PATH/share/google-cloud-sdk/path.zsh.inc"
+source "$__USR_PATH/share/google-cloud-sdk/completion.zsh.inc"
+
 autoload -U compinit
 compinit
 autoload bashcompinit
