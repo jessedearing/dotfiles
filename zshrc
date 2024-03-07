@@ -15,7 +15,9 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(pyenv init -)"
 
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-source $HOME/.zsh-custom/*.zsh
+for __customfile in $HOME/.zsh-custom/*.zsh; do
+  source $__customfile
+done
 source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
@@ -134,7 +136,7 @@ unfunction kubectl &> /dev/null
 kubectl() {
   if [[ "$1" == "node-shell" ]]; then
     $__USR_PATH/bin/kubectl "$@"
-  elif [[ "$@" =~ '(^|\s)(attach|run|exec|logs|edit)\s' ]]; then
+  elif [[ "$@" =~ '(attach|run|exec|logs|edit)' ]]; then
     $__USR_PATH/bin/kubectl "$@"
   else
     grc -e -s -c conf.kubectl -- $__USR_PATH/bin/kubectl "$@"
@@ -178,6 +180,8 @@ if [ -f $__USR_PATH/share/nvm/init-nvm.sh ]; then
   source $__USR_PATH/share/nvm/init-nvm.sh
 fi
 
+autoload -U compinit
+compinit
 autoload bashcompinit
 bashcompinit
 unsetopt XTRACE
