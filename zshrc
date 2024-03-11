@@ -18,6 +18,11 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 for __customfile in $HOME/.zsh-custom/*.zsh; do
   source $__customfile
 done
+unsetopt XTRACE
+function zvm_config() {
+  ZVM_VI_SURROUND_BINDKEY="s-prefix"
+  ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+}
 source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
@@ -72,8 +77,6 @@ function bail_on_tmux() {
   echo "Press CTRL-C to cancel"
   sleep 1.5
 }
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 function load_tmux() {
   tmux_session="local"
@@ -183,8 +186,8 @@ fi
 source "$__USR_PATH/share/google-cloud-sdk/path.zsh.inc"
 source "$__USR_PATH/share/google-cloud-sdk/completion.zsh.inc"
 
-autoload -U compinit
+autoload -Uz compinit bashcompinit
 compinit
-autoload bashcompinit
 bashcompinit
-unsetopt XTRACE
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

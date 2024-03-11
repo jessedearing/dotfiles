@@ -13,83 +13,97 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-{'vimwiki/vimwiki',
-  init = function()
-    vim.g.vimwiki_list = {
-      {
-        path = '~/Google Drive/My Drive/vimwiki',
-        ext = '.md',
-        syntax = 'markdown',
-      },
-    }
-  end
-},
-{'shaunsingh/nord.nvim'},
-{'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
-'pedrohdz/vim-yaml-folds',
-'RRethy/vim-illuminate',
-'Mofiqul/dracula.nvim',
-'ryanoasis/vim-devicons',
-'nvim-lualine/lualine.nvim',
-'nvim-lua/plenary.nvim',
-'lewis6991/gitsigns.nvim',
-'kyazdani42/nvim-web-devicons',
-'tpope/vim-fugitive',
-'kyazdani42/nvim-tree.lua',
-'vim-scripts/scratch.vim',
-{
-  "ray-x/go.nvim",
-  dependencies = {  -- optional packages
-    "ray-x/guihua.lua",
-    "neovim/nvim-lspconfig",
-    "nvim-treesitter/nvim-treesitter",
+  'folke/neoconf.nvim',
+  'folke/neodev.nvim',
+  {'vimwiki/vimwiki',
+    init = function()
+      local vimwiki_path = os.getenv("HOME") .. '/Google Drive/My Drive/vimwiki'
+      if vim.loop.fs_stat(os.getenv("HOME") .. "Nextcloud") then
+        vimwiki_path = os.getenv("HOME") .. "Nextcloud/Notes"
+      end
+      vim.g.vimwiki_list = {
+        {
+          path = vimwiki_path,
+          ext = '.md',
+          syntax = 'markdown',
+        },
+      }
+    end
   },
-  event = {"CmdlineEnter"},
-  ft = {"go", 'gomod'},
-  build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
-},
-'andrewstuart/vim-kubernetes',
-'neomake/neomake',
-'honza/vim-snippets',
-'masukomi/vim-markdown-folding',
-{'junegunn/fzf.vim', dependencies = {
-    {'junegunn/fzf', dir = '~/.fzf', build = './install --all'},
+  {'shaunsingh/nord.nvim'},
+  {'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
+  'pedrohdz/vim-yaml-folds',
+  'RRethy/vim-illuminate',
+  'Mofiqul/dracula.nvim',
+  'ryanoasis/vim-devicons',
+  'nvim-lualine/lualine.nvim',
+  'nvim-lua/plenary.nvim',
+  'lewis6991/gitsigns.nvim',
+  'kyazdani42/nvim-web-devicons',
+  'tpope/vim-fugitive',
+  'kyazdani42/nvim-tree.lua',
+  'vim-scripts/scratch.vim',
+  {
+    "ray-x/go.nvim",
+    dependencies = {  -- optional packages
+      "ray-x/guihua.lua",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    event = {"CmdlineEnter"},
+    ft = {"go", 'gomod'},
+    build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
   },
-},
-'ntpeters/vim-better-whitespace',
-'mattn/gist-vim',
-'mattn/webapi-vim',
-'hdima/python-syntax',
-'jelera/vim-javascript-syntax',
-'junegunn/vim-easy-align',
-'vim-scripts/dbext.vim',
-'godlygeek/tabular',
-'liuchengxu/vista.vim',
-'google/vim-searchindex',
-'hashivim/vim-terraform',
-'cohama/agit.vim',
-'kristijanhusak/vim-carbon-now-sh',
-'tpope/vim-eunuch',
-'powerman/vim-plugin-AnsiEsc',
-'neovim/nvim-lspconfig',
-{
-	"L3MON4D3/LuaSnip",
-	-- follow latest release.
-	version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-},
-'hrsh7th/nvim-cmp',
-'hrsh7th/cmp-nvim-lsp',
-'hrsh7th/cmp-buffer',
-'hrsh7th/cmp-path',
-'hrsh7th/cmp-cmdline',
-'saadparwaiz1/cmp_luasnip',
-'sindrets/diffview.nvim',
-'towolf/vim-helm',
-'DerSaidin/vim-urlencode',
-'Apeiros-46B/qalc.nvim',
-{ 'echasnovski/mini.nvim', version = false },
-{ "lukas-reineke/indent-blankline.nvim" },
+  'andrewstuart/vim-kubernetes',
+  'neomake/neomake',
+  'honza/vim-snippets',
+  'masukomi/vim-markdown-folding',
+  {'junegunn/fzf.vim', dependencies = {
+      {'junegunn/fzf', dir = '/opt/homebrew/opt/fzf', build = './install --all'},
+    },
+  },
+  'ntpeters/vim-better-whitespace',
+  'mattn/gist-vim',
+  'mattn/webapi-vim',
+  'hdima/python-syntax',
+  'jelera/vim-javascript-syntax',
+  'junegunn/vim-easy-align',
+  'vim-scripts/dbext.vim',
+  'godlygeek/tabular',
+  'liuchengxu/vista.vim',
+  'google/vim-searchindex',
+  'hashivim/vim-terraform',
+  'cohama/agit.vim',
+  'kristijanhusak/vim-carbon-now-sh',
+  'tpope/vim-eunuch',
+  'powerman/vim-plugin-AnsiEsc',
+  'neovim/nvim-lspconfig',
+  {
+    "L3MON4D3/LuaSnip",
+    -- follow latest release.
+    version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+  },
+  'hrsh7th/nvim-cmp',
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-path',
+  'hrsh7th/cmp-cmdline',
+  'saadparwaiz1/cmp_luasnip',
+  'sindrets/diffview.nvim',
+  'towolf/vim-helm',
+  'DerSaidin/vim-urlencode',
+  'Apeiros-46B/qalc.nvim',
+  { 'echasnovski/mini.nvim', version = false },
+  { "lukas-reineke/indent-blankline.nvim" },
 })
+
+require("neodev").setup({
+    override = function(_, library)
+        library.enabled = true
+        library.plugins = true
+    end,
+})
+require("neoconf").setup({})
 
 vim.opt.rtp:prepend(lazypath)
 
@@ -138,7 +152,6 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'luasnip' }, -- For luasnip users.
     { name = 'buffer' },
-    { name = 'neorg' },
   })
 })
 
@@ -196,11 +209,10 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
-
 vim.api.nvim_set_keymap('i', '<c-e>','<cmd>lua require("go.iferr").run()<CR>', { silent=true, noremap=true})
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'gopls', 'terraformls', 'pylsp', 'tsserver' }
+local servers = { 'gopls', 'terraformls', 'pylsp', 'tsserver', 'lua_ls'}
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 for _, lsp in pairs(servers) do
@@ -235,7 +247,7 @@ lspconfig['yamlls'].setup {
 
 require('diffview').setup({})
 
-require'nvim-treesitter.configs'.setup {
+require'nvim-treesitter.configs'.setup({
   -- A list of parser names, or "all"
   ensure_installed = {
     "lua",
@@ -263,11 +275,9 @@ require'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
-}
-
-require('mini.comment').setup({
-
 })
+
+require('mini.comment').setup({})
 require('mini.splitjoin').setup()
 require('mini.align').setup()
 require('mini.pairs').setup()

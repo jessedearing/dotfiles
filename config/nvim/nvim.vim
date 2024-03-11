@@ -224,9 +224,9 @@ set spelllang=en_us
 
 " FZF {{{1 "
 " Keybindings
-map <Leader>ff :FZF<CR>
-map <Leader>fb :Buffers<CR>
-map <Leader>fc :Commits<CR>
+map <C-t> :FZF<CR>
+map <M-b> :Buffers<CR>
+map <M-c> :Commits<CR>
 noremap <Leader>\ :execute 'Rg! '.expand('<cword>')<CR>
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -242,7 +242,7 @@ let g:vimwiki_list = [{
       \ 'syntax': 'markdown',
       \ 'ext': '.md' }]
 map <Leader>ww :VimwikiIndex<CR>
-map <Leader>wd :VimwikiMakeDiaryNote<CR>
+map <Leader>w<Leader>w :VimwikiMakeDiaryNote<CR>
 
 map <Leader>> :bn<CR>
 map <Leader>< :bp<CR>
@@ -379,7 +379,3 @@ let g:strip_whitespace_on_save = 1
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 let g:vista_default_executive = 'ctags'
 " }}} Vista "
-
-" Neorg {{{1 "
-autocmd BufWritePost $HOME/pensieve/*.norg silent execute '! git --git-dir=$HOME/pensieve/.git --work-tree=$HOME/pensieve add "%" > /dev/null; git --git-dir=$HOME/pensieve/.git --work-tree=$HOME/pensieve commit -q -m "%" 2>&1 > /dev/null'
-" 1}}} "
