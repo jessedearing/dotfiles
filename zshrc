@@ -22,15 +22,16 @@ unsetopt XTRACE
 function zvm_config() {
   ZVM_VI_SURROUND_BINDKEY="s-prefix"
   ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+  ZVM_INIT_MODE=sourcing
+  ZVM_LAZY_KEYBINDINGS=false
 }
-source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Example format: plugins=(rails git textmate ruby lighthouse)
-fpath=(~/.zsh-completions /opt/homebrew/share/zsh/site-functions $fpath)
 
 eval "$(starship init zsh)"
+
+source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+eval "$(fzf --zsh)"
+fpath=(~/.zsh-completions /opt/homebrew/share/zsh/site-functions $fpath)
 
 alias node='NODE_NO_READLINE=1 rlwrap node'
 alias tf=terraform
@@ -189,5 +190,3 @@ source "$__USR_PATH/share/google-cloud-sdk/completion.zsh.inc"
 autoload -Uz compinit bashcompinit
 compinit
 bashcompinit
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
