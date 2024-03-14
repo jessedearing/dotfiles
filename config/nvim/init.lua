@@ -117,6 +117,7 @@ require'gitsigns'.setup{}
 require'nvim-tree'.setup{}
 
 require("luasnip.loaders.from_snipmate").lazy_load()
+require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/snippets"})
 
 -- Setup nvim-cmp.
 local has_words_before = function()
