@@ -11,6 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 
 vim.opt.rtp:prepend(lazypath)
+vim.opt.rtp:append('/opt/homebrew/opt/fzf')
 
 require("lazy").setup({
   'folke/neoconf.nvim',
@@ -118,7 +119,6 @@ require'nvim-tree'.setup{}
 
 require("luasnip.loaders.from_snipmate").lazy_load()
 require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/snippets"})
-
 -- Setup nvim-cmp.
 local has_words_before = function()
   unpack = unpack or table.unpack
@@ -128,6 +128,8 @@ end
 
 local luasnip = require("luasnip")
 local cmp = require'cmp'
+vim.keymap.set({"i", "s"}, "<C-L>", function() luasnip.jump( 1) end, {silent = true})
+vim.keymap.set({"i", "s"}, "<C-J>", function() luasnip.jump(-1) end, {silent = true})
 
 cmp.setup({
   snippet = {
