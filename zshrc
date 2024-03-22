@@ -4,6 +4,8 @@ setopt chase_links
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export ZSH=$HOME/.oh-my-zsh
+export ZSH_CUSTOM="$HOME/.zsh-custom"
+plugins=(vi-mode kubectl aws)
 
 __USR_PATH="/usr"
 if [[ $(uname -s) == "Darwin" ]]; then
@@ -18,9 +20,9 @@ for __customfile in $HOME/.zsh-custom/*.zsh; do
   source $__customfile
 done
 unsetopt XTRACE
+source $ZSH/oh-my-zsh.sh
 eval "$(starship init zsh)"
 
-source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 eval "$(fzf --zsh)"
 fpath=(~/.zsh-completions /opt/homebrew/share/zsh/site-functions $fpath)
