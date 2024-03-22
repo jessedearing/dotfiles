@@ -3,28 +3,7 @@ setopt interactive_comments
 setopt chase_links
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-
-setopt auto_cd
-setopt auto_pushd
-setopt pushd_ignore_dups
-setopt pushdminus
-
-
-alias -g ...='../..'
-alias -g ....='../../..'
-alias -g .....='../../../..'
-alias -g ......='../../../../..'
-
-alias -- -='cd -'
-alias 1='cd -1'
-alias 2='cd -2'
-alias 3='cd -3'
-alias 4='cd -4'
-alias 5='cd -5'
-alias 6='cd -6'
-alias 7='cd -7'
-alias 8='cd -8'
-alias 9='cd -9'
+export ZSH=$HOME/.oh-my-zsh
 
 __USR_PATH="/usr"
 if [[ $(uname -s) == "Darwin" ]]; then
@@ -39,13 +18,6 @@ for __customfile in $HOME/.zsh-custom/*.zsh; do
   source $__customfile
 done
 unsetopt XTRACE
-function zvm_config() {
-  ZVM_VI_SURROUND_BINDKEY="s-prefix"
-  ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-  ZVM_INIT_MODE=sourcing
-  ZVM_LAZY_KEYBINDINGS=false
-}
-
 eval "$(starship init zsh)"
 
 source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
