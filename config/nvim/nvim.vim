@@ -224,9 +224,9 @@ set spelllang=en_us
 
 " FZF {{{1 "
 " Keybindings
-map <C-t> :FZF<CR>
-map <M-b> :Buffers<CR>
-map <M-c> :Commits<CR>
+map <Leader>ff :FZF<CR>
+map <Leader>fb :Buffers<CR>
+map <Leader>fc :Commits<CR>
 noremap <Leader>\ :execute 'Rg! '.expand('<cword>')<CR>
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(

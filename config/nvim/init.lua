@@ -96,6 +96,7 @@ require("lazy").setup({
   'Apeiros-46B/qalc.nvim',
   { 'echasnovski/mini.nvim', version = false },
   { "lukas-reineke/indent-blankline.nvim" },
+  {'mrcjkb/rustaceanvim', version = "4.*" },
 })
 
 require("neodev").setup({
@@ -212,7 +213,18 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
-vim.api.nvim_set_keymap('i', '<c-e>','<cmd>lua require("go.iferr").run()<CR>', { silent=true, noremap=true})
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+  pattern = "*.go",
+  callback = function()
+    vim.api.nvim_buf_set_keymap(0, 'i', '<c-e>', '<cmd>lua require("go.iferr").run()<CR>', {silent=true, noremap=true})
+  end,
+})
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.rs",
+  callback = function()
+    vim.lsp.buf.format()
+  end,
+})
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 local servers = { 'gopls', 'terraformls', 'pylsp', 'tsserver', 'lua_ls'}
@@ -244,6 +256,12 @@ lspconfig['yamlls'].setup {
       },
     },
   },
+}
+
+vim.g.rustaceanvim = {
+  server = {
+    on_attach = on_attach
+  }
 }
 
 -- vim.lsp.set_log_level('debug')
