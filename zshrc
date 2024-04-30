@@ -109,7 +109,7 @@ bindkey -M isearch '^F' history-incremental-search-forward
 
 bindkey "^Q" push-input
 
-fortune startrek computers $HOME/.fortunes/sadserver_tweets $HOME/.fortunes/honest_update_tweets
+fortune startrek computers $HOME/.fortunes/sadserver_tweets $HOME/.fortunes/honest_update_tweets $HOME/.fortunes/devops_borat
 echo
 
 stty discard undef
