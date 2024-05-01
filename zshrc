@@ -141,19 +141,6 @@ kubectl() {
   fi
 }
 
-unalias dig &> /dev/null
-unfunction dig &> /dev/null
-
-func dig() {
-  if [[ $# > 1 ]]; then
-    grc -e -s -c conf.dig -- dig "$@"
-    return
-  fi
-  hostname=$1
-  shift
-  grc -e -s -c conf.dig -- dig $hostname A $hostname AAAA "$@"
-}
-
 aws() {
   (
     if [[ "$@" =~ 'help$' ]]; then
