@@ -1,3 +1,4 @@
+vim.g.mapleader = ','
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -69,7 +70,6 @@ require("lazy").setup({
   'hdima/python-syntax',
   'jelera/vim-javascript-syntax',
   'junegunn/vim-easy-align',
-  'vim-scripts/dbext.vim',
   'godlygeek/tabular',
   'liuchengxu/vista.vim',
   'google/vim-searchindex',
@@ -77,7 +77,6 @@ require("lazy").setup({
   'cohama/agit.vim',
   'kristijanhusak/vim-carbon-now-sh',
   'tpope/vim-eunuch',
-  'powerman/vim-plugin-AnsiEsc',
   'neovim/nvim-lspconfig',
   {
     "L3MON4D3/LuaSnip",
@@ -94,7 +93,7 @@ require("lazy").setup({
   'towolf/vim-helm',
   'DerSaidin/vim-urlencode',
   'Apeiros-46B/qalc.nvim',
-  { 'echasnovski/mini.nvim', version = false },
+  { 'echasnovski/mini.nvim', version = '*' },
   { "lukas-reineke/indent-blankline.nvim" },
   {'mrcjkb/rustaceanvim', version = "4.*" },
 })
@@ -110,7 +109,7 @@ require("neoconf").setup({})
 vim.opt.rtp:prepend(lazypath)
 
 require('go').setup({
-  goimport = "gopls", -- if set to 'gopls' will use gopls format, also goimport
+  goimports = "gopls", -- if set to 'gopls' will use gopls format, also goimport
   fillstruct = "gopls",
   gofmt = "gopls", -- if set to gopls will use gopls format
 })
@@ -227,7 +226,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'gopls', 'terraformls', 'pylsp', 'tsserver', 'lua_ls'}
+local servers = { 'gopls', 'terraformls', 'tflint', 'pylsp', 'tsserver', 'lua_ls'}
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 for _, lsp in pairs(servers) do
@@ -243,6 +242,12 @@ local on_attach_yaml = function(client, bufnr)
     vim.diagnostic.disable()
   end
 end
+
+lspconfig['java_language_server'].setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = {'/Users/jessed/Documents/code/java-language-server/dist/lang_server_mac.sh'},
+}
 
 lspconfig['yamlls'].setup {
   on_attach = on_attach_yaml,
