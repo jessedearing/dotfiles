@@ -1,3 +1,3 @@
 #!/usr/bin/env zsh
 
-exec neovide $*
+exec neovide --no-fork $*
