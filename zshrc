@@ -122,7 +122,7 @@ ulimit -S -n 2048
 if [ -f $HOME/.config/op/plugins.sh ]; then
   source $HOME/.config/op/plugins.sh
 fi
-load_tmux
+# load_tmux
 
 if [ -f /opt/homebrew/etc/grc.zsh ]; then
   . /opt/homebrew/etc/grc.zsh

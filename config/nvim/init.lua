@@ -95,6 +95,7 @@ require("lazy").setup({
   { 'echasnovski/mini.nvim', version = '*' },
   { "lukas-reineke/indent-blankline.nvim" },
   {'mrcjkb/rustaceanvim', version = "4.*" },
+  'github/copilot.vim',
 })
 
 require("neodev").setup({
@@ -317,5 +318,5 @@ if vim.g.neovide then
   vim.o.guifont = "CaskaydiaCove Nerd Font:h16"
   vim.defer_fn(function()
     vim.cmd("NeovideFocus")
-  end, 25)
+  end, 7)
 end
