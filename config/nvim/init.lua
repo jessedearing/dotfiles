@@ -90,7 +90,6 @@ require("lazy").setup({
   'hrsh7th/cmp-cmdline',
   'saadparwaiz1/cmp_luasnip',
   'sindrets/diffview.nvim',
-  'towolf/vim-helm',
   'DerSaidin/vim-urlencode',
   'Apeiros-46B/qalc.nvim',
   { 'echasnovski/mini.nvim', version = '*' },
@@ -112,6 +111,7 @@ require('go').setup({
   goimports = "gopls", -- if set to 'gopls' will use gopls format, also goimport
   fillstruct = "gopls",
   gofmt = "gopls", -- if set to gopls will use gopls format
+  iferr_vertical_shift = 3,
 })
 require'lualine'.setup{}
 require'gitsigns'.setup{}
@@ -226,7 +226,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'gopls', 'terraformls', 'tflint', 'pylsp', 'tsserver', 'lua_ls'}
+local servers = { 'gopls', 'terraformls', 'tflint', 'pylsp', 'tsserver', 'lua_ls', 'helm_ls'}
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 for _, lsp in pairs(servers) do
@@ -312,3 +312,10 @@ require('mini.surround').setup()
 vim.cmd.colorscheme "nord"
 
 vim.cmd.source "~/.config/nvim/nvim.vim"
+
+if vim.g.neovide then
+  vim.o.guifont = "CaskaydiaCove Nerd Font:h16"
+  vim.defer_fn(function()
+    vim.cmd("NeovideFocus")
+  end, 25)
+end

@@ -1,7 +1,3 @@
 #!/usr/bin/env zsh
 
-if [ -x /opt/homebrew/bin/nvim ]; then
-  exec /opt/homebrew/bin/nvim $*
-else
-  exec /usr/bin/nvim $*
-fi
+exec /opt/homebrew/bin/neovide $*

@@ -1,4 +1,3 @@
 #!/usr/bin/env zsh
 
-exec nvim $*
-
+exec neovide $*
