@@ -5,7 +5,7 @@
 [color]
 	ui = true
 [mergetool "fugitive"]
-  cmd = neovide -- -c "Gdiffsplit!" "$MERGED"
+  cmd = neovide --no-fork -- -c "Gdiffsplit!" "$MERGED"
 [merge]
 	tool = fugitive
 [core]
