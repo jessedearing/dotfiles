@@ -5,7 +5,7 @@
 [color]
 	ui = true
 [mergetool "fugitive"]
-  cmd = nvim -c "Gdiffsplit!" "$MERGED"
+  cmd = neovide -- -c "Gdiffsplit!" "$MERGED"
 [merge]
 	tool = fugitive
 [core]
@@ -52,10 +52,10 @@
 	enabled = true
 [init]
   defaultBranch = main
+[gpg "ssh"]
+  allowedSignersFile = ~/.gitSigners
 [credential]
-	helper = 
+	helper =
 	helper = /usr/local/share/gcm-core/git-credential-manager
 [credential "https://dev.azure.com"]
 	useHttpPath = true
-[gpg "ssh"]
-  allowedSignersFile = ~/.gitSigners

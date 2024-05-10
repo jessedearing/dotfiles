@@ -119,6 +119,9 @@ TIMEFMT=$'\nreal\t%E\nuser\t%U\nsys\t%S'
 
 ulimit -S -n 2048
 
+if [ -f $HOME/.config/op/plugins.sh ]; then
+  source $HOME/.config/op/plugins.sh
+fi
 load_tmux
 
 if [ -f /opt/homebrew/etc/grc.zsh ]; then
@@ -139,16 +142,6 @@ kubectl() {
   else
     grc -e -s -c conf.kubectl -- $__USR_PATH/bin/kubectl "$@"
   fi
-}
-
-aws() {
-  (
-    if [[ "$@" =~ 'help$' ]]; then
-      MANPAGER="sh -c 'col  -bx | bat -l man -p'" /usr/bin/env -u PAGER $__USR_PATH/bin/aws $@
-    else
-      $__USR_PATH/bin/aws $@
-    fi
-  )
 }
 
 # Alias ls after grc since lsd is colorized
