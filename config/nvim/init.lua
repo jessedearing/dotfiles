@@ -316,6 +316,8 @@ vim.cmd.source "~/.config/nvim/nvim.vim"
 
 if vim.g.neovide then
   vim.o.guifont = "CaskaydiaCove Nerd Font:h16"
+  vim.g.neovide_cursor_animation_length = 0.03
+  vim.g.neovide_cursor_trail_length = 0.5
   vim.defer_fn(function()
     vim.cmd("NeovideFocus")
   end, 7)
