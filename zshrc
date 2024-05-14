@@ -47,7 +47,6 @@ alias g=git
 if [ -x $__USR_PATH/bin/richgo ] || [ -x $HOME/go/bin/richgo ]; then
 	alias go=richgo
 fi
-alias vim="editor.sh"
 
 alias rg="rg -i -g \"!{vendor}\""
 
@@ -122,7 +121,8 @@ ulimit -S -n 2048
 if [ -f $HOME/.config/op/plugins.sh ]; then
   source $HOME/.config/op/plugins.sh
 fi
-# load_tmux
+
+load_tmux
 
 if [ -f /opt/homebrew/etc/grc.zsh ]; then
   . /opt/homebrew/etc/grc.zsh
