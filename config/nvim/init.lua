@@ -30,6 +30,13 @@ require("lazy").setup({
           syntax = 'markdown',
         },
       }
+
+      vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+        pattern = "*.md",
+        callback = function()
+          vim.keymap.set('i', '<C-Tab>', 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false, buffer = true})
+        end,
+      })
     end
   },
   {'shaunsingh/nord.nvim'},
@@ -240,7 +247,7 @@ end
 local on_attach_yaml = function(client, bufnr)
   on_attach(client, bufnr)
   if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
-    vim.diagnostic.disable()
+    vim.diagnostic.enable(false)
   end
 end
 
@@ -259,6 +266,7 @@ lspconfig['yamlls'].setup {
     yaml = {
       schemas = {
         kubernetes = {"kubectl-edit-*.yaml", "*-k8s.yaml", "deployment.yaml", "*cronjob*.yaml"},
+        ["https://golangci-lint.run/jsonschema/golangci.jsonschema.json"] = ".golangci.yaml",
       },
     },
   },
