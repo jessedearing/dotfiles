@@ -1,3 +1,3 @@
 #!/usr/bin/env zsh
 
-exec /opt/homebrew/bin/neovide $*
+source ~/.local/bin/editor.sh
