@@ -95,17 +95,15 @@ require("lazy").setup({
   { 'echasnovski/mini.nvim', version = '*' },
   { "lukas-reineke/indent-blankline.nvim" },
   {'mrcjkb/rustaceanvim', version = "4.*" },
-  {'github/copilot.vim', init = function()
-      vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
-        pattern = "*.md",
-        callback = function()
-          vim.keymap.set('i', '<C-Tab>', 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false, buffer = true})
-        end,
-      })
-    end
-  },
+  'github/copilot.vim',
 })
 
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+  pattern = "*.md",
+  callback = function()
+    vim.keymap.set('i', '<M-Tab>', 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false, buffer = true})
+  end,
+})
 require("neodev").setup({
     override = function(_, library)
         library.enabled = true
@@ -247,7 +245,7 @@ end
 
 local on_attach_yaml = function(client, bufnr)
   on_attach(client, bufnr)
-  if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
+  if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "yaml.gotexttmpl" then
     vim.diagnostic.enable(false)
   end
 end
