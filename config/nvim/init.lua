@@ -30,13 +30,6 @@ require("lazy").setup({
           syntax = 'markdown',
         },
       }
-
-      vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
-        pattern = "*.md",
-        callback = function()
-          vim.keymap.set('i', '<C-Tab>', 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false, buffer = true})
-        end,
-      })
     end
   },
   {'shaunsingh/nord.nvim'},
@@ -102,7 +95,15 @@ require("lazy").setup({
   { 'echasnovski/mini.nvim', version = '*' },
   { "lukas-reineke/indent-blankline.nvim" },
   {'mrcjkb/rustaceanvim', version = "4.*" },
-  'github/copilot.vim',
+  {'github/copilot.vim', init = function()
+      vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+        pattern = "*.md",
+        callback = function()
+          vim.keymap.set('i', '<C-Tab>', 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false, buffer = true})
+        end,
+      })
+    end
+  },
 })
 
 require("neodev").setup({
