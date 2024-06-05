@@ -1,4 +1,9 @@
 #!/usr/bin/env zsh
 
-curl -L $@ -o ~/Downloads/giphy.gif
-dragon-drag-and-drop ~/Downloads/giphy.gif
+mkdir -p ~/Downloads/giphy
+curl -L $@ -o ~/Downloads/giphy/giphy.gif
+if which dragon-drag-and-drop &> /dev/null ; then
+  dragon-drag-and-drop ~/Downloads/giphy/giphy.gif
+else
+  open ~/Downloads/giphy
+fi
