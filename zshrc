@@ -65,7 +65,6 @@ function quote() {
 
 export NODE_PATH=$__USR_PATH/lib/node
 
-
 function bail_on_tmux() {
   echo "Loading tmux...."
   echo "Press CTRL-C to cancel"
@@ -76,6 +75,10 @@ function load_tmux() {
   tmux_session="local"
   if [ ! -z "$SSH_CONNECTION" ]; then
     tmux_session="ssh"
+  fi
+
+  if [[ "$__CFBundleIdentifier" == "com.qvacua.VimR" ]]; then
+    return
   fi
 
   if (which tmux 2>&1 > /dev/null); then
@@ -164,3 +167,6 @@ source "$__USR_PATH/share/google-cloud-sdk/completion.zsh.inc"
 autoload -Uz compinit bashcompinit
 compinit
 bashcompinit
+
+# added by Snowflake SnowSQL installer v1.2
+export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH

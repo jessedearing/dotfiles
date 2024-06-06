@@ -21,6 +21,9 @@ export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlightin
 
 export GPG_TTY=$(tty)
 
+
+export VI_MODE_DISABLE_CLIPBOARD='true'
+
 ###############
 #  Databases  #
 ###############
@@ -49,3 +52,13 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-c"
 export XCURSOR_THEME=Adwaita
 export PAGER=bat
+
+#############
+# Homebrew #
+#############
+export HOMEBREW_PREFIX="/opt/homebrew";
+export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+export HOMEBREW_REPOSITORY="/opt/homebrew";
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
+export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
+export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
