@@ -56,7 +56,6 @@ require("lazy").setup({
     ft = {"go", 'gomod'},
     build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
   },
-  'andrewstuart/vim-kubernetes',
   'neomake/neomake',
   'honza/vim-snippets',
   'masukomi/vim-markdown-folding',
@@ -96,6 +95,10 @@ require("lazy").setup({
   { "lukas-reineke/indent-blankline.nvim" },
   {'mrcjkb/rustaceanvim', version = "4.*" },
   'github/copilot.vim',
+  {'towolf/vim-helm',
+    ft = { 'helm' },
+    event = { "BufReadPre", "BufNewFile", "BufEnter" },
+  },
 })
 
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
@@ -233,31 +236,20 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'gopls', 'terraformls', 'tflint', 'pylsp', 'tsserver', 'lua_ls', 'helm_ls'}
+local servers = { 'gopls', 'terraformls', 'tflint', 'pylsp', 'tsserver', 'lua_ls'}
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
-for _, lsp in pairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities
-  }
-end
 
-local on_attach_yaml = function(client, bufnr)
-  on_attach(client, bufnr)
-  if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "yaml.gotexttmpl" then
-    vim.diagnostic.enable(false)
-  end
-end
+lspconfig.helm_ls.setup {}
 
-lspconfig['java_language_server'].setup {
+lspconfig.java_language_server.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   cmd = {'/Users/jessed/Documents/code/java-language-server/dist/lang_server_mac.sh'},
 }
 
-lspconfig['yamlls'].setup {
-  on_attach = on_attach_yaml,
+lspconfig.yamlls.setup {
+  on_attach = on_attach,
   flags = {
   },
   capabilities = capabilities,
@@ -270,6 +262,14 @@ lspconfig['yamlls'].setup {
     },
   },
 }
+
+for _, lsp in pairs(servers) do
+  lspconfig[lsp].setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+  }
+end
+
 
 vim.g.rustaceanvim = {
   server = {
@@ -328,4 +328,8 @@ if vim.g.neovide then
   vim.defer_fn(function()
     vim.cmd("NeovideFocus")
   end, 7)
+end
+
+if vim.g.gui_vimr then
+  vim.o.guifont = "CaskaydiaCove Nerd Font:h16"
 end
