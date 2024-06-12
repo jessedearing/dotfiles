@@ -1,6 +1,7 @@
 #setopt XTRACE
 setopt interactive_comments
 setopt chase_links
+setopt hist_ignore_space
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export ZSH=$HOME/.oh-my-zsh
