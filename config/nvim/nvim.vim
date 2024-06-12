@@ -188,8 +188,8 @@ let g:nord_uniform_diff_background = 1
 let g:nord_cursor_line_number_background = 1
 
 " Directories for swp files
-set backupdir=~/.vim/backup
-set directory=~/.vim/backup
+set backupdir=~/.config/nvim/backup
+set directory=~/.config/nvim/backup
 
 " Turn off jslint errors by default
 let g:JSLintHighlightErrorLine = 0
