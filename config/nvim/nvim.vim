@@ -38,19 +38,6 @@ set colorcolumn=80
 
 set shell=/bin/zsh
 
-" Undofile directory settings
-if exists("+undofile")
-	" Creates an undo file so undo history is saved and can be executed
-	" after the file is reopened
-	set undofile
-	" :help undo-persistence
-	" This is only present in 7.3+
-  if isdirectory($HOME . '/.config/nvim/undo') == 0
-		:silent !mkdir -p ~/.config/nvim/undo > /dev/null 2>&1
-  endif
-	set undodir=~/.config/nvim/undo//
-endif
-
 nnoremap ' `
 nnoremap ` '
 

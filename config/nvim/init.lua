@@ -99,6 +99,15 @@ require("lazy").setup({
     ft = { 'helm' },
     event = { "BufReadPre", "BufNewFile", "BufEnter" },
   },
+  {
+    'kevinhwang91/nvim-fundo',
+    dependencies = {
+      'kevinhwang91/promise-async',
+    },
+    build = function()
+      require('fundo').install()
+    end,
+  },
 })
 
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
@@ -116,6 +125,12 @@ require("neodev").setup({
 require("neoconf").setup({})
 
 vim.opt.rtp:prepend(lazypath)
+if vim.loop.fs_stat(os.getenv("HOME") .. "/.config/nvim/undo") == nil then
+  vim.loop.fs_mkdir(os.getenv("HOME") .. "/.config/nvim/undo", 493)
+end
+vim.o.undodir = os.getenv("HOME") .. "/.config/nvim/undo"
+vim.o.undofile = true
+require('fundo').setup()
 
 require('go').setup({
   goimports = "gopls", -- if set to 'gopls' will use gopls format, also goimport
