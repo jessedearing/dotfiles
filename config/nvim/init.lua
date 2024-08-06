@@ -30,7 +30,10 @@ require("lazy").setup({
           syntax = 'markdown',
         },
       }
-    end
+    end,
+    config = function()
+      vim.treesitter.language.register('markdown', 'vimwiki')
+    end,
   },
   {'shaunsingh/nord.nvim'},
   {'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
@@ -60,7 +63,15 @@ require("lazy").setup({
   },
   'neomake/neomake',
   'honza/vim-snippets',
-  'masukomi/vim-markdown-folding',
+  {
+    'MeanderingProgrammer/markdown.nvim',
+    dependencies = {'nvim-treesitter/nvim-treesitter', 'echanoviski/mini.nvim'},
+    config = function()
+      require('render-markdown').setup({
+        file_types = { 'markdown', 'vimwiki' },
+      })
+    end,
+  },
   {'junegunn/fzf.vim', dependencies = {
       {'junegunn/fzf', dir = '/opt/homebrew/opt/fzf', build = './install --all'},
     },
@@ -111,6 +122,7 @@ require("lazy").setup({
     end,
   },
 })
+
 
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
   pattern = "*.md",

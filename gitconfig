@@ -54,10 +54,10 @@
   defaultBranch = main
 [gpg "ssh"]
   allowedSignersFile = ~/.gitSigners
-[credential]
-	helper =
-	helper = /usr/local/bin/git-credential-manager
-[credential "https://dev.azure.com"]
-	useHttpPath = true
 [url "https://github.com/"]
   insteadOf = "git@github.com:"
+[credential]
+	helper = 
+	helper = /usr/local/share/gcm-core/git-credential-manager
+[credential "https://dev.azure.com"]
+	useHttpPath = true
