@@ -121,6 +121,14 @@ require("lazy").setup({
       require('fundo').install()
     end,
   },
+  {
+      "petertriho/cmp-git",
+      dependencies = { 'hrsh7th/nvim-cmp' },
+      opts = {},
+      init = function()
+          table.insert(require("cmp").get_config().sources, { name = "git" })
+      end
+  },
 })
 
 
@@ -159,14 +167,10 @@ require'nvim-tree'.setup{}
 require("luasnip.loaders.from_snipmate").lazy_load()
 require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/snippets"})
 -- Setup nvim-cmp.
-local has_words_before = function()
-  unpack = unpack or table.unpack
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
 
 local luasnip = require("luasnip")
-local cmp = require'cmp'
+local cmp = require('cmp')
+
 vim.keymap.set({"i", "s"}, "<C-L>", function() luasnip.jump( 1) end, {silent = true})
 vim.keymap.set({"i", "s"}, "<C-J>", function() luasnip.jump(-1) end, {silent = true})
 
@@ -194,33 +198,13 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'luasnip' }, -- For luasnip users.
     { name = 'buffer' },
+    { name = 'path' },
+    { name = 'git' },
   })
 })
 
--- Set configuration for specific filetype.
-cmp.setup.filetype('gitcommit', {
-  sources = cmp.config.sources({
-    { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-  }, {
-    { name = 'buffer' },
-  })
-})
+require("cmp_git").setup()
 
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
-  sources = {
-    { name = 'buffer' }
-  }
-})
-
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
-  sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
-    { name = 'cmdline' }
-  })
-})
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
