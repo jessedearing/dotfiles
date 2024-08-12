@@ -22,8 +22,8 @@
 	default = simple
 [help]
 	autocorrect = 1
-[includeIf "gitdir:~/Documents/code/lacework/"]
-  path = ~/.gitconfig.lacework
+[includeIf "gitdir:~/Documents/code/observable/"]
+  path = ~/.gitconfig.observable
 [include]
   path = ~/.gitconfig.local
 [alias]

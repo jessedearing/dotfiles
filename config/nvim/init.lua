@@ -15,8 +15,6 @@ vim.opt.rtp:prepend(lazypath)
 vim.opt.rtp:append('/opt/homebrew/opt/fzf')
 
 require("lazy").setup({
-  'folke/neoconf.nvim',
-  'folke/neodev.nvim',
   {'vimwiki/vimwiki',
     init = function()
       local vimwiki_path = os.getenv("HOME") .. '/Google Drive/My Drive/vimwiki'
@@ -77,18 +75,14 @@ require("lazy").setup({
     },
   },
   'ntpeters/vim-better-whitespace',
-  'mattn/gist-vim',
-  'mattn/webapi-vim',
   'hdima/python-syntax',
   'jelera/vim-javascript-syntax',
   'junegunn/vim-easy-align',
   'godlygeek/tabular',
-  'liuchengxu/vista.vim',
   'google/vim-searchindex',
   'hashivim/vim-terraform',
   'cohama/agit.vim',
   'kristijanhusak/vim-carbon-now-sh',
-  'tpope/vim-eunuch',
   'neovim/nvim-lspconfig',
   {
     "L3MON4D3/LuaSnip",
@@ -128,6 +122,11 @@ require("lazy").setup({
       init = function()
           table.insert(require("cmp").get_config().sources, { name = "git" })
       end
+   },
+   {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
   },
 })
 
@@ -138,13 +137,6 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
     vim.keymap.set('i', '<M-Tab>', 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false, buffer = true})
   end,
 })
-require("neodev").setup({
-    override = function(_, library)
-        library.enabled = true
-        library.plugins = true
-    end,
-})
-require("neoconf").setup({})
 
 vim.opt.rtp:prepend(lazypath)
 if vim.loop.fs_stat(os.getenv("HOME") .. "/.config/nvim/undo") == nil then
@@ -249,7 +241,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'gopls', 'terraformls', 'tflint', 'pyright', 'tsserver', 'lua_ls'}
+local servers = { 'gopls', 'terraformls', 'tflint', 'pyright', 'lua_ls'}
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 

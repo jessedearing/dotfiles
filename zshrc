@@ -124,6 +124,7 @@ ulimit -S -n 2048
 
 if [ -f $HOME/.config/op/plugins.sh ]; then
   source $HOME/.config/op/plugins.sh
+  unalias aws
 fi
 
 load_tmux
@@ -162,8 +163,10 @@ if [ -f $__USR_PATH/share/nvm/init-nvm.sh ]; then
   source $__USR_PATH/share/nvm/init-nvm.sh
 fi
 
-source "$__USR_PATH/share/google-cloud-sdk/path.zsh.inc"
-source "$__USR_PATH/share/google-cloud-sdk/completion.zsh.inc"
+if [ -f $__USR_PATH/share/google-cloud-sdk/path.zsh.inc ]; then
+  source "$__USR_PATH/share/google-cloud-sdk/path.zsh.inc"
+  source "$__USR_PATH/share/google-cloud-sdk/completion.zsh.inc"
+fi
 
 autoload -Uz compinit bashcompinit
 compinit

@@ -11,3 +11,4 @@ config/database.yml
 .tern-port
 vim-markdown-preview.html
 .glab-cli/
+.pre-commit-config.yaml
