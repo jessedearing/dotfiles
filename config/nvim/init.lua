@@ -15,6 +15,20 @@ vim.opt.rtp:prepend(lazypath)
 vim.opt.rtp:append('/opt/homebrew/opt/fzf')
 
 require("lazy").setup({
+  {
+      "ldelossa/gh.nvim",
+      dependencies = {
+          {
+          "ldelossa/litee.nvim",
+          config = function()
+              require("litee.lib").setup()
+          end,
+          },
+      },
+      config = function()
+          require("litee.gh").setup()
+      end,
+  },
   {'vimwiki/vimwiki',
     init = function()
       local vimwiki_path = os.getenv("HOME") .. '/Google Drive/My Drive/vimwiki'
@@ -33,7 +47,12 @@ require("lazy").setup({
       vim.treesitter.language.register('markdown', 'vimwiki')
     end,
   },
-  {'shaunsingh/nord.nvim'},
+  {
+    'shaunsingh/nord.nvim',
+    lazy = false,
+    priority = 1000,
+  },
+  'folke/tokyonight.nvim',
   {'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
   'pedrohdz/vim-yaml-folds',
   'RRethy/vim-illuminate',
@@ -70,10 +89,12 @@ require("lazy").setup({
       })
     end,
   },
-  {'junegunn/fzf.vim', dependencies = {
-      {'junegunn/fzf', dir = '/opt/homebrew/opt/fzf', build = './install --all'},
-    },
-  },
+  {
+  "ibhagwan/fzf-lua",
+  dependencies = { "nvim-tree/nvim-web-devicons" },
+  config = function()
+    require("fzf-lua").setup({})
+  end},
   'ntpeters/vim-better-whitespace',
   'hdima/python-syntax',
   'jelera/vim-javascript-syntax',
@@ -86,6 +107,9 @@ require("lazy").setup({
   'neovim/nvim-lspconfig',
   {
     "L3MON4D3/LuaSnip",
+    dependencies = {
+      'echasnovski/mini.nvim',
+    },
     -- follow latest release.
     version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
   },
@@ -121,12 +145,20 @@ require("lazy").setup({
       opts = {},
       init = function()
           table.insert(require("cmp").get_config().sources, { name = "git" })
-      end
+      end,
    },
    {
     "pmizio/typescript-tools.nvim",
     dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = {},
+  },
+  {
+    'mistweaverco/kulala.nvim',
+    version = '*',
+    config = function()
+      -- Setup is required, even if you don't pass any options
+      require('kulala').setup()
+    end,
   },
 })
 
@@ -152,7 +184,20 @@ require('go').setup({
   gofmt = "gopls", -- if set to gopls will use gopls format
   iferr_vertical_shift = 3,
 })
-require'lualine'.setup{}
+
+require'lualine'.setup{
+  options = {
+    theme = 'tokyonight',
+    section_separators = {
+      left = '▓▒░',
+      right = '░▒▓',
+    },
+    component_separators = {
+      left = '',
+      right = '',
+    },
+  },
+}
 require'gitsigns'.setup{}
 require'nvim-tree'.setup{}
 
@@ -195,7 +240,9 @@ cmp.setup({
   })
 })
 
-require("cmp_git").setup()
+require("cmp_git").setup({
+  filetypes = { "gitcommit", "octo", "NeogitCommitMessage", "vimwiki" },
+})
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -241,7 +288,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'gopls', 'terraformls', 'tflint', 'pyright', 'lua_ls'}
+local servers = { 'gopls', 'terraformls', 'tflint', 'pyright', 'lua_ls', 'tsserver'}
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 
@@ -322,7 +369,7 @@ require('mini.align').setup()
 require('mini.pairs').setup()
 require('mini.surround').setup()
 
-vim.cmd.colorscheme "nord"
+vim.cmd.colorscheme "tokyonight-night"
 
 vim.cmd.source "~/.config/nvim/nvim.vim"
 
@@ -338,3 +385,9 @@ end
 if vim.g.gui_vimr then
   vim.o.guifont = "CaskaydiaCove Nerd Font:h16"
 end
+
+local fzflua = require('fzf-lua')
+vim.keymap.set('n', '<leader>ff', fzflua.files, {desc = "FZF Files"})
+vim.keymap.set('n', '<leader>fb', fzflua.buffers, {desc = "FZF Buffers"})
+vim.keymap.set('n', '<leader>ll', fzflua.loclist, {desc = "Location List"})
+vim.keymap.set('n', '<leader>fj', fzflua.jumps, {desc = "Jumps"})

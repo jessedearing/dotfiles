@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+nvim -c 'require("cmp_git").setup({filetypes={ "gitcommit", "octo", "NeogitCommitMessage", "vimwiki" }})' $*

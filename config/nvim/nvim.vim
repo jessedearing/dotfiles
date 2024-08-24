@@ -211,9 +211,6 @@ set spelllang=en_us
 
 " FZF {{{1 "
 " Keybindings
-map <Leader>ff :FZF<CR>
-map <Leader>fb :Buffers<CR>
-map <Leader>fc :Commits<CR>
 noremap <Leader>\ :execute 'Rg! '.expand('<cword>')<CR>
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -361,8 +358,3 @@ au filetype crontab setlocal nobackup nowritebackup
 " Better Whitesapce {{{1 "
 let g:strip_whitespace_on_save = 1
 " 1}}} "
-
-" Vista {{{ "
-let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-let g:vista_default_executive = 'ctags'
-" }}} Vista "

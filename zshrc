@@ -28,7 +28,6 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 eval "$(fzf --zsh)"
 fpath=(~/.zsh-completions /opt/homebrew/share/zsh/site-functions $fpath)
 
-alias node='NODE_NO_READLINE=1 rlwrap node'
 alias tf=terraform
 alias gco='g checkout'
 alias gs="g status -sb"
@@ -159,9 +158,9 @@ if [ -f $__USR_PATH/bin/aws_zsh_completer.sh ]; then
   . $__USR_PATH/bin/aws_zsh_completer.sh
 fi
 
-if [ -f $__USR_PATH/share/nvm/init-nvm.sh ]; then
-  source $__USR_PATH/share/nvm/init-nvm.sh
-fi
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 
 if [ -f $__USR_PATH/share/google-cloud-sdk/path.zsh.inc ]; then
   source "$__USR_PATH/share/google-cloud-sdk/path.zsh.inc"
