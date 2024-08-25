@@ -369,7 +369,7 @@ require('mini.align').setup()
 require('mini.pairs').setup()
 require('mini.surround').setup()
 
-vim.cmd.colorscheme "tokyonight-night"
+vim.cmd.colorscheme "tokyonight-moon"
 
 vim.cmd.source "~/.config/nvim/nvim.vim"
 
