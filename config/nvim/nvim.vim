@@ -231,8 +231,6 @@ map <Leader>w<Leader>w :VimwikiMakeDiaryNote<CR>
 map <Leader>> :bn<CR>
 map <Leader>< :bp<CR>
 
-let g:snips_author = 'Jesse Dearing'
-
 " Golang {{{1 "
 autocmd BufWritePre *.go :silent! lua f = require('go.format'); f.gofmt(); f.org_imports()
 " Run gofmt and goimports on save

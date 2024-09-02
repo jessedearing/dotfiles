@@ -8,7 +8,7 @@ local f = ls.function_node
 return {
   s({trig="todo", desc="Insert a TODO comment"},
   {
-    f(function(_, snip)
+    f(function(_, _)
       local MiniComment = require("mini.comment")
       local cursor = vim.api.nvim_win_get_cursor(0)
       return string.format(MiniComment.get_commentstring({cursor[1], cursor[2]+1}), "")
@@ -16,6 +16,8 @@ return {
     i(2, "TODO"),
     t(" "),
     i(1),
-    t({string.format(" <%s> %s", os.date("%Y-%m-%d"), vim.g.snips_author)}),
+    f(function(_, _)
+      return string.format(" <%s> %s", os.date("%Y-%m-%d"), vim.g.snips_author)
+    end),
   })
 }

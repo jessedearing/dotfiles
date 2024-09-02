@@ -15,20 +15,6 @@ vim.opt.rtp:prepend(lazypath)
 vim.opt.rtp:append('/opt/homebrew/opt/fzf')
 
 require("lazy").setup({
-  {
-      "ldelossa/gh.nvim",
-      dependencies = {
-          {
-          "ldelossa/litee.nvim",
-          config = function()
-              require("litee.lib").setup()
-          end,
-          },
-      },
-      config = function()
-          require("litee.gh").setup()
-      end,
-  },
   {'vimwiki/vimwiki',
     init = function()
       local vimwiki_path = os.getenv("HOME") .. '/Google Drive/My Drive/vimwiki'
@@ -391,3 +377,7 @@ vim.keymap.set('n', '<leader>ff', fzflua.files, {desc = "FZF Files"})
 vim.keymap.set('n', '<leader>fb', fzflua.buffers, {desc = "FZF Buffers"})
 vim.keymap.set('n', '<leader>ll', fzflua.loclist, {desc = "Location List"})
 vim.keymap.set('n', '<leader>fj', fzflua.jumps, {desc = "Jumps"})
+vim.keymap.set('n', '<leader>fg', fzflua.grep, {desc = "Grep"})
+vim.keymap.set('v' , '<leader>fg', fzflua.grep_visual, {desc = "Grep Visual"})
+
+vim.g.snips_author = "Jesse Dearing"
