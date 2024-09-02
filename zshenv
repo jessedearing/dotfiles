@@ -1,4 +1,4 @@
-export PATH=/opt/podman/bin:${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.pyenv/bin:$HOME/.fzf/bin:$HOME/.yarn/bin:$HOME/go/bin:$HOME/.local/bin:/opt/homebrew/opt/openjdk/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/opt/perl/bin:$PATH
+export PATH=${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.pyenv/bin:$HOME/.fzf/bin:$HOME/.yarn/bin:$HOME/go/bin:$HOME/.local/bin:/opt/homebrew/opt/openjdk/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/opt/perl/bin:$PATH
 export EDITOR=$HOME/.local/bin/editor.sh
 if [[ $(uname -s) == "Darwin" ]]; then
   export RVC_READLINE="/usr/local/opt/readline/lib/libreadline.dylib"

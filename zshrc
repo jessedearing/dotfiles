@@ -14,7 +14,7 @@ if [[ $(uname -s) == "Darwin" ]]; then
 fi
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
-eval "$(pyenv init -)"
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 for __customfile in $HOME/.zsh-custom/*.zsh; do
@@ -171,5 +171,5 @@ autoload -Uz compinit bashcompinit
 compinit
 bashcompinit
 
-# added by Snowflake SnowSQL installer v1.2
-export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
+# I don't use visual mode in the terminal since I use tmux
+bindkey -M vicmd 'v' edit-command-line
