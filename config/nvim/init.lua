@@ -18,9 +18,6 @@ require("lazy").setup({
   {'vimwiki/vimwiki',
     init = function()
       local vimwiki_path = os.getenv("HOME") .. '/Google Drive/My Drive/vimwiki'
-      if vim.loop.fs_stat(os.getenv("HOME") .. "/Nextcloud") then
-        vimwiki_path = os.getenv("HOME") .. "/Nextcloud/Notes"
-      end
       vim.g.vimwiki_list = {
         {
           path = vimwiki_path,
