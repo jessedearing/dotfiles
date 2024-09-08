@@ -130,19 +130,6 @@ require("lazy").setup({
           table.insert(require("cmp").get_config().sources, { name = "git" })
       end,
    },
-   {
-    "pmizio/typescript-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-    opts = {},
-  },
-  {
-    'mistweaverco/kulala.nvim',
-    version = '*',
-    config = function()
-      -- Setup is required, even if you don't pass any options
-      require('kulala').setup()
-    end,
-  },
 })
 
 
@@ -271,7 +258,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'gopls', 'terraformls', 'tflint', 'pyright', 'lua_ls', 'tsserver'}
+local servers = { 'gopls', 'terraformls', 'tflint', 'pyright', 'lua_ls', 'ts_ls'}
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 
