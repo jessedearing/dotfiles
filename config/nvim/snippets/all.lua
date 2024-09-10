@@ -19,5 +19,7 @@ return {
     f(function(_, _)
       return string.format(" <%s> %s", os.date("%Y-%m-%d"), vim.g.snips_author)
     end),
-  })
+  }),
+  s({trig="nobodyuid", desc="The common UID of the nobody user"},{t("65534")}),
 }
+
