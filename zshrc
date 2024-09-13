@@ -14,7 +14,7 @@ if [[ $(uname -s) == "Darwin" ]]; then
 fi
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
-export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+export PATH="$HOME/.local/bin:/opt/homebrew/opt/curl/bin:$PATH"
 
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 for __customfile in $HOME/.zsh-custom/*.zsh; do
@@ -30,7 +30,6 @@ fpath=(~/.zsh-completions /opt/homebrew/share/zsh/site-functions $fpath)
 
 alias tf=terraform
 alias gco='g checkout'
-alias gs="g status -sb"
 alias ga="g add"
 alias gc="g commit -v"
 alias mongod="mongod --config /usr/local/etc/mongod.conf"

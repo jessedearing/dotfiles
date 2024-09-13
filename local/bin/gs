@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+if [ -z "$1" ]; then
+  git status -sb
+else
+  /opt/homebrew/bin/gs $*
+fi
+
