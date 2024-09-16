@@ -129,17 +129,12 @@ au FileType yaml,yml call s:setupYaml()
 
 " md, markdown, and mk are markdown and define buffer-local preview
 au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
-let vim_markdown_preview_toggle=1
-let vim_markdown_preview_github=1
-let vim_markdown_preview_browser='Chromium'
 
 au BufRead,BufNewFile *.txt call s:setupWrapping()
 
 " make python follow PEP8 ( http://www.python.org/dev/peps/pep-0008/ )
 "au FileType python  set tabstop=4 textwidth=79
 let g:jedi#force_py_version = 3
-
-au FileType taskpaper set noautoindent
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -181,9 +176,6 @@ set directory=~/.config/nvim/backup
 " Turn off jslint errors by default
 let g:JSLintHighlightErrorLine = 0
 
-" MacVIM shift+arrow-keys behavior (required in .vimrc)
-let macvim_hig_shift_movement = 1
-
 let g:sqlutil_align_comma = 1
 
 set clipboard+=unnamedplus
@@ -205,22 +197,11 @@ au BufRead,BufNewFile python setlocal shiftwidth=4
 au BufRead,BufNewFile python setlocal softtabstop=4
 au BufRead,BufNewFile python setlocal textwidth=79
 
-" Spell {{{1 "
+" Spell {{{
 set spelllang=en_us
-" 1}}} "
+" }}}
 
-" FZF {{{1 "
-" Keybindings
-noremap <Leader>\ :execute 'Rg! '.expand('<cword>')<CR>
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.<q-args>, 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-set rtp+=/usr/local/opt/fzf
-" 1}}} "
-
+" Vimwiki {{{
 let g:vimwiki_list = [{
       \ 'path': '~/vimwiki',
       \ 'syntax': 'markdown',
@@ -230,8 +211,9 @@ map <Leader>w<Leader>w :VimwikiMakeDiaryNote<CR>
 
 map <Leader>> :bn<CR>
 map <Leader>< :bp<CR>
+" }}}
 
-" Golang {{{1 "
+" Golang {{{
 autocmd BufWritePre *.go :silent! lua f = require('go.format'); f.gofmt(); f.org_imports()
 " Run gofmt and goimports on save
 "autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
@@ -259,21 +241,8 @@ let g:go_code_completion_enabled = 0
 let g:go_gopls_enabled = 0
 let g:go_gopls_options = ['-remote=auto']
 
-" Platinum Searcher (Ag) {{{ "
-if executable('rg')
-	set grepprg=rg\ --vimgrep\ -g\ \\!\.git/\\*\ -g\ \\!vendor/\\*
-	"let g:ctrlp_user_command = 'ag %s -l -U --ignore public --ignore .bundle --ignore node_modules --ignore vendor --nocolor -g ""'
+" }}}
 
-  " bind \ (backward slash) to grep shortcut
-  "command -nargs=+ -complete=file -bar Rg silent! grep! <args>|cwindow|redraw!
-  nnoremap \ :Rg<SPACE>
-endif
-
-map <leader>! :mode<cr>
-
-"let g:ctrlsf_ackprg = '/usr/local/bin/ag'
-
-" }}} Platinum Searcher (Ag) "
 set exrc
 set secure
 
@@ -343,10 +312,10 @@ nmap <silent> <C-l> :call WinMove('l')<cr>
 
 hi illuminatedWord cterm=underline gui=underline
 
-" JSON {{{1 "
+" JSON {{{
 au Filetype json setlocal foldmethod=expr
 au Filetype json setlocal foldexpr=nvim_treesitter#foldexpr()
-" 1}}} "
+" }}} "
 
 " Crontab {{{1 "
 au filetype crontab setlocal nobackup nowritebackup

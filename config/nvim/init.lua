@@ -1,4 +1,5 @@
 vim.g.mapleader = ','
+-- Lazy Dependencies {{{
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -131,14 +132,16 @@ require("lazy").setup({
       end,
    },
 })
+-- }}}
 
-
+-- GitHub Copilot {{{
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
   pattern = "*.md",
   callback = function()
     vim.keymap.set('i', '<M-Tab>', 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false, buffer = true})
   end,
 })
+-- }}}
 
 vim.opt.rtp:prepend(lazypath)
 if vim.loop.fs_stat(os.getenv("HOME") .. "/.config/nvim/undo") == nil then
@@ -155,6 +158,7 @@ require('go').setup({
   iferr_vertical_shift = 3,
 })
 
+-- Lualine {{{
 require'lualine'.setup{
   options = {
     theme = 'tokyonight',
@@ -168,12 +172,13 @@ require'lualine'.setup{
     },
   },
 }
+-- }}}
+
 require'gitsigns'.setup{}
 require'nvim-tree'.setup{}
 
 require("luasnip.loaders.from_snipmate").lazy_load()
 require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/snippets"})
--- Setup nvim-cmp.
 
 local luasnip = require("luasnip")
 local cmp = require('cmp')
@@ -181,6 +186,7 @@ local cmp = require('cmp')
 vim.keymap.set({"i", "s"}, "<C-L>", function() luasnip.jump( 1) end, {silent = true})
 vim.keymap.set({"i", "s"}, "<C-J>", function() luasnip.jump(-1) end, {silent = true})
 
+-- cmp Setup {{{
 cmp.setup({
   snippet = {
     -- REQUIRED - you must specify a snippet engine
@@ -214,6 +220,9 @@ require("cmp_git").setup({
   filetypes = { "gitcommit", "octo", "NeogitCommitMessage", "vimwiki" },
 })
 
+-- }}}
+
+-- LSP keybindings {{{
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
@@ -256,9 +265,12 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     vim.lsp.buf.format()
   end,
 })
+
+-- }}}
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'gopls', 'terraformls', 'tflint', 'pyright', 'lua_ls', 'ts_ls', 'eslint'}
+-- LSP Servers {{{
+local servers = { 'gopls', 'terraformls', 'tflint', 'lua_ls', 'ts_ls', 'eslint', 'pylsp'}
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 
@@ -299,6 +311,7 @@ vim.g.rustaceanvim = {
   }
 }
 
+--- }}}
 -- vim.lsp.set_log_level('debug')
 
 require('diffview').setup({})
@@ -361,7 +374,9 @@ vim.keymap.set('n', '<leader>ff', fzflua.files, {desc = "FZF Files"})
 vim.keymap.set('n', '<leader>fb', fzflua.buffers, {desc = "FZF Buffers"})
 vim.keymap.set('n', '<leader>ll', fzflua.loclist, {desc = "Location List"})
 vim.keymap.set('n', '<leader>fj', fzflua.jumps, {desc = "Jumps"})
-vim.keymap.set('n', '<leader>fg', fzflua.grep, {desc = "Grep"})
+vim.keymap.set('n', '\\', fzflua.grep, {desc = "Grep"})
 vim.keymap.set('v' , '<leader>fg', fzflua.grep_visual, {desc = "Grep Visual"})
 
 vim.g.snips_author = "Jesse Dearing"
+
+-- vim: foldenable

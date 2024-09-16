@@ -6,7 +6,7 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export ZSH=$HOME/.oh-my-zsh
 export ZSH_CUSTOM="$HOME/.zsh-custom"
-plugins=(vi-mode kubectl aws)
+plugins=(vi-mode kubectl aws 1password)
 
 __USR_PATH="/usr"
 if [[ $(uname -s) == "Darwin" ]]; then
