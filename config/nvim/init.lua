@@ -131,6 +131,11 @@ require("lazy").setup({
           table.insert(require("cmp").get_config().sources, { name = "git" })
       end,
    },
+   {
+     "digitaltoad/vim-pug",
+     lazy = true,
+     ft = { "pug" },
+   },
 })
 -- }}}
 
@@ -270,9 +275,15 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 -- LSP Servers {{{
-local servers = { 'gopls', 'terraformls', 'tflint', 'lua_ls', 'ts_ls', 'eslint', 'pylsp'}
+local servers = { 'gopls', 'terraformls', 'tflint', 'pyright', 'lua_ls', 'eslint'}
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
+
+lspconfig.ts_ls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = {"yarn", "exec", "typescript-language-server", "--stdio" }
+}
 
 lspconfig.helm_ls.setup {}
 
