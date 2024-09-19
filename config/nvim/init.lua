@@ -136,6 +136,12 @@ require("lazy").setup({
      lazy = true,
      ft = { "pug" },
    },
+   {
+     'klen/nvim-config-local',
+     config = function()
+       require('config-local').setup()
+     end,
+   }
 })
 -- }}}
 
@@ -282,7 +288,7 @@ local lspconfig = require('lspconfig')
 lspconfig.ts_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  cmd = {"yarn", "exec", "typescript-language-server", "--stdio" }
+  cmd = {"typescript-language-server.sh"}
 }
 
 lspconfig.helm_ls.setup {}
