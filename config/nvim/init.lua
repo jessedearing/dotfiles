@@ -61,6 +61,14 @@ require("lazy").setup({
     build = function()
       require("go.install").update_all_sync()
     end,
+    config = function()
+      require('go').setup({
+        goimports = "gopls", -- if set to 'gopls' will use gopls format, also goimport
+        fillstruct = "gopls",
+        gofmt = "gopls", -- if set to gopls will use gopls format
+        iferr_vertical_shift = 3,
+      })
+    end,
   },
   'neomake/neomake',
   'honza/vim-snippets',
@@ -162,12 +170,6 @@ vim.o.undodir = os.getenv("HOME") .. "/.config/nvim/undo"
 vim.o.undofile = true
 require('fundo').setup()
 
-require('go').setup({
-  goimports = "gopls", -- if set to 'gopls' will use gopls format, also goimport
-  fillstruct = "gopls",
-  gofmt = "gopls", -- if set to gopls will use gopls format
-  iferr_vertical_shift = 3,
-})
 
 -- Lualine {{{
 require'lualine'.setup{
@@ -188,6 +190,7 @@ require'lualine'.setup{
 require'gitsigns'.setup{}
 require'nvim-tree'.setup{}
 
+-- LuaSnip {{{
 require("luasnip.loaders.from_snipmate").lazy_load()
 require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/snippets"})
 
@@ -196,6 +199,8 @@ local cmp = require('cmp')
 
 vim.keymap.set({"i", "s"}, "<C-L>", function() luasnip.jump( 1) end, {silent = true})
 vim.keymap.set({"i", "s"}, "<C-J>", function() luasnip.jump(-1) end, {silent = true})
+
+-- }}}
 
 -- cmp Setup {{{
 cmp.setup({
@@ -244,7 +249,7 @@ vim.api.nvim_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<C
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
+on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -282,20 +287,20 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- map buffer local keybindings when the language server attaches
 -- LSP Servers {{{
 local servers = { 'gopls', 'terraformls', 'tflint', 'pyright', 'lua_ls', 'eslint'}
-local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+lsp_capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local lspconfig = require('lspconfig')
 
 lspconfig.ts_ls.setup {
   on_attach = on_attach,
-  capabilities = capabilities,
-  cmd = {"typescript-language-server.sh"}
+  capabilities = lsp_capabilities,
+  cmd = {"typescript-language-server", "--stdio"}
 }
 
 lspconfig.helm_ls.setup {}
 
 lspconfig.java_language_server.setup {
   on_attach = on_attach,
-  capabilities = capabilities,
+  capabilities = lsp_capabilities,
   cmd = {'/Users/jessed/Documents/code/java-language-server/dist/lang_server_mac.sh'},
 }
 
@@ -303,7 +308,7 @@ lspconfig.yamlls.setup {
   on_attach = on_attach,
   flags = {
   },
-  capabilities = capabilities,
+  capabilities = lsp_capabilities,
   settings = {
     yaml = {
       schemas = {
@@ -317,7 +322,7 @@ lspconfig.yamlls.setup {
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
-    capabilities = capabilities
+    capabilities = lsp_capabilities,
   }
 end
 
@@ -328,25 +333,23 @@ vim.g.rustaceanvim = {
   }
 }
 
---- }}}
+-- }}}
 -- vim.lsp.set_log_level('debug')
 
+-- Diffview {{{
 require('diffview').setup({})
+-- }}}
 
+-- Treesitter {{{
 require'nvim-treesitter.configs'.setup({
   -- A list of parser names, or "all"
-  ensure_installed = {
-    "lua",
-    "json",
-    "yaml",
-    "go",
-    },
+  ensure_installed = 'all',
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
 
   -- List of parsers to ignore installing (for "all")
-  ignore_install = { "javascript" },
+  ignore_install = {},
 
   highlight = {
     -- `false` will disable the whole extension
@@ -363,16 +366,21 @@ require'nvim-treesitter.configs'.setup({
   },
 })
 
+-- }}}
+
+-- Mini {{{
 require('mini.comment').setup({})
 require('mini.splitjoin').setup()
 require('mini.align').setup()
 require('mini.pairs').setup()
 require('mini.surround').setup()
+--- }}}
 
 vim.cmd.colorscheme "tokyonight-moon"
 
 vim.cmd.source "~/.config/nvim/nvim.vim"
 
+-- GUI Specific Settings {{{
 if vim.g.neovide then
   vim.o.guifont = "CaskaydiaCove Nerd Font:h16"
   vim.g.neovide_cursor_animation_length = 0.03
@@ -386,6 +394,10 @@ if vim.g.gui_vimr then
   vim.o.guifont = "CaskaydiaCove Nerd Font:h16"
 end
 
+-- }}}
+
+-- FZF Lua {{{
+
 local fzflua = require('fzf-lua')
 vim.keymap.set('n', '<leader>ff', fzflua.files, {desc = "FZF Files"})
 vim.keymap.set('n', '<leader>fb', fzflua.buffers, {desc = "FZF Buffers"})
@@ -393,6 +405,8 @@ vim.keymap.set('n', '<leader>ll', fzflua.loclist, {desc = "Location List"})
 vim.keymap.set('n', '<leader>fj', fzflua.jumps, {desc = "Jumps"})
 vim.keymap.set('n', '\\', fzflua.grep, {desc = "Grep"})
 vim.keymap.set('v' , '<leader>fg', fzflua.grep_visual, {desc = "Grep Visual"})
+
+-- }}}
 
 vim.g.snips_author = "Jesse Dearing"
 
