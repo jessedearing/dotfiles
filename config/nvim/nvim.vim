@@ -1,5 +1,3 @@
-set completeopt=menu,menuone,noselect
-let g:python3_host_prog = $HOME."/.pyenv/shims/python3"
 
 " Stock nvim & vim settings {{{1 "
 set termguicolors
@@ -254,36 +252,6 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 let g:terraform_completion_keys = 1
 
 let g:terraform_fmt_on_save = 1
-" 1}}} "
-
-" Neomake {{{1 "
-highlight NeomakeError ctermfg=168 ctermbg=16 guifg=#e06c75 guibg=#282c34
-highlight NeomakeWarning ctermfg=180 guifg=#e5c07b
-call neomake#configure#automake('w')
-
-let g:neomake_error_sign = {
-      \ 'text': '‼',
-      \ 'texthl': 'NeomakeErrorSign',
-      \ }
-let g:neomake_warning_sign = {
-      \ 'text': '⁉',
-      \ 'texthl': 'NeomakeWarningSign',
-      \ }
-
-let g:neomake_go_go_maker = {}
-
-let g:neomake_yaml_yamllint_maker = {
-      \ 'args': ['-f', 'parsable', '-d', 'relaxed'],
-      \ 'errorformat': '%E%f:%l:%c: [error] %m,%W%f:%l:%c: [warning] %m',
-      \ }
-
-let g:neomake_vimwiki_writegood_maker = {
-      \ 'exe': 'writegood',
-      \ 'args': ['--parse'],
-      \ 'errorformat': '%W%f:%l:%c:%m,%C%m,%-G',
-      \ 'postprocess': function('neomake#makers#ft#text#PostprocessWritegood')
-      \ }
-let g:neomake_vimwiki_enabled_makers = ['writegood']
 " 1}}} "
 
 if has('nvim')
