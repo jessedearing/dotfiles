@@ -5,7 +5,7 @@ set -e
 (
 cd $HOME/.dotfiles
 
-all_dir=$(find $PWD -maxdepth 1 \! -name 'root' \! -iname 'pkg' \! -iname 'themes' \! -iname 'README.md' \! -iname '.*' \! -iname 'powerline-fonts' \! -iname misc_scripts \! -iname 'install.sh' \! -iname 'global.gems' \! -iname 'gpg-agent.conf' \! -iname 'coc-settings.json' \! -iname 'config' \! -iname 'local' \! -name 'shell-bookmarks')
+all_dir=$(find $PWD -maxdepth 1 \! -name 'root' \! -iname 'pkg' \! -iname 'themes' \! -iname 'README.md' \! -iname '.*' \! -iname 'powerline-fonts' \! -iname misc_scripts \! -iname 'install.sh' \! -iname 'global.gems' \! -iname 'gpg-agent.conf' \! -iname 'coc-settings.json' \! -iname 'config' \! -iname 'local' \! -name 'shell-bookmarks' \! -name 'folder-templates')
 
 for dir in $all_dir; do
   if [ ! -e $HOME/.`basename $dir` ]; then
