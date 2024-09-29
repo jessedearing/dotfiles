@@ -4,10 +4,6 @@
   signingkey = E52D5105FF1793795856B3485E3E12B582979004
 [color]
 	ui = true
-[mergetool "fugitive"]
-  cmd = nvim -c "Gdiffsplit!" "$MERGED"
-[merge]
-	tool = fugitive
 [core]
 	excludesfile = ~/.gitignore
 [difftool "vim"]
