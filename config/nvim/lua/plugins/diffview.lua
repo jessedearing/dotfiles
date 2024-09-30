@@ -1,9 +1,7 @@
 return {
 	{
 		"sindrets/diffview.nvim",
-		config = function()
-			require("config.diffview").setup()
-		end,
+		lazy = true,
 		keys = {
 			{
 				"<leader>dv",
