@@ -1,6 +1,7 @@
 return {
 	{
 		"sindrets/diffview.nvim",
+		desc = "Diffview",
 		lazy = true,
 		keys = {
 			{
