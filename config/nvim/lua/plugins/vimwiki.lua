@@ -6,7 +6,7 @@ return {
 		{ "<leader>w<leader>W", "<cmd>VimwikiDiaryIndex<cr>" },
 	},
 	init = function()
-		local vimwiki_path = os.getenv("HOME") .. "/Google Drive/My Drive/vimwiki"
+		local vimwiki_path = os.getenv("HOME") .. "/Documents/pensieve"
 		vim.g.vimwiki_list = {
 			{
 				path = vimwiki_path,
