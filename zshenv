@@ -12,8 +12,7 @@ export GO111MODULE=on
 export PGDATA=$HOME/data/postgres
 export PGHOST=localhost
 export CDPATH=~/.dotfiles/shell-bookmarks
-
-export AWS_REGION=us-west-2
+export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
 
 export ZSH_DISABLE_COMPFIX=true
 

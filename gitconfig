@@ -56,10 +56,10 @@
   allowedSignersFile = ~/.gitSigners
 [url "https://github.com/"]
   insteadOf = "git@github.com:"
-[credential]
-	helper =
-	helper = /usr/local/share/gcm-core/git-credential-manager
 [credential "https://github.com"]
   username = jessedearing
+[credential]
+	helper = 
+	helper = /usr/local/share/gcm-core/git-credential-manager
 [credential "https://dev.azure.com"]
 	useHttpPath = true

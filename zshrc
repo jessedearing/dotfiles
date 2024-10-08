@@ -29,6 +29,7 @@ eval "$(fzf --zsh)"
 fpath=(~/.zsh-completions /opt/homebrew/share/zsh/site-functions $fpath)
 
 alias tf=terraform
+alias lg=lazygit
 alias gco='g checkout'
 alias ga="g add"
 alias gc="g commit -v"
