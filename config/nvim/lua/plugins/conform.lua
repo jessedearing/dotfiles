@@ -5,6 +5,7 @@ return {
 			formatters = {
 				sqlformatter = {
 					command = "sql-formatter",
+					args = { "-l", "postgresql" },
 				},
 			},
 			formatters_by_ft = {
