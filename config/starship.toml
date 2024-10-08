@@ -16,8 +16,9 @@ $kubernetes\
 [ ](fg:#1d2230)\
 \n$character"""
 
-right_format = """[](fg:#779FF0)$jobs[▓▒░](fg:#769ff0 bg:#394260)
-"""
+command_timeout = 900
+
+right_format = """[](fg:#779FF0)$jobs[▓▒░](fg:#769ff0 bg:#394260)"""
 
 [kubernetes]
 disabled = false
