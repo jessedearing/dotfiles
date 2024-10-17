@@ -1,4 +1,4 @@
-export PNPM_HOME="/Users/jesse/Library/pnpm"
+export PNPM_HOME="/Users/$USER/Library/pnpm"
 export PATH=$PNPM_HOME:${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.pyenv/bin:$HOME/.fzf/bin:$HOME/.yarn/bin:$HOME/go/bin:/opt/homebrew/opt/openjdk/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/opt/perl/bin:$PATH
 export EDITOR=$HOME/.local/bin/editor.sh
 if [[ $(uname -s) == "Darwin" ]]; then
