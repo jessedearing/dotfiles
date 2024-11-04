@@ -12,3 +12,4 @@ config/database.yml
 vim-markdown-preview.html
 .glab-cli/
 .pre-commit-config.yaml
+.nvmrc

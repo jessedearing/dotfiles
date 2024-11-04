@@ -1,8 +1,6 @@
 export PNPM_HOME="/Users/$USER/Library/pnpm"
 
-export CURRENT_NODE_VERSION="22.11.0"
-export NVM_DIR="$HOME/.nvm"
-export PATH=$PNPM_HOME:${KREW_ROOT:-$HOME/.krew}/bin:${NVM_DIR}/versions/node/v${CURRENT_NODE_VERSION}/bin/npm:$HOME/.pyenv/bin:$HOME/.fzf/bin:$HOME/.yarn/bin:$HOME/go/bin:/opt/homebrew/opt/openjdk/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/opt/perl/bin:$PATH
+export PATH=$PNPM_HOME:${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.pyenv/bin:$HOME/.fzf/bin:$HOME/.yarn/bin:$HOME/go/bin:/opt/homebrew/opt/openjdk/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/opt/perl/bin:$PATH
 export EDITOR=$HOME/.local/bin/editor.sh
 if [[ $(uname -s) == "Darwin" ]]; then
   export RVC_READLINE="/usr/local/opt/readline/lib/libreadline.dylib"

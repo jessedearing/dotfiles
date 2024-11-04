@@ -6,7 +6,9 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export ZSH=$HOME/.oh-my-zsh
 export ZSH_CUSTOM="$HOME/.zsh-custom"
-plugins=(vi-mode kubectl aws 1password)
+plugins=(vi-mode kubectl aws 1password nvm)
+
+zstyle ':omz:plugins:nvm' autoload yes
 
 __USR_PATH="/usr"
 if [[ $(uname -s) == "Darwin" ]]; then
@@ -163,9 +165,6 @@ alias l='ls -l'
 if [ -f $__USR_PATH/bin/aws_zsh_completer.sh ]; then
   . $__USR_PATH/bin/aws_zsh_completer.sh
 fi
-
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 
 if [ -f $__USR_PATH/share/google-cloud-sdk/path.zsh.inc ]; then
   source "$__USR_PATH/share/google-cloud-sdk/path.zsh.inc"
