@@ -62,6 +62,11 @@ export LESS_TERMCAP_so=$'\E[30;43m'
 export LESS_TERMCAP_se=$'\E[39;49m'
 export GIT_EDITOR=$EDITOR
 
+load_nvm() {
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+}
+
 function quote() {
   echo "“$*”" | pbcopy
 }
@@ -166,14 +171,10 @@ if [ -f $__USR_PATH/bin/aws_zsh_completer.sh ]; then
   . $__USR_PATH/bin/aws_zsh_completer.sh
 fi
 
-if [ -f $__USR_PATH/share/google-cloud-sdk/path.zsh.inc ]; then
-  source "$__USR_PATH/share/google-cloud-sdk/path.zsh.inc"
-  source "$__USR_PATH/share/google-cloud-sdk/completion.zsh.inc"
-fi
-
 autoload -Uz compinit bashcompinit
 compinit
 bashcompinit
 
 # I don't use visual mode in the terminal since I use tmux
 bindkey -M vicmd 'v' edit-command-line
+load_nvm
