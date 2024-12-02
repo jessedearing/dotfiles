@@ -5,9 +5,11 @@
 [color]
 	ui = true
 [mergetool "vim"]
-  cmd = nvim -c DiffViewOpen
+  cmd = nvim \"+lua require('diffview').open({})\"
+[mergetool "fugitive"]
+  cmd = nvim -c "Gdiffsplit!" "$MERGED"
 [merge]
-	tool = vim
+	tool = fugitive
 [core]
 	excludesfile = ~/.gitignore
 [difftool "vim"]
