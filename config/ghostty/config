@@ -1,0 +1,7 @@
+theme = tokyonight
+font-family = Monolisa Variable
+font-thicken = true
+font-size = 14
+window-width = 195
+window-height = 60
+background-opacity = 0.9
