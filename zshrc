@@ -119,7 +119,7 @@ bindkey -M isearch '^F' history-incremental-search-forward
 
 bindkey "^Q" push-input
 
-if [[ "$TERMINAL" == "kitty" && -d $HOME/Google\ Drive/My\ Drive/xkcd ]]; then
+if [[ "$TERM_PROGRAM" == "ghostty" && -d $HOME/Google\ Drive/My\ Drive/xkcd ]]; then
   kitten icat --align=left "$(find "$HOME/Google Drive/My Drive/xkcd" -name '*.png' | shuf -n 1)"
 else
   fortune startrek computers $HOME/.fortunes/sadserver_tweets $HOME/.fortunes/honest_update_tweets $HOME/.fortunes/devops_borat
