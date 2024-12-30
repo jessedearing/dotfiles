@@ -1,0 +1,6 @@
+# phony
+snippet phony "Add a phony (one that doesn't have files) make task" b
+	.PHONY: $1
+	${1}:
+		${2}
+endsnippet
