@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+if [ -z "$1" ]; then
+  git status -sb
+elif [[ "$1" == "witch" ]]; then
+  shift
+  git switch $*
+else
+  /opt/homebrew/bin/gs $*
+fi
+

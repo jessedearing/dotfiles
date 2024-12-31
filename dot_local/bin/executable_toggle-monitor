@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+#display=$(xrandr | grep -v eDP-1| awk '$2 == "connected" { print $1;}')
+__monitor_on=$(xrandr --listmonitors | awk 'BEGIN {enabled = "0";} $2 ~ /\+DP-1/ { enabled = "1"; } END { print enabled; }')
+
+function __monitoron() {
+  xrandr --output DP-1 --auto --scale 1.75 --right-of eDP-1
+}
+
+function __monitoroff() {
+  xrandr --output DP-1 --off
+}
+
+if [[ $1 == "only-off" ]]; then
+  __monitoroff
+  exit 0
+fi
+
+
+if [[ $1 == "only-on" ]]; then
+  __monitoron
+  exit 0
+fi
+
+if [[ $__monitor_on == "0" ]]; then
+  __monitoron
+else
+  __monitoroff
+fi

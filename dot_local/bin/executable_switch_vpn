@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+disconnect_vpn && sleep 1 && connect_vpn $@

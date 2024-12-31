@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+if [ ! -f "$1" ]; then
+  echo "$1 is not a file"
+  exit 1
+fi
+
+if [[ "$1" != *.md ]]; then
+  echo "$1 needs to end in md"
+  exit 1
+fi
+
+tmpfile=$(mktemp /tmp/markdown-XXXXXXXXXXXX.html)
+
+pandoc -o "$tmpfile" "$1"
+
+$BROWSER "$tmpfile"
+
+bash -c "sleep 2 && rm \"$tmpfile\"" &!
+exit 0
