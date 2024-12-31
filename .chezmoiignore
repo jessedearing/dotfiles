@@ -1,0 +1,17 @@
+{{- if ne .chezmoi.os "linux" }}
+.config/picom.conf
+.config/conky
+.config/dunst
+.config/fontconfig
+.config/gtk-2.0
+.config/gtk-3.0
+.config/gtk-4.0
+.config/i3
+.config/i3blocks
+.config/pipewire
+.config/rofi
+.config/sway
+.config/swaylock
+.config/systemd
+.config/waybar
+{{- end }}

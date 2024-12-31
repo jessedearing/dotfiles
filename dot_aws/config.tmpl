@@ -1,0 +1,11 @@
+{{- if eq .chezmoi.hostname "Leviathan" -}}
+[default]
+region = us-west-2
+credential_process = /Users/jessed/Documents/code/awscreds/awscreds
+
+[profile personal-admin]
+source_profile = default
+role_arn = {{ onepasswordRead "op://Private/Personal AWS Access Key/add more/admin role" }}
+{{- end }}
+{{- if eq .chezmoi.hostname "Camio" }}
+{{- end }}

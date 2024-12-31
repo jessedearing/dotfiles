@@ -44,7 +44,7 @@ alias ag="ag -S"
 alias vscr="v -c ':Scratch'"
 alias mytop="perl /usr/local/bin/mytop"
 alias g=git
-alias lg=lazygit
+alias cm=chezmoi
 #alias g="~/git"
 #alias lab="~/lab"
 if [ -x $__USR_PATH/bin/richgo ] || [ -x $HOME/go/bin/richgo ]; then
@@ -178,3 +178,5 @@ bashcompinit
 # I don't use visual mode in the terminal since I use tmux
 bindkey -M vicmd 'v' edit-command-line
 load_nvm
+eval $(thefuck --alias)
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

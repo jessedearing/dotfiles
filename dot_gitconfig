@@ -1,0 +1,67 @@
+[user]
+  name = Jesse Dearing
+	email = code@me.jesse.dev
+  signingkey = E52D5105FF1793795856B3485E3E12B582979004
+[color]
+	ui = true
+[mergetool "vim"]
+  cmd = nvim \"+lua require('diffview').open({})\"
+[mergetool "fugitive"]
+  cmd = nvim -c "Gdiffsplit!" "$MERGED"
+[merge]
+	tool = fugitive
+[core]
+	excludesfile = ~/.gitignore
+[difftool "vim"]
+  cmd = nvim -d $LOCAL $REMOTE
+[difftool]
+	trustExitCode = true
+	prompt = false
+[diff]
+	tool = vim
+	colorMoved = default
+[push]
+	default = simple
+[help]
+	autocorrect = 1
+[includeIf "gitdir:~/Documents/code/observable/"]
+  path = ~/.gitconfig.observable
+[include]
+  path = ~/.gitconfig.local
+[alias]
+  reuse=commit --amend --reuse-message=HEAD
+  s=status -sb
+  glinit=config --local --add remote.origin.fetch '+refs/merge-requests/*/head:refs/remotes/origin/merge-request/*'
+[fetch]
+  prune = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true
+	process = git-lfs filter-process
+[github]
+	user = jessedearing
+[commit]
+	gpgsign = true
+[pull]
+  rebase = true
+[rebase]
+	autoStash = true
+  autoSquash = true
+[protocol]
+	version = 2
+[rerere]
+	enabled = true
+[init]
+  defaultBranch = main
+[gpg "ssh"]
+  allowedSignersFile = ~/.gitSigners
+[url "https://github.com/"]
+  insteadOf = "git@github.com:"
+[credential "https://github.com"]
+  username = jessedearing
+[credential]
+	helper = 
+	helper = /usr/local/share/gcm-core/git-credential-manager
+[credential "https://dev.azure.com"]
+	useHttpPath = true
