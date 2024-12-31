@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-if [ -x /usr/bin/pbpaste ]; then
-  exec pbpaste
-fi
-if [ ! -z "$WAYLAND_DISPLAY" ]; then
-  exec wl-paste -n
-else
-  exec xsel -b -o
-fi

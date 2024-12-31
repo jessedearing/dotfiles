@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-sudo ifconfig en5 down && sudo ifconfig en5 up

@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-dragon-drag-and-drop $(ls -1 -t ~/Nextcloud/Pictures/*_scrot.png | head -1)

@@ -1,9 +1,0 @@
-[Unit]
-Description=NextCloud Desktop Sync
-
-[Service]
-Type=service
-ExecStart=/usr/bin/nextcloud
-
-[Install]
-WantedBy=i3-session.target

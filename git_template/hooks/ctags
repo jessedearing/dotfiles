@@ -1,3 +1,0 @@
-#!/bin/sh
-rm -rf .git/tags
-/usr/local/bin/ctags --exclude=.git --exclude=public --languages=-JavaScript --exclude=.bundle --exclude=doc --exclude=coverage -R

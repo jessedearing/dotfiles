@@ -1,8 +1,0 @@
-#!/bin/bash
-
-(
-  cd ~/.vpns
-  curl -H "Auth-Key: `cat /var/lib/pritunl/auth`" -H 'Content-Type: application/json' -H 'Accept: application/json' -X DELETE -d @disconnect.json http://127.0.0.1:9770/profile 2>&1 > /dev/null
-)
-osascript $HOME/.dotfiles/misc_scripts/vpn-disconnect.applescript $1
-

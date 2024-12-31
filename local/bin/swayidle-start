@@ -1,9 +1,0 @@
-#!/usr/bin/env zsh
-
-exec swayidle -w \
-  timeout 30 'brightnessctl set 64' \
-    resume 'brightnessctl set 300' \
-  timeout 420 'swaylock -f' \
-  before-sleep 'swaylock -f' \
-  timeout 900 'swaymsg -s /run/user/1000/sway-ipc.1000.*.sock "output * dpms off"' \
-    resume 'swaymsg -s /run/user/1000/sway-ipc.1000.*.sock "output * dpms on"'
