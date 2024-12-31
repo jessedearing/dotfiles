@@ -1,6 +1,5 @@
 export PNPM_HOME="/Users/$USER/Library/pnpm"
 
-export CURRENT_NODE_VERSION="22.11.0"
 export NVM_DIR="$HOME/.nvm"
 export PATH=$PNPM_HOME:${KREW_ROOT:-$HOME/.krew}/bin:${NVM_DIR}/versions/node/v${CURRENT_NODE_VERSION}/bin:$HOME/.cargo/bin:/opt/homebrew/opt/rustup/bin:$HOME/.fzf/bin:$HOME/.yarn/bin:$HOME/go/bin:/opt/homebrew/opt/openjdk/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/opt/perl/bin:$PATH
 export EDITOR=$HOME/.local/bin/editor.sh
@@ -10,7 +9,6 @@ fi
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 unset GOROOT
-export GOPRIVATE=*.vmware.com
 export GO111MODULE=on
 export PGDATA=$HOME/data/postgres
 export PGHOST=localhost
