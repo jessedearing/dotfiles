@@ -16,4 +16,4 @@
 .config/waybar
 {{- end }}
 README.md
-.aws/work.enc
+**/*.enc
