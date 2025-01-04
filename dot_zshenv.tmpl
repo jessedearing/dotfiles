@@ -50,12 +50,7 @@ export PAGER=bat
 #############
 # 1Password #
 #############
-
-{{- if eq .chezmoi.hostname "Camio" }}
-export OP_ACCOUNT=observablehq.1password.com
-{{- else }}
 export OP_ACCOUNT=my.1password.com
-{{- end }}
 
 #############
 # Homebrew #
