@@ -45,6 +45,7 @@ alias vscr="v -c ':Scratch'"
 alias mytop="perl /usr/local/bin/mytop"
 alias g=git
 alias cm=chezmoi
+alias jq="jq -r"
 #alias g="~/git"
 #alias lab="~/lab"
 if [ -x $__USR_PATH/bin/richgo ] || [ -x $HOME/go/bin/richgo ]; then
