@@ -19,6 +19,7 @@ brew yor
 tap filosottile/musl-cross
 
 tap get-woke/tap
+brew woke
 
 tap heroku/brew
 

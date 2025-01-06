@@ -305,7 +305,6 @@ cask kitty
 cask mitmproxy
 cask nordvpn
 cask obs
-cask orion
 cask qr-journal
 cask raycast
 cask slack
