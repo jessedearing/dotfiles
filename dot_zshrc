@@ -45,7 +45,6 @@ alias vscr="v -c ':Scratch'"
 alias mytop="perl /usr/local/bin/mytop"
 alias g=git
 alias cm=chezmoi
-alias jq="jq -r"
 #alias g="~/git"
 #alias lab="~/lab"
 if [ -x $__USR_PATH/bin/richgo ] || [ -x $HOME/go/bin/richgo ]; then
@@ -142,6 +141,9 @@ fi
 
 #load_tmux
 
+if [ -f $(brew --prefix)/etc/brew-wrap ];then
+  source $(brew --prefix)/etc/brew-wrap
+fi
 if [ -f /opt/homebrew/etc/grc.zsh ]; then
   . /opt/homebrew/etc/grc.zsh
 elif [ -f /usr/local/etc/grc.zsh ]; then
