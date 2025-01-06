@@ -3,13 +3,18 @@
 
 tap homebrew/core
 brew azure-cli
+brew cosign
+brew duckdb
+brew eksctl
 
 tap homebrew/cask
+cask snowflake-snowsql
 cask zed
 
 tap abhinav/tap
 
 tap bridgecrewio/tap
+brew yor
 
 tap filosottile/musl-cross
 
@@ -28,8 +33,3 @@ tap oven-sh/bun
 tap rcmdnk/file
 
 tap rigellute/tap
-brew git-spice
-brew inih
-brew exiv2
-cask snowflake-snowsql
-brew yor
