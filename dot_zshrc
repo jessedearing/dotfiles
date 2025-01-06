@@ -141,9 +141,6 @@ fi
 
 #load_tmux
 
-if [ -f $(brew --prefix)/etc/brew-wrap ];then
-  source $(brew --prefix)/etc/brew-wrap
-fi
 if [ -f /opt/homebrew/etc/grc.zsh ]; then
   . /opt/homebrew/etc/grc.zsh
 elif [ -f /usr/local/etc/grc.zsh ]; then
