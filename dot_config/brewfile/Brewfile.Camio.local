@@ -1,0 +1,30 @@
+
+# tap repositories and their packages
+
+tap homebrew/core
+brew azure-cli
+
+tap homebrew/cask
+cask zed
+
+tap abhinav/tap
+
+tap bridgecrewio/tap
+
+tap filosottile/musl-cross
+
+tap get-woke/tap
+
+tap heroku/brew
+
+tap mike-engel/jwt-cli
+
+tap ngrok/ngrok
+
+tap norwoodj/tap
+
+tap oven-sh/bun
+
+tap rcmdnk/file
+
+tap rigellute/tap

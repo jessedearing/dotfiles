@@ -12,7 +12,6 @@ brew aribb24
 brew assimp
 brew autoconf
 brew awscli
-brew azure-cli
 brew bash
 brew bat
 brew bind
@@ -21,7 +20,6 @@ brew c-ares
 brew ca-certificates
 brew cairo
 brew calicoctl
-brew capstone
 brew certifi
 brew cffi
 brew check-jsonschema
@@ -34,11 +32,8 @@ brew curl
 brew dateutils
 brew dav1d
 brew dbus
-brew deno
 brew docker-compose
-brew doctl
 brew double-conversion
-brew dtc
 brew duckdb
 brew e2fsprogs
 brew eksctl
@@ -139,7 +134,6 @@ brew libraqm
 brew librist
 brew librtlsdr
 brew libsamplerate
-brew libslirp
 brew libsndfile
 brew libsodium
 brew libsoxr
@@ -228,7 +222,6 @@ brew python@3.11
 brew python@3.12
 brew python@3.13
 brew pyyaml
-brew qemu
 brew qrtool
 brew qt
 brew quicktype
@@ -276,7 +269,6 @@ brew unbound
 brew unibilium
 brew userspace-rcu
 brew utf8proc
-brew vde
 brew wakeonlan
 brew wcurl
 brew weasyprint
@@ -291,9 +283,7 @@ brew xz
 brew yamlfmt
 brew yamllint
 brew yq
-brew z3
 brew zeromq
-brew zig
 brew zimg
 brew zlib
 brew zsh
@@ -332,7 +322,6 @@ cask snowflake-snowsql
 cask spotify
 cask suspicious-package
 cask tailscale
-cask zed
 
 tap abhinav/tap
 
@@ -365,3 +354,6 @@ appstore 408981434 iMovie (10.4.3)
 appstore 409183694 Keynote (14.3)
 appstore 409203825 Numbers (14.3)
 appstore 409201541 Pages (14.3)
+
+# Main file
+main Brewfile.$HOSTNAME
