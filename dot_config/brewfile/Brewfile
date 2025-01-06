@@ -318,7 +318,6 @@ cask orion
 cask qr-journal
 cask raycast
 cask slack
-cask snowflake-snowsql
 cask spotify
 cask suspicious-package
 cask tailscale
