@@ -3,14 +3,11 @@
 
 tap homebrew/core
 brew abseil
-brew adr-tools
 brew aespipe
 brew age
-brew age-plugin-se
 brew aom
 brew aribb24
 brew assimp
-brew autoconf
 brew awscli
 brew bash
 brew bat
@@ -22,11 +19,9 @@ brew cairo
 brew calicoctl
 brew certifi
 brew cffi
-brew check-jsonschema
 brew chezmoi
 brew cjson
 brew coreutils
-brew cosign
 brew cryptography
 brew curl
 brew dateutils
@@ -34,15 +29,11 @@ brew dav1d
 brew dbus
 brew docker-compose
 brew double-conversion
-brew duckdb
 brew e2fsprogs
-brew eksctl
-brew exiv2
 brew fd
 brew ffmpeg
 brew fish
 brew flac
-brew fltk
 brew fltk@1.3
 brew fontconfig
 brew fortune
@@ -54,7 +45,6 @@ brew gd
 brew gettext
 brew gh
 brew giflib
-brew git-spice
 brew glib
 brew gmp
 brew gnu-sed
@@ -68,8 +58,6 @@ brew graphite2
 brew grc
 brew grep
 brew grip
-brew groonga
-brew grype
 brew harfbuzz
 brew helm
 brew helm-docs
@@ -83,7 +71,6 @@ brew hunspell
 brew icu4c@75
 brew icu4c@76
 brew imath
-brew inih
 brew ipcalc
 brew iproute2mac
 brew ircii
@@ -94,7 +81,6 @@ brew jpeg-turbo
 brew jpeg-xl
 brew jq
 brew json-c
-brew jwt-cli
 brew kind
 brew krb5
 brew krew
@@ -113,7 +99,6 @@ brew libcbor
 brew libcerf
 brew libdeflate
 brew libevent
-brew libfido2
 brew libgcrypt
 brew libgit2
 brew libgit2@1.7
@@ -167,13 +152,9 @@ brew luajit
 brew luv
 brew lz4
 brew lzo
-brew m4
 brew magic-wormhole.rs
-brew mariadb
 brew mbedtls
 brew md4c
-brew mecab
-brew mecab-ipadic
 brew mkcert
 brew mosquitto
 brew mpdecimal
@@ -193,12 +174,10 @@ brew opencore-amr
 brew openexr
 brew openjdk
 brew openjpeg
-brew openldap
 brew openssl@3
 brew opentofu
 brew opus
 brew p11-kit
-brew packer
 brew pandoc
 brew pango
 brew pcre
@@ -207,32 +186,24 @@ brew pgformatter
 brew pillow
 brew pinentry
 brew pinentry-mac
-brew pipenv
 brew pixman
 brew pkgconf
 brew poetry
 brew postgresql@16
-brew pre-commit
-brew protobuf@21
 brew pycparser
-brew pyenv
 brew python-lsp-server
 brew python-packaging
-brew python@3.11
 brew python@3.12
 brew python@3.13
 brew pyyaml
 brew qrtool
 brew qt
-brew quicktype
 brew rav1e
 brew readline
-brew rekor-cli
 brew richgo
 brew ripgrep
 brew rlwrap
 brew rtl_433
-brew rtmpdump
 brew rubberband
 brew rustup
 brew sdl2
@@ -242,38 +213,26 @@ brew snappy
 brew socket_vmnet
 brew sops
 brew speex
-brew spotify-tui
 brew sqlite
 brew srt
 brew starship
 brew stern
 brew svt-av1
-brew syft
-brew taplo
 brew tcptraceroute
 brew terraform-ls
 brew tesseract
-brew testssl
-brew tfenv
-brew tflint
-brew tfsec
 brew thefuck
 brew theora
 brew tiger-vnc
 brew tmux
 brew tpm
 brew tree-sitter
-brew trivy
 brew ubertooth
 brew unbound
 brew unibilium
 brew userspace-rcu
 brew utf8proc
-brew wakeonlan
-brew wcurl
-brew weasyprint
 brew webp
-brew websocat
 brew wimlib
 brew x264
 brew x265
@@ -285,7 +244,6 @@ brew yamllint
 brew yq
 brew zeromq
 brew zimg
-brew zlib
 brew zsh
 brew zsh-async
 brew zsh-syntax-highlighting
@@ -325,13 +283,11 @@ cask tailscale
 tap abhinav/tap
 
 tap bridgecrewio/tap
-brew yor
 
 tap filosottile/musl-cross
 brew musl-cross
 
 tap get-woke/tap
-brew woke
 
 tap heroku/brew
 

@@ -28,3 +28,8 @@ tap oven-sh/bun
 tap rcmdnk/file
 
 tap rigellute/tap
+brew git-spice
+brew inih
+brew exiv2
+cask snowflake-snowsql
+brew yor
