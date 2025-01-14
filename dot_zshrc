@@ -45,6 +45,7 @@ alias vscr="v -c ':Scratch'"
 alias mytop="perl /usr/local/bin/mytop"
 alias g=git
 alias cm=chezmoi
+alias cdgr='cd $(git rev-parse --show-toplevel)'
 #alias g="~/git"
 #alias lab="~/lab"
 if [ -x $__USR_PATH/bin/richgo ] || [ -x $HOME/go/bin/richgo ]; then
@@ -169,6 +170,10 @@ alias l='ls -l'
 
 if [ -f $__USR_PATH/bin/aws_zsh_completer.sh ]; then
   . $__USR_PATH/bin/aws_zsh_completer.sh
+fi
+
+if [ -f /opt/homebrew/opt/asdf/libexec/asdf.sh ]; then
+  . /opt/homebrew/opt/asdf/libexec/asdf.sh
 fi
 
 autoload -Uz compinit bashcompinit
