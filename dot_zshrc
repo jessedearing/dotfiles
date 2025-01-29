@@ -182,6 +182,8 @@ bashcompinit
 
 # I don't use visual mode in the terminal since I use tmux
 bindkey -M vicmd 'v' edit-command-line
-load_nvm
 eval $(thefuck --alias)
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -f /opt/homebrew/bin/minikube ]; then
+  eval $(minikube -p minikube docker-env)
+fi
