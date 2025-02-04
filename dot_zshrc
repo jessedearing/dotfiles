@@ -184,6 +184,8 @@ bashcompinit
 bindkey -M vicmd 'v' edit-command-line
 eval $(thefuck --alias)
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-if [ -f /opt/homebrew/bin/minikube ]; then
-  eval $(minikube -p minikube docker-env)
-fi
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/jesse/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
