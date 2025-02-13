@@ -6,6 +6,6 @@ elif [[ "$1" == "witch" ]]; then
   shift
   git switch $*
 else
-  /opt/homebrew/bin/gs $*
+  /opt/homebrew/opt/git-spice/bin/gs $*
 fi
 
