@@ -65,3 +65,9 @@
 	helper = /usr/local/share/gcm-core/git-credential-manager
 [credential "https://dev.azure.com"]
 	useHttpPath = true
+[diff "age"]
+  textconv = age --decrypt -i ~/.age.key
+[filter "age"]
+  clean = age --encrypt --armor -R ~/.age.pub
+  smudge = age --decrypt -i ~/.age.key
+  required
