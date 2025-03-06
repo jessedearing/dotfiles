@@ -10,8 +10,6 @@
   cmd = nvim -c "Gdiffsplit!" "$MERGED"
 [merge]
 	tool = fugitive
-[core]
-	excludesfile = ~/.gitignore
 [difftool "vim"]
   cmd = nvim -d $LOCAL $REMOTE
 [difftool]

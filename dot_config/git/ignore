@@ -13,3 +13,4 @@ vim-markdown-preview.html
 .glab-cli/
 .pre-commit-config.yaml
 .nvmrc
+.venv
