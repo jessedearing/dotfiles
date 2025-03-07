@@ -122,6 +122,8 @@ bindkey "^Q" push-input
 
 if [[ "$TERM_PROGRAM" == "ghostty" && -d $HOME/Google\ Drive/My\ Drive/Visual\ fortunes ]]; then
   kitten icat --align=left "$(find "$HOME/Google Drive/My Drive/Visual fortunes" -name '*.png' -or -name '*.jpg' | shuf -n 1)"
+elif [[ "$TERM_PROGRAM" == "ghostty" && -d $HOME/Library/CloudStorage/ProtonDrive-me@jesse.dev-folder/Visual\ Fortunes ]]; then
+  kitten icat --align=left "$(find "$HOME/Library/CloudStorage/ProtonDrive-me@jesse.dev-folder/Visual Fortunes" -name '*.png' -or -name '*.jpg' | shuf -n 1)"
 else
   fortune startrek computers $HOME/.fortunes/sadserver_tweets $HOME/.fortunes/honest_update_tweets $HOME/.fortunes/devops_borat
 fi
