@@ -24,6 +24,10 @@
 	autocorrect = 1
 [includeIf "gitdir:~/Documents/code/observable/"]
   path = ~/.gitconfig.observable
+{{- if eq .chezmoi.hostname "Leviathan" }}
+[includeIf "gitdir:~/Documents/code/gitlab/"]
+  path = ~/.gitconfig.gitlab
+{{- end }}
 [include]
   path = ~/.gitconfig.local
 [alias]

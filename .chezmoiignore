@@ -15,5 +15,8 @@
 .config/systemd
 .config/waybar
 {{- end }}
+{{- if eq .chezmoi.hostname "Leviathan" }}
+.gitconfig.gitlab
+{{- end }}
 README.md
 **/*.enc
