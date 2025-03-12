@@ -27,6 +27,8 @@
 {{- if eq .chezmoi.hostname "Leviathan" }}
 [includeIf "gitdir:~/Documents/code/gitlab/"]
   path = ~/.gitconfig.gitlab
+[includeIf "gitdir:~/Documents/code/github"]
+  path = ~/.gitconfig.github
 {{- end }}
 [include]
   path = ~/.gitconfig.local
