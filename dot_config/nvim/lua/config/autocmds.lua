@@ -32,10 +32,3 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 		}):start()
 	end,
 })
-
-vim.api.nvim_create_autocmd("BufReadPost", {
-	pattern = { os.getenv("HOME") .. "/Documents/pensieve/*.md" },
-	callback = function()
-		vim.cmd("Copilot disable")
-	end,
-})
