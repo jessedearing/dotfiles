@@ -1,6 +1,10 @@
 [user]
 name = "Jesse Dearing"
+{{- if eq .chezmoi.hostname "Camio" }}
+email = "jesse@observablehq.com"
+{{- else }}
 email = "code@me.jesse.dev"
+{{- end }}
 
 [ui]
 default-command = "status"
@@ -9,4 +13,8 @@ diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
 [signing]
 behavior = "own"
 backend = "gpg"
+{{- if eq .chezmoi.hostname "Camio" }}
+key = "jesse@observablehq.com"
+{{- else }}
 key = "code@me.jesse.dev"
+{{- end }}
