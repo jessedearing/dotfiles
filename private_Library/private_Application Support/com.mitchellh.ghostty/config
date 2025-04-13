@@ -6,3 +6,4 @@ window-width = 195
 window-height = 60
 background-opacity = 0.9
 keybind = ctrl+left_bracket=text:\x1b
+mouse-hide-while-typing = true
