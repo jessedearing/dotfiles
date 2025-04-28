@@ -26,6 +26,7 @@ return {
 									"*-k8s.yaml",
 									"deployment.yaml",
 									"*cronjob*.yaml",
+									"kubernetes.yaml",
 								},
 							},
 						},
