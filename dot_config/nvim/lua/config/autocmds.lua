@@ -32,3 +32,14 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 		}):start()
 	end,
 })
+
+vim.api.nvim_create_autocmd("BufRead", {
+	pattern = { "Tiltfile" },
+	callback = function()
+		vim.bo.filetype = "starlark"
+		vim.lsp.start({
+			name = "Tilt",
+			cmd = { "tilt", "lsp", "start" },
+		})
+	end,
+})
