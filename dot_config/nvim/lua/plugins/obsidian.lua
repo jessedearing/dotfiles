@@ -1,7 +1,27 @@
+local function folder_exists(path)
+	return vim.loop.fs_stat(vim.fn.expand(path)) ~= nil
+end
+
+local workspaces = {}
+
+if folder_exists("~/Documents/Jesse's Vault") then
+	table.insert(workspaces, {
+		name = "personal",
+		path = "~/Documents/Jesse's Vault",
+	})
+end
+
+if folder_exists("~/Documents/Obsidian Vault") then
+	table.insert(workspaces, {
+		name = "work",
+		path = "~/Documents/Obsidian Vault",
+	})
+end
+
 return {
 	"epwalsh/obsidian.nvim",
 	version = "*", -- recommended, use latest release instead of latest commit
-	lazy = true,
+	lazy = false,
 	ft = "markdown",
 	-- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
 	-- event = {
@@ -18,13 +38,7 @@ return {
 		-- see below for full list of optional dependencies 👇
 	},
 	opts = {
-		workspaces = {
-			{
-				name = "personal",
-				path = "~/Proton Drive/Obsidian/Personal",
-			},
-		},
-
+		workspaces = workspaces,
 		-- see below for full list of options 👇
 	},
 }
