@@ -12,3 +12,4 @@ map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move whole line down" })
 map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move whole line up" })
 
 map("i", "<c-e>", goiferr, { desc = "Use iferr to automatically populate the if err block" })
+map("i", "<c-c>", "<esc>")
