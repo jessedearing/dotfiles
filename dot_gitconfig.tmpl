@@ -65,10 +65,8 @@
 [credential "https://github.com"]
   username = jessedearing
 [credential]
-	helper = 
-	helper = /opt/homebrew/bin/git-credential-oauth
-[credential "https://dev.azure.com"]
-	useHttpPath = true
+	helper = cache --timeout 21600	# six hours
+	helper = oauth
 [diff "age"]
   textconv = age --decrypt -i ~/.age.key
 [filter "age"]
