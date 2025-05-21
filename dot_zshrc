@@ -142,7 +142,7 @@ if [ -f $HOME/.config/op/plugins.sh ]; then
   unalias aws
 fi
 
-#load_tmux
+load_tmux
 
 if [ -f /opt/homebrew/etc/grc.zsh ]; then
   . /opt/homebrew/etc/grc.zsh
