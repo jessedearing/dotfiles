@@ -155,7 +155,7 @@ fi
 unalias kubectl &> /dev/null
 unfunction kubectl &> /dev/null
 kubectl() {
-  if [[ "$1" == "node-shell" ]]; then
+  if [[ "$1" =~ '(node-shell|klock)' ]]; then
     $__USR_PATH/bin/kubectl "$@"
   elif [[ "$@" =~ '(attach|run|exec|logs|edit)' ]]; then
     $__USR_PATH/bin/kubectl "$@"
