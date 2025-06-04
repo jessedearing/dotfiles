@@ -4,6 +4,7 @@ return {
 		opts = {
 			spec = {
 				{ "<leader>d", group = "DiffView" },
+				{ "<leader>a", group = "ai" },
 			},
 		},
 	},

@@ -1,0 +1,34 @@
+{
+  "mcpServers": {
+    "github.com/modelcontextprotocol/servers/tree/main/src/filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/jesse/Documents/code"
+      ]
+    },
+    "github.com/smithery-ai/mcp-obsidian": {
+      "command": "npx",
+      "args": ["-y", "mcp-obsidian", "/Users/jesse/Documents/Obsidian Vault"]
+    },
+    "github.com/modelcontextprotocol/servers/tree/main/src/time": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "mcp/time"]
+    },
+    "github.com/github/github-mcp-server": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "ghcr.io/github/github-mcp-server"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "{{- onepasswordRead "op://Private/GitHub MCP Token/credential" -}}"
+      }
+    }
+  }
+}
