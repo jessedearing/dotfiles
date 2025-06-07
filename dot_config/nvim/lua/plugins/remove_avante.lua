@@ -3,9 +3,12 @@ return {
 	event = "VeryLazy",
 	version = false, -- Never set this value to "*"! Never!
 	opts = {
-		-- add any opts here
-		provider = "copilot",
-		auto_suggestions_provider = "copilot",
+		providers = {
+			ollama = {
+				endpoint = "http://belial.local:11434",
+				model = "qwq:latest",
+			},
+		},
 		system_prompt = function()
 			local hub = require("mcphub").get_hub_instance()
 			return hub and hub:get_active_servers_prompt() or ""
