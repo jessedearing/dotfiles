@@ -1,5 +1,5 @@
 export NVM_DIR="$HOME/.nvm"
-export PATH=${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.cargo/bin:/opt/homebrew/opt/node@22/bin:/opt/homebrew/opt/rustup/bin:$HOME/.fzf/bin:$HOME/.pub-cache/bin:$HOME/go/bin:/opt/homebrew/opt/openjdk/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/opt/perl/bin:$PATH
+export PATH=$HOME/.asdf/shims:${KREW_ROOT:-$HOME/.krew}/bin:$HOME/.cargo/bin:/opt/homebrew/opt/node@22/bin:/opt/homebrew/opt/rustup/bin:$HOME/.fzf/bin:$HOME/.pub-cache/bin:$HOME/go/bin:/opt/homebrew/opt/openjdk/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/opt/perl/bin:$PATH
 export EDITOR=$HOME/.local/bin/editor.sh
 if [[ $(uname -s) == "Darwin" ]]; then
   export RVC_READLINE="/usr/local/opt/readline/lib/libreadline.dylib"
