@@ -7,7 +7,7 @@ return {
 		},
 		opts = {
 			files = {
-				cmd = 'rg --files --no-ignore --hidden --follow -g "!{.git/**,node_modules/**,vendor/**}" 2> /dev/null',
+				fd_opts = [[--color=never --hidden --type f --type l --exclude .git --exclude .jj --exclude node_modules]],
 			},
 		},
 	},
