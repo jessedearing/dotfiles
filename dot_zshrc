@@ -46,6 +46,10 @@ alias mytop="perl /usr/local/bin/mytop"
 alias g=git
 alias cm=chezmoi
 alias cdgr='cd $(git rev-parse --show-toplevel)'
+
+## jj
+alias jjs='jj status'
+alias jjl='jj log'
 #alias g="~/git"
 #alias lab="~/lab"
 if [ -x $__USR_PATH/bin/richgo ] || [ -x $HOME/go/bin/richgo ]; then
