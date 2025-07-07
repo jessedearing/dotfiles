@@ -1,5 +1,5 @@
 format = """[▓▒░](fg:#769ff0 bg:#394260)\
-${custom.jj} ${custom.jjstate}[](fg:#394260)\n\
+${custom.jj}${custom.jjstate}[](fg:#394260)\n\
 [░▒▓](#a3aed2)\
 [  ](bg:#a3aed2 fg:#090c0c)\
 $directory\
@@ -99,5 +99,5 @@ jj log --revisions @ --no-graph --ignore-working-copy --color always --limit 1 -
 [custom.jjstate]
 when = "jj root"
 command = '''
-jj log -r@ -n1 --no-graph -T "" --stat | tail -n1 | sd "(\d+) files? changed, (\d+) insertions?\(\+\), (\d+) deletions?\(-\)" ' ${1}m ${2}+ ${3}-' | sd " 0." ""
+jj log -r@ -n1 --no-graph -T "" --stat | tail -n1 | sd " (\d+) files? changed, (\d+) insertions?\(\+\), (\d+) deletions?\(-\)" ' ${1}m ${2}+ ${3}-' | sd " 0." ""
 '''
