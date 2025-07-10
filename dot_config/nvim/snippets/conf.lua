@@ -25,7 +25,6 @@ return {
 	s({ trig = "wg-client", desc = "Wireguard client config" }, {
 		t({ "[Interface]", "" }),
 		t({ "Address = 10.0.0.2/24", "" }),
-		t({ "ListenPort = 51820", "" }),
 		t({ "PrivateKey = ", "" }),
 		t({ "", "" }),
 		t({ "[Peer]", "" }),
