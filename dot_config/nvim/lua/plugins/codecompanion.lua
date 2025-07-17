@@ -14,6 +14,20 @@ return {
 	},
 	config = function()
 		require("codecompanion").setup({
+			strategies = {
+				inline = {
+					keymaps = {
+						accept_change = {
+							modes = { n = ",ac" },
+							description = "Accept the suggested change",
+						},
+						reject_change = {
+							modes = { n = ",ar" },
+							description = "Reject the suggested change",
+						},
+					},
+				},
+			},
 			extensions = {
 				mcphub = {
 					callback = "mcphub.extensions.codecompanion",
