@@ -29,3 +29,6 @@ key = "code@me.jesse.dev"
 
 [git]
 push-new-bookmarks = true
+
+[aliases]
+tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
