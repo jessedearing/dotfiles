@@ -1,4 +1,4 @@
-\set PROMPT1 ' (%n@%M) %x [(%/)] %R%# '
+\set PROMPT1 ' (%n@%M) %x [(%/)]\n%R%# '
 \set PROMPT2 '⋮ %# '
 \timing
 \x auto
