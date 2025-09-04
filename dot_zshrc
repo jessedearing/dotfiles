@@ -32,11 +32,11 @@ unsetopt XTRACE
 source $ZSH/oh-my-zsh.sh
 eval "$(starship init zsh)"
 
-if [ -x /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+if [ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
   source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
-if [ -x /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
   source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 eval "$(fzf --zsh)"
