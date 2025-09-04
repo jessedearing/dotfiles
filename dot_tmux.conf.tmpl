@@ -8,7 +8,11 @@ set -g @plugin 'tmux-plugins/tmux-open'
 set -g @theme_variation 'moon'
 set -g @theme_left_separator ''
 set -g @theme_right_separator ''
+{{- if eq .chezmoi.os "linux" }}
+set -g @theme_plugins 'datetime'
+{{- else }}
 set -g @theme_plugins 'homebrew'
+{{- end }}
 ## keybindings
 #unbind C-b
 #unbind C-a
@@ -143,4 +147,8 @@ set-option -g escape-time 0
 set-option -sa terminal-features ',xterm-kitty:RGB'
 set-option -g focus-events on
 
-run '/opt/homebrew/opt/tpm/share/tpm/tpm'
+{{- if eq .chezmoi.os "linux" }}
+  run '~/.tmux/plugins/tpm/tpm'
+{{- else }}
+  run '/opt/homebrew/opt/tpm/share/tpm/tpm'
+{{- end }}

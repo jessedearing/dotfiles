@@ -1,7 +1,7 @@
 format = """[▓▒░](fg:#769ff0 bg:#394260)\
 ${custom.jj}${custom.jjstate}[](fg:#394260)\n\
 [░▒▓](#a3aed2)\
-[  ](bg:#a3aed2 fg:#090c0c)\
+[  ](bg:#a3aed2 fg:#090c0c)\
 $directory\
 [](fg:#769ff0 bg:#394260)\
 $nodejs\

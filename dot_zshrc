@@ -15,8 +15,14 @@ if [[ $(uname -s) == "Darwin" ]]; then
   __USR_PATH="/opt/homebrew"
 fi
 
+if [ -x /opt/homebrew/bin/brew ]; then
 eval "$(/opt/homebrew/bin/brew shellenv)"
-export PATH="$HOME/.local/bin:/opt/homebrew/opt/curl/bin:$PATH"
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+fi
+
+if [ -s /rw/config/gpg-split-domain ]; then
+  export QUBES_GPG_DOMAIN=`cat /rw/config/gpg-split-domain`
+fi
 
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 for __customfile in $HOME/.zsh-custom/*.zsh; do
@@ -26,7 +32,13 @@ unsetopt XTRACE
 source $ZSH/oh-my-zsh.sh
 eval "$(starship init zsh)"
 
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -x /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+if [ -x /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 eval "$(fzf --zsh)"
 fpath=(~/.zsh-completions /opt/homebrew/share/zsh/site-functions $fpath)
 
@@ -127,6 +139,8 @@ if [[ ! -z "$GHOSTTY_BIN_DIR" && -d $HOME/Google\ Drive/My\ Drive/Visual\ fortun
   kitten icat --align=left "$(find "$HOME/Google Drive/My Drive/Visual fortunes" -name '*.png' -or -name '*.jpg' | shuf -n 1)"
 elif [[ ! -z "$GHOSTTY_BIN_DIR" && -d $HOME/Library/CloudStorage/ProtonDrive-me@jesse.dev-folder/Visual\ Fortunes ]]; then
   kitten icat --align=left "$(find "$HOME/Library/CloudStorage/ProtonDrive-me@jesse.dev-folder/Visual Fortunes" -name '*.png' -or -name '*.jpg' | shuf -n 1)"
+elif [[ ! -z "$GHOSTTY_BIN_DIR" && -d $HOME/Documents/Visual\ Fortunes ]]; then
+  kitten icat --align=left "$(find "$HOME/Documents/Visual Fortunes" -name '*.png' -or -name '*.jpg' | shuf -n 1)"
 else
   fortune startrek computers $HOME/.fortunes/sadserver_tweets $HOME/.fortunes/honest_update_tweets $HOME/.fortunes/devops_borat
 fi
@@ -184,7 +198,6 @@ bashcompinit
 # I don't use visual mode in the terminal since I use tmux
 bindkey -M vicmd 'v' edit-command-line
 eval $(thefuck --alias)
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 if [ -d "$PWD/../$(basename "$PWD").node" ]; then
   . "../$(basename "$PWD").node/bin/activate"
