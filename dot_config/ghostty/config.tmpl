@@ -1,7 +1,11 @@
 theme = tokyonight
 font-family = Monolisa Variable
 font-thicken = true
+{{- if eq .chezmoi.os "linux" }}
+font-size = 12
+{{- else }}
 font-size = 14
+{{- end }}
 window-width = 195
 window-height = 60
 background-opacity = 0.9

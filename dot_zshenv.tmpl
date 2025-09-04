@@ -16,7 +16,11 @@ export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agen
 export ZSH_DISABLE_COMPFIX=true
 
 export KEYTIMEOUT=20
+{{- if eq .chezmoi.os "linux" }}
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/share/zsh-syntax-highlighting/highlighters
+{{- else }}
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
+{{- end }}
 
 export GPG_TTY=$(tty)
 

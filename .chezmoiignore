@@ -15,10 +15,13 @@
 .config/systemd
 .config/waybar
 {{- else }}
-Library/**/*
+Library/
 {{- end }}
 {{- if ne .chezmoi.hostname "Leviathan" }}
 .gitconfig.gitlab
 {{- end }}
 README.md
 **/*.enc
+{{- if contains "qubes" .chezmoi.kernel.osrelease }}
+.gnupg/
+{{ end }}
