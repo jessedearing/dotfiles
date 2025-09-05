@@ -22,6 +22,4 @@ Library/
 {{- end }}
 README.md
 **/*.enc
-{{- if and (eq .chezmoi.os "linux") (contains "qubes" .chezmoi.kernel.osrelease) }}
 .gnupg/
-{{ end }}
