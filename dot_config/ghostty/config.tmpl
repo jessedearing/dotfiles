@@ -11,6 +11,17 @@ window-height = 60
 background-opacity = 0.9
 keybind = ctrl+left_bracket=text:\x1b
 
+{{- if eq .chezmoi.os "darwin" }}
+keybind = cmd+left_bracket=text:\x1b
+keybind = cmd+d=text:\x04
+keybind = cmd+a=text:\x01
+keybind = cmd+k=text:\x0b
+keybind = cmd+j=text:\x0a
+keybind = cmd+h=text:\x08
+keybind = cmd+l=text:\x0c
+{{- else }}
+keybind = ctrl+left_bracket=text:\x1b
+{{- end }}
 # Tmux cmd bindings (because option is hard to reach sometimes)
 keybind = cmd+,=text:\x01,
 keybind = cmd+.=text:\x01.

@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+{{- if and (eq .chezmoi.os "linux") (contains "qubes" .chezmoi.kernel.osrelease) }}
+exec qubes-gpg-client-wrapper $*
+{{- else }}
+exec gpg $*
+{{- end }}
