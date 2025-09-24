@@ -172,12 +172,17 @@ fi
 unalias kubectl &> /dev/null
 unfunction kubectl &> /dev/null
 kubectl() {
+  local __kubectl=$__USER_PATH/bin/kubectl
+  if [ -x $HOME/bin/kubectl ]; then
+    __kubectl=$HOME/bin/kubectl
+  fi
+
   if [[ "$1" =~ '(node-shell|klock)' ]]; then
-    $__USR_PATH/bin/kubectl "$@"
+    $__kubectl "$@"
   elif [[ "$@" =~ '(attach|run|exec|logs|edit)' ]]; then
-    $__USR_PATH/bin/kubectl "$@"
+    $__kubectl "$@"
   else
-    grc -e -s -c conf.kubectl -- $__USR_PATH/bin/kubectl "$@"
+    grc -e -s -c conf.kubectl -- $__kubectl "$@"
   fi
 }
 

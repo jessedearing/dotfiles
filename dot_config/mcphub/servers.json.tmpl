@@ -15,27 +15,6 @@
     "github.com/modelcontextprotocol/servers/tree/main/src/time": {
       "command": "docker",
       "args": ["run", "-i", "--rm", "mcp/time"]
-    },
-    "github.com/github/github-mcp-server": {
-      "command": "docker",
-      "args": [
-        "run",
-        "-i",
-        "--rm",
-        "-e",
-        "GITHUB_PERSONAL_ACCESS_TOKEN",
-        "ghcr.io/github/github-mcp-server"
-      ],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "{{- onepasswordRead "op://Private/GitHub MCP Token/credential" -}}"
-      },
-      "kagi": {
-        "command": "uvx",
-        "args": ["kagimcp"],
-        "env": {
-          "KAGI_API_KEY": "{{- onepasswordRead "op://Private/Kagi/api token" -}}"
-        }
-      }
     }
   }
 }

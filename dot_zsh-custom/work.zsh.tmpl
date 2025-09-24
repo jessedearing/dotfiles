@@ -1,1 +1,3 @@
+{{- if eq .chezmoi.hostname "Camio" }}
 {{- onepasswordRead "op://Private/Work Shell Environment Variables/work.zsh" }}
+{{- end }}
