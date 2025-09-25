@@ -133,12 +133,12 @@ bindkey -M isearch '^F' history-incremental-search-forward
 
 bindkey "^Q" push-input
 
-if [[ ! -z "$GHOSTTY_BIN_DIR" && -d $HOME/Google\ Drive/My\ Drive/Visual\ fortunes ]]; then
-  kitten icat --align=left "$(find "$HOME/Google Drive/My Drive/Visual fortunes" -name '*.png' -or -name '*.jpg' | shuf -n 1)"
-elif [[ ! -z "$GHOSTTY_BIN_DIR" && -d $HOME/Library/CloudStorage/ProtonDrive-me@jesse.dev-folder/Visual\ Fortunes ]]; then
-  kitten icat --align=left "$(find "$HOME/Library/CloudStorage/ProtonDrive-me@jesse.dev-folder/Visual Fortunes" -name '*.png' -or -name '*.jpg' | shuf -n 1)"
-elif [[ ! -z "$GHOSTTY_BIN_DIR" && -d $HOME/Documents/Visual\ Fortunes ]]; then
-  kitten icat --align=left "$(find "$HOME/Documents/Visual Fortunes" -name '*.png' -or -name '*.jpg' | shuf -n 1)"
+if [[ ! -z "$ITERM_SESSION_ID" && -d $HOME/Google\ Drive/My\ Drive/Visual\ fortunes ]]; then
+  imgcat "$(find "$HOME/Google Drive/My Drive/Visual fortunes" -name '*.png' -or -name '*.jpg' | shuf -n 1)"
+elif [[ ! -z "$ITERM_SESSION_ID" && -d $HOME/Library/CloudStorage/ProtonDrive-me@jesse.dev-folder/Visual\ Fortunes ]]; then
+  imgcat "$(find "$HOME/Library/CloudStorage/ProtonDrive-me@jesse.dev-folder/Visual Fortunes" -name '*.png' -or -name '*.jpg' | shuf -n 1)"
+elif [[ ! -z "$ITERM_SESSION_ID" && -d $HOME/Documents/Visual\ Fortunes ]]; then
+  imgcat "$(find "$HOME/Documents/Visual Fortunes" -name '*.png' -or -name '*.jpg' | shuf -n 1)"
 else
   fortune startrek computers $HOME/.fortunes/sadserver_tweets $HOME/.fortunes/honest_update_tweets $HOME/.fortunes/devops_borat
 fi
@@ -210,3 +210,5 @@ compinit
 
 # added by Snowflake SnowSQL installer v1.2
 export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
