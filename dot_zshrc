@@ -43,7 +43,6 @@ eval "$(fzf --zsh)"
 fpath=(~/.zsh-completions /opt/homebrew/share/zsh/site-functions $fpath)
 
 alias tf=terraform
-alias gco='g checkout'
 alias ga="g add"
 alias gc="g commit -v"
 alias mongod="mongod --config /usr/local/etc/mongod.conf"
@@ -56,7 +55,6 @@ alias vscr="v -c ':Scratch'"
 alias mytop="perl /usr/local/bin/mytop"
 alias g=git
 alias cm=chezmoi
-alias cdgr='cd $(git rev-parse --show-toplevel)'
 
 ## jj
 alias jjs='jj status'
