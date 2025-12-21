@@ -2,8 +2,8 @@
 
 mkdir -p ~/Downloads/giphy
 curl -L $@ -o ~/Downloads/giphy/giphy.gif
-if which dragon-drag-and-drop &> /dev/null ; then
-  dragon-drag-and-drop ~/Downloads/giphy/giphy.gif
+if which xdg-open &> /dev/null ; then
+  xdg-open ~/downloads/giphy
 else
   open ~/Downloads/giphy
 fi
