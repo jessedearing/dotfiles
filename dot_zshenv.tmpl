@@ -14,7 +14,8 @@ export CDPATH=~/Documents/shell-bookmarks
 {{- if eq .chezmoi.os "linux" }}
 export SSH_AUTH_SOCK=/run/user/1000/ssh-agent.socket
 {{- else }}
-export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+# 1Password: export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
+export SSH_AUTH_SOCK={{ .chezmoi.homeDir }}/.ssh/auth.sock
 {{- end }}
 
 export ZSH_DISABLE_COMPFIX=true
