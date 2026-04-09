@@ -42,6 +42,10 @@ fi
 if [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
   source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
+if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/share/zsh/plugins/zsh-syntax-highlighting/highlighters
+  source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 eval "$(fzf --zsh)"
 fpath=(~/.zsh-completions /opt/homebrew/share/zsh/site-functions $fpath)
 
@@ -160,7 +164,7 @@ if [ -f $HOME/.config/op/plugins.sh ]; then
   unalias aws
 fi
 
-#load_tmux
+load_tmux
 
 if [ -f /opt/homebrew/etc/grc.zsh ]; then
   . /opt/homebrew/etc/grc.zsh
@@ -187,6 +191,10 @@ kubectl() {
   fi
 }
 
+# Alias ls after grc since lsd is colorized
+if [ -x $__USR_PATH/bin/lsd ]; then
+	alias ls=lsd
+fi
 alias l='ls -l'
 
 if [ -f $__USR_PATH/bin/aws_zsh_completer.sh ]; then

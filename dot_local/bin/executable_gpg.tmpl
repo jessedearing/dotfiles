@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
-{{- if and (eq .chezmoi.os "linux") (contains "qubes" .chezmoi.kernel.osrelease) }}
-exec qubes-gpg-client-wrapper $*
+{{- if eq .chezmoi.os "linux"}}
+exec /usr/bin/gpg $*
 {{- else }}
 exec /opt/homebrew/bin/gpg $*
 {{- end }}

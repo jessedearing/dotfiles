@@ -1,12 +1,39 @@
+format = """[▓▒░](fg:#769ff0 bg:#394260)\
+${custom.jj}${custom.jjstate}[](fg:#394260)\n\
+[░▒▓](#a3aed2)\
+{{- if eq .chezmoi.os "linux" }}
+[ 󰣇 ](bg:#a3aed2 fg:#363fa0)\
+{{- else }}
+[  ](bg:#a3aed2 fg:#090c0c)\
+{{- end }}
+$directory\
+[](fg:#769ff0 bg:#394260)\
+$nodejs\
+$rust\
+$golang\
+$php\
+[](fg:#212736 bg:#1d2230)\
+$time\
+$kubernetes\
+[ ](fg:#1d2230)\
+\n$character"""
+
 command_timeout = 900
+
+right_format = """[](fg:#779FF0)$jobs[▓▒░](fg:#769ff0 bg:#394260)"""
 
 [kubernetes]
 disabled = false
+symbol = "󱃾 "
 style = "bg:#212736"
 format = '[[$symbol$context( \($namespace\))](fg:#769ff0 bg:#212736)]($style)'
 
 [aws]
+symbol = "  "
 style = "blue"
+
+[jobs]
+symbol = "  "
 
 [directory]
 style = "fg:#e3e5e5 bg:#769ff0"
@@ -14,8 +41,15 @@ format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
 
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+
 [git_branch]
 disabled = true
+symbol = ""
 style = "bg:#394260"
 format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
 
@@ -25,10 +59,12 @@ style = "bg:#394260"
 format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'
 
 [nodejs]
+symbol = ""
 style = "bg:#212736"
 format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
 [golang]
+symbol = ""
 style = "bg:#212736"
 format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
@@ -36,7 +72,7 @@ format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 disabled = false
 time_format = "%R"                                      # Hour:Minute Format
 style = "bg:#1d2230"
-format = '[[ $time ](fg:#a0a9cb bg:#1d2230)]($style)'
+format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
 
 [custom.jj]
 ignore_timeout = true
