@@ -66,11 +66,6 @@ alias cm=chezmoi
 ## jj
 alias jjs='jj status'
 alias jjl='jj log'
-#alias g="~/git"
-#alias lab="~/lab"
-if [ -x $__USR_PATH/bin/richgo ] || [ -x $HOME/go/bin/richgo ]; then
-	alias go=richgo
-fi
 
 alias rg="rg -i -g \"!{vendor}\""
 
@@ -146,6 +141,8 @@ elif [[ ! -z "$ITERM_SESSION_ID" && -d $HOME/Library/CloudStorage/ProtonDrive-me
   imgcat "$(find "$HOME/Library/CloudStorage/ProtonDrive-me@jesse.dev-folder/Visual Fortunes" -name '*.png' -or -name '*.jpg' | shuf -n 1)"
 elif [[ ! -z "$ITERM_SESSION_ID" && -d $HOME/Documents/Visual\ Fortunes ]]; then
   imgcat "$(find "$HOME/Documents/Visual Fortunes" -name '*.png' -or -name '*.jpg' | shuf -n 1)"
+elif [[ "$TERM_PROGRAM" == "ghostty" ]]; then
+  viu "$(find "$HOME/Documents/Visual Fortunes" -name '*.png' -or -name '*.jpg' | shuf -n 1)"
 else
   fortune startrek computers $HOME/.fortunes/sadserver_tweets $HOME/.fortunes/honest_update_tweets $HOME/.fortunes/devops_borat
 fi
@@ -208,18 +205,3 @@ bashcompinit
 # I don't use visual mode in the terminal since I use tmux
 bindkey -M vicmd 'v' edit-command-line
 eval $(thefuck --alias)
-
-if [ -d "$PWD/../$(basename "$PWD").node" ]; then
-  . "../$(basename "$PWD").node/bin/activate"
-fi
-
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/jesse/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
-
-# added by Snowflake SnowSQL installer v1.2
-export PATH=/Applications/SnowSQL.app/Contents/MacOS:$PATH
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
