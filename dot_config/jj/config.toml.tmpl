@@ -20,11 +20,6 @@ merge-tool-edits-conflict-markers = true
 [signing]
 behavior = "own"
 backend = "gpg"
-{{- if eq .chezmoi.hostname "Camio" }}
-key = "jesse@observablehq.com"
-{{- else }}
-key = "code@me.jesse.dev"
-{{- end }}
 
 [aliases]
 tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
