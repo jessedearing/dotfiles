@@ -12,5 +12,14 @@ return {
 				require("Arduino-Nvim")
 			end,
 		})
+		require("lspconfig").arduino_language_server.setup({
+			cmd = {
+				"arduino-language-server",
+				"-cli-config",
+				"/home/daemon503/.arduino15/arduino-cli.yaml",
+				"-fqbn",
+				"arduino:avr:nano",
+			},
+		})
 	end,
 }

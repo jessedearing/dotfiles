@@ -3,7 +3,7 @@
 mkdir -p ~/Downloads/giphy
 curl -L $@ -o ~/Downloads/giphy/giphy.gif
 if which xdg-open &> /dev/null ; then
-  xdg-open ~/downloads/giphy
+  xdg-open ~/Downloads/giphy
 else
   open ~/Downloads/giphy
 fi
