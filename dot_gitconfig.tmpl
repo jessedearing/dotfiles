@@ -1,7 +1,7 @@
 [user]
   name = Jesse Dearing
 	email = code@me.jesse.dev
-  signingkey = E52D5105FF1793795856B3485E3E12B582979004
+  signingkey = ~/.config/git/signing_key.pub
 [color]
 	ui = true
 [mergetool "vim"]
@@ -55,8 +55,10 @@
 	enabled = true
 [init]
   defaultBranch = main
+[gpg]
+  format = "ssh"
 [gpg "ssh"]
-  allowedSignersFile = ~/.gitSigners
+  allowedSignersFile = ~/.config/git/gitSigners
 [url "https://github.com/"]
   insteadOf = "git@github.com:"
 [credential "https://github.com"]

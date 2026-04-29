@@ -19,7 +19,8 @@ merge-tool-edits-conflict-markers = true
 
 [signing]
 behavior = "own"
-backend = "gpg"
+backend = "ssh"
+key = "~/.config/git/signing_key.pub"
 
 [aliases]
 tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
