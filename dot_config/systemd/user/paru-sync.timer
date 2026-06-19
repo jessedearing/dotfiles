@@ -1,0 +1,12 @@
+[Unit]
+Description=Timer for syncing paru packages
+Requires=paru-sync.service
+
+[Timer]
+OnCalendar=*-*-* 03:00:00
+OnCalendar=*-*-* 09:00:00
+OnCalendar=*-*-* 15:00:00
+OnCalendar=*-*-* 21:00:00
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,7 @@
+[Unit]
+Description=Sync paru packages
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/paru -Sy
