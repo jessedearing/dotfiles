@@ -1,13 +1,14 @@
 [user]
 name = "Jesse Dearing"
-{{- if eq .chezmoi.hostname "Camio" }}
-email = "jesse@observablehq.com"
-{{- else }}
 email = "code@me.jesse.dev"
-{{- end }}
 
 [ui]
 default-command = "log"
+pager = "delta"
+diff-formatter = ":git"
+
+[merge-tools.delta]
+diff-expected-exit-codes = [0, 1]
 
 [merge-tools.nvim]
 program = "nvim"

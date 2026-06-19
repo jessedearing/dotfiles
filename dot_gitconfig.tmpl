@@ -2,6 +2,13 @@
   name = Jesse Dearing
 	email = code@me.jesse.dev
   signingkey = ~/.config/git/signing_key.pub
+[core]
+  pager = delta
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true
+  dark = true
 [color]
 	ui = true
 [mergetool "vim"]
@@ -9,7 +16,7 @@
 [mergetool "fugitive"]
   cmd = nvim -c "Gdiffsplit!" "$MERGED"
 [merge]
-	tool = fugitive
+  conflictStyle = zdiff3
 [difftool "vim"]
   cmd = nvim -d $LOCAL $REMOTE
 [difftool]
