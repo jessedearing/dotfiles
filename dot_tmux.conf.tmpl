@@ -1,9 +1,11 @@
 set -g @plugin 'tmux-plugins/tpm'
 #set -g @plugin 'arcticicestudio/nord-tmux'
-set -g @plugin 'fabioluciano/tmux-powerkil'
-set -g @powerkit_plugins 'battery,cpu,memory,chezmoi,packages,datetime'
+set -g @plugin 'fabioluciano/tmux-powerkit'
+set -g @powerkit_plugins 'battery,cpu,loadavg,memory,chezmoi,packages,netspeed,datetime'
 set -g @powerkit_theme 'tokyo'
-set -g @powerkil_theme_variant 'night'
+set -g @powerkit_theme_variant 'night'
+set -g @powerkit_plugin_datetime_format 'datetime-us'
+set -g @powerkit_plugin_packages_backend 'yay'
 #set -g @plugin 'dracula/tmux'
 #set -g @plugin 'tmux-plugins/tmux-battery'
 set -g @plugin 'tmux-plugins/tmux-open'
@@ -29,8 +31,8 @@ set-option -g prefix C-a # C-a for perfix just like screen
 bind-key C-a    last-window
 bind-key \\      split-window -h -c "#{pane_current_path}"
 bind-key -      split-window -v -c "#{pane_current_path}"
-bind-key x      kill-pane
-bind-key X      kill-window
+#bind-key x      kill-pane
+#bind-key X      kill-window
 bind-key q      confirm-before kill-session
 bind-key Q      confirm-before kill-server
 bind-key ,      previous-window # <
@@ -92,7 +94,7 @@ set -s copy-command 'pbcopy'
 ## set status bar
 ## Using tmux-powerline
 # set-option -g status on
-set-option -g status-interval 15
+set-option -g status-interval 5
 # set-option -g status-utf8 on
 # set-option -g status-justify "centre"
 # set-option -g status-left-length 60
