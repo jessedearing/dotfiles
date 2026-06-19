@@ -1,9 +1,6 @@
 [default]
 region = us-west-2
-credential_process = {{ .chezmoi.homeDir }}/Documents/code/awscreds/awscreds
+#credential_process = {{ .chezmoi.homeDir }}/Documents/code/awscreds/awscreds
 
 [profile personal-admin]
 source_profile = default
-{{- if eq .chezmoi.hostname "Camio" }}
-{{ joinPath .chezmoi.sourceDir "dot_aws/work.enc" | include | decrypt }}
-{{- end }}
