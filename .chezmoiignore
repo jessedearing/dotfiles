@@ -17,9 +17,8 @@
 {{- else }}
 Library/
 {{- end }}
-{{- if ne .chezmoi.hostname "Leviathan" }}
 .gitconfig.gitlab
-{{- end }}
+.gitconfig.github
 README.md
 **/*.enc
 .gnupg/

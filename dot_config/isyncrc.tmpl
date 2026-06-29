@@ -1,0 +1,25 @@
+IMAPAccount mail
+{{- if eq .profile "personal" }}
+Host imap.fastmail.com
+PassCmd "secret-tool lookup app_id mbsync"
+{{- end }}
+Port 993
+User {{ .email }}
+TLSType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore mail-remote
+Account mail
+
+MaildirStore mail-local
+SubFolders Verbatim
+Path ~/Mail/
+Inbox ~/Mail/INBOX
+
+Channel mail
+Far :mail-remote:
+Near :mail-local:
+Patterns *
+Create Both
+Expunge Both
+SyncState *

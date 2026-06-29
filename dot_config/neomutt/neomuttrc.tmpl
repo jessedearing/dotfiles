@@ -1,0 +1,95 @@
+set realname  = "Jesse Dearing"
+set from      = "{{ .email }}"
+
+# Local Maildir
+set mbox_type = Maildir
+set folder    = ~/Mail
+set spoolfile = +INBOX
+set record    = +Sent
+set trash     = +Trash
+set postponed = +Drafts
+
+# Sending via msmtp
+set sendmail  = "/usr/bin/msmtp"
+set sendmail_wait = 0
+
+set text_flowed = yes
+
+{{- if eq .profile "personal" -}}
+# Mailboxes to show in sidebar
+mailboxes +INBOX ++SaneLater ++SaneNews +Sent +Drafts +Trash +Archive +Spam
+{{- else -}}
+mailboxes +INBOX +Sent +Drafts +Trash +Archive +Spam
+{{- end -}}
+
+# Sidebar
+set sidebar_visible = yes
+set sidebar_width   = 20
+bind index,pager \Cp sidebar-prev
+bind index,pager \Cn sidebar-next
+bind index,pager \Co sidebar-open
+macro index,pager A "<save-message>=Archive<enter>" "Archive message"
+
+# notmuch integration
+set nm_default_url = "notmuch://{{ .chezmoi.homeDir }}/Mail"
+
+
+# Virtual mailboxes (saved searches)
+virtual-mailboxes \
+    "Unread"    "notmuch://?query=tag:unread" \
+    "Flagged"   "notmuch://?query=tag:flagged" \
+    "Today"     "notmuch://?query=date:today"
+
+# Search binding
+bind index,pager \Cf noop
+macro index \Cf "<vfolder-from-query>" "notmuch search"
+
+set sort = threads
+set sort_aux = reverse-last-date-received
+set collapse_all = no
+set nm_record = yes
+set hide_thread_subject = yes   # don't repeat subject on every reply in thread
+set hide_limited = yes          # hide messages that failed to load
+set hide_missing = yes          # hide gaps in threads where messages are absent
+
+set confirmappend = no
+
+# Vim style keybindings
+# Navigation
+bind index,pager j next-entry
+bind index,pager k previous-entry
+bind index,pager g noop
+bind index gg first-entry
+bind index G last-entry
+
+# Open/back
+bind index l display-message
+bind index,pager h exit
+
+# Pager scrolling
+bind pager j next-line
+bind pager k previous-line
+bind pager gg top
+bind pager G bottom
+
+# Search
+bind index,pager / search
+bind index,pager n search-next
+bind index,pager N search-opposite
+
+# Mark/tag (visual-mode-ish)
+bind index t tag-entry
+bind index \; tag-prefix
+
+# Delete
+bind index,pager d delete-message
+bind index D delete-thread
+bind index u undelete-message
+
+# Reply
+bind index,pager r reply
+bind index,pager R group-reply
+
+# Links
+macro index,pager \Cb "<pipe-message> urlscan<enter>"
+macro attach,compose \Cb "<pipe-message> urlscan<enter>"

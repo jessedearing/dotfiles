@@ -1,0 +1,16 @@
+defaults
+auth           on
+tls            on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+logfile        ~/.local/share/msmtp/msmtp.log
+
+account mail
+{{- if eq .profile "personal" }}
+host smtp.fastmail.com
+port 587
+from {{ .email }}
+user {{ .email }}
+passwordeval secret-tool lookup app_id mbsync
+tls_starttls   on
+{{- end }}
+account default : mail
