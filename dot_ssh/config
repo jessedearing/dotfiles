@@ -1,2 +1,0 @@
-Host *
-  IdentityAgent /run/user/1000/ssh-agent.socket

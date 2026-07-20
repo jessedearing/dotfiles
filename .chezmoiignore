@@ -17,8 +17,7 @@
 {{- else }}
 Library/
 {{- end }}
-.gitconfig.gitlab
-.gitconfig.github
 README.md
 **/*.enc
 .gnupg/
+.fortunes/*.dat

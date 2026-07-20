@@ -5,7 +5,9 @@ set -g @powerkit_plugins 'battery,cpu,loadavg,memory,chezmoi,packages,netspeed,d
 set -g @powerkit_theme 'tokyo'
 set -g @powerkit_theme_variant 'night'
 set -g @powerkit_plugin_datetime_format 'datetime-us'
+{{- if eq .chezmoi.os "linux" }}
 set -g @powerkit_plugin_packages_backend 'paru'
+{{- end }}
 #set -g @plugin 'dracula/tmux'
 #set -g @plugin 'tmux-plugins/tmux-battery'
 set -g @plugin 'tmux-plugins/tmux-open'
@@ -146,8 +148,4 @@ set-option -sa terminal-features ',xterm-kitty:RGB'
 set-option -g focus-events on
 set -as terminal-overrides ",*:Tc"
 
-{{- if eq .chezmoi.os "linux" }}
-  run '~/.tmux/plugins/tpm/tpm'
-{{- else }}
-  run '/opt/homebrew/opt/tpm/share/tpm/tpm'
-{{- end }}
+run '{{ .chezmoi.homeDir }}/.tmux/plugins/tpm/tpm'
