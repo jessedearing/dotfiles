@@ -62,8 +62,10 @@
   format = "ssh"
 [gpg "ssh"]
   allowedSignersFile = ~/.config/git/gitSigners
+{{- if eq .profile "personal" }}
 [url "https://github.com/"]
   insteadOf = "git@github.com:"
+{{- end }}
 [credential "https://github.com"]
   username = jessedearing
 [credential]

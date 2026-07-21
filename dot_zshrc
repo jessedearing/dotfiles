@@ -21,6 +21,7 @@ fi
 if [ -x /opt/homebrew/bin/brew ]; then
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+eval "$(/opt/homebrew/opt/zsh-patina/bin/zsh-patina activate)"
 fi
 
 if [ -s /rw/config/gpg-split-domain ]; then
@@ -150,6 +151,8 @@ if [ -f $HOME/.config/op/plugins.sh ]; then
   unalias aws
 fi
 
+eval "$(/opt/homebrew/opt/zsh-patina/bin/zsh-patina activate)"
+
 load_tmux
 
 if [ -f /opt/homebrew/etc/grc.zsh ]; then
@@ -194,3 +197,6 @@ bashcompinit
 # I don't use visual mode in the terminal since I use tmux
 bindkey -M vicmd 'v' edit-command-line
 eval $(thefuck --alias)
+if which mise &> /dev/null; then
+  eval "$(mise activate zsh)"
+fi

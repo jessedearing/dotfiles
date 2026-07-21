@@ -1,0 +1,6 @@
+{{- if eq .profile "work" }}
+{{ .chezmoi.homeDir }}/.aws/aws-config-cmh-prod/AWSAdministratorAccess.config
+{{- end }}
+{{- if eq .profile "personal" }}
+{{ .chezmoi.homeDir }}/.aws/personal_config
+{{- end }}
