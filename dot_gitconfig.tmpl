@@ -68,6 +68,10 @@
 {{- end }}
 [credential "https://github.com"]
   username = jessedearing
+{{- if eq .profile "work" }}
+  helper =
+  helper = !/opt/homebrew/bin/gh auth git-credential
+{{- end }}
 [credential]
 	helper = cache --timeout 21600	# six hours
 	helper = oauth
@@ -77,3 +81,8 @@
   clean = age --encrypt --armor -R ~/.age.pub
   smudge = age --decrypt -i ~/.age.key
   required
+[credential "https://gist.github.com"]
+{{- if eq .profile "work" }}
+  helper =
+  helper = !/opt/homebrew/bin/gh auth git-credential
+{{- end }}
