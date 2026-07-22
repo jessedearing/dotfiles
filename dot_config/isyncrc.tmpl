@@ -3,10 +3,15 @@ IMAPAccount mail
 Host imap.fastmail.com
 PassCmd "secret-tool lookup app_id mbsync"
 {{- end }}
+{{- if eq .profile "work" }}
+Host imap.gmail.com
+AuthMechs XOAUTH2
+PassCmd "{{ .chezmoi.homeDir }}/.local/bin/mutt_oauth2.py ~/.{{ .email }}.tokens"
+{{- end }}
 Port 993
 User {{ .email }}
 TLSType IMAPS
-CertificateFile /etc/ssl/certs/ca-certificates.crt
+CertificateFile /opt/homebrew/etc/ca-certificates/cert.pem
 
 IMAPStore mail-remote
 Account mail

@@ -1,16 +1,26 @@
 defaults
-auth           on
 tls            on
+{{- if eq .profile "personal" }}
+auth           on
 tls_trust_file /etc/ssl/certs/ca-certificates.crt
+{{- else }}
+tls_trust_file /etc/ssl/cert.pem
+auth xoauth2
+{{- end }}
 logfile        ~/.local/share/msmtp/msmtp.log
 
 account mail
 {{- if eq .profile "personal" }}
 host smtp.fastmail.com
 port 587
-from {{ .email }}
-user {{ .email }}
 passwordeval secret-tool lookup app_id mbsync
 tls_starttls   on
+{{- else }}
+host smtp.gmail.com
+port 587
+passwordeval mutt_oauth2.py ~/.{{ .email }}.tokens
 {{- end }}
+tls_starttls   on
+from {{ .email }}
+user {{ .email }}
 account default : mail

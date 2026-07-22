@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+{{- if eq .chezmoi.os "darwin" }}
+export PATH=/opt/homebrew/bin:$PATH
+SASL_PATH=/opt/homebrew/opt/cyrus-sasl/lib/sasl2:/opt/homebrew/opt/cyrus-sasl-xoauth2/lib/sasl2 /opt/homebrew/bin/mbsync -a
+/opt/homebrew/bin/notmuch new
+{{- else }}
+mbsync -a
+notmuch new
+{{- end }}

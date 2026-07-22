@@ -2,25 +2,32 @@ set realname  = "Jesse Dearing"
 set from      = "{{ .email }}"
 
 # Local Maildir
-set mbox_type = Maildir
-set folder    = ~/Mail
 set spoolfile = +INBOX
+set folder    = ~/Mail
+{{- if eq .profile "personal" }}
+set mbox_type = Maildir
 set record    = +Sent
 set trash     = +Trash
 set postponed = +Drafts
-
 # Sending via msmtp
 set sendmail  = "/usr/bin/msmtp"
 set sendmail_wait = 0
+{{ end }}
+{{- if eq .profile "work" }}
+set sendmail  = "/opt/homebrew/bin/msmtp"
+set postponed = "+[Gmail]/Drafts"
+set record = "+[Gmail]/Sent Mail"
+set trash = "+[Gmail]/Trash"
+{{- end }}
 
 set text_flowed = yes
 
-{{- if eq .profile "personal" -}}
+{{- if eq .profile "personal" }}
 # Mailboxes to show in sidebar
 mailboxes +INBOX ++SaneLater ++SaneNews +Sent +Drafts +Trash +Archive +Spam
-{{- else -}}
-mailboxes +INBOX +Sent +Drafts +Trash +Archive +Spam
-{{- end -}}
+{{- else }}
+mailboxes +INBOX "+[Gmail]/Sent Mail" +[Gmail]/Drafts +[Gmail]/Trash "+[Gmail]/All Mail" +[Gmail]/Spam
+{{- end }}
 
 # Sidebar
 set sidebar_visible = yes
@@ -28,7 +35,11 @@ set sidebar_width   = 20
 bind index,pager \Cp sidebar-prev
 bind index,pager \Cn sidebar-next
 bind index,pager \Co sidebar-open
-macro index,pager A "<save-message>=Archive<enter>" "Archive message"
+{{- if eq .profile "personal" }}
+macro index,pager A "<save-message>=Archive<enter><sync-mailbox>" "Archive message"
+{{- else }}
+macro index,pager A "<save-message>=[Gmail]/All^V Mail<enter>" "Archive message"
+{{- end }}
 
 # notmuch integration
 set nm_default_url = "notmuch://{{ .chezmoi.homeDir }}/Mail"
