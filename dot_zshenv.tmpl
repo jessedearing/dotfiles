@@ -10,7 +10,7 @@ unset GOROOT
 export GO111MODULE=on
 export PGDATA=$HOME/data/postgres
 export PGHOST=localhost
-export CDPATH=~/Documents/shell-bookmarks
+export CDPATH=.:$HOME/Documents/shell-bookmarks
 {{- if eq .chezmoi.os "linux" }}
 export SSH_AUTH_SOCK=/run/user/1000/ssh-agent.socket
 {{- else if eq .profile "work" }}
