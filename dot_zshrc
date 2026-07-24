@@ -24,6 +24,10 @@ export PATH="/opt/homebrew/opt/curl/bin:$PATH"
 eval "$(/opt/homebrew/opt/zsh-patina/bin/zsh-patina activate)"
 fi
 
+if [ -x /usr/bin/zsh-patina ]; then
+  eval "$(/usr/bin/zsh-patina activate)"
+fi
+
 if [ -s /rw/config/gpg-split-domain ]; then
   export QUBES_GPG_DOMAIN=`cat /rw/config/gpg-split-domain`
 fi
@@ -150,8 +154,6 @@ if [ -f $HOME/.config/op/plugins.sh ]; then
   source $HOME/.config/op/plugins.sh
   unalias aws
 fi
-
-eval "$(/opt/homebrew/opt/zsh-patina/bin/zsh-patina activate)"
 
 load_tmux
 

@@ -36,7 +36,7 @@ bind index,pager \Cp sidebar-prev
 bind index,pager \Cn sidebar-next
 bind index,pager \Co sidebar-open
 {{- if eq .profile "personal" }}
-macro index,pager A "<save-message>=Archive<enter><sync-mailbox>" "Archive message"
+macro index,pager A "<save-message>=Archive<enter><sync-mailbox><enter>" "Archive message"
 {{- else }}
 macro index,pager A "<save-message>=[Gmail]/All^V Mail<enter>" "Archive message"
 {{- end }}

@@ -11,7 +11,11 @@ PassCmd "{{ .chezmoi.homeDir }}/.local/bin/mutt_oauth2.py ~/.{{ .email }}.tokens
 Port 993
 User {{ .email }}
 TLSType IMAPS
+{{- if eq .chezmoi.os "darwin" }}
 CertificateFile /opt/homebrew/etc/ca-certificates/cert.pem
+{{- else }}
+CertificateFile /etc/ssl/cert.pem
+{{- end }}
 
 IMAPStore mail-remote
 Account mail
