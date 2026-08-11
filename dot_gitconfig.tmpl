@@ -71,10 +71,11 @@
 {{- if eq .profile "work" }}
   helper =
   helper = !/opt/homebrew/bin/gh auth git-credential
-{{- end }}
+{{- else }}
 [credential]
 	helper = cache --timeout 21600	# six hours
 	helper = oauth
+{{- end }}
 [diff "age"]
   textconv = age --decrypt -i ~/.age.key
 [filter "age"]
