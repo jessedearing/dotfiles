@@ -24,7 +24,7 @@ set text_flowed = yes
 
 {{- if eq .profile "personal" }}
 # Mailboxes to show in sidebar
-mailboxes +INBOX ++SaneLater ++SaneNews +Sent +Drafts +Trash +Archive +Spam
+mailboxes +INBOX ++SaneLater ++SaneNews ++SaneReceipts +Sent +Drafts +Trash +Archive +Spam
 {{- else }}
 mailboxes +INBOX "+[Gmail]/Sent Mail" +[Gmail]/Drafts +[Gmail]/Trash "+[Gmail]/All Mail" +[Gmail]/Spam
 {{- end }}
@@ -36,7 +36,7 @@ bind index,pager \Cp sidebar-prev
 bind index,pager \Cn sidebar-next
 bind index,pager \Co sidebar-open
 {{- if eq .profile "personal" }}
-macro index,pager A "<save-message>=Archive<enter><sync-mailbox><enter>" "Archive message"
+macro index,pager A "<save-message>=Archive<enter>" "Archive message"
 {{- else }}
 macro index,pager A "<save-message>=[Gmail]/All^V Mail<enter>" "Archive message"
 {{- end }}
