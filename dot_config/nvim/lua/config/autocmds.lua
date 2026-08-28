@@ -43,3 +43,36 @@ vim.api.nvim_create_autocmd("BufRead", {
 		})
 	end,
 })
+
+local prose_filetypes = {
+	gitcommit = true,
+	jjdescription = true,
+	mail = true,
+	text = true,
+}
+
+local function setup_prose_formatting(buf)
+	if not prose_filetypes[vim.bo[buf].filetype] then
+		return
+	end
+	vim.bo[buf].formatexpr = ""
+	vim.bo[buf].textwidth = 72
+end
+
+local prose_group = vim.api.nvim_create_augroup("prose_formatting", { clear = true })
+
+vim.api.nvim_create_autocmd("FileType", {
+	group = prose_group,
+	pattern = vim.tbl_keys(prose_filetypes),
+	callback = function(args)
+		setup_prose_formatting(args.buf)
+		vim.opt_local.colorcolumn = "+1"
+	end,
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = prose_group,
+	callback = function(args)
+		setup_prose_formatting(args.buf)
+	end,
+})
