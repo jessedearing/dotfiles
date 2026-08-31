@@ -38,7 +38,12 @@ export VI_MODE_DISABLE_CLIPBOARD='true'
 #  Databases  #
 ###############
 
+{{- if eq .chezmoi.os "linux" }}
 export PGUSER=postgres
+{{- else }}
+export PGUSER={{ .chezmoi.username }}
+export PGDATABASE=postgres
+{{- end }}
 
 
 export ETCDCTL_API=3
