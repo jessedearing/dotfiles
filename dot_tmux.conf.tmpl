@@ -6,7 +6,8 @@ set -g @powerkit_theme 'tokyo'
 set -g @powerkit_theme_variant 'night'
 set -g @powerkit_plugin_datetime_format 'datetime-us'
 {{- if eq .chezmoi.os "linux" }}
-set -g @powerkit_plugin_packages_backend 'paru'
+# It's actually paru, but I symlinked it
+set -g @powerkit_plugin_packages_backend 'yay'
 {{- end }}
 #set -g @plugin 'dracula/tmux'
 #set -g @plugin 'tmux-plugins/tmux-battery'
