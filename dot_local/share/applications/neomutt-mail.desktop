@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Neomutt (tmux)
+Exec=/home/daemon503/.local/bin/mailto_neomutt %u
+Icon=utilities-terminal
+Terminal=false
+NoDisplay=true
+MimeType=x-scheme-handler/mailto
