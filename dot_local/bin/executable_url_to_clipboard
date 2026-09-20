@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Copy the URL(s) handed to us by the desktop launcher into the clipboard,
+# then pop a notification so it is obvious what ended up there.
+set -euo pipefail
+
+if [ "$#" -eq 0 ]; then
+    notify-send "URL to clipboard" "No URL was provided."
+    exit 1
+fi
+
+urls=$(printf '%s\n' "$@")
+
+if [ -n "${WAYLAND_DISPLAY:-}" ] && command -v wl-copy >/dev/null 2>&1; then
+    printf '%s' "$urls" | wl-copy
+elif command -v xclip >/dev/null 2>&1; then
+    printf '%s' "$urls" | xclip -selection clipboard
+elif command -v xsel >/dev/null 2>&1; then
+    printf '%s' "$urls" | xsel --clipboard --input
+else
+    notify-send "URL to clipboard" "No clipboard tool found (wl-copy/xclip/xsel)."
+    exit 1
+fi
+
+notify-send "URL copied to clipboard" "$urls"

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=URL to Clipboard
+Comment=Copy the URL to the clipboard and show a notification
+Exec=/home/daemon503/.local/bin/url_to_clipboard %u
+Icon=edit-copy
+Terminal=false
+NoDisplay=true
+Categories=Network;WebBrowser;
+MimeType=x-scheme-handler/unknown;x-scheme-handler/about;x-scheme-handler/http;x-scheme-handler/https;text/html;
