@@ -155,7 +155,9 @@ if [ -f $HOME/.config/op/plugins.sh ]; then
   unalias aws
 fi
 
-zellij attach -c local && exit 0
+if [ -z "$ZELLIJ" ]; then
+  zellij attach -c local && exit 0
+fi
 
 if [ -f /opt/homebrew/etc/grc.zsh ]; then
   . /opt/homebrew/etc/grc.zsh
