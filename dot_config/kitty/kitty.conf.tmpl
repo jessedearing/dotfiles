@@ -1,11 +1,11 @@
 # vim:fileencoding=utf-8:ft=conf:foldmethod=marker
 
-#: Fonts {{{
+#: Fonts 
 
 #: kitty has very powerful font management. You can configure
 #: individual font faces and even specify special fonts for particular
 #: characters.
-font_family      Monolisa Variable
+font_family      Monolisa Variable 
 bold_font        auto
 italic_font      auto
 bold_italic_font auto
@@ -24,7 +24,11 @@ bold_italic_font auto
 #:     italic_font      Operator Mono Book Italic
 #:     bold_italic_font Operator Mono Medium Italic
 
+{{- if eq .chezmoi.os "linux" }}
+font_size 12.0
+{{- else }}
 font_size 16.0
+{{- end }}
 
 #: Font size (in pts)
 
@@ -51,6 +55,7 @@ adjust_column_width 0
 #:     symbol_map codepoints Font Family Name
 
 # disable_ligatures always
+disable_ligatures never
 
 #: Choose how you want to handle multi-character ligatures. The
 #: default is to always render them.  You can tell kitty to not render
@@ -71,9 +76,9 @@ box_drawing_scale 0.001, 1, 1.5, 2
 #: monitor DPI to arrive at a pixel value. There must be four values
 #: corresponding to thin, normal, thick, and very thick lines.
 
-#: }}}
+#: 
 
-#: Cursor customization {{{
+#: Cursor customization 
 
 cursor #cccccc
 
@@ -101,11 +106,11 @@ cursor_stop_blinking_after 15.0
 #: Stop blinking cursor after the specified number of seconds of
 #: keyboard inactivity.  Set to zero to never stop blinking.
 
-#: }}}
+#: 
 
-#: Scrollback {{{
+#: Scrollback 
 
-scrollback_lines 50000
+scrollback_lines 0
 
 #: Number of lines of history to keep in memory for scrolling back.
 #: Memory is allocated on demand. Negative numbers are (effectively)
@@ -146,9 +151,9 @@ touch_scroll_multiplier 1.0
 #: for high precision scrolling devices on platforms such as macOS and
 #: Wayland. Use negative numbers to change scroll direction.
 
-#: }}}
+#: 
 
-#: Mouse {{{
+#: Mouse 
 
 mouse_hide_wait 3.0
 
@@ -230,9 +235,9 @@ pointer_shape_when_grabbed arrow
 #: The shape of the mouse pointer when the program running in the
 #: terminal grabs the mouse. Valid values are: arrow, beam and hand
 
-#: }}}
+#: 
 
-#: Performance tuning {{{
+#: Performance tuning 
 
 repaint_delay 10
 
@@ -261,9 +266,9 @@ sync_to_monitor yes
 #: keyboard repeat rate, you may notice some slight input latency. If
 #: so, set this to no.
 
-#: }}}
+#: 
 
-#: Terminal bell {{{
+#: Terminal bell 
 
 enable_audio_bell no
 
@@ -290,9 +295,9 @@ command_on_bell none
 
 #: Program to run when a bell occurs.
 
-#: }}}
+#: 
 
-#: Window layout {{{
+#: Window layout 
 
 remember_window_size  yes
 initial_window_width  1024
@@ -399,9 +404,9 @@ resize_draw_strategy static
 #: scaled. A value of blank means draw a blank window. A value of size
 #: means show the window size in cells.
 
-#: }}}
+#: 
 
-#: Tab bar {{{
+#: Tab bar 
 
 tab_bar_edge bottom
 
@@ -471,9 +476,9 @@ tab_bar_background none
 #: Background color for the tab bar. Defaults to using the terminal
 #: background color.
 
-#: }}}
+#: 
 
-#: Color scheme {{{
+#: Color scheme 
 
 foreground #dddddd
 background #000000
@@ -519,9 +524,9 @@ selection_background #fffacd
 #: The background for text selected with the mouse.
 
 
-#: }}}
+#: 
 
-#: Advanced {{{
+#: Advanced 
 
 shell .
 
@@ -615,9 +620,9 @@ term xterm-kitty
 #: from key-presses, to colors, to various advanced features may not
 #: work.
 
-#: }}}
+#: 
 
-#: OS specific tweaks {{{
+#: OS specific tweaks 
 
 macos_titlebar_color system
 
@@ -689,9 +694,9 @@ linux_display_server auto
 #: backend based on the system state is chosen automatically. Set it
 #: to x11 or wayland to force the choice.
 
-#: }}}
+#: 
 
-#: Keyboard shortcuts {{{
+#: Keyboard shortcuts 
 
 #: For a list of key names, see: GLFW keys
 #: <https://www.glfw.org/docs/latest/group__keys.html>. The name to
@@ -767,7 +772,7 @@ clear_all_shortcuts yes
 #: kitty +kitten hints --hints-offset to zero for all mappings,
 #: including the builtin ones.
 
-#: Clipboard {{{
+#: Clipboard 
 
 # map kitty_mod+c copy_to_clipboard
 
@@ -794,9 +799,9 @@ map cmd+v paste_from_clipboard
 
 #:     map kitty_mod+y new_window less @selection
 
-#: }}}
+#: 
 
-#: Scrolling {{{
+#: Scrolling 
 
 # map kitty_mod+up        scroll_line_up
 # map kitty_mod+k         scroll_line_up
@@ -818,9 +823,9 @@ map cmd+v paste_from_clipboard
 #: For more details on piping screen and buffer contents to external
 #: programs, see launch.
 
-#: }}}
+#: 
 
-#: Window management {{{
+#: Window management 
 
 map kitty_mod+enter new_window
 
@@ -872,9 +877,9 @@ map kitty_mod+7 seventh_window
 map kitty_mod+8 eighth_window
 map kitty_mod+9 ninth_window
 map kitty_mod+0 tenth_window
-#: }}}
+#: 
 
-#: Tab management {{{
+#: Tab management 
 
 map kitty_mod+right next_tab
 map kitty_mod+left  previous_tab
@@ -897,9 +902,9 @@ map kitty_mod+q     close_tab
 #: the current tab rather than at the end of the tabs list, use::
 
 #:     map ctrl+t new_tab !neighbor [optional cmd to run]
-#: }}}
+#: 
 
-#: Layout management {{{
+#: Layout management 
 
 #map kitty_mod+l next_layout
 
@@ -911,9 +916,9 @@ map kitty_mod+q     close_tab
 #: Similarly, to switch back to the previous layout::
 
 #:    map ctrl+alt+p last_used_layout
-#: }}}
+#: 
 
-#: Font sizes {{{
+#: Font sizes 
 
 #: You can change the font size for all top-level kitty OS windows at
 #: a time or only the current one.
@@ -930,9 +935,9 @@ map kitty_mod+backspace change_font_size all 0
 #: size::
 
 #:     map kitty_mod+f6 change_font_size current 10.0
-#: }}}
+#: 
 
-#: Select and act on visible text {{{
+#: Select and act on visible text 
 
 #: Use the hints kitten to select text and either pass it to an
 #: external program or insert it into the terminal or copy it to the
@@ -971,9 +976,9 @@ map kitty_mod+p>h kitten hints --type hash --program -
 
 #: The hints kitten has many more modes of operation that you can map
 #: to different shortcuts. For a full description see kittens/hints.
-#: }}}
+#: 
 
-#: Miscellaneous {{{
+#: Miscellaneous 
 
 map kitty_mod+f11    toggle_fullscreen
 map kitty_mod+f10    toggle_maximized
@@ -1034,10 +1039,10 @@ map kitty_mod+delete clear_terminal reset active
 #:     map ctrl+alt+a send_text normal Word\x1b[H
 #:     map ctrl+alt+a send_text application Word\x1bOH
 
-#: }}}
+#: 
 
-# }}}
+# 
 
-cursor_trail 1
+cursor_trail 0
 
 include tokyo-night.conf

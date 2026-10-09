@@ -155,7 +155,7 @@ if [ -f $HOME/.config/op/plugins.sh ]; then
   unalias aws
 fi
 
-load_tmux
+zellij attach -c local && exit 0
 
 if [ -f /opt/homebrew/etc/grc.zsh ]; then
   . /opt/homebrew/etc/grc.zsh
