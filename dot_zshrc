@@ -93,33 +93,6 @@ function quote() {
 
 export NODE_PATH=$__USR_PATH/lib/node
 
-function bail_on_tmux() {
-  echo "Loading tmux...."
-  echo "Press CTRL-C to cancel"
-  sleep 1.5
-}
-
-function load_tmux() {
-  tmux_session="local"
-  if [ ! -z "$SSH_CONNECTION" ]; then
-    tmux_session="ssh"
-  fi
-
-  if [[ "$__CFBundleIdentifier" == "com.qvacua.VimR" ]]; then
-    return
-  fi
-
-  if (which tmux 2>&1 > /dev/null); then
-    if [ -z "$TMUX" ] && ( tmux ls | grep "${tmux_session}:" &> /dev/null ); then
-      bail_on_tmux && tmux attach -t $tmux_session && exit
-    else
-      if [ -z "$TMUX" ] && [ -z "$SUDO_USER" ]; then
-        bail_on_tmux && tmux new-session -s $tmux_session && exit
-      fi
-    fi
-  fi
-}
-
 function printcolors() {
   for i in {0..255} ; do
     printf "\\x1b[38;5;${i}m \\\x1b[38;5;${i}m\n"
