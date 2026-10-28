@@ -4,5 +4,6 @@ Host *
 {{- end }}
 {{- if eq .profile "work" }}
   IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+  User jesse.dearing
 {{ joinPath .chezmoi.sourceDir "dot_ssh/footer.age" | include | decrypt -}}
 {{- end }}

@@ -6,6 +6,14 @@ keybinds clear-defaults=true {
     locked {
         bind "Ctrl a" { SwitchToMode "normal"; }
     }
+    normal {
+      bind "a" {
+        Run "server_pass" {
+          close_on_exit true;
+        };
+        SwitchToMode "locked";
+      }
+    }
     pane {
         bind "left" { MoveFocus "left"; }
         bind "down" { MoveFocus "down"; }
