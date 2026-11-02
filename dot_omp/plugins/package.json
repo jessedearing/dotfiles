@@ -1,0 +1,9 @@
+{
+  "name": "omp-plugins",
+  "private": true,
+  "dependencies": {
+    "@mjakl/pi-kagi-api": "npm:@mjakl/pi-kagi-api@^0.1.0",
+    "pi-jj": "https://github.com/cole/pi-jj",
+    "pi-zellij": "npm:pi-zellij@^0.4.9"
+  }
+}
