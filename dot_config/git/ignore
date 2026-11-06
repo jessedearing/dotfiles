@@ -15,5 +15,6 @@ vim-markdown-preview.html
 .nvmrc
 .venv
 .jj
+.omp
 
 **/.claude/settings.local.json

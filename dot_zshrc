@@ -33,9 +33,6 @@ if [ -s /rw/config/gpg-split-domain ]; then
 fi
 
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-for __customfile in $HOME/.zsh-custom/*.zsh; do
-  source $__customfile
-done
 unsetopt XTRACE
 source $ZSH/oh-my-zsh.sh
 eval "$(starship init zsh)"
@@ -170,6 +167,10 @@ fi
 autoload -Uz compinit bashcompinit
 compinit
 bashcompinit
+
+if [ -x $__USR_PATH/bin/zoxide ]; then
+  eval "$(zoxide init zsh)"
+fi
 
 # I don't use visual mode in the terminal since I use tmux
 bindkey -M vicmd 'v' edit-command-line
